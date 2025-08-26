@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9B823C032E5DB46200B595E3 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 9B823C022E5DB46200B595E3 /* Swinject */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		9B823BBD2E5DAEBB00B595E3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B823C032E5DB46200B595E3 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 				9B823BAF2E5DAEB900B595E3 /* iScream */,
 				9B823BBF2E5DAEBB00B595E3 /* iScreamTests */,
 				9B823BC92E5DAEBB00B595E3 /* iScreamUITests */,
+				9B823C012E5DB46200B595E3 /* Frameworks */,
 				9B823BAE2E5DAEB900B595E3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +96,13 @@
 				9B823BC62E5DAEBB00B595E3 /* iScreamUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9B823C012E5DB46200B595E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +125,7 @@
 			);
 			name = iScream;
 			packageProductDependencies = (
+				9B823C022E5DB46200B595E3 /* Swinject */,
 			);
 			productName = iScream;
 			productReference = 9B823BAD2E5DAEB900B595E3 /* iScream.app */;
@@ -195,6 +209,9 @@
 			);
 			mainGroup = 9B823BA42E5DAEB900B595E3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				9B823C002E5DB41B00B595E3 /* XCRemoteSwiftPackageReference "Swinject" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9B823BAE2E5DAEB900B595E3 /* Products */;
 			projectDirPath = "";
@@ -550,6 +567,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9B823C002E5DB41B00B595E3 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9B823C022E5DB46200B595E3 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B823C002E5DB41B00B595E3 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9B823BA52E5DAEB900B595E3 /* Project object */;
 }
