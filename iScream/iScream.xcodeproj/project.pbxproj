@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B21C8A92E5DE9380082951B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9B21C8A82E5DE9380082951B /* Localizable.xcstrings */; };
 		9B823C032E5DB46200B595E3 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 9B823C022E5DB46200B595E3 /* Swinject */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B21C8A82E5DE9380082951B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = iScream/Tools/Strings/Localizable.xcstrings; sourceTree = "<group>"; };
 		9B823BAD2E5DAEB900B595E3 /* iScream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iScream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B823BBC2E5DAEBB00B595E3 /* iScreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iScreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B823BC62E5DAEBB00B595E3 /* iScreamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iScreamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +82,7 @@
 		9B823BA42E5DAEB900B595E3 = {
 			isa = PBXGroup;
 			children = (
+				9B21C8A82E5DE9380082951B /* Localizable.xcstrings */,
 				9B823BAF2E5DAEB900B595E3 /* iScream */,
 				9B823BBF2E5DAEBB00B595E3 /* iScreamTests */,
 				9B823BC92E5DAEBB00B595E3 /* iScreamUITests */,
@@ -229,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B21C8A92E5DE9380082951B /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +349,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -401,6 +406,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

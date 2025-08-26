@@ -1,10 +1,26 @@
+# Preface
+
 This is a small app for my son. Since he has been born it has been a running joke about when he is being good he is earning Ice cream points. So i wanted to make an app to track these points. 
 
 Now he is getting older he is also losing points for being naughty! 
 
 This also gives me a playground to play about with the more recent language, library and sDK changes in Swift / SwiftUI / iOS.
 
-In addition to this I want to try out a bunch of Architectures with the latest SwiftUI changes including navigation. This project is done as a ViperC ARchitected project. Though frowned upon i wanted to see how well it would fair in a more modern SwifTUI world for a bit of fun.
+> [!IMPORTANT]
+> In addition to this I wanted to try out a bunch of Architectures with the latest SwiftUI changes including navigation. This project is done as a ViperC Architected project. Though I know isn't recommended by Apple and sometimes frowned upon, I wanted to see how well it would fair in a more modern SwifTUI world for a bit of fun.
+
+## Features
+> [!NOTE]
+> Below is a full list of features of Swift / SwiftUI / iOS and testing methods that i have used. 
+
+###Swift
+
+###SwiftUI
+````TabBar````
+
+###iOS 
+
+###Testing
 
 This is a work in progress at the momment and below is a todo list to remind myself of things i want to play about with: 
 
