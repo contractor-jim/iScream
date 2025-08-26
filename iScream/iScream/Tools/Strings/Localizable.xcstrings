@@ -1,0 +1,43 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Add Item" : {
+
+    },
+    "Item at %@" : {
+
+    },
+    "Page 1" : {
+
+    },
+    "Page 2" : {
+
+    },
+    "Select an item" : {
+
+    },
+    "tab.title.bounties" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bounties"
+          }
+        }
+      }
+    },
+    "tab.title.people" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "People"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
