@@ -13,17 +13,17 @@ This also gives me a playground to play about with the more recent language, lib
 > [!NOTE]
 > Below is a full list of features of Swift / SwiftUI / xCode and testing methods that i have used. 
 
-###Swift
+### Swift
 
-###SwiftUI
+### SwiftUI
 
 ````TabBar````
 
-###xCode 
+### xCode 
 
 ````AssetCatalogs```` ````String Catalogs````
 
-###Testing
+### Testing
 
 This is a work in progress at the momment and below is a todo list to remind myself of things i want to play about with: 
 
