@@ -11,14 +11,15 @@ This also gives me a playground to play about with the more recent language, lib
 
 ## Features
 > [!NOTE]
-> Below is a full list of features of Swift / SwiftUI / iOS and testing methods that i have used. 
+> Below is a full list of features of Swift / SwiftUI / xCode and testing methods that i have used. 
 
 ###Swift
 
 ###SwiftUI
 ````TabBar````
 
-###iOS 
+###xCode 
+````AssetCatalogs```` ````String Catalogs````
 
 ###Testing
 
