@@ -21,6 +21,6 @@ class StartupManagerImp {
     }
 
     private func buildSignInModule() -> AnyView {
-        return RootContainerBuilderDefaultBuilder().buildRootContainerView()
+        return RootContainerDefaultBuilder().buildRootContainerView()
     }
 }

@@ -13,7 +13,8 @@ struct RootContainerView: View {
     var body: some View {
         TabView {
             Tab("tab.title.people", systemImage: "person.fill") {
-                Text("Page 1")
+                ParentListChildrenDefaultBuilder().buildParentListChildrenView()
+                    .accessibilityIdentifier("parent-children-list-view")
             }
             .accessibilityIdentifier("parent-tab-bar-item-1")
 
