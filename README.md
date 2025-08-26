@@ -4,6 +4,8 @@ Now he is getting older he is also losing points for being naughty!
 
 This also gives me a playground to play about with the more recent language, library and sDK changes in Swift / SwiftUI / iOS.
 
+In addition to this I want to try out a bunch of Architectures with the latest SwiftUI changes including navigation. This project is done as a ViperC ARchitected project. Though frowned upon i wanted to see how well it would fair in a more modern SwifTUI world for a bit of fun.
+
 This is a work in progress at the momment and below is a todo list to remind myself of things i want to play about with: 
 
   // Write some shaders for funky animated intext shown here https://developer.apple.com/videos/play/wwdc2023/10148/ aruond 23 mins
