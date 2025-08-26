@@ -15,9 +15,11 @@ This also gives me a playground to play about with the more recent language, lib
 
 ### Swift
 
+````Swift6````
+
 ### SwiftUI
 
-````TabBar````
+````TabBar```` ````SFSymbols````
 
 ### xCode 
 
