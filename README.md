@@ -19,7 +19,7 @@ This also gives me a playground to play about with the more recent language, lib
 
 ### SwiftUI
 
-````TabBar```` ````SFSymbols````
+````TabBar```` ````SFSymbols```` ````ScrollView```` ````HStack```` ````ZStack```` ````VStack```` ````ViewModifiers```` ````Custom ViewModifiers```` ````Charts````
 
 ### iOS 
 
@@ -90,3 +90,6 @@ This is a work in progress at the momment and below is a todo list to remind mys
 
     // Write a widget as shown here at 17:37
     // https://developer.apple.com/videos/play/wwdc2024/10150/
+    
+    // Read into xCode clooud and managing running / deplyment
+    // https://developer.apple.com/videos/play/wwdc2025/344/ at 19 mins

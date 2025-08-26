@@ -12,7 +12,7 @@ struct RootContainerView: View {
     @State var presenter: RootContainerPresenter!
     var body: some View {
         TabView {
-            Tab("tab.title.people", systemImage: "person.fill") {
+            Tab("general.title.people", systemImage: "person.fill") {
                 ParentListChildrenDefaultBuilder().buildParentListChildrenView()
                     .accessibilityIdentifier("parent-children-list-view")
             }
