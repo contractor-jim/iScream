@@ -54,7 +54,6 @@ class ParentListChildrenInteractorImp: ParentListChildrenInteractor {
         ]
 
         var me = User(dataPoints: jackIceCreamDataPoints, name: "Jack", iceCreamPoints: 1000, type: .child)
-
         let jack = User(dataPoints: jackIceCreamDataPoints, name: "Jack", iceCreamPoints: 1000, type: .child)
         let jem = User(dataPoints: mummyIceCreamDataPoints, name: "Mummy", iceCreamPoints: 450, type: .child)
         let chris = User(dataPoints: chrisIceCreamDataPoints, name: "Chris", iceCreamPoints: -10000000, type: .child)
