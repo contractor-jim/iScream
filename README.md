@@ -30,11 +30,11 @@ This also gives me a playground to play about with the more recent language, lib
 
 ### Testing
 
-````XCtest```` ````UItest````
+````XCtest```` ````UItest```` ````Github Actions````
 
 This is a work in progress at the momment and below is a todo list to remind myself of things i want to play about with: 
-
-  // Write some shaders for funky animated intext shown here https://developer.apple.com/videos/play/wwdc2023/10148/ aruond 23 mins
+<!--
+    // Write some shaders for funky animated intext shown here https://developer.apple.com/videos/play/wwdc2023/10148/ aruond 23 mins
     //    var stripes: Shader {
     //        ShaderLibrary.angledFill(withArguments: .float(30), .float(0.1), .color(.blue))
     //    }
@@ -93,3 +93,4 @@ This is a work in progress at the momment and below is a todo list to remind mys
     
     // Read into xCode clooud and managing running / deplyment
     // https://developer.apple.com/videos/play/wwdc2025/344/ at 19 mins
+-->
