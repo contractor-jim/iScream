@@ -15,7 +15,8 @@ struct DashboardChildCardView: View {
         VStack(alignment: .leading) {
 
             DashBoardChildCardTitleView(user: user)
-
+                .accessibilityIdentifier("parent-dashboard-card-title-view-\(user.name)")
+            
             HStack(alignment: .top, spacing: 0) {
                 DashBoardChildCardScoreView(user: user)
                 DashBoardChildCardChartView(user: user)
@@ -26,6 +27,7 @@ struct DashboardChildCardView: View {
         .font(.custom(CustomFont.regularFontName, size: 18))
         .background(.cellBackground)
         .cornerRadius(16)
+        .accessibilityIdentifier("parent-dashboard-card-view-\(user.name)")
     }
 }
 

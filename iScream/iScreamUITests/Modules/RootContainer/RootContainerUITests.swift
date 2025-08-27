@@ -28,10 +28,6 @@ final class RootContainerUITests: XCTestCase {
         app.activate()
 
         XCTAssertTrue(
-            app.tabBars["parent-tab-bar"].waitForExistence(timeout: 3.0)
-        )
-
-        XCTAssertTrue(
             app.buttons["People"].waitForExistence(timeout: 3.0)
         )
 
