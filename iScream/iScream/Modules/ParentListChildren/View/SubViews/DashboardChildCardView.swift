@@ -13,21 +13,27 @@ struct DashboardChildCardView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            Text(user.name)
+                .font(.custom(CustomFont.headerFontName, size: 22))
+                .fontWeight(.bold)
 
-            DashBoardChildCardTitleView(user: user)
-                .accessibilityIdentifier("parent-dashboard-card-title-view-\(user.name)")
-            
-            HStack(alignment: .top, spacing: 0) {
-                DashBoardChildCardScoreView(user: user)
-                DashBoardChildCardChartView(user: user)
+            VStack(alignment: .leading) {
+
+                DashBoardChildCardTitleView(user: user)
+                    .accessibilityIdentifier("parent-dashboard-card-title-view-\(user.name)")
+
+                HStack(alignment: .top, spacing: 0) {
+                    DashBoardChildCardScoreView(user: user)
+                    DashBoardChildCardChartView(user: user)
+                }
+                .frame(maxHeight: 90)
             }
-            .frame(maxHeight: 90)
+            .padding(.all, 16)
+            .font(.custom(CustomFont.regularFontName, size: 18))
+            .background(.cellBackground)
+            .cornerRadius(16)
+            .accessibilityIdentifier("parent-dashboard-card-view-\(user.name)")
         }
-        .padding(.all, 16)
-        .font(.custom(CustomFont.regularFontName, size: 18))
-        .background(.cellBackground)
-        .cornerRadius(16)
-        .accessibilityIdentifier("parent-dashboard-card-view-\(user.name)")
     }
 }
 
@@ -36,16 +42,13 @@ struct DashBoardChildCardTitleView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
-            Text(user.name)
-                .font(.custom(CustomFont.regularFontName, size: 18))
-                .fontWeight(.bold)
-
-            Spacer()
             Text(
                 String(format: NSLocalizedString("dashboard.childpoints.label", bundle: .main, comment: ""), user.iceCreamPoints)
             )
-                .font(.custom(CustomFont.regularFontName, size: 18))
-                .fontWeight(.bold)
+            .font(.custom(CustomFont.regularFontName, size: 18))
+            .fontWeight(.bold)
+
+            Spacer()
         }
     }
 }

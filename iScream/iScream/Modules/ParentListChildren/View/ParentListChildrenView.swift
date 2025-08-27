@@ -31,7 +31,10 @@ struct ParentListChildrenView: View {
             .foregroundColor(.white)
         }
         .onAppear() {
-            presenter.fetch()
+            // TODO: Review which actor this task is created on
+            Task {
+                await presenter.fetch()
+            }
         }
     }
 }

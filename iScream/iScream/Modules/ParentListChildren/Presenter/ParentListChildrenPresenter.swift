@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 protocol ParentListChildrenPresenter {
-    func fetch()
+    func fetch() async
     var user: User? { get }
 }
 
@@ -26,7 +26,7 @@ class ParentListChildrenPresenterImp: ParentListChildrenPresenter, Observable {
         self.router = router
     }
 
-    func fetch() {
-        user = interactor.fetchMyUser()
+    func fetch() async {
+        user = await interactor.fetchMyUser()
     }
 }
