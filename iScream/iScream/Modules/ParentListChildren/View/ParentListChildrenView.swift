@@ -14,7 +14,7 @@ struct ParentListChildrenView: View {
 
     var body: some View {
         NavigationStack(path: $navPath) {
-            DashboardChildCellView(users: presenter.childUsers, navPath: $navPath)
+            DashboardChildCellView(users: presenter.user?.children ?? [], navPath: $navPath)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     ToolBarPlus()
@@ -29,6 +29,9 @@ struct ParentListChildrenView: View {
             .scrollContentBackground(.hidden)
             .background(.mainBackground)
             .foregroundColor(.white)
+        }
+        .onAppear() {
+            presenter.fetch()
         }
     }
 }

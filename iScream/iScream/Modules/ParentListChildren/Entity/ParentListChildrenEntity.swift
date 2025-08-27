@@ -15,16 +15,26 @@ struct IceCreamData: Identifiable, Hashable {
     let points: Int
 }
 
+enum UserType {
+    case unknown
+    case parent
+    case child
+}
+
 struct User: Hashable, Identifiable {
     let id = UUID()
     let dataPoints: [IceCreamData]
     let name: String
     let iceCreamPoints: Int
+    let type: UserType
+    var children: [User]
 
-    init(dataPoints: [IceCreamData], name: String, iceCreamPoints: Int) {
+    init(dataPoints: [IceCreamData], name: String, iceCreamPoints: Int, type: UserType = .unknown, children: [User] = []) {
         self.dataPoints = dataPoints
         self.name = name
         self.iceCreamPoints = iceCreamPoints
+        self.type = type
+        self.children = children
     }
 
     static func == (lhs: User, rhs: User) -> Bool {

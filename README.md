@@ -1,10 +1,10 @@
 # Preface
 
-This is a small app for my son. Since he has been born it has been a running joke about when he is being good he is earning Ice cream points. So i wanted to make an app to track these points. 
+This is a small app for my son. Since he has been born it has been a running joke about when he is being good he is earning Ice cream points. So I wanted to make an app to track these points. 
 
 Now he is getting older he is also losing points for being naughty! 
 
-This also gives me a playground to play about with the more recent language, library and sDK changes in Swift / SwiftUI / iOS.
+This also gives me a playground to play about with the more recent language, library and SDK changes in Swift / SwiftUI / iOS.
 
 > [!IMPORTANT]
 > In addition to this I wanted to try out a bunch of Architectures with the latest SwiftUI changes including navigation. This project is done as a ViperC Architected project. Though I know isn't recommended by Apple and sometimes frowned upon, I wanted to see how well it would fair in a more modern SwifTUI world for a bit of fun.

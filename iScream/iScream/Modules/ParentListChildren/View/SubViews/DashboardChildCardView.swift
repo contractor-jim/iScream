@@ -73,7 +73,7 @@ struct DashBoardChildCardScoreView: View {
 struct DashBoardChildCardChartView: View {
 
     let user: User!
-
+    // TODO: Some custom fade in animation
     var body: some View {
         Chart {
             ForEach(user.dataPoints) {
