@@ -12,7 +12,7 @@ protocol RootContainerBuilder {
     func buildRootContainerView() -> AnyView
 }
 
-class RootContainerBuilderDefaultBuilder: RootContainerBuilder {
+class RootContainerDefaultBuilder: RootContainerBuilder {
 
     let container = Container(parent: SharedDependancyContainerBuilder.defaultContainer)
 

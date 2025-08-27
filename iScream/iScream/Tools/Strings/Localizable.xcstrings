@@ -1,16 +1,76 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$lld"
+          }
+        }
+      }
+    },
+    "%lld Points" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Points"
+          }
+        }
+      }
+    },
     "Add Item" : {
 
+    },
+    "amountEnd" : {
+
+    },
+    "dashboard.childpoints.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Points"
+          }
+        }
+      }
+    },
+    "dashboard.childpoints.since.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Points since %@"
+          }
+        }
+      }
+    },
+    "general.title.people" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "People"
+          }
+        }
+      }
     },
     "Item at %@" : {
 
     },
-    "Page 1" : {
+    "Month" : {
 
     },
     "Page 2" : {
+
+    },
+    "Points" : {
 
     },
     "Select an item" : {
@@ -27,16 +87,8 @@
         }
       }
     },
-    "tab.title.people" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "People"
-          }
-        }
-      }
+    "Test" : {
+
     }
   },
   "version" : "1.0"
