@@ -14,15 +14,18 @@ protocol ParentListChildrenBuilder {
 
 class ParentListChildrenDefaultBuilder: ParentListChildrenBuilder {
 
-    let container = Container(parent: SharedDependancyContainerBuilder.defaultContainer)
+    let container = Container(parent: AppServiceBuilder.defaultContainer)
 
     func buildParentListChildrenView() -> AnyView {
+
         container.register(ParentListChildrenEntity.self) { c in
             ParentListChildrenEntityImp()
         }
 
         container.register(ParentListChildrenInteractor.self) { c in
-            ParentListChildrenInteractorImp(entity: c.resolve(ParentListChildrenEntity.self)!)
+            let userService = self.container.resolve(UserService.self)!
+            return ParentListChildrenInteractorImp(entity: c.resolve(ParentListChildrenEntity.self)!,
+                                            userService: userService)
         }
 
         container.register(ParentListChildrenRouter.self) { c in
