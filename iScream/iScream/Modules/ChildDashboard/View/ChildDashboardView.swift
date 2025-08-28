@@ -14,12 +14,24 @@ struct ChildDashboardView: View {
     
     var body: some View {
         NavigationStack(path: $navPath) {
-            VStack {
+            VStack(alignment: .leading) {
                 if let user = presenter.user {
-                    // TODO: HAndle when no data points are present
-                    /*, !user.dataPoints.isEmpty*/
-                    ChildDashboardChartView(user: user)
-                        .frame(maxWidth: .infinity, maxHeight: 200)
+                    VStack(alignment: .leading) {
+                        Text("Welcome \(user.name)")
+                            .font(.custom(CustomFont.headerFontName, size: 32))
+                            .foregroundStyle(.white)
+
+                        Text("\(user.hasImproved ? "+" : "-") \(user.iceCreamPoints) Points")
+                            .font(.custom(CustomFont.headerFontName, size: 16))
+                            .foregroundStyle(user.hasImproved ? .green : .red )
+                            .bold()
+
+                        // TODO: Handle when no data points are present
+                        /*, !user.dataPoints.isEmpty*/
+                        ChildDashboardChartView(user: user)
+                    }
+                    .padding([.leading, .trailing, .top], 26)
+
                     Spacer()
                 }
                 else {
@@ -51,44 +63,53 @@ struct ChildDashboardChartView: View {
     @State private var navPath = NavigationPath()
 
     var body: some View {
-        Chart {
-            ForEach(user.dataPoints) {
-                LineMark(
-                    x: .value("Month", $0.month),
-                    y: .value("Points", $0.points)
-                )
-                .interpolationMethod(.catmullRom)
-                .foregroundStyle(user.hasImproved ? .red : .green)
-
-                AreaMark(
-                    x: .value("Month", $0.month),
-                    yStart: .value("Points", $0.points),
-                    yEnd: .value("amountEnd", user.max)
-                )
-                .interpolationMethod(.catmullRom)
-                .foregroundStyle(
-                    LinearGradient(
-                        gradient: Gradient(colors: [
-                            user.hasImproved ? .red.opacity(0.5) : .green.opacity(0.5),
-                            user.hasImproved ? .red.opacity(0.05) : .green.opacity(0.05)
-                        ]),
-                        startPoint: .top,
-                        endPoint: .bottom
+        VStack(alignment: .leading) {
+            Chart {
+                ForEach(user.dataPoints) {
+                    LineMark(
+                        x: .value("Month", $0.month),
+                        y: .value("Points", $0.points)
                     )
-                )
+                    .interpolationMethod(.catmullRom)
+                    .foregroundStyle(user.hasImproved ? .red : .green)
+                    .alignsMarkStylesWithPlotArea()
+
+                    AreaMark(
+                        x: .value("Month", $0.month),
+                        yStart: .value("Points", $0.points),
+                        yEnd: .value("amountEnd", user.max)
+                    )
+                    .interpolationMethod(.catmullRom)
+                    .foregroundStyle(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                user.hasImproved ? .red.opacity(0.5) : .green.opacity(0.5),
+                                user.hasImproved ? .red.opacity(0.05) : .green.opacity(0.05)
+                            ]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                }
+            }
+            .padding([.top], 20)
+            .padding([.bottom], 16)
+            .padding([.leading, .trailing], 8)
+            .chartLegend(.hidden)
+            .chartXAxis { AxisMarks(values: .automatic) {
+                AxisValueLabel()
+                    .foregroundStyle(Color.white)
+                }
+            }
+            .chartYAxis { AxisMarks(values: .automatic) {
+                AxisValueLabel()
+                    .foregroundStyle(Color.white)
+                }
             }
         }
-        .chartLegend(.hidden)
-        .chartXAxis { AxisMarks(values: .automatic) {
-            AxisValueLabel()
-                .foregroundStyle(Color.white)
-            }
-        }
-        .chartYAxis { AxisMarks(values: .automatic) {
-            AxisValueLabel()
-                .foregroundStyle(Color.white)
-            }
-        }
+        .frame(maxWidth: .infinity, maxHeight: 180)
+        .background(.cellBackground)
+        .cornerRadius(16)
     }
 }
 
