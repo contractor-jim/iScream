@@ -12,6 +12,7 @@ struct RootContainerView: View {
     @State var presenter: RootContainerPresenter!
 
     var body: some View {
+        // TODO: Need to show login style sheet here
         if let user = presenter.user {
             LoggedInTabBarView(user: user, presenter: presenter)
         } else {
