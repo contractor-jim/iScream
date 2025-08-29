@@ -20,10 +20,10 @@ struct ChildDashboardView: View {
                         Text("Welcome \(user.name)")
                             .font(.custom(CustomFont.headerFontName, size: 32))
                             .foregroundStyle(.white)
-
+                        // TODO: This needs to be looked as as it should be total points followed by increase since last X time period
                         Text("\(user.hasImproved ? "+" : "-") \(user.iceCreamPoints) Points")
                             .font(.custom(CustomFont.headerFontName, size: 16))
-                            .foregroundStyle(user.hasImproved ? .green : .red )
+                            .foregroundStyle(user.hasImproved ? .red : .green )
                             .bold()
 
                         // TODO: Handle when no data points are present
