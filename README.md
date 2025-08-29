@@ -64,14 +64,7 @@ This is a work in progress at the momment and below is a todo list to remind mys
     // Try built tool plugins as described here to generate VIPER modules
     // https://developer.apple.com/videos/play/wwdc2022/110354/
 
-    // REview custom layouts for building layouts that work beyond the ones provided
-    // https://developer.apple.com/videos/play/wwdc2022/10056/
-
-    // Use swift charts to show monthly icecream wins / loses
-
-    // Add NavigationStack / NavigationLink for navigation and .navigationDestination see here http://developer.apple.com/videos/play/wwdc2022/10052/ at 7mins
-
-    // Copy gradient from here // https://developer.apple.com/videos/play/wwdc2022/10052/
+    // LEarn gradient from here // https://developer.apple.com/videos/play/wwdc2022/10052/
 
     // choose avatar?
     // https://developer.apple.com/videos/play/wwdc2024/10151/
