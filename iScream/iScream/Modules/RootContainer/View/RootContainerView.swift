@@ -14,9 +14,9 @@ struct RootContainerView: View {
         TabView {
             Tab("general.title.people", systemImage: "person.fill") {
                 // TODO: Switch based on users type parent / child
-                ParentListChildrenDefaultBuilder().buildParentListChildrenView()
-                    .accessibilityIdentifier("parent-children-list-view")
-//                ChildDashboardDefaultBuilder().buildChildDashboardView()
+//                ParentListChildrenDefaultBuilder().buildParentListChildrenView()
+//                    .accessibilityIdentifier("parent-children-list-view")
+                ChildDashboardDefaultBuilder().buildChildDashboardView()
             }
             .accessibilityIdentifier("parent-tab-bar-item-1")
 
