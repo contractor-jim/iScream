@@ -13,6 +13,7 @@ struct RootContainerView: View {
     var body: some View {
         TabView {
             Tab("general.title.people", systemImage: "person.fill") {
+                // TODO: Switch
 //                ParentListChildrenDefaultBuilder().buildParentListChildrenView()
 //                    .accessibilityIdentifier("parent-children-list-view")
                 ChildDashboardDefaultBuilder().buildChildDashboardView()
@@ -20,7 +21,7 @@ struct RootContainerView: View {
             .accessibilityIdentifier("parent-tab-bar-item-1")
 
             Tab("tab.title.bounties", systemImage: "trophy.fill") {
-                Text("Page 2")
+                BountyDefaultBuilder().buildBountyView()
             }
             .badge(10)
             .accessibilityIdentifier("parent-tab-bar-item-2")

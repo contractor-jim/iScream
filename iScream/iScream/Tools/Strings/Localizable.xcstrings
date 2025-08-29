@@ -4,6 +4,9 @@
     "" : {
 
     },
+    " CompletedBounty 3" : {
+
+    },
     "%@ %lld Points" : {
       "localizations" : {
         "en" : {
@@ -41,6 +44,24 @@
     "amountEnd" : {
 
     },
+    "Bounty 1" : {
+
+    },
+    "Bounty 2" : {
+
+    },
+    "Bounty 3" : {
+
+    },
+    "Completed Bounties" : {
+
+    },
+    "Completed Bounty 1" : {
+
+    },
+    "Completed Bounty 2" : {
+
+    },
     "dashboard.childpoints.label" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -74,13 +95,16 @@
         }
       }
     },
+    "Init" : {
+
+    },
     "Item at %@" : {
 
     },
     "Month" : {
 
     },
-    "Page 2" : {
+    "Open Bounties" : {
 
     },
     "Points" : {
