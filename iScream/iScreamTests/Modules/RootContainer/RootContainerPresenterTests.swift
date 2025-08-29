@@ -37,41 +37,38 @@ struct RootContainerPresenterTests {
         #expect(presenter.getBountyBadgeCount() == 0)
     }
 
-    @Test("POSITIVE - RootContainerPresenter - child user") func testGetChildBountyBadgeCount_ReturnsCountOf3() async throws {
+    @Test("POSITIVE - RootContainerPresenter - getBountyBadgeCount",
+          arguments:[
+            (openBounties: Bounty.threeCorrectIncompleteBounties,
+             closedBounties: Bounty.threeCorrectCompletedBounties,
+             userType: UserType.child,
+             expectedCount: 3),
+
+            (openBounties: Bounty.threeCorrectIncompleteBounties,
+             closedBounties: Bounty.threeCorrectCompletedBounties,
+             userType: UserType.parent,
+             expectedCount: 0),
+
+            (openBounties: Bounty.threeCorrectIncompleteBounties,
+             closedBounties: Bounty.threeCorrectCompletedBounties,
+             userType: UserType.unknown,
+             expectedCount: -1)
+
+    ])
+    func testGetChildBountyBadgeCount_ReturnsCountOf3(
+        openBounties: [Bounty],
+        closedBounties: [Bounty],
+        userType: UserType,
+        expectedCount: Int
+        ) async throws {
         mockService.mockUser = User(dataPoints: [],
-                                    openBounties: Bounty.threeCorrectIncompleteBounties,
-                                    completedBounties: Bounty.threeCorrectCompletedBounties,
+                                    openBounties: openBounties,
+                                    completedBounties: closedBounties,
                                     name: "McTest",
                                     iceCreamPoints: 1000,
-                                    type: .child)
+                                    type: userType)
         await presenter.fetch()
         try #require(presenter.user != nil)
-        #expect(presenter.getBountyBadgeCount() == 3)
-    }
-
-    @Test("POSITIVE - RootContainerPresenter - parent user INCOMPLETE") func testGetParentBountyBadgeCount_INCOMPLETE() async throws {
-        mockService.mockUser = User(dataPoints: [],
-                                    openBounties: Bounty.threeCorrectIncompleteBounties,
-                                    completedBounties: Bounty.threeCorrectCompletedBounties,
-                                    name: "McTest",
-                                    iceCreamPoints: 1000,
-                                    type: .parent)
-
-        await presenter.fetch()
-        try #require(presenter.user != nil)
-        #expect(presenter.getBountyBadgeCount() == 0)
-    }
-
-    @Test("POSITIVE - RootContainerPresenter - unknown user", .disabled("INCOMPLETE"))
-    func testGetUnknownUserBountyBadgeCount_ReturnsMinusOne() async throws {
-        mockService.mockUser = User(dataPoints: [],
-                                    openBounties: Bounty.threeCorrectIncompleteBounties,
-                                    completedBounties: Bounty.threeCorrectCompletedBounties,
-                                    name: "McTest",
-                                    iceCreamPoints: 1000,
-                                    type: .unknown)
-        await presenter.fetch()
-        try #require(presenter.user != nil)
-        #expect(presenter.getBountyBadgeCount() == -1)
+        #expect(presenter.getBountyBadgeCount() == expectedCount)
     }
 }
