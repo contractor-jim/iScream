@@ -41,26 +41,27 @@
     "amountEnd" : {
 
     },
-    "Bounty 1" : {
-
+    "bounties.complete.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed Bounties"
+          }
+        }
+      }
     },
-    "Bounty 2" : {
-
-    },
-    "Bounty 3" : {
-
-    },
-    "Completed Bounties" : {
-
-    },
-    "Completed Bounty 1" : {
-
-    },
-    "Completed Bounty 2" : {
-
-    },
-    "CompletedBounty 3" : {
-
+    "bounties.open.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Bounties"
+          }
+        }
+      }
     },
     "dashboard.childpoints.label" : {
       "extractionState" : "manual",
@@ -84,6 +85,16 @@
         }
       }
     },
+    "general.title.bounties" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bounties"
+          }
+        }
+      }
+    },
     "general.title.people" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -102,24 +113,21 @@
 
     },
     "Open Bounties" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Bounties"
+          }
+        }
+      }
     },
     "Points" : {
 
     },
     "Select an item" : {
 
-    },
-    "tab.title.bounties" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bounties"
-          }
-        }
-      }
     },
     "Test" : {
 

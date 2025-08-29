@@ -10,44 +10,48 @@ import SwiftUI
 struct BountyView: View {
 
     @State var presenter: BountyPresenter!
+    @State private var navPath = NavigationPath()
+    
     var body: some View {
-        VStack {
-            List {
-                // TODO: Add to strings file
-                Section() {
-                    Text("Bounty 1")
-                        .listRowSeparator(.hidden)
-                    Text("Bounty 2")
-                        .listRowSeparator(.hidden)
-                    Text("Bounty 3")
-                        .listRowSeparator(.hidden)
+        NavigationStack(path: $navPath) {
+            VStack(alignment: .leading) {
+                List {
+                    Section() {
+                        ForEach(presenter.user?.openBounties ?? []) { bounty in
+                            Text(bounty.title)
+                                .listRowSeparator(.hidden)
+                        }
+                    }
+                    header: {
+                        Text("bounties.open.title") .textCase(nil) .font(CustomFont.subHeaderFont).bold()
+                    }
+                    .font(CustomFont.regularFontBody.weight(.regular))
+                    .listRowBackground(Color.cellBackground)
+                    
+                    Section() {
+                        ForEach(presenter.user?.completedBounties ?? []) { bounty in
+                            Text(bounty.title)
+                                .listRowSeparator(.hidden)
+                        }
+                    }
+                    header: {
+                        Text("bounties.complete.title") .textCase(nil) .font(CustomFont.subHeaderFont).bold()
+                    }
+                    .font(CustomFont.regularFontBody.weight(.regular))
+                    .listRowBackground(Color.cellBackground)
                 }
-                header: {
-                    Text("Open Bounties") .textCase(nil) .font(CustomFont.subHeaderFont).bold()
-                }
-                .font(CustomFont.regularFontBody.weight(.regular))
-                .listRowBackground(Color.cellBackground)
-
-                // TODO: Add to strings file
-                Section() {
-                    Text("Completed Bounty 1")
-                        .listRowSeparator(.hidden)
-                    Text("Completed Bounty 2")
-                        .listRowSeparator(.hidden)
-                    Text("CompletedBounty 3")
-                        .listRowSeparator(.hidden)
-                }
-                header: {
-                    Text("Completed Bounties") .textCase(nil) .font(CustomFont.subHeaderFont).bold()
-                }
-                .font(CustomFont.regularFontBody.weight(.regular))
-                .listRowBackground(Color.cellBackground)
+                .foregroundColor(.white)
+                .background(.clear)
+                .scrollContentBackground(.hidden)
             }
-            .foregroundColor(.white)
-            .background(.clear)
-            .scrollContentBackground(.hidden)
+            .navigationBarTitleDisplayMode(.inline)
+            .background(.mainBackground)
+            .navigationTitle("general.title.bounties")
+            .onAppear() {
+                Task {
+                    await presenter.fetch()
+                }
+            }
         }
-        .background(.mainBackground)
-        //.navigationTitle("Bounties")
     }
 }

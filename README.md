@@ -26,7 +26,7 @@ This also gives me a playground to play about with the more recent language, lib
 
 ### xCode 
 
-````AssetCatalogs```` ````String Catalogs```` ````SwiftPM````
+````AssetCatalogs```` ````String Catalogs```` ````SwiftPM```` ````Icon Composer````
 
 ### Testing
 

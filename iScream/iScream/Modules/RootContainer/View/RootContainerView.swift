@@ -20,7 +20,7 @@ struct RootContainerView: View {
             }
             .accessibilityIdentifier("parent-tab-bar-item-1")
 
-            Tab("tab.title.bounties", systemImage: "trophy.fill") {
+            Tab("general.title.bounties", systemImage: "trophy.fill") {
                 BountyDefaultBuilder().buildBountyView()
             }
             .badge(10)

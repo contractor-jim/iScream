@@ -14,7 +14,7 @@ protocol BountyBuilder {
 
 class BountyDefaultBuilder: BountyBuilder {
 
-    let container = Container(parent: SharedDependancyContainerBuilder.defaultContainer)
+    let container = Container(parent: AppServiceBuilder.defaultContainer)
 
     func buildBountyView() -> AnyView {
         container.register(BountyEntity.self) { c in
@@ -22,7 +22,9 @@ class BountyDefaultBuilder: BountyBuilder {
         }
 
         container.register(BountyInteractor.self) { c in
-            BountyInteractorImp(entity: c.resolve(BountyEntity.self)!)
+            let userService = self.container.resolve(UserService.self)!
+            return BountyInteractorImp(entity: c.resolve(BountyEntity.self)!,
+                                userService: userService)
         }
 
         container.register(BountyRouter.self) { c in

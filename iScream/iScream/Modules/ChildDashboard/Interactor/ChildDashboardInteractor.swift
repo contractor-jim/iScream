@@ -10,8 +10,8 @@ protocol ChildDashboardInteractor {
     init(entity: ChildDashboardEntity,
          userService: UserService)
     
-    var userService: UserService! { get set }
     var entity: ChildDashboardEntity! { get }
+    var userService: UserService! { get set }
 
     func fetchMyUser() async -> User
 }
