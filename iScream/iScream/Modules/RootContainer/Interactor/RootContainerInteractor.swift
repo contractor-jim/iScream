@@ -8,14 +8,26 @@
 import SwiftUI
 
 protocol RootContainerInteractor {
-    init(entity: RootContainerEntity)
     var entity: RootContainerEntity! { get }
+    var userService: UserService! { get set }
+
+    init(entity: RootContainerEntity,
+         userService: UserService)
+
+    func fetchMyUser() async -> User
 }
 
 class RootContainerInteractorImp: RootContainerInteractor {
     let entity: RootContainerEntity!
-
-    required init(entity: any RootContainerEntity) {
+    var userService: UserService!
+    // TODO: Test this
+    required init(entity: any RootContainerEntity,
+                  userService: UserService) {
         self.entity = entity
+        self.userService = userService
+    }
+    // TODO: Test this
+    func fetchMyUser() async -> User {
+        return await userService.getUser()
     }
 }

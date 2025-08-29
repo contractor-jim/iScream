@@ -10,35 +10,11 @@ import Charts
 
 struct ChildDashboardView: View {
     @State var presenter: ChildDashboardPresenter!
-    @State private var navPath = NavigationPath()
-    
+
     var body: some View {
-        // TODO: Break this out more
-        NavigationStack(path: $navPath) {
+        NavigationStack(path: presenter.navPath) {
             VStack(alignment: .leading) {
-                if let user = presenter.user {
-                    VStack(alignment: .leading) {
-                        // TODO: Needs to be in text file
-                        Text("Welcome \(user.name)")
-                            .font(CustomFont.headerFont)
-                            .foregroundStyle(.white)
-                        // TODO: This needs to be looked as it should be total points followed by increase since last X time period
-                        Text("\(user.hasImproved ? "+" : "-") \(user.iceCreamPoints) Points")
-                            .font(CustomFont.smallSubHeaderFont)
-                            .foregroundStyle(user.hasImproved ? .red : .green )
-                            .bold()
-
-                        // TODO: Handle when no data points are present
-                        /*, !user.dataPoints.isEmpty*/
-                        ChildDashboardChartView(user: user)
-                    }
-                    .padding([.leading, .trailing, .top], 26)
-
-                    Spacer()
-                }
-                else {
-                    ProgressView()
-                }
+                ChildDashboardListView(presenter: presenter)
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -60,6 +36,47 @@ struct ChildDashboardView: View {
     }
 }
 
+struct ChildDashboardListView: View {
+    var presenter: ChildDashboardPresenter
+
+    var body: some View {
+        if let user = presenter.user {
+            VStack(alignment: .leading) {
+                Text(
+                    String(
+                        format: NSLocalizedString("child.dashboard.title",
+                                                  bundle: .main,
+                                                  comment: ""),
+                        user.name)
+                )
+                .font(CustomFont.headerFont)
+                .foregroundStyle(.white)
+                // TODO: This needs to be looked as it should be total points followed by increase since last X time period
+                Text(
+                    String(
+                        format: NSLocalizedString("child.dashboard.points",
+                                                  bundle: .main,
+                                                  comment: ""),
+                        user.hasImproved ? "+" : "-", user.iceCreamPoints
+                    )
+                )
+                .font(CustomFont.smallSubHeaderFont.bold())
+                .foregroundStyle(user.hasImproved ? .red : .green )
+
+                // TODO: Handle when no data points are present
+                /*, !user.dataPoints.isEmpty*/
+                ChildDashboardChartView(user: user)
+            }
+            .padding([.leading, .trailing, .top], 26)
+
+            Spacer()
+        }
+        else {
+            ProgressView()
+        }
+    }
+}
+
 struct ChildDashboardChartView: View {
     @State var user: User!
     @State private var navPath = NavigationPath()
@@ -69,17 +86,17 @@ struct ChildDashboardChartView: View {
             Chart {
                 ForEach(user.dataPoints) {
                     LineMark(
-                        x: .value("Month", $0.month),
-                        y: .value("Points", $0.points)
+                        x: .value("", $0.month),
+                        y: .value("", $0.points)
                     )
                     .interpolationMethod(.catmullRom)
                     .foregroundStyle(user.hasImproved ? .red : .green)
                     .alignsMarkStylesWithPlotArea()
 
                     AreaMark(
-                        x: .value("Month", $0.month),
-                        yStart: .value("Points", $0.points),
-                        yEnd: .value("amountEnd", user.max)
+                        x: .value("", $0.month),
+                        yStart: .value("", $0.points),
+                        yEnd: .value("", user.max)
                     )
                     .interpolationMethod(.catmullRom)
                     .foregroundStyle(

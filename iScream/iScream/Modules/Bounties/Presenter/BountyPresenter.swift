@@ -10,6 +10,8 @@ import SwiftData
 
 protocol BountyPresenter {
     var user: User? { get }
+    var navPath: Binding<NavigationPath> { get }
+    
     func fetch() async
 }
 
@@ -17,14 +19,18 @@ protocol BountyPresenter {
 class BountyPresenterImp: BountyPresenter, Observable {
     var interactor: BountyInteractor!
     var router: BountyRouter!
-
+    // TODO: Test this
+    var navPath: Binding<NavigationPath> {
+        Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
+    }
+    
     var user: User?
-
+    // TODO: Test this
     init(interactor: BountyInteractor, router: BountyRouter) {
         self.interactor = interactor
         self.router = router
     }
-
+    // TODO: Test this
     func fetch() async {
         user = await interactor.fetchMyUser()
     }

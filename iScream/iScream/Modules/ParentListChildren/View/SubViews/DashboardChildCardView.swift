@@ -41,7 +41,11 @@ struct DashBoardChildCardTitleView: View {
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
             Text(
-                String(format: NSLocalizedString("dashboard.childpoints.label", bundle: .main, comment: ""), user.iceCreamPoints)
+                String(
+                    format: NSLocalizedString("dashboard.childpoints.label",
+                                              bundle: .main,
+                                              comment: ""),
+                    user.iceCreamPoints)
             )
             .font(CustomFont.regularFontBody)
 
@@ -61,11 +65,16 @@ struct DashBoardChildCardScoreView: View {
                 .minimumScaleFactor(0.01)
                 .foregroundStyle(user.aggregateSinceLastMonth >= 0 ? .green : .red)
             Text(
-                String(format: NSLocalizedString("dashboard.childpoints.since.label", bundle: .main, comment: ""), user.dataPoints.dropLast().last!.month))
-                .font(CustomFont.smallFontBody)
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
-                .lineLimit(2)
+                String(
+                    format: NSLocalizedString("dashboard.childpoints.since.label",
+                                              bundle: .main,
+                                              comment: ""),
+                    user.dataPoints.dropLast().last!.month)
+            )
+            .font(CustomFont.smallFontBody)
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
+            .lineLimit(2)
         }
         .frame(maxWidth: 65)
         .padding([.trailing], 8)
@@ -80,16 +89,16 @@ struct DashBoardChildCardChartView: View {
         Chart {
             ForEach(user.dataPoints) {
                 LineMark(
-                    x: .value("Month", $0.month),
-                    y: .value("Points", $0.points)
+                    x: .value("", $0.month),
+                    y: .value("", $0.points)
                 )
                 .interpolationMethod(.catmullRom)
                 .foregroundStyle( user.hasImproved ? .red : .green)
 
                 AreaMark(
-                    x: .value("Month", $0.month),
-                    yStart: .value("Points", $0.points),
-                    yEnd: .value("amountEnd", user.max)
+                    x: .value("", $0.month),
+                    yStart: .value("", $0.points),
+                    yEnd: .value("", user.max)
                 )
                 .interpolationMethod(.catmullRom)
                 .foregroundStyle(

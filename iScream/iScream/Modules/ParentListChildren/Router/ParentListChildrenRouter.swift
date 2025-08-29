@@ -5,6 +5,19 @@
 //  Created by James Woodbridge on 26/08/2025.
 //
 
-protocol ParentListChildrenRouter { }
+import SwiftUI
 
-class ParentListChildrenRouterImp: ParentListChildrenRouter { }
+protocol ParentListChildrenRouter {
+    var nav: NavigationPath { get set }
+
+    func navigateChildDetailView(user: User)
+}
+
+@Observable
+class ParentListChildrenRouterImp: ParentListChildrenRouter {
+    var nav = NavigationPath()
+    // TODO: Test this
+    func navigateChildDetailView(user: User) {
+        nav.append(user)
+    }
+}

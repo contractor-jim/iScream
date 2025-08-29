@@ -8,11 +8,12 @@
 import SwiftUI
 
 protocol BountyInteractor {
+    var entity: BountyEntity! { get }
+    var userService: UserService! { get set }
+
     init(entity: BountyEntity,
          userService: UserService
     )
-    var entity: BountyEntity! { get }
-    var userService: UserService! { get set }
 
     func fetchMyUser() async -> User
 }

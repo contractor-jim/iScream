@@ -14,7 +14,7 @@ protocol RootContainerBuilder {
 
 class RootContainerDefaultBuilder: RootContainerBuilder {
 
-    let container = Container(parent: SharedDependancyContainerBuilder.defaultContainer)
+    let container = Container(parent: AppServiceBuilder.defaultContainer)
 
     func buildRootContainerView() -> AnyView {
         container.register(RootContainerEntity.self) { c in
@@ -22,7 +22,9 @@ class RootContainerDefaultBuilder: RootContainerBuilder {
         }
 
         container.register(RootContainerInteractor.self) { c in
-            RootContainerInteractorImp(entity: c.resolve(RootContainerEntity.self)!)
+            let userService = self.container.resolve(UserService.self)!
+            return RootContainerInteractorImp(entity: c.resolve(RootContainerEntity.self)!,
+                                       userService: userService)
         }
 
         container.register(RootContainerRouter.self) { c in

@@ -10,18 +10,18 @@ import SwiftUI
 struct ParentListChildrenView: View {
 
     @State var presenter: ParentListChildrenPresenter!
-    @State private var navPath = NavigationPath()
 
     var body: some View {
-        NavigationStack(path: $navPath) {
-            DashboardChildCellView(users: presenter.user?.children ?? [], navPath: $navPath)
+        NavigationStack(path: presenter.navPath) {
+            DashboardChildCellView(presenter: presenter)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     ToolBarPlus()
                 }
             }
             .navigationDestination(for: User.self) { user in
-                Text("Test")
+                // TODO: Replace this with the child dashboard
+                Text("Child Detail view")
                     .navigationTitle(user.name)
                     .navigationBarTitleDisplayMode(.inline)
             }
@@ -40,20 +40,21 @@ struct ParentListChildrenView: View {
 }
 
 struct DashboardChildCellView: View {
-    let users: [User]
-    @Binding var navPath: NavigationPath
+    var presenter: ParentListChildrenPresenter
 
     var body: some View {
         ZStack {
             ScrollView {
-                ForEach (Array(users.enumerated()), id: \.offset) { index, user in
-                    // TODO: Some custom press animation
-                    DashboardChildCardView(user: user)
-                        .onTapGesture {
-                            navPath.append(users[index])
-                        }
-                        .padding(.top, 16)
-                        .padding([.trailing, .leading], 16)
+                if let children = presenter.user?.children {
+                    ForEach (Array(children.enumerated()), id: \.offset) { index, user in
+                        // TODO: Some custom press animation
+                        DashboardChildCardView(user: user)
+                            .onTapGesture {
+                                presenter.navigateChildDetailView(user: user)
+                            }
+                            .padding(.top, 16)
+                            .padding([.trailing, .leading], 16)
+                    }
                 }
             }
         }
