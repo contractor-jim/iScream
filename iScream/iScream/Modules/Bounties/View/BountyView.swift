@@ -2,7 +2,7 @@
 //  BountyView.swift
 //  iScream
 //
-//  Created by james Woodbridge on 29/08/2025.
+//  Created by James Woodbridge on 29/08/2025.
 //
 
 import SwiftUI
