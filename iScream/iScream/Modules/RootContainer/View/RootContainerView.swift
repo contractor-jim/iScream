@@ -10,20 +10,44 @@ import SwiftUI
 struct RootContainerView: View {
 
     @State var presenter: RootContainerPresenter!
+
+    var body: some View {
+        if let user = presenter.user {
+            LoggedInTabBarView(user: user, presenter: presenter)
+        } else {
+            ProgressView()
+                .accessibilityIdentifier("initial-tab-indicator")
+                .onAppear() {
+                Task {
+                    await presenter.fetch()
+                }
+            }
+        }
+    }
+}
+
+struct LoggedInTabBarView: View {
+    let user: User
+    let presenter: RootContainerPresenter
+
     var body: some View {
         TabView {
             Tab("general.title.people", systemImage: "person.fill") {
-                // TODO: Switch based on users type parent / child
-//                ParentListChildrenDefaultBuilder().buildParentListChildrenView()
-//                    .accessibilityIdentifier("parent-children-list-view")
-                ChildDashboardDefaultBuilder().buildChildDashboardView()
+                if user.type == .parent {
+                    ParentListChildrenDefaultBuilder().buildParentListChildrenView()
+                        .accessibilityIdentifier("parent-children-list-view")
+                } else if user.type == .child {
+                    ChildDashboardDefaultBuilder().buildChildDashboardView()
+                        .accessibilityIdentifier("children-list-view")
+                }
             }
             .accessibilityIdentifier("parent-tab-bar-item-1")
 
             Tab("general.title.bounties", systemImage: "trophy.fill") {
                 BountyDefaultBuilder().buildBountyView()
+                    .accessibilityIdentifier("children-list-view")
             }
-            .badge(10)
+            .badge(presenter.getBountyBadgeCount())
             .accessibilityIdentifier("parent-tab-bar-item-2")
         }
         .navigationBarModifier()
