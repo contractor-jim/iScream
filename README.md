@@ -93,4 +93,7 @@ This is a work in progress at the momment and below is a todo list to remind mys
     
     // Read into xCode clooud and managing running / deplyment
     // https://developer.apple.com/videos/play/wwdc2025/344/ at 19 mins
+    
+    // Write an app intent to increase points e.t.c. ? 
+    // https://developer.apple.com/videos/play/wwdc2025/244/
 -->

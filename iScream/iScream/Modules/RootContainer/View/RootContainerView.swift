@@ -13,10 +13,10 @@ struct RootContainerView: View {
     var body: some View {
         TabView {
             Tab("general.title.people", systemImage: "person.fill") {
-                // TODO: Switch
-//                ParentListChildrenDefaultBuilder().buildParentListChildrenView()
-//                    .accessibilityIdentifier("parent-children-list-view")
-                ChildDashboardDefaultBuilder().buildChildDashboardView()
+                // TODO: Switch based on users type parent / child
+                ParentListChildrenDefaultBuilder().buildParentListChildrenView()
+                    .accessibilityIdentifier("parent-children-list-view")
+//                ChildDashboardDefaultBuilder().buildChildDashboardView()
             }
             .accessibilityIdentifier("parent-tab-bar-item-1")
 
@@ -26,11 +26,11 @@ struct RootContainerView: View {
             .badge(10)
             .accessibilityIdentifier("parent-tab-bar-item-2")
         }
-         .navigationBarModifier()
-         .tabBarModifier()
-         .toolbarBackground(.navBackground)
-         .font(.custom(CustomFont.regularFontName, size: 18))
-         .tint(.white)
-         .accessibilityIdentifier("parent-tab-bar")
+        .navigationBarModifier()
+        .tabBarModifier()
+        .toolbarBackground(.navBackground)
+        .font(CustomFont.regularFontBody)
+        .tint(.white)
+        .accessibilityIdentifier("parent-tab-bar")
     }
 }

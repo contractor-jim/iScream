@@ -7,7 +7,7 @@
 
 import SwiftUI
 import SwiftData
-
+// TODO: This needs to be removed
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]

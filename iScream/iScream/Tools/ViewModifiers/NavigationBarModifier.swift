@@ -16,11 +16,11 @@ struct NavigationBarModifier: ViewModifier {
 
         navBarAppearance.titleTextAttributes = [
             .foregroundColor: UIColor.white,
-            .font: UIFont(name: CustomFont.headerFontName, size: 20)!]
+            .font: UIFont(name: CustomFont.headerFontName, size: CustomFont.fontSubHeaderLargeSize)!]
 
         navBarAppearance.largeTitleTextAttributes = [
             .foregroundColor: UIColor.white,
-            .font: UIFont(name: CustomFont.headerFontName, size: 32)!]
+            .font: UIFont(name: CustomFont.headerFontName, size: CustomFont.fontHeaderLargeSize)!]
 
         UINavigationBar.appearance().standardAppearance = navBarAppearance
         UINavigationBar.appearance().compactAppearance = navBarAppearance

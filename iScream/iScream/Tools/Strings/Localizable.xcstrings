@@ -4,9 +4,6 @@
     "" : {
 
     },
-    " CompletedBounty 3" : {
-
-    },
     "%@ %lld Points" : {
       "localizations" : {
         "en" : {
@@ -62,6 +59,9 @@
     "Completed Bounty 2" : {
 
     },
+    "CompletedBounty 3" : {
+
+    },
     "dashboard.childpoints.label" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -94,9 +94,6 @@
           }
         }
       }
-    },
-    "Init" : {
-
     },
     "Item at %@" : {
 
