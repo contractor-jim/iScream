@@ -13,16 +13,18 @@ struct ChildDashboardView: View {
     @State private var navPath = NavigationPath()
     
     var body: some View {
+        // TODO: Break this out more
         NavigationStack(path: $navPath) {
             VStack(alignment: .leading) {
                 if let user = presenter.user {
                     VStack(alignment: .leading) {
+                        // TODO: Needs to be in text file
                         Text("Welcome \(user.name)")
-                            .font(.custom(CustomFont.headerFontName, size: 32))
+                            .font(CustomFont.headerFont)
                             .foregroundStyle(.white)
-                        // TODO: This needs to be looked as as it should be total points followed by increase since last X time period
+                        // TODO: This needs to be looked as it should be total points followed by increase since last X time period
                         Text("\(user.hasImproved ? "+" : "-") \(user.iceCreamPoints) Points")
-                            .font(.custom(CustomFont.headerFontName, size: 16))
+                            .font(CustomFont.smallSubHeaderFont)
                             .foregroundStyle(user.hasImproved ? .red : .green )
                             .bold()
 

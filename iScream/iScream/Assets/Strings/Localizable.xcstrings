@@ -41,6 +41,28 @@
     "amountEnd" : {
 
     },
+    "bounties.complete.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed Bounties"
+          }
+        }
+      }
+    },
+    "bounties.open.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Bounties"
+          }
+        }
+      }
+    },
     "dashboard.childpoints.label" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -63,6 +85,16 @@
         }
       }
     },
+    "general.title.bounties" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bounties"
+          }
+        }
+      }
+    },
     "general.title.people" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -80,25 +112,22 @@
     "Month" : {
 
     },
-    "Page 2" : {
-
+    "Open Bounties" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Bounties"
+          }
+        }
+      }
     },
     "Points" : {
 
     },
     "Select an item" : {
 
-    },
-    "tab.title.bounties" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bounties"
-          }
-        }
-      }
     },
     "Test" : {
 

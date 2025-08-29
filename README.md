@@ -19,14 +19,14 @@ This also gives me a playground to play about with the more recent language, lib
 
 ### SwiftUI
 
-````TabBar```` ````SFSymbols```` ````ScrollView```` ````HStack```` ````ZStack```` ````VStack```` ````ViewModifiers```` ````Custom ViewModifiers```` ````Charts````
+````TabBar```` ````SFSymbols```` ````ScrollView```` ````HStack```` ````ZStack```` ````VStack```` ````ViewModifiers```` ````Custom ViewModifiers```` ````Charts```` ````List```` ````List Sections````
 
 ### iOS 
 
 
 ### xCode 
 
-````AssetCatalogs```` ````String Catalogs```` ````SwiftPM````
+````AssetCatalogs```` ````String Catalogs```` ````SwiftPM```` ````Icon Composer````
 
 ### Testing
 
@@ -93,4 +93,7 @@ This is a work in progress at the momment and below is a todo list to remind mys
     
     // Read into xCode clooud and managing running / deplyment
     // https://developer.apple.com/videos/play/wwdc2025/344/ at 19 mins
+    
+    // Write an app intent to increase points e.t.c. ? 
+    // https://developer.apple.com/videos/play/wwdc2025/244/
 -->

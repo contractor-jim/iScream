@@ -14,11 +14,9 @@ struct DashboardChildCardView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(user.name)
-                .font(.custom(CustomFont.headerFontName, size: 22))
-                .fontWeight(.bold)
+                .font(CustomFont.subHeaderFont.bold())
 
             VStack(alignment: .leading) {
-
                 DashBoardChildCardTitleView(user: user)
                     .accessibilityIdentifier("parent-dashboard-card-title-view-\(user.name)")
 
@@ -29,7 +27,7 @@ struct DashboardChildCardView: View {
                 .frame(maxHeight: 90)
             }
             .padding(.all, 16)
-            .font(.custom(CustomFont.regularFontName, size: 18))
+            .font(CustomFont.subHeaderFont)
             .background(.cellBackground)
             .cornerRadius(16)
             .accessibilityIdentifier("parent-dashboard-card-view-\(user.name)")
@@ -45,8 +43,7 @@ struct DashBoardChildCardTitleView: View {
             Text(
                 String(format: NSLocalizedString("dashboard.childpoints.label", bundle: .main, comment: ""), user.iceCreamPoints)
             )
-            .font(.custom(CustomFont.regularFontName, size: 18))
-            .fontWeight(.bold)
+            .font(CustomFont.regularFontBody)
 
             Spacer()
         }
@@ -59,13 +56,13 @@ struct DashBoardChildCardScoreView: View {
     var body: some View {
         VStack(alignment: .center) {
             Text("\(user.aggregateSinceLastMonth >= 0 ? "+" : "")\(user.aggregateSinceLastMonth)")
-                .font(.custom(CustomFont.headerFontName, size: 24))
+                .font(CustomFont.subHeaderFont)
                 .lineLimit(1)
                 .minimumScaleFactor(0.01)
                 .foregroundStyle(user.aggregateSinceLastMonth >= 0 ? .green : .red)
             Text(
                 String(format: NSLocalizedString("dashboard.childpoints.since.label", bundle: .main, comment: ""), user.dataPoints.dropLast().last!.month))
-                .font(.custom(CustomFont.regularFontName, size: 10))
+                .font(CustomFont.smallFontBody)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
                 .lineLimit(2)

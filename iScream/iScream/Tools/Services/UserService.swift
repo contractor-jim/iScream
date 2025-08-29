@@ -44,10 +44,47 @@ class DefaultUserService: UserService {
             IceCreamData(month: "Jul", points: -50000),
         ]
 
-        var me = User(dataPoints: jackIceCreamDataPoints, name: "Jack", iceCreamPoints: 1000, type: .child)
-        let jack = User(dataPoints: jackIceCreamDataPoints, name: "Jack", iceCreamPoints: 1000, type: .child)
-        let jem = User(dataPoints: mummyIceCreamDataPoints, name: "Mummy", iceCreamPoints: 450, type: .child)
-        let chris = User(dataPoints: chrisIceCreamDataPoints, name: "Chris", iceCreamPoints: -10000000, type: .child)
+        let openBountyData = [
+            Bounty(title: "Clean your room", points: 10, completed: false),
+            Bounty(title: "Mow the lawn", points: 20, completed: false),
+            Bounty(title: "Take out the bins", points: 2, completed: false),
+            Bounty(title: "Do your math homework", points: 5, completed: false)
+        ]
+
+        let completedBountyData = [
+            Bounty(title: "Do Geography Homework", points: 5, completed: true),
+            Bounty(title: "Tidy up your toys", points: 2, completed: true),
+            Bounty(title: "Be a good boy for Nanny", points: 10, completed: true),
+            Bounty(title: "Eat all your dinner", points: 2, completed: true)
+        ]
+
+        var me = User(dataPoints: jackIceCreamDataPoints,
+                      openBounties: openBountyData,
+                      completedBounties: completedBountyData,
+                      name: "Daddy",
+                      iceCreamPoints: 1000,
+                      type: .child)
+
+        let jack = User(dataPoints: jackIceCreamDataPoints,
+                        openBounties: openBountyData,
+                        completedBounties: completedBountyData,
+                        name: "Jack",
+                        iceCreamPoints: 1000,
+                        type: .child)
+
+        let jem = User(dataPoints: mummyIceCreamDataPoints,
+                       openBounties: openBountyData,
+                       completedBounties: completedBountyData,
+                       name: "Mummy",
+                       iceCreamPoints: 450,
+                       type: .child)
+
+        let chris = User(dataPoints: chrisIceCreamDataPoints,
+                         openBounties: openBountyData,
+                         completedBounties: completedBountyData,
+                         name: "Chris",
+                         iceCreamPoints: -10000000,
+                         type: .child)
 
         me.children.append(jack)
         me.children.append(jem)
