@@ -4,16 +4,6 @@
     "" : {
 
     },
-    "%@ %lld Points" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$lld Points"
-          }
-        }
-      }
-    },
     "%@%lld" : {
       "localizations" : {
         "en" : {
@@ -24,21 +14,7 @@
         }
       }
     },
-    "%lld Points" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld Points"
-          }
-        }
-      }
-    },
     "Add Item" : {
-
-    },
-    "amountEnd" : {
 
     },
     "bounties.complete.title" : {
@@ -65,6 +41,28 @@
     },
     "Child Detail view" : {
 
+    },
+    "child.dashboard.points" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$lld Points"
+          }
+        }
+      }
+    },
+    "child.dashboard.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome %@"
+          }
+        }
+      }
     },
     "dashboard.childpoints.label" : {
       "extractionState" : "manual",
@@ -112,27 +110,7 @@
     "Item at %@" : {
 
     },
-    "Month" : {
-
-    },
-    "Open Bounties" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Bounties"
-          }
-        }
-      }
-    },
-    "Points" : {
-
-    },
     "Select an item" : {
-
-    },
-    "Welcome %@" : {
 
     }
   },

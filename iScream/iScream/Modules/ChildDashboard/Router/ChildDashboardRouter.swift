@@ -5,6 +5,12 @@
 //  Created by James Woodbridge on 27/08/2025.
 //
 
-protocol ChildDashboardRouter { }
+import SwiftUI
 
-class ChildDashboardRouterImp: ChildDashboardRouter { }
+protocol ChildDashboardRouter {
+    var nav: NavigationPath { get set }
+}
+
+class ChildDashboardRouterImp: ChildDashboardRouter {
+    var nav = NavigationPath()
+}

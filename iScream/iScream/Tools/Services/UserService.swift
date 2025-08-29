@@ -63,7 +63,7 @@ class DefaultUserService: UserService {
                       completedBounties: completedBountyData,
                       name: "Daddy",
                       iceCreamPoints: 1000,
-                      type: .parent)
+                      type: .child)
 
         let jack = User(dataPoints: jackIceCreamDataPoints,
                         openBounties: openBountyData,

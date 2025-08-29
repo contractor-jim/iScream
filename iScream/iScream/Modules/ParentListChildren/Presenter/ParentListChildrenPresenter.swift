@@ -22,12 +22,12 @@ class ParentListChildrenPresenterImp: ParentListChildrenPresenter, Observable {
     // ViperC conformity
     var interactor: ParentListChildrenInteractor!
     var router: ParentListChildrenRouter!
-
-    var user: User?
     // TODO: Test this
     var navPath: Binding<NavigationPath> {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
     }
+
+    var user: User?
 
     // TODO: Test this
     init(interactor: ParentListChildrenInteractor, router: ParentListChildrenRouter) {
