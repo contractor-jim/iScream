@@ -63,6 +63,9 @@
         }
       }
     },
+    "Child Detail view" : {
+
+    },
     "dashboard.childpoints.label" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -127,9 +130,6 @@
 
     },
     "Select an item" : {
-
-    },
-    "Test" : {
 
     },
     "Welcome %@" : {
