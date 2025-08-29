@@ -11,6 +11,7 @@ protocol UserService {
 
 class DefaultUserService: UserService {
     // TODO: At a later date build out the correct generic function to pull data from a URL and store it for now just return the user object
+    // TODO: Test this
     func getUser() async -> User {
         // TODO: This is mocked. Need to pull from DB / API on Entity
         // Mocked for now whilst we are only dealing with users

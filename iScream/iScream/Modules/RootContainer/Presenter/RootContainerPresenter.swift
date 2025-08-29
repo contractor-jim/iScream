@@ -25,17 +25,17 @@ class RootContainerPresenterImp: RootContainerPresenter, Observable {
         self.interactor = interactor
         self.router = router
     }
-    // TODO: Test this
+
     func fetch() async {
         user = await interactor.fetchMyUser()
     }
     // TODO: Test this
     func getBountyBadgeCount() -> Int {
-        // TODO: Test this
+
         guard let user else {
             return 0
         }
-        // TODO: Test this
+
         if user.type == .child {
             return user.openBounties.count
         }
@@ -45,6 +45,6 @@ class RootContainerPresenterImp: RootContainerPresenter, Observable {
             return 0
         }
 
-        return 0
+        return -1
     }
 }

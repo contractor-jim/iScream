@@ -30,7 +30,7 @@ This also gives me a playground to play about with the more recent language, lib
 
 ### Testing
 
-````XCtest```` ````UItest```` ````Github Actions````
+````XCtest```` ````UItest```` ````SwiftTest```` ````Github Actions````
 <!--
 This is a work in progress at the momment and below is a todo list to remind myself of things i want to play about with: 
 
