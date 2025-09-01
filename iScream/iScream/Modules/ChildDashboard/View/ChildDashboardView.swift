@@ -125,6 +125,7 @@ struct ChildDashboardChartView: View {
                     .foregroundStyle(Color.white)
                 }
             }
+            .accessibilityIdentifier("child-dashboard-chart-view")
         }
         .frame(maxWidth: .infinity, maxHeight: 180)
         .background(.cellBackground)

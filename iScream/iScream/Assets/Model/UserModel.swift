@@ -37,8 +37,7 @@ struct User: Hashable, Identifiable {
     var openBounties: [Bounty] = []
     var completedBounties: [Bounty] = []
 
-    //TODO: This is incorrect as we shouldn't be adding testing code in the app. Add some switching for mock json when the network is build
-    let parentTesting = ProcessInfo.processInfo.arguments.contains("USER_PARENT")
+    
 
     init(dataPoints: [IceCreamData],
          openBounties: [Bounty],
@@ -52,7 +51,7 @@ struct User: Hashable, Identifiable {
         self.completedBounties = completedBounties
         self.name = name
         self.iceCreamPoints = iceCreamPoints
-        self.type = parentTesting ? .parent : type
+        self.type =  type
         self.children = children
     }
 
