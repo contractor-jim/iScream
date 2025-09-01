@@ -6,4 +6,14 @@
 //
 
 @testable import iScream
-final class MockRootContainerEntity: RootContainerEntity { }
+import Foundation
+
+final class MockRootContainerEntity: RootContainerEntity {
+    let mockId = UUID()
+}
+
+extension MockRootContainerEntity: Equatable {
+    static func == (lhs: MockRootContainerEntity, rhs: MockRootContainerEntity) -> Bool {
+        lhs.mockId == rhs.mockId
+    }
+}

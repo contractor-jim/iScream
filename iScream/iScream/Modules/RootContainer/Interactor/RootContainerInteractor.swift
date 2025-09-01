@@ -20,13 +20,13 @@ protocol RootContainerInteractor {
 class RootContainerInteractorImp: RootContainerInteractor {
     let entity: RootContainerEntity!
     var userService: UserService!
-    // TODO: Test this
+
     required init(entity: any RootContainerEntity,
                   userService: UserService) {
         self.entity = entity
         self.userService = userService
     }
-    // TODO: Test this
+
     func fetchMyUser() async -> User {
         return await userService.getUser()
     }

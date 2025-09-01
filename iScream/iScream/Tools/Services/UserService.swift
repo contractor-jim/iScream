@@ -5,7 +5,7 @@
 //  Created by James Woodbridge on 27/08/2025.
 //
 
-protocol UserService {
+protocol UserService: Equatable {
     func getUser() async -> User
 }
 
@@ -94,4 +94,12 @@ class DefaultUserService: UserService {
         return me
     }
 
+}
+
+extension DefaultUserService: Equatable {
+    static func == (lhs: DefaultUserService, rhs: DefaultUserService) -> Bool {
+        // TODO: This needs to be tested
+        // TODO: This needs to actually return a user from disk / mocked API
+        true
+    }
 }
