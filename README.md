@@ -15,7 +15,7 @@ This also gives me a playground to play about with the more recent language, lib
 
 ### Swift
 
-````Swift6````
+````Swift6```` ````Protocols```` ````Equatable````
 
 ### SwiftUI
 
@@ -30,7 +30,7 @@ This also gives me a playground to play about with the more recent language, lib
 
 ### Testing
 
-````XCtest```` ````UItest```` ````Github Actions````
+````XCtest```` ````UItest```` ````SwiftTest```` ````Github Actions````
 <!--
 This is a work in progress at the momment and below is a todo list to remind myself of things i want to play about with: 
 
@@ -64,14 +64,7 @@ This is a work in progress at the momment and below is a todo list to remind mys
     // Try built tool plugins as described here to generate VIPER modules
     // https://developer.apple.com/videos/play/wwdc2022/110354/
 
-    // REview custom layouts for building layouts that work beyond the ones provided
-    // https://developer.apple.com/videos/play/wwdc2022/10056/
-
-    // Use swift charts to show monthly icecream wins / loses
-
-    // Add NavigationStack / NavigationLink for navigation and .navigationDestination see here http://developer.apple.com/videos/play/wwdc2022/10052/ at 7mins
-
-    // Copy gradient from here // https://developer.apple.com/videos/play/wwdc2022/10052/
+    // LEarn gradient from here // https://developer.apple.com/videos/play/wwdc2022/10052/
 
     // choose avatar?
     // https://developer.apple.com/videos/play/wwdc2024/10151/
@@ -96,4 +89,8 @@ This is a work in progress at the momment and below is a todo list to remind mys
     
     // Write an app intent to increase points e.t.c. ? 
     // https://developer.apple.com/videos/play/wwdc2025/244/
+    
+    // Can we make the logo as an SF symbol and use the draw animation as discussed in here 1t 2:40 https://developer.apple.com/videos/play/wwdc2025/337/
+    
+    // Come back and look at how string resource names are generated on tables https://developer.apple.com/videos/play/wwdc2025/225/ 17 mins
 -->

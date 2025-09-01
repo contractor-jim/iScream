@@ -20,18 +20,16 @@ class ChildDashboardPresenterImp: ChildDashboardPresenter, Observable {
     // ViperC conformity
     var interactor: ChildDashboardInteractor!
     var router: ChildDashboardRouter!
-    // TODO: Test this
+    var user: User?
     var navPath: Binding<NavigationPath> {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
     }
 
-    var user: User?
-    // TODO: Test this
     required init(interactor: ChildDashboardInteractor, router: ChildDashboardRouter) {
         self.interactor = interactor
         self.router = router
     }
-    // TODO: Test this
+
     func fetch() async {
         user = await interactor.fetchMyUser()
     }

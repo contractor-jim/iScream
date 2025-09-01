@@ -5,12 +5,13 @@
 //  Created by James Woodbridge on 27/08/2025.
 //
 
-protocol UserService {
+protocol UserService: Equatable {
     func getUser() async -> User
 }
 
 class DefaultUserService: UserService {
     // TODO: At a later date build out the correct generic function to pull data from a URL and store it for now just return the user object
+    // TODO: Test this
     func getUser() async -> User {
         // TODO: This is mocked. Need to pull from DB / API on Entity
         // Mocked for now whilst we are only dealing with users
@@ -93,4 +94,12 @@ class DefaultUserService: UserService {
         return me
     }
 
+}
+
+extension DefaultUserService: Equatable {
+    static func == (lhs: DefaultUserService, rhs: DefaultUserService) -> Bool {
+        // TODO: This needs to be tested
+        // TODO: This needs to actually return a user from disk / mocked API
+        true
+    }
 }
