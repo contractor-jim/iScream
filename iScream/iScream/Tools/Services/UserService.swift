@@ -66,8 +66,10 @@ class DefaultUserService: UserService {
         let childTesting = ProcessInfo.processInfo.arguments.contains("USER_CHILD")
 
         var userType: UserType = .child
-        // userType = parentTesting ? .parent : userType
-        // userType = childTesting ? .child : userType
+        userType = parentTesting ? .parent : userType
+        userType = childTesting ? .child : userType
+
+        print(">>> parentTesting \(parentTesting) child testing \(childTesting) userType \(userType)")
 
         var me = User(dataPoints: jackIceCreamDataPoints,
                       openBounties: openBountyData,

@@ -27,6 +27,7 @@ struct BountyStackView: View {
                     ForEach(presenter.user?.openBounties ?? []) { bounty in
                         Text(bounty.title)
                             .listRowSeparator(.hidden)
+                            .accessibilityIdentifier(bounty.title)
                     }
                 }
                 header: {
@@ -39,6 +40,7 @@ struct BountyStackView: View {
                     ForEach(presenter.user?.completedBounties ?? []) { bounty in
                         Text(bounty.title)
                             .listRowSeparator(.hidden)
+                            .accessibilityIdentifier(bounty.title)
                     }
                 }
                 header: {
