@@ -91,4 +91,6 @@ This is a work in progress at the momment and below is a todo list to remind mys
     // https://developer.apple.com/videos/play/wwdc2025/244/
     
     // Can we make the logo as an SF symbol and use the draw animation as discussed in here 1t 2:40 https://developer.apple.com/videos/play/wwdc2025/337/
+    
+    // Come back and look at how string resource names are generated on tables https://developer.apple.com/videos/play/wwdc2025/225/ 17 mins
 -->

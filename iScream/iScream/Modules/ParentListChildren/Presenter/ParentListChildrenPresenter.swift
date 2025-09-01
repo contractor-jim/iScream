@@ -18,27 +18,24 @@ protocol ParentListChildrenPresenter {
 
 @Observable
 class ParentListChildrenPresenterImp: ParentListChildrenPresenter, Observable {
-
     // ViperC conformity
     var interactor: ParentListChildrenInteractor!
     var router: ParentListChildrenRouter!
-    // TODO: Test this
+    var user: User?
+
     var navPath: Binding<NavigationPath> {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
     }
 
-    var user: User?
-
-    // TODO: Test this
     init(interactor: ParentListChildrenInteractor, router: ParentListChildrenRouter) {
         self.interactor = interactor
         self.router = router
     }
-    // TODO: Test this
+
     func fetch() async {
         user = await interactor.fetchMyUser()
     }
-    // TODO: Test this
+
     func navigateChildDetailView(user: User) {
         router.navigateChildDetailView(user: user)
     }

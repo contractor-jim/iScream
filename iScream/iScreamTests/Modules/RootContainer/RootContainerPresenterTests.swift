@@ -10,26 +10,30 @@ import Testing
 
 struct RootContainerPresenterTests {
 
-    var mockService: MockUserService
+    var mockUserService: MockUserService
     let router: MockRootContainerRouter
     let interactor: MockRootContainerInteractor
     let presenter: RootContainerPresenterImp
 
     init() throws {
-        mockService = MockUserService()
+        mockUserService = MockUserService()
         router = MockRootContainerRouter()
-        interactor = MockRootContainerInteractor(entity: MockRootContainerEntity(), userService: mockService)
+        interactor = MockRootContainerInteractor(entity: MockRootContainerEntity(), userService: mockUserService)
         presenter = RootContainerPresenterImp(interactor: interactor, router: router)
     }
 
     @Test("POSITIVE - RootContainerPresenter - fetch user") func testFetch() async throws {
+        let testUser = User(dataPoints: [],
+                            openBounties: Bounty.threeCorrectIncompleteBounties,
+                            completedBounties: Bounty.threeCorrectCompletedBounties,
+                            name: "McTest",
+                            iceCreamPoints: 1000)
 
-        mockService.mockUser = User(dataPoints: [],
-                                    openBounties: Bounty.threeCorrectIncompleteBounties,
-                                    completedBounties: Bounty.threeCorrectCompletedBounties,
-                                    name: "McTest",
-                                    iceCreamPoints: 1000)
+        mockUserService.mockUser = testUser
         await presenter.fetch()
+
+        #expect(presenter.user != nil)
+        #expect(presenter.user == testUser)
     }
 
     @Test("POSITIVE - RootContainerPresenter - nil user") func testGetBountyBadgeCountNilUser_ReturnsNil() {
@@ -61,7 +65,7 @@ struct RootContainerPresenterTests {
         userType: UserType,
         expectedCount: Int
         ) async throws {
-        mockService.mockUser = User(dataPoints: [],
+            mockUserService.mockUser = User(dataPoints: [],
                                     openBounties: openBounties,
                                     completedBounties: closedBounties,
                                     name: "McTest",
