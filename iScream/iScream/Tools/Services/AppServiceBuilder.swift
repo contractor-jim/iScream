@@ -16,7 +16,7 @@ class AppServiceBuilder {
 
     static var defaultContainer: Container {
         Static.sharedContainer = Container { container in
-
+            // TODO: Test this
             container.register(UserService.self) { resolver in
                 return DefaultUserService()
             }
