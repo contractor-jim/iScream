@@ -37,6 +37,8 @@ struct User: Hashable, Identifiable {
     var openBounties: [Bounty] = []
     var completedBounties: [Bounty] = []
 
+    
+
     init(dataPoints: [IceCreamData],
          openBounties: [Bounty],
          completedBounties: [Bounty],
@@ -49,7 +51,7 @@ struct User: Hashable, Identifiable {
         self.completedBounties = completedBounties
         self.name = name
         self.iceCreamPoints = iceCreamPoints
-        self.type = type
+        self.type =  type
         self.children = children
     }
 

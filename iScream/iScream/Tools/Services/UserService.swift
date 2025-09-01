@@ -5,6 +5,8 @@
 //  Created by James Woodbridge on 27/08/2025.
 //
 
+import Foundation
+
 protocol UserService: Equatable {
     func getUser() async -> User
 }
@@ -59,12 +61,22 @@ class DefaultUserService: UserService {
             Bounty(title: "Eat all your dinner", points: 2, completed: true)
         ]
 
+        //TODO: This is incorrect as we shouldn't be adding testing code in the app. Add some switching for mock json when the network is build
+        let parentTesting = ProcessInfo.processInfo.arguments.contains("USER_PARENT")
+        let childTesting = ProcessInfo.processInfo.arguments.contains("USER_CHILD")
+
+        var userType: UserType = .child
+        userType = parentTesting ? .parent : userType
+        userType = childTesting ? .child : userType
+
+        print(">>> parentTesting \(parentTesting) child testing \(childTesting) userType \(userType)")
+
         var me = User(dataPoints: jackIceCreamDataPoints,
                       openBounties: openBountyData,
                       completedBounties: completedBountyData,
                       name: "Daddy",
                       iceCreamPoints: 1000,
-                      type: .child)
+                      type: userType)
 
         let jack = User(dataPoints: jackIceCreamDataPoints,
                         openBounties: openBountyData,

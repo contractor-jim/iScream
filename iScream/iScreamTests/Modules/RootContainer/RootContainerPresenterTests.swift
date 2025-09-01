@@ -61,7 +61,13 @@ struct RootContainerPresenterTests {
         userType: UserType,
         expectedCount: Int
         ) async throws {
-            mockUserService.mockUser = User.mockUser
+            mockUserService.mockUser = User(dataPoints: [],
+                                            openBounties: openBounties,
+                                            completedBounties: closedBounties,
+                                            name: "McTest",
+                                            iceCreamPoints: 1,
+                                            type: userType,
+                                            children: [])
         await presenter.fetch()
         try #require(presenter.user != nil)
         #expect(presenter.getBountyBadgeCount() == expectedCount)

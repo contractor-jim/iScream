@@ -34,13 +34,5 @@ final class RootContainerUITests: XCTestCase {
         XCTAssertTrue(
             app.buttons["Bounties"].waitForExistence(timeout: 3.0)
         )
-
-        //app.buttons["People"].tap()
-        //app.buttons["Bounties"].tap()
-
-        // Or?
-
-        //app.tabBars["People"].tap()
-        //app.tabBars["Bounties"].tap()
     }
 }

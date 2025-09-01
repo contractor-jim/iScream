@@ -93,4 +93,8 @@ This is a work in progress at the momment and below is a todo list to remind mys
     // Can we make the logo as an SF symbol and use the draw animation as discussed in here 1t 2:40 https://developer.apple.com/videos/play/wwdc2025/337/
     
     // Come back and look at how string resource names are generated on tables https://developer.apple.com/videos/play/wwdc2025/225/ 17 mins
+    
+    // Add proper error handeling and use expct throws in swift test https://developer.apple.com/videos/play/wwdc2024/10195/ 4:01 
+    
+    // Use some tags for wip and also test plans for smoke tests https://developer.apple.com/videos/play/wwdc2024/10195/ 18 mins
 -->
