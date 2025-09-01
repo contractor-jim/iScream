@@ -19,7 +19,7 @@ protocol ChildDashboardInteractor {
 class ChildDashboardInteractorImp: ChildDashboardInteractor {
     let entity: ChildDashboardEntity!
     var userService: UserService!
-    
+
     required init(entity: any ChildDashboardEntity,
                   userService: UserService) {
         self.entity = entity
