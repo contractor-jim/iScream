@@ -5,8 +5,8 @@
 //  Created by James Woodbridge on 29/08/2025.
 //
 
-import Testing
 @testable import iScream
+import Testing
 
 struct RootContainerPresenterTests {
 

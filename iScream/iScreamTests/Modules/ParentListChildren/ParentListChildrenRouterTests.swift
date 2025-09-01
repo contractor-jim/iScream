@@ -5,8 +5,8 @@
 //  Created by James Woodbridge on 01/09/2025.
 //
 
-import Testing
 @testable import iScream
+import Testing
 
 struct ParentListChildrenRouterTests {
 

@@ -6,6 +6,7 @@
 //
 
 @testable import iScream
+
 class MockUserService: UserService {
 
     var mockUser: User?
@@ -18,7 +19,6 @@ class MockUserService: UserService {
                                 iceCreamPoints: 0)
     }
 }
-
 
 extension MockUserService: Equatable {
     static func == (lhs: MockUserService, rhs: MockUserService) -> Bool {
