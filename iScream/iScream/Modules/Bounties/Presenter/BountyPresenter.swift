@@ -19,13 +19,12 @@ protocol BountyPresenter {
 class BountyPresenterImp: BountyPresenter, Observable {
     var interactor: BountyInteractor!
     var router: BountyRouter!
+    var user: User?
     // TODO: Test this
     var navPath: Binding<NavigationPath> {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
     }
-    
-    var user: User?
-    // TODO: Test this
+
     init(interactor: BountyInteractor, router: BountyRouter) {
         self.interactor = interactor
         self.router = router
