@@ -35,11 +35,7 @@ struct ParentListChildrenPresenterTests {
     }
 
     @Test("POSITIVE - ParentListChildrenPresenter - fetch user") func testFetch() async throws {
-        let testUser = User(dataPoints: [],
-                            openBounties: Bounty.threeCorrectIncompleteBounties,
-                            completedBounties: Bounty.threeCorrectCompletedBounties,
-                            name: "McTest",
-                            iceCreamPoints: 1000)
+        let testUser = User.mockUser
 
         mockUserService.mockUser = testUser
         await presenter.fetch()
@@ -65,7 +61,7 @@ struct ParentListChildrenPresenterTests {
     @Test("POSITIVE - ParentListChildrenPresenter - navPath return") func testNavigateChildDetail() {
         // Set up expectation
         let router = ParentListChildrenRouterImp()
-        var nav = NavigationPath()
+        let nav = NavigationPath()
 
         // Append expectation
         router.nav = nav
@@ -73,11 +69,7 @@ struct ParentListChildrenPresenterTests {
 
         // Navigate to user
         // TODO: Need to make this user as part of the mocked model to refactor out duplicate generation
-        let mockedUser = User(dataPoints: [],
-                              openBounties: Bounty.threeCorrectIncompleteBounties,
-                              completedBounties: Bounty.threeCorrectCompletedBounties,
-                              name: "McTest",
-                              iceCreamPoints: 1000)
+        let mockedUser = User.mockUser
         presenter.navigateChildDetailView(user: mockedUser)
 
         #expect(presenter.navPath.wrappedValue.isEmpty == false)

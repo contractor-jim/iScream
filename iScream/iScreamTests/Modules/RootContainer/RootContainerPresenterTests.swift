@@ -23,11 +23,7 @@ struct RootContainerPresenterTests {
     }
 
     @Test("POSITIVE - RootContainerPresenter - fetch user") func testFetch() async throws {
-        let testUser = User(dataPoints: [],
-                            openBounties: Bounty.threeCorrectIncompleteBounties,
-                            completedBounties: Bounty.threeCorrectCompletedBounties,
-                            name: "McTest",
-                            iceCreamPoints: 1000)
+        let testUser = User.mockUser
 
         mockUserService.mockUser = testUser
         await presenter.fetch()
@@ -65,12 +61,7 @@ struct RootContainerPresenterTests {
         userType: UserType,
         expectedCount: Int
         ) async throws {
-            mockUserService.mockUser = User(dataPoints: [],
-                                    openBounties: openBounties,
-                                    completedBounties: closedBounties,
-                                    name: "McTest",
-                                    iceCreamPoints: 1000,
-                                    type: userType)
+            mockUserService.mockUser = User.mockUser
         await presenter.fetch()
         try #require(presenter.user != nil)
         #expect(presenter.getBountyBadgeCount() == expectedCount)

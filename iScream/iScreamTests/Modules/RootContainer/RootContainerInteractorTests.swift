@@ -40,11 +40,7 @@ struct RootContainerInteractorTests {
 
     @Test("POSITIVE - RootContainerInteractor - fetch user") func testFetch() async throws {
 
-        let mockedUser = User(dataPoints: [],
-                              openBounties: Bounty.threeCorrectIncompleteBounties,
-                              completedBounties: Bounty.threeCorrectCompletedBounties,
-                              name: "McTest",
-                              iceCreamPoints: 1000)
+        let mockedUser = User.mockUser
         mockUserService.mockUser = mockedUser
 
         let user = await interactor.fetchMyUser()
