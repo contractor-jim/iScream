@@ -10,9 +10,9 @@
 extension User {
     static var mockUser: User {
         User(dataPoints: [],
-                              openBounties: Bounty.threeCorrectIncompleteBounties,
-                              completedBounties: Bounty.threeCorrectCompletedBounties,
-                              name: "McTest",
-                              iceCreamPoints: 1000)
+             openBounties: Bounty.threeCorrectIncompleteBounties,
+             completedBounties: Bounty.threeCorrectCompletedBounties,
+             name: "Test",
+             iceCreamPoints: 1000)
     }
 }

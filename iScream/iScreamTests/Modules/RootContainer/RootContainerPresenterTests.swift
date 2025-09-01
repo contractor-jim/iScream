@@ -52,7 +52,7 @@ struct RootContainerPresenterTests {
             (openBounties: Bounty.threeCorrectIncompleteBounties,
              closedBounties: Bounty.threeCorrectCompletedBounties,
              userType: UserType.unknown,
-             expectedCount: -1)
+             expectedCount: 0)
 
     ])
     func testGetChildBountyBadgeCount_ReturnsCountOf3(
