@@ -85,7 +85,6 @@ struct ChildDashboardListView: View {
                 ChildDashboardChartView(user: user)
             }
             .padding([.leading, .trailing,], 26)
-            // .background(Color.yellow)
 
             Spacer()
         }
