@@ -64,6 +64,17 @@
         }
       }
     },
+    "dashboard.cell.child-naughty.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Naughty?"
+          }
+        }
+      }
+    },
     "dashboard.childpoints.label" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -82,6 +93,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Points since %@"
+          }
+        }
+      }
+    },
+    "general.good.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Good"
+          }
+        }
+      }
+    },
+    "general.naughty.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Naughty"
           }
         }
       }
@@ -108,9 +141,6 @@
       }
     },
     "Item at %@" : {
-
-    },
-    "Naughty?" : {
 
     },
     "Select an item" : {

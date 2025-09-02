@@ -1,0 +1,94 @@
+//
+//  ChildGoodBadCell.swift
+//  iScream
+//
+//  Created by James Woodbridge on 02/09/2025.
+//
+
+import SwiftUI
+import Charts
+
+struct ChildGoodBadCell: View {
+    var presenter: ChildDashboardPresenter
+
+    struct IcecramPointSpread: Identifiable {
+        let id = UUID()
+        let title: String
+        let points: Int
+        let color: Color
+    }
+    // TODO: Put these in strings file
+    @State private var points: [IcecramPointSpread]
+
+
+    init (presenter: ChildDashboardPresenter) {
+        self.presenter = presenter
+        points = [
+            IcecramPointSpread.init(title: String(localized: "general.good.label"), points: presenter.getPositivePoints(), color: .green),
+            IcecramPointSpread.init(title: String(localized: "general.naughty.label"), points: presenter.getNegativePoints(), color: .red)
+        ]
+    }
+
+    var body: some View {
+        ZStack(alignment: .top) {
+
+            Text("dashboard.cell.child-naughty.label")
+                .font(CustomFont.smallSubHeaderFont)
+                .lineLimit(2)
+                .padding(.bottom, 0)
+                .padding(.top, 16)
+
+            Chart(points) { spread in
+                SectorMark(
+                    angle: .value(
+                        Text(verbatim: spread.title),
+                        spread.points
+                    ),
+                    innerRadius: .ratio(0.6),
+                    angularInset: 8
+                )
+
+                .foregroundStyle(
+                    by: .value(
+                        Text(verbatim: spread.title),
+                        spread.title
+                    )
+                )
+            }
+            .chartForegroundStyleScale(
+                [String(localized: "general.good.label"): LinearGradient(gradient: Gradient(colors: [.green, .mint]),
+                                                                         startPoint: .top, endPoint: .bottom),
+                 String(localized: "general.naughty.label"): LinearGradient(gradient: Gradient(colors: [.red, .pink]),
+                                           startPoint: .top, endPoint: .bottom)]
+            )
+            .chartLegend(position: .bottom) {
+                HStack {
+                    ForEach(points) { point in
+                        HStack {
+                            BasicChartSymbolShape.circle
+                                .foregroundColor(point.color)
+                                .frame(width: 8, height: 8)
+                            Text(point.title)
+                                .foregroundColor(.white)
+                                .font(.caption)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.01)
+                        }
+                        .padding(.top, 8)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(0)
+                }
+                .padding(0)
+            }
+            .padding(20)
+            .padding(.top, 32)
+            .foregroundColor(Color.white)
+        }
+        .frame(maxWidth: .infinity, maxHeight: 200)
+        .background(Color.cellBackground)
+        .cornerRadius(16)
+        .padding(0)
+        .foregroundColor(Color.white)
+    }
+}

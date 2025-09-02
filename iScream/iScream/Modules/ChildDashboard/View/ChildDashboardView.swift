@@ -35,28 +35,10 @@ struct ChildDashboardView: View {
         }
     }
 }
-
+// TODO: break this out into its own file
 struct ChildDashboardListView: View {
     var presenter: ChildDashboardPresenter
 
-    ///
-    struct IcecramPointSpread: Identifiable {
-        let id = UUID()
-        let title: String
-        let points: Int
-        let color: Color
-    }
-    // TODO: Put these in strings file
-    @State private var points: [IcecramPointSpread]
-
-    init (presenter: ChildDashboardPresenter) {
-        self.presenter = presenter
-        points = [
-            IcecramPointSpread.init(title: "Good", points: presenter.getPositivePoints(), color: .green),
-            IcecramPointSpread.init(title: "Naughty", points: presenter.getNegativePoints(), color: .red)
-        ]
-    }
-    ///
     var body: some View {
         if let user = presenter.user {
             VStack(alignment: .leading) {
@@ -81,68 +63,12 @@ struct ChildDashboardListView: View {
                 .font(CustomFont.smallSubHeaderFont.bold())
                 .foregroundStyle(user.hasImproved ? .red : .green )
 
-                ///
                 HStack {
-                    ZStack(alignment: .top) {
-                        // TODO: Add to the strings file
-                        Text("Naughty?")
-                            .font(CustomFont.smallSubHeaderFont)
-                            .lineLimit(2)
-                            .padding(.bottom, 0)
-                            .padding(.top, 16)
-
-                        Chart(points) { spread in
-                            SectorMark(
-                                angle: .value(
-                                    Text(verbatim: spread.title),
-                                    spread.points
-                                ),
-                                innerRadius: .ratio(0.6),
-                                angularInset: 8
-                            )
-
-                            .foregroundStyle(
-                                by: .value(
-                                    Text(verbatim: spread.title),
-                                    spread.title
-                                )
-                            )
-                        }
-                        .chartForegroundStyleScale(
-                            ["Good": LinearGradient(gradient: Gradient(colors: [.green, .mint]), startPoint: .top, endPoint: .bottom),
-                             "Naughty": LinearGradient(gradient: Gradient(colors: [.red, .pink]), startPoint: .top, endPoint: .bottom)]
-                        )
-                        .chartLegend(position: .bottom) {
-                            HStack {
-                                ForEach(points) { point in
-                                    HStack {
-                                        BasicChartSymbolShape.circle
-                                            .foregroundColor(point.color)
-                                            .frame(width: 8, height: 8)
-                                        Text(point.title)
-                                            .foregroundColor(.white)
-                                            .font(.caption)
-                                            .lineLimit(1)
-                                            .minimumScaleFactor(0.01)
-                                    }
-                                }
-                                .frame(maxWidth: .infinity)
-                                .padding(0)
-                            }
-                            .padding(0)
-                        }
-                        .padding(20)
-                        .padding(.top, 32)
-                        .foregroundColor(Color.white)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: 200)
-                    .background(Color.cellBackground)
-                    .cornerRadius(16)
-                    .padding(0)
-                    .foregroundColor(Color.white)
+                    ChildGoodBadCell(presenter: presenter)
 
                     Spacer()
-                    // TODO: set corner radius to some global style
+                    // TODO: Set corner radius to some global style
+                    // TODO: Add cell for open Bounties / Achievements
                     VStack(alignment: .center) {
                         Text("")
                     }
@@ -153,7 +79,7 @@ struct ChildDashboardListView: View {
                 }
                 .padding(0)
                 .fixedSize(horizontal: false, vertical: false)
-                ///
+
                 // TODO: Handle when no data points are present
                 /*, !user.dataPoints.isEmpty*/
                 ChildDashboardChartView(user: user)
