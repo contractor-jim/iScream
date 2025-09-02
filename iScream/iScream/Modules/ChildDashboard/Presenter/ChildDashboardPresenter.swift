@@ -13,6 +13,8 @@ protocol ChildDashboardPresenter {
     var navPath: Binding<NavigationPath> { get }
     
     func fetch() async
+    func getPositivePoints() -> Int
+    func getNegativePoints() -> Int
 }
 
 @Observable
@@ -32,5 +34,13 @@ class ChildDashboardPresenterImp: ChildDashboardPresenter, Observable {
 
     func fetch() async {
         user = await interactor.fetchMyUser()
+    }
+    // TODO: Test this
+    func getPositivePoints() -> Int {
+        return 500
+    }
+    // TODO: Test this
+    func getNegativePoints() -> Int {
+        return 40
     }
 }

@@ -8,7 +8,6 @@
 import SwiftUI
 
 // TODO: Write tests for these
-
 struct CustomFont {
     // Font names
     static let headerFontName = "Avenir Black"
@@ -18,6 +17,7 @@ struct CustomFont {
     static let fontHeaderLargeSize: CGFloat = 32
     static let fontSubHeaderLargeSize: CGFloat = 20
     static let fontSubHeaderSmallSize: CGFloat = 16
+    static let fontExtraSmallSize: CGFloat = 8
 
     static let fontRegularBodySize: CGFloat = 18
     static let fontSmallBodySize: CGFloat = 10
@@ -29,4 +29,5 @@ struct CustomFont {
     // Body content
     static let regularFontBody: Font = .custom(headerFontName, fixedSize: fontRegularBodySize)
     static let smallFontBody: Font = .custom(headerFontName, fixedSize: fontSmallBodySize)
+    static let extraSmallFontBody: Font = .custom(regularFontName, fixedSize: fontExtraSmallSize)
 }
