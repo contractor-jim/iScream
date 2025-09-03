@@ -58,7 +58,6 @@ struct ChildGoodBadCell: View {
     }
 }
 
-
 struct ChildGoodChartLegend: View {
 
     var points: [IcecramPointSpread]

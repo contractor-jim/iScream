@@ -32,5 +32,12 @@ final class ChildDashboardUITests: XCTestCase {
         XCTAssertTrue(app.otherElements["child-is-naughty-chart-legend"].waitForExistence(timeout: 3.0))
         XCTAssertTrue(app/*@START_MENU_TOKEN@*/.staticTexts["Good"]/*[[".otherElements.staticTexts[\"Good\"]",".staticTexts[\"Good\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
         XCTAssertTrue(app/*@START_MENU_TOKEN@*/.staticTexts["Naughty"]/*[[".otherElements.staticTexts[\"Naughty\"]",".staticTexts[\"Naughty\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
+        XCTAssertTrue(app.staticTexts["Naughty?"].waitForExistence(timeout: 3.0))
+
+        // The Bounty cell
+        XCTAssertTrue(app/*@START_MENU_TOKEN@*/.staticTexts["child-bounty-cell-title"]/*[[".otherElements",".staticTexts[\"Bounties\"]",".staticTexts[\"child-bounty-cell-title\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
+        XCTAssertTrue(app/*@START_MENU_TOKEN@*/.images["child-bounty-cell-icon"]/*[[".otherElements",".images[\"ice.cream.coin\"]",".images[\"child-bounty-cell-icon\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
+        XCTAssertTrue(app/*@START_MENU_TOKEN@*/.staticTexts["child-bounty-cell-completed"]/*[[".otherElements",".staticTexts[\"4\/8 bounties completed\"]",".staticTexts[\"child-bounty-cell-completed\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
+        XCTAssertTrue(app.staticTexts["4/8 bounties completed"].waitForExistence(timeout: 3.0))
     }
 }

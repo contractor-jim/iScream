@@ -20,6 +20,8 @@ protocol ChildDashboardPresenter {
     var user: User? { get }
     var navPath: Binding<NavigationPath> { get }
     var points: [IcecramPointSpread] { get }
+    var openBountyCount: Int { get }
+    var totalBountyCount: Int { get }
 
     func fetch() async
 }
@@ -35,6 +37,14 @@ class ChildDashboardPresenterImp: ChildDashboardPresenter, Observable {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
     }
 
+    var openBountyCount: Int {
+        user?.completedBounties.count ?? 0
+    }
+
+    var totalBountyCount: Int {
+        (user?.completedBounties.count ?? 0) + (user?.openBounties.count ?? 0)
+    }
+
     required init(interactor: ChildDashboardInteractor, router: ChildDashboardRouter) {
         self.interactor = interactor
         self.router = router
@@ -43,7 +53,6 @@ class ChildDashboardPresenterImp: ChildDashboardPresenter, Observable {
     func fetch() async {
         user = await interactor.fetchMyUser()
         guard let user else { return }
-        // TODO: Test this
         points = [
             IcecramPointSpread.init(title: String(localized: "general.good.label"), points: user.iceCreamPoints, color: .green),
             IcecramPointSpread.init(title: String(localized: "general.naughty.label"), points: user.negativeIceCreamPoints, color: .red)
