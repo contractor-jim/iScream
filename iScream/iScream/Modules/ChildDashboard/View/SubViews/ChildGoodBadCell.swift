@@ -18,6 +18,7 @@ struct ChildGoodBadCell: View {
                 .lineLimit(2)
                 .padding(.bottom, 0)
                 .padding(.top, Style.fullPadding)
+                .accessibilityIdentifier("child-is-naughty-cell-title")
 
             Chart(presenter.points) { spread in
                 SectorMark(
@@ -34,6 +35,7 @@ struct ChildGoodBadCell: View {
                         spread.title
                     )
                 )
+                .accessibilityIdentifier("child-is-naughty-sectormark-\(spread.title)")
             }
             .chartForegroundStyleScale(
                 [String(localized: "general.good.label"): LinearGradient(gradient: Gradient(colors: [.green, .mint]),
@@ -43,6 +45,7 @@ struct ChildGoodBadCell: View {
             )
             .chartLegend(position: .bottom) {
                 ChildGoodChartLegend(points: presenter.points)
+                    .accessibilityIdentifier("child-is-naughty-chart-legend")
             }
             .padding(20)
             .padding(.top, 32)
@@ -65,13 +68,15 @@ struct ChildGoodChartLegend: View {
             ForEach(points) { point in
                 HStack {
                     BasicChartSymbolShape.circle
-                        .foregroundColor(point.color)
                         .frame(width: 8, height: 8)
+                        .foregroundColor(point.color)
+                        .accessibilityIdentifier("child-is-naughty-chart-legend-shape-\(point.color)")
                     Text(point.title)
                         .foregroundColor(.white)
                         .font(.caption)
                         .lineLimit(1)
                         .minimumScaleFactor(0.01)
+                        .accessibilityIdentifier("child-is-naughty-chart-legend-title-\(point.title)")
                 }
                 .padding(.top, Style.halfPadding)
             }
