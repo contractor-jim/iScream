@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Charts
 
 struct ChildDashboardView: View {
     @State var presenter: ChildDashboardPresenter!
@@ -63,22 +62,8 @@ struct ChildDashboardListView: View {
                 .font(CustomFont.smallSubHeaderFont.bold())
                 .foregroundStyle(user.hasImproved ? .red : .green )
 
-                HStack {
-                    ChildGoodBadCell(presenter: presenter)
-
-                    Spacer()
-                    // TODO: Set corner radius to some global style
-                    // TODO: Add cell for open Bounties / Achievements
-                    VStack(alignment: .center) {
-                        Text("")
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: 200)
-                    .background(Color.cellBackground)
-                    .cornerRadius(Style.cornerRadius)
-                    .padding(0)
-                }
-                .fixedSize(horizontal: false, vertical: false)
-                .padding(0)
+                // Users good bad and Bounty cells
+                ChildDashboardGoalCells(presenter: presenter)
 
                 // TODO: Handle when no data points are present
                 /*, !user.dataPoints.isEmpty*/
@@ -93,59 +78,24 @@ struct ChildDashboardListView: View {
     }
 }
 
-struct ChildDashboardChartView: View {
-    @State var user: User!
-    @State private var navPath = NavigationPath()
+struct ChildDashboardGoalCells: View {
+    var presenter: ChildDashboardPresenter
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Chart {
-                ForEach(user.dataPoints) {
-                    LineMark(
-                        x: .value("", $0.month),
-                        y: .value("", $0.points)
-                    )
-                    .interpolationMethod(.catmullRom)
-                    .foregroundStyle(user.hasImproved ? .red : .green)
-                    .alignsMarkStylesWithPlotArea()
+        HStack {
+            ChildGoodBadCell(presenter: presenter)
 
-                    AreaMark(
-                        x: .value("", $0.month),
-                        yStart: .value("", $0.points),
-                        yEnd: .value("", user.max)
-                    )
-                    .interpolationMethod(.catmullRom)
-                    .foregroundStyle(
-                        LinearGradient(
-                            gradient: Gradient(colors: [
-                                user.hasImproved ? .red.opacity(0.5) : .green.opacity(0.5),
-                                user.hasImproved ? .red.opacity(0.05) : .green.opacity(0.05)
-                            ]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
-                }
+            Spacer()
+            // TODO: Add cell for open Bounties / Achievements
+            VStack(alignment: .center) {
+                Text("")
             }
-            .padding([.top], 20)
-            .padding([.bottom], 16)
-            .padding([.leading, .trailing], 8)
-            .chartLegend(.hidden)
-            .chartXAxis { AxisMarks(values: .automatic) {
-                AxisValueLabel()
-                    .foregroundStyle(Color.white)
-                }
-            }
-            .chartYAxis { AxisMarks(values: .automatic) {
-                AxisValueLabel()
-                    .foregroundStyle(Color.white)
-                }
-            }
-            .accessibilityIdentifier("child-dashboard-chart-view")
+            .frame(maxWidth: .infinity, maxHeight: 200)
+            .background(Color.cellBackground)
+            .cornerRadius(Style.cornerRadius)
+            .padding(0)
         }
-        .frame(maxWidth: .infinity, maxHeight: 180)
-        .background(.cellBackground)
-        .cornerRadius(Style.cornerRadius)
+        .fixedSize(horizontal: false, vertical: false)
     }
 }
 
@@ -159,6 +109,6 @@ struct ToolBarSettings: View {
                     .foregroundStyle(Color.white.opacity(0.2))
                     .frame(width: 28, height: 28)
             }
-            .padding(.trailing, 16)
+            .padding(.trailing, Style.fullPadding)
     }
 }

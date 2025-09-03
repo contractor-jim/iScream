@@ -17,7 +17,7 @@ struct ChildGoodBadCell: View {
                 .font(CustomFont.smallSubHeaderFont)
                 .lineLimit(2)
                 .padding(.bottom, 0)
-                .padding(.top, 16)
+                .padding(.top, Style.fullPadding)
 
             Chart(presenter.points) { spread in
                 SectorMark(
@@ -74,7 +74,7 @@ struct ChildGoodChartLegend: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.01)
                 }
-                .padding(.top, 8)
+                .padding(.top, Style.halfPadding)
             }
             .frame(maxWidth: .infinity)
             .padding(0)
