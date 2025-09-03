@@ -19,7 +19,7 @@ This also gives me a playground to play about with the more recent language, lib
 
 ### SwiftUI
 
-````TabBar```` ````SFSymbols```` ````ScrollView```` ````HStack```` ````ZStack```` ````VStack```` ````ViewModifiers```` ````Custom ViewModifiers```` ````Charts```` ````List```` ````List Sections````
+````TabBar```` ````SFSymbols```` ````ScrollView```` ````HStack```` ````ZStack```` ````VStack```` ````ViewModifiers```` ````Custom ViewModifiers```` ````Charts```` ````List```` ````List Sections```` ````Animation```` ````MeshGradient````
 
 ### iOS 
 
