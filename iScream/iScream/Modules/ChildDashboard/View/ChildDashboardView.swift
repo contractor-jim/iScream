@@ -62,6 +62,9 @@ struct ChildDashboardListView: View {
                 .font(CustomFont.smallSubHeaderFont.bold())
                 .foregroundStyle(user.hasImproved ? .red : .green )
 
+                // Child achievements
+                ChildDashboardAchievementCell(presenter: presenter)
+
                 // Users good bad and Bounty cells
                 ChildDashboardGoalCells(presenter: presenter)
 
