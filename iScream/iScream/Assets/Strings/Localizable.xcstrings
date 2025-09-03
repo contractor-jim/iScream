@@ -14,13 +14,7 @@
         }
       }
     },
-    "20/40 Bounties completed" : {
-
-    },
     "Add Item" : {
-
-    },
-    "Bounties" : {
 
     },
     "bounties.complete.title" : {
@@ -47,6 +41,17 @@
     },
     "Child Detail view" : {
 
+    },
+    "child.dash.bounties_complete.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld/%2$lld bounties completed"
+          }
+        }
+      }
     },
     "child.dashboard.points" : {
       "extractionState" : "manual",

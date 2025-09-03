@@ -15,7 +15,7 @@ struct ChildDashboardBountyScore: View {
     var body: some View {
         VStack(alignment: .center) {
             // TODO: Add to strings file
-            Text("Bounties")
+            Text("general.title.bounties")
                 .font(CustomFont.smallSubHeaderFont)
                 .lineLimit(2)
                 .padding(.bottom, 0)
@@ -34,7 +34,7 @@ struct ChildDashboardBountyScore: View {
                             ], colors: [
                                 .goldLight, .white, .goldLight,
                                 .goldMid, .yellow, .goldMid,
-                                .goldLight, .white, .goldLight
+                                .goldLight, .white, .goldDark
                             ])
                 )
                 .onAppear() {
@@ -42,12 +42,20 @@ struct ChildDashboardBountyScore: View {
                 }
 
             Spacer()
-            Text("20/40 Bounties completed")
-                .font(CustomFont.extraSmallFontBody)
-                .lineLimit(2)
-                .padding(.bottom, Style.fullPadding)
-                .padding(.top, 0)
-                .accessibilityIdentifier("child-bounty-cell-completed")
+            
+            Text(
+                String(
+                    format: NSLocalizedString("child.dash.bounties_complete.label",
+                                              bundle: .main,
+                                              comment: ""),
+                    presenter.openBountyCount, presenter.totalBountyCount
+                )
+            )
+            .font(CustomFont.extraSmallFontBody)
+            .lineLimit(2)
+            .padding(.bottom, Style.fullPadding)
+            .padding(.top, 0)
+            .accessibilityIdentifier("child-bounty-cell-completed")
         }
         .frame(maxWidth: .infinity, maxHeight: 200)
         .background(Color.cellBackground)
