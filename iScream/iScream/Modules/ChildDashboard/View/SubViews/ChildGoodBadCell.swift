@@ -46,7 +46,6 @@ struct ChildGoodBadCell: View {
             }
             .padding(20)
             .padding(.top, 32)
-            .foregroundColor(Color.white)
         }
         .frame(maxWidth: .infinity, maxHeight: 200)
         .padding(0)
@@ -62,7 +61,7 @@ struct ChildGoodChartLegend: View {
     var points: [IcecramPointSpread]
 
     var body: some View {
-        HStack {
+        HStack(alignment: .center) {
             ForEach(points) { point in
                 HStack {
                     BasicChartSymbolShape.circle
@@ -76,9 +75,6 @@ struct ChildGoodChartLegend: View {
                 }
                 .padding(.top, Style.halfPadding)
             }
-            .frame(maxWidth: .infinity)
-            .padding(0)
         }
-        .padding(0)
     }
 }
