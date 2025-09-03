@@ -69,8 +69,6 @@ class DefaultUserService: UserService {
         userType = parentTesting ? .parent : userType
         userType = childTesting ? .child : userType
 
-        print(">>> parentTesting \(parentTesting) child testing \(childTesting) userType \(userType)")
-
         var me = User(dataPoints: jackIceCreamDataPoints,
                       openBounties: openBountyData,
                       completedBounties: completedBountyData,
