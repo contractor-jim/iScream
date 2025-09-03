@@ -29,7 +29,7 @@ struct DashboardChildCardView: View {
             .padding(.all, 16)
             .font(CustomFont.subHeaderFont)
             .background(.cellBackground)
-            .cornerRadius(16)
+            .cornerRadius(Style.cornerRadius)
             .accessibilityIdentifier("parent-dashboard-card-view-\(user.name)")
         }
     }

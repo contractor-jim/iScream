@@ -74,11 +74,11 @@ struct ChildDashboardListView: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: 200)
                     .background(Color.cellBackground)
-                    .cornerRadius(16)
+                    .cornerRadius(Style.cornerRadius)
                     .padding(0)
                 }
-                .padding(0)
                 .fixedSize(horizontal: false, vertical: false)
+                .padding(0)
 
                 // TODO: Handle when no data points are present
                 /*, !user.dataPoints.isEmpty*/
@@ -87,8 +87,7 @@ struct ChildDashboardListView: View {
             .padding([.leading, .trailing,], 26)
 
             Spacer()
-        }
-        else {
+        } else {
             ProgressView()
         }
     }
@@ -146,7 +145,7 @@ struct ChildDashboardChartView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: 180)
         .background(.cellBackground)
-        .cornerRadius(16)
+        .cornerRadius(Style.cornerRadius)
     }
 }
 

@@ -49,10 +49,10 @@ struct ChildGoodBadCell: View {
             .foregroundColor(Color.white)
         }
         .frame(maxWidth: .infinity, maxHeight: 200)
-        .background(Color.cellBackground)
-        .cornerRadius(16)
         .padding(0)
+        .background(Color.cellBackground)
         .foregroundColor(Color.white)
+        .cornerRadius(Style.cornerRadius)
     }
 }
 
