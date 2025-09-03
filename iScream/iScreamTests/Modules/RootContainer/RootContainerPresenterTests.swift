@@ -66,6 +66,7 @@ struct RootContainerPresenterTests {
                                             completedBounties: closedBounties,
                                             name: "McTest",
                                             iceCreamPoints: 1,
+                                            negativeIceCreamPoints: 1,
                                             type: userType,
                                             children: [])
         await presenter.fetch()

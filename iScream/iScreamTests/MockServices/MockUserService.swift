@@ -16,7 +16,8 @@ class MockUserService: UserService {
                                 openBounties: [],
                                 completedBounties: [],
                                 name: "",
-                                iceCreamPoints: 0)
+                                iceCreamPoints: 0,
+                                negativeIceCreamPoints: 0)
     }
 }
 

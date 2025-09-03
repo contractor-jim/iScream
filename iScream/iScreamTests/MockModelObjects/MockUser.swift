@@ -13,6 +13,7 @@ extension User {
              openBounties: Bounty.threeCorrectIncompleteBounties,
              completedBounties: Bounty.threeCorrectCompletedBounties,
              name: "Test",
-             iceCreamPoints: 1000)
+             iceCreamPoints: 1000,
+             negativeIceCreamPoints: 50)
     }
 }

@@ -26,10 +26,10 @@ struct DashboardChildCardView: View {
                 }
                 .frame(maxHeight: 90)
             }
-            .padding(.all, 16)
+            .padding(.all, Style.fullPadding)
             .font(CustomFont.subHeaderFont)
             .background(.cellBackground)
-            .cornerRadius(16)
+            .cornerRadius(Style.cornerRadius)
             .accessibilityIdentifier("parent-dashboard-card-view-\(user.name)")
         }
     }
@@ -77,7 +77,7 @@ struct DashBoardChildCardScoreView: View {
             .lineLimit(2)
         }
         .frame(maxWidth: 65)
-        .padding([.trailing], 8)
+        .padding([.trailing], Style.halfPadding)
     }
 }
 

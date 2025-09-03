@@ -52,8 +52,8 @@ struct DashboardChildCellView: View {
                             .onTapGesture {
                                 presenter.navigateChildDetailView(user: user)
                             }
-                            .padding(.top, 16)
-                            .padding([.trailing, .leading], 16)
+                            .padding(.top, Style.fullPadding)
+                            .padding([.trailing, .leading], Style.fullPadding)
                     }
                 }
             }
@@ -71,6 +71,6 @@ struct ToolBarPlus: View {
                     .foregroundStyle(Color.white.opacity(0.2))
                     .frame(width: 28, height: 28)
             }
-            .padding(.trailing, 16)
+            .padding(.trailing, Style.fullPadding)
     }
 }

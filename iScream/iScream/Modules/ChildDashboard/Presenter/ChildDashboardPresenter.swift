@@ -8,10 +8,19 @@
 import SwiftUI
 import SwiftData
 
+// TODO: move this further down to the model
+struct IcecramPointSpread: Identifiable {
+    let id = UUID()
+    let title: String
+    let points: Int
+    let color: Color
+}
+
 protocol ChildDashboardPresenter {
     var user: User? { get }
     var navPath: Binding<NavigationPath> { get }
-    
+    var points: [IcecramPointSpread] { get }
+
     func fetch() async
 }
 
@@ -21,6 +30,7 @@ class ChildDashboardPresenterImp: ChildDashboardPresenter, Observable {
     var interactor: ChildDashboardInteractor!
     var router: ChildDashboardRouter!
     var user: User?
+    var points: [IcecramPointSpread] = []
     var navPath: Binding<NavigationPath> {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
     }
@@ -32,5 +42,11 @@ class ChildDashboardPresenterImp: ChildDashboardPresenter, Observable {
 
     func fetch() async {
         user = await interactor.fetchMyUser()
+        guard let user else { return }
+        // TODO: Test this
+        points = [
+            IcecramPointSpread.init(title: String(localized: "general.good.label"), points: user.iceCreamPoints, color: .green),
+            IcecramPointSpread.init(title: String(localized: "general.naughty.label"), points: user.negativeIceCreamPoints, color: .red)
+        ]
     }
 }

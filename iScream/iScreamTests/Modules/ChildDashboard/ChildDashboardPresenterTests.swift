@@ -42,6 +42,9 @@ struct ChildDashboardPresenterTests {
 
         #expect(presenter.user != nil)
         #expect(presenter.user == testUser)
+        #expect(presenter.points.count == 2)
+        #expect(presenter.points[0].points == 1000)
+        #expect(presenter.points[1].points == 50)
     }
 
     @Test("POSITIVE - ChildDashboardPresenter - navPath return") func testNavPath() {
