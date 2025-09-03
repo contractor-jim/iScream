@@ -130,6 +130,17 @@
         }
       }
     },
+    "general.title.achievements" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Achievements"
+          }
+        }
+      }
+    },
     "general.title.bounties" : {
       "localizations" : {
         "en" : {

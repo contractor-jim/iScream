@@ -44,12 +44,24 @@ struct LoggedInTabBarView: View {
             }
             .accessibilityIdentifier("parent-tab-bar-item-1")
 
-            Tab("general.title.bounties", systemImage: "trophy.fill") {
+            Tab {
                 BountyDefaultBuilder().buildBountyView()
                     .accessibilityIdentifier("children-list-view")
+            } label: {
+                Label {
+                  Text("general.title.bounties")
+                } icon: {
+                  Image("ice.cream.coin")
+                }
             }
             .badge(presenter.getBountyBadgeCount())
             .accessibilityIdentifier("parent-tab-bar-item-2")
+
+            Tab("general.title.achievements", systemImage: "trophy.fill") {
+                BountyDefaultBuilder().buildBountyView()
+                    .accessibilityIdentifier("children-list-view")
+            }
+            .accessibilityIdentifier("parent-tab-bar-item-3")
         }
         .navigationBarModifier()
         .tabBarModifier()
