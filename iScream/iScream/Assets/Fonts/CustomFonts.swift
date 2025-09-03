@@ -17,7 +17,7 @@ struct CustomFont {
     static let fontHeaderLargeSize: CGFloat = 32
     static let fontSubHeaderLargeSize: CGFloat = 20
     static let fontSubHeaderSmallSize: CGFloat = 16
-    static let fontExtraSmallSize: CGFloat = 8
+    static let fontExtraSmallSize: CGFloat = 12
 
     static let fontRegularBodySize: CGFloat = 18
     static let fontSmallBodySize: CGFloat = 10

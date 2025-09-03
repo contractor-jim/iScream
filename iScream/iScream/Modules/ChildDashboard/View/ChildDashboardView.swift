@@ -86,14 +86,8 @@ struct ChildDashboardGoalCells: View {
             ChildGoodBadCell(presenter: presenter)
 
             Spacer()
-            // TODO: Add cell for open Bounties / Achievements
-            VStack(alignment: .center) {
-                Text("")
-            }
-            .frame(maxWidth: .infinity, maxHeight: 200)
-            .background(Color.cellBackground)
-            .cornerRadius(Style.cornerRadius)
-            .padding(0)
+
+            ChildDashboardBountyScore(presenter: presenter)
         }
         .fixedSize(horizontal: false, vertical: false)
     }
