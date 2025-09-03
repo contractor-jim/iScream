@@ -12,8 +12,7 @@ struct ChildDashboardAchievementCell: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            // TODO: Add to strings file
-            Text("Achievements")
+            Text("general.title.achievements")
                 .padding(Style.halfPadding)
 
             HStack(alignment: .center) {
@@ -35,6 +34,7 @@ struct ChildDashboardAchievementCell: View {
                 ChildDashboardAchievementLabel(points: 12)
                     .foregroundStyle( BronzeShapeStyle() )
             }
+            .padding(0)
             .padding(.bottom, Style.halfPadding)
         }
         .frame(maxWidth: .infinity, maxHeight: 60)
@@ -49,9 +49,9 @@ struct PlatinumShapeStyle: ShapeStyle {
     func resolve(in environment: EnvironmentValues) -> some ShapeStyle {
         LinearGradient(
             gradient: Gradient(stops: [
-                .init(color: Color(#colorLiteral(red: 0.776, green: 0.266, blue: 0.988, alpha: 1)), location: 0),
-                .init(color: Color(#colorLiteral(red: 0.356, green: 0.348, blue: 0.870, alpha: 1)), location: 0.62),
-                .init(color: Color(#colorLiteral(red: 0.357, green: 0.349, blue: 0.870, alpha: 1)), location: 1)
+                .init(color: Color(#colorLiteral(red: 0.357, green: 0.349, blue: 0.870, alpha: 1)), location: 0),
+                .init(color: Color(#colorLiteral(red: 0.356, green: 0.348, blue: 0.870, alpha: 1)), location: 0.3),
+                .init(color: Color(#colorLiteral(red: 0.776, green: 0.266, blue: 0.988, alpha: 1)), location: 1)
             ]),
             startPoint: .bottomTrailing,
             endPoint: .topLeading
@@ -92,8 +92,10 @@ struct BronzeShapeStyle: ShapeStyle {
         LinearGradient(
             gradient: Gradient(stops: [
                 .init(color: Color(#colorLiteral(red: 0.5098039216, green: 0.3411764706, blue: 0.1725490196, alpha: 1)), location: 0),
-                .init(color: Color(#colorLiteral(red: 0.9882352941, green: 0.662745098, blue: 0.337254902, alpha: 1)), location: 0.3),
-                .init(color: Color(#colorLiteral(red: 0.8078431373, green: 0.537254902, blue: 0.2745098039, alpha: 1)), location: 1)
+                .init(color: Color(#colorLiteral(red: 0.8078431373, green: 0.537254902, blue: 0.2745098039, alpha: 1)), location: 0.62),
+                .init(color: Color(#colorLiteral(red: 0.9882352941, green: 0.662745098, blue: 0.337254902, alpha: 1)), location: 1)
+
+
             ]),
             startPoint: .bottomTrailing,
             endPoint: .topLeading
