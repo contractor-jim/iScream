@@ -50,6 +50,7 @@ struct ChildDashboardListView: View {
                 )
                 .font(CustomFont.headerFont)
                 .foregroundStyle(.white)
+                .padding(.top, 26)
                 // TODO: This needs to be looked as it should be total points followed by increase since last X time period
                 Text(
                     String(
