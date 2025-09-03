@@ -36,11 +36,11 @@ class ChildDashboardPresenterImp: ChildDashboardPresenter, Observable {
     var navPath: Binding<NavigationPath> {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
     }
-    // TODO: Test this
+
     var openBountyCount: Int {
         user?.completedBounties.count ?? 0
     }
-    // TODO: Test this
+
     var totalBountyCount: Int {
         (user?.completedBounties.count ?? 0) + (user?.openBounties.count ?? 0)
     }
@@ -53,7 +53,6 @@ class ChildDashboardPresenterImp: ChildDashboardPresenter, Observable {
     func fetch() async {
         user = await interactor.fetchMyUser()
         guard let user else { return }
-        // TODO: Test this
         points = [
             IcecramPointSpread.init(title: String(localized: "general.good.label"), points: user.iceCreamPoints, color: .green),
             IcecramPointSpread.init(title: String(localized: "general.naughty.label"), points: user.negativeIceCreamPoints, color: .red)

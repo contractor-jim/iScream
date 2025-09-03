@@ -14,7 +14,6 @@ struct ChildDashboardBountyScore: View {
 
     var body: some View {
         VStack(alignment: .center) {
-            // TODO: Add to strings file
             Text("general.title.bounties")
                 .font(CustomFont.smallSubHeaderFont)
                 .lineLimit(2)
@@ -40,6 +39,7 @@ struct ChildDashboardBountyScore: View {
                 .onAppear() {
                     withAnimation(.easeOut(duration: 5.0).repeatForever() ) { isAnimating.toggle() }
                 }
+                .accessibilityIdentifier("child-bounty-cell-icon")
 
             Spacer()
             

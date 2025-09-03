@@ -60,4 +60,14 @@ struct ChildDashboardPresenterTests {
         #expect(presenter.navPath.wrappedValue.count == 1)
         #expect(presenter.navPath.wrappedValue == nav)
     }
+
+    @Test("POSITIVE - ChildDashboardPresenter - user bounty scores add up") func testUserBountyCounts() async {
+        let testUser = User.mockUser
+
+        mockUserService.mockUser = testUser
+        await presenter.fetch()
+
+        #expect(presenter.openBountyCount == 3 )
+        #expect(presenter.totalBountyCount == 6)
+    }
 }
