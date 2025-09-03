@@ -22,8 +22,6 @@ protocol ChildDashboardPresenter {
     var points: [IcecramPointSpread] { get }
 
     func fetch() async
-    func getPositivePoints() -> Int
-    func getNegativePoints() -> Int
 }
 
 @Observable
@@ -40,21 +38,15 @@ class ChildDashboardPresenterImp: ChildDashboardPresenter, Observable {
     required init(interactor: ChildDashboardInteractor, router: ChildDashboardRouter) {
         self.interactor = interactor
         self.router = router
-        points = [
-            IcecramPointSpread.init(title: String(localized: "general.good.label"), points: getPositivePoints(), color: .green),
-            IcecramPointSpread.init(title: String(localized: "general.naughty.label"), points: getNegativePoints(), color: .red)
-        ]
     }
 
     func fetch() async {
         user = await interactor.fetchMyUser()
-    }
-    // TODO: Test this
-    func getPositivePoints() -> Int {
-        return 500
-    }
-    // TODO: Test this
-    func getNegativePoints() -> Int {
-        return 40
+        guard let user else { return }
+        // TODO: Test this
+        points = [
+            IcecramPointSpread.init(title: String(localized: "general.good.label"), points: user.iceCreamPoints, color: .green),
+            IcecramPointSpread.init(title: String(localized: "general.naughty.label"), points: user.negativeIceCreamPoints, color: .red)
+        ]
     }
 }

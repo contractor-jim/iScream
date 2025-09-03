@@ -76,6 +76,7 @@ class DefaultUserService: UserService {
                       completedBounties: completedBountyData,
                       name: "Daddy",
                       iceCreamPoints: 1000,
+                      negativeIceCreamPoints: 200,
                       type: userType)
 
         let jack = User(dataPoints: jackIceCreamDataPoints,
@@ -83,6 +84,7 @@ class DefaultUserService: UserService {
                         completedBounties: completedBountyData,
                         name: "Jack",
                         iceCreamPoints: 1000,
+                        negativeIceCreamPoints: 20,
                         type: .child)
 
         let jem = User(dataPoints: mummyIceCreamDataPoints,
@@ -90,6 +92,7 @@ class DefaultUserService: UserService {
                        completedBounties: completedBountyData,
                        name: "Mummy",
                        iceCreamPoints: 450,
+                       negativeIceCreamPoints: 20,
                        type: .child)
 
         let chris = User(dataPoints: chrisIceCreamDataPoints,
@@ -97,6 +100,7 @@ class DefaultUserService: UserService {
                          completedBounties: completedBountyData,
                          name: "Chris",
                          iceCreamPoints: -10000000,
+                         negativeIceCreamPoints:  -10000000,
                          type: .child)
 
         me.children.append(jack)

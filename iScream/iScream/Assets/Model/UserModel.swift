@@ -32,18 +32,18 @@ struct User: Hashable, Identifiable {
     let dataPoints: [IceCreamData]
     let name: String
     let iceCreamPoints: Int
+    let negativeIceCreamPoints: Int
     let type: UserType
     var children: [User]
     var openBounties: [Bounty] = []
     var completedBounties: [Bounty] = []
-
-    
 
     init(dataPoints: [IceCreamData],
          openBounties: [Bounty],
          completedBounties: [Bounty],
          name: String,
          iceCreamPoints: Int,
+         negativeIceCreamPoints: Int,
          type: UserType = .unknown,
          children: [User] = []) {
         self.dataPoints = dataPoints
@@ -51,6 +51,7 @@ struct User: Hashable, Identifiable {
         self.completedBounties = completedBounties
         self.name = name
         self.iceCreamPoints = iceCreamPoints
+        self.negativeIceCreamPoints = negativeIceCreamPoints
         self.type =  type
         self.children = children
     }
