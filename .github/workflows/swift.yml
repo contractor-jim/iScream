@@ -19,4 +19,11 @@ jobs:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
           P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+            
+        run: |
+            # create variables
+            CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+            PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+            KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+            EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
   
