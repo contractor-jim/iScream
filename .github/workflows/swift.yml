@@ -13,5 +13,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
-    
+
+      - name: Install Certificates and Provisioning Profile
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
   
