@@ -18,21 +18,25 @@ struct ChildDashboardAchievementCell: View {
             HStack(alignment: .center) {
                 ChildDashboardAchievementLabel(points: 0)
                     .foregroundStyle( PlatinumShapeStyle() )
+                    .accessibilityIdentifier("child-dashboard-achievement-cell-midnight")
 
                 Spacer()
 
                 ChildDashboardAchievementLabel(points: 2)
                     .foregroundStyle( GoldShapeStyle() )
+                    .accessibilityIdentifier("child-dashboard-achievement-cell-gold")
 
                 Spacer()
 
                 ChildDashboardAchievementLabel(points: 4)
                     .foregroundStyle( SilverShapeStyle() )
+                    .accessibilityIdentifier("child-dashboard-achievement-cell-silver")
 
                 Spacer()
 
                 ChildDashboardAchievementLabel(points: 12)
                     .foregroundStyle( BronzeShapeStyle() )
+                    .accessibilityIdentifier("child-dashboard-achievement-cell-bronze")
             }
             .padding(0)
             .padding(.bottom, Style.halfPadding)

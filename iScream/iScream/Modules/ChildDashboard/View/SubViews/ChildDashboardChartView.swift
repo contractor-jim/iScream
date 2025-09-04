@@ -14,6 +14,7 @@ struct ChildDashboardChartView: View {
 
     var body: some View {
         VStack(alignment: .center) {
+            // TODO: Need to refactor how strings are handled a bit
             Text(
                 String(
                     format: NSLocalizedString("child.dashboard.chart.title",

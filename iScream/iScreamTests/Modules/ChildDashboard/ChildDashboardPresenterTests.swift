@@ -70,4 +70,12 @@ struct ChildDashboardPresenterTests {
         #expect(presenter.openBountyCount == 3 )
         #expect(presenter.totalBountyCount == 6)
     }
+
+    @Test("POSITIVE - ChildDashboardPresenter - this year is returned") func testCurrentYear() async {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        let year = dateFormatter.string(from: date)
+        #expect(presenter.getThisYear() == year)
+    }
 }
