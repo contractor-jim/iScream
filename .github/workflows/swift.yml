@@ -58,13 +58,4 @@ jobs:
         run: |
           EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
           echo -n "$EXPORT_OPTIONS_PLIST" | base64 --decode -o $EXPORT_OPTS_PATH
-          xcodebuild -exportArchive -archivePath $RUNNER_TEMP/iamgroot.xcarchive -exportOptionsPlist $EXPORT_OPTS_PATH -exportPath $RUNNER_TEMP/build
-
-      #- name: Upload application
-      #  uses: actions/upload-artifact@v4
-      #  with:
-      #    name: app
-      #    path: ${{ runner.temp }}/build/iScream.ipa
-          # you can also archive the entire directory
-          # path: ${{ runner.temp }}/build
-      #    retention-days: 3
+          xcodebuild -exportArchive -archivePath $RUNNER_TEMP/iScream.xcarchive -exportOptionsPlist $EXPORT_OPTS_PATH -exportPath $RUNNER_TEMP/build
