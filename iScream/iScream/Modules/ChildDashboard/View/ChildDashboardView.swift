@@ -50,7 +50,7 @@ struct ChildDashboardListView: View {
                 )
                 .font(CustomFont.headerFont)
                 .foregroundStyle(.white)
-                .padding(.top, 26)
+                .padding(.top, Style.topPadding)
                 // TODO: This needs to be looked as it should be total points followed by increase since last X time period
                 Text(
                     String(
@@ -71,9 +71,9 @@ struct ChildDashboardListView: View {
 
                 // TODO: Handle when no data points are present
                 /*, !user.dataPoints.isEmpty*/
-                ChildDashboardChartView(user: user)
+                ChildDashboardChartView(user: user, presenter: presenter)
             }
-            .padding([.leading, .trailing,], 26)
+            .padding([.leading, .trailing,], Style.topPadding)
 
             Spacer()
         } else {
@@ -88,9 +88,7 @@ struct ChildDashboardGoalCells: View {
     var body: some View {
         HStack {
             ChildGoodBadCell(presenter: presenter)
-
             Spacer()
-
             ChildDashboardBountyScore(presenter: presenter)
         }
         .fixedSize(horizontal: false, vertical: false)
