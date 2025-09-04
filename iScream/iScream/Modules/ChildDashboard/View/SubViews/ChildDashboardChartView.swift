@@ -10,10 +10,24 @@ import Charts
 
 struct ChildDashboardChartView: View {
     @State var user: User!
-    @State private var navPath = NavigationPath()
+    var presenter: ChildDashboardPresenter
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .center) {
+            // TODO: Need to refactor how strings are handled a bit
+            Text(
+                String(
+                    format: NSLocalizedString("child.dashboard.chart.title",
+                                              bundle: .main,
+                                              comment: ""),
+                    presenter.getThisYear()
+                )
+            )
+            .font(CustomFont.smallSubHeaderFont)
+            .foregroundStyle(.white)
+            .padding(0)
+            .padding(.top, Style.topPadding)
+
             Chart {
                 ForEach(user.dataPoints) {
                     LineMark(
@@ -42,7 +56,6 @@ struct ChildDashboardChartView: View {
                     )
                 }
             }
-            .padding([.top], 20)
             .padding([.bottom], Style.fullPadding)
             .padding([.leading, .trailing], Style.halfPadding)
             .chartLegend(.hidden)

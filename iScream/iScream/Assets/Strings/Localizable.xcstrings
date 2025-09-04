@@ -14,6 +14,9 @@
         }
       }
     },
+    "%lld" : {
+
+    },
     "Add Item" : {
 
     },
@@ -49,6 +52,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$lld/%2$lld bounties completed"
+          }
+        }
+      }
+    },
+    "child.dashboard.chart.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Progress %@"
           }
         }
       }
@@ -164,6 +178,9 @@
     },
     "Item at %@" : {
 
+    },
+    "Key 1" : {
+      "extractionState" : "manual"
     },
     "Select an item" : {
 

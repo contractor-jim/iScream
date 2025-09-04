@@ -24,6 +24,7 @@ protocol ChildDashboardPresenter {
     var totalBountyCount: Int { get }
 
     func fetch() async
+    func getThisYear() -> String
 }
 
 @Observable
@@ -57,5 +58,13 @@ class ChildDashboardPresenterImp: ChildDashboardPresenter, Observable {
             IcecramPointSpread.init(title: String(localized: "general.good.label"), points: user.iceCreamPoints, color: .green),
             IcecramPointSpread.init(title: String(localized: "general.naughty.label"), points: user.negativeIceCreamPoints, color: .red)
         ]
+    }
+
+    // TODO: We need to be able to search progress on years, pagination with db search?
+    func getThisYear() -> String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        return dateFormatter.string(from: date)
     }
 }

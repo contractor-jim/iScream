@@ -39,5 +39,16 @@ final class ChildDashboardUITests: XCTestCase {
         XCTAssertTrue(app/*@START_MENU_TOKEN@*/.images["child-bounty-cell-icon"]/*[[".otherElements",".images[\"ice.cream.coin\"]",".images[\"child-bounty-cell-icon\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
         XCTAssertTrue(app/*@START_MENU_TOKEN@*/.staticTexts["child-bounty-cell-completed"]/*[[".otherElements",".staticTexts[\"4\/8 bounties completed\"]",".staticTexts[\"child-bounty-cell-completed\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
         XCTAssertTrue(app.staticTexts["4/8 bounties completed"].waitForExistence(timeout: 3.0))
+
+        // Achievement cell
+        XCTAssertTrue(app/*@START_MENU_TOKEN@*/.images["child-dashboard-achievement-cell-midnight"]/*[[".otherElements.images[\"child-dashboard-achievement-cell-midnight\"]",".images[\"child-dashboard-achievement-cell-midnight\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
+        XCTAssertTrue(app/*@START_MENU_TOKEN@*/.images["child-dashboard-achievement-cell-gold"]/*[[".otherElements.images[\"child-dashboard-achievement-cell-gold\"]",".images[\"child-dashboard-achievement-cell-gold\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
+        XCTAssertTrue(app/*@START_MENU_TOKEN@*/.images["child-dashboard-achievement-cell-silver"]/*[[".otherElements.images[\"child-dashboard-achievement-cell-silver\"]",".images[\"child-dashboard-achievement-cell-silver\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
+        XCTAssertTrue(app/*@START_MENU_TOKEN@*/.images["child-dashboard-achievement-cell-bronze"]/*[[".otherElements.images[\"child-dashboard-achievement-cell-bronze\"]",".images[\"child-dashboard-achievement-cell-bronze\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
+        XCTAssertTrue(app/*@START_MENU_TOKEN@*/.staticTexts["Achievements"]/*[[".otherElements.staticTexts[\"Achievements\"]",".staticTexts[\"Achievements\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
+        XCTAssertTrue(app.staticTexts["0"].waitForExistence(timeout: 3.0))
+        XCTAssertTrue(app.staticTexts["2"].waitForExistence(timeout: 3.0))
+        XCTAssertTrue(app.staticTexts["4"].waitForExistence(timeout: 3.0))
+        XCTAssertTrue(app.staticTexts["12"].waitForExistence(timeout: 3.0))
     }
 }
