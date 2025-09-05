@@ -8,7 +8,7 @@
 run: |
 
 
-    security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+    
     security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
     # import certificates into keychain
