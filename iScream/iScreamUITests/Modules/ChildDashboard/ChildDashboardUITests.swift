@@ -34,7 +34,6 @@ final class ChildDashboardUITests: XCTestCase {
         app.launchArguments.append("USER_CHILD")
         app.activate()
 
-        // Naughty ( good bad ) list cell
         XCTAssertTrue(app/*@START_MENU_TOKEN@*/.staticTexts["child-is-naughty-cell-title"]/*[[".otherElements",".staticTexts[\"Naughty?\"]",".staticTexts[\"child-is-naughty-cell-title\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
         XCTAssertTrue(app/*@START_MENU_TOKEN@*/.otherElements["child-is-naughty-sectormark-Good"]/*[[".otherElements",".otherElements[\"Good\"]",".otherElements[\"child-is-naughty-sectormark-Good\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
         XCTAssertTrue(app/*@START_MENU_TOKEN@*/.otherElements["child-is-naughty-sectormark-Naughty"]/*[[".otherElements",".otherElements[\"Naughty\"]",".otherElements[\"child-is-naughty-sectormark-Naughty\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
@@ -51,7 +50,6 @@ final class ChildDashboardUITests: XCTestCase {
         app.launchArguments.append("USER_CHILD")
         app.activate()
 
-        // The Bounty cell
         XCTAssertTrue(app/*@START_MENU_TOKEN@*/.staticTexts["child-bounty-cell-title"]/*[[".otherElements",".staticTexts[\"Bounties\"]",".staticTexts[\"child-bounty-cell-title\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
         XCTAssertTrue(app/*@START_MENU_TOKEN@*/.images["child-bounty-cell-icon"]/*[[".otherElements",".images[\"ice.cream.coin\"]",".images[\"child-bounty-cell-icon\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
         XCTAssertTrue(app/*@START_MENU_TOKEN@*/.staticTexts["child-bounty-cell-completed"]/*[[".otherElements",".staticTexts[\"4\/8 bounties completed\"]",".staticTexts[\"child-bounty-cell-completed\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
@@ -65,7 +63,6 @@ final class ChildDashboardUITests: XCTestCase {
         app.launchArguments.append("USER_CHILD")
         app.activate()
 
-        // Achievement cell
         XCTAssertTrue(app/*@START_MENU_TOKEN@*/.images["child-dashboard-achievement-cell-midnight"]/*[[".otherElements.images[\"child-dashboard-achievement-cell-midnight\"]",".images[\"child-dashboard-achievement-cell-midnight\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
         XCTAssertTrue(app/*@START_MENU_TOKEN@*/.images["child-dashboard-achievement-cell-gold"]/*[[".otherElements.images[\"child-dashboard-achievement-cell-gold\"]",".images[\"child-dashboard-achievement-cell-gold\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
         XCTAssertTrue(app/*@START_MENU_TOKEN@*/.images["child-dashboard-achievement-cell-silver"]/*[[".otherElements.images[\"child-dashboard-achievement-cell-silver\"]",".images[\"child-dashboard-achievement-cell-silver\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))
