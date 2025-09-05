@@ -1,4 +1,4 @@
-name: "Build iScream app"
+name: "iScream Tests"
 
 on:
   workflow_dispatch:
