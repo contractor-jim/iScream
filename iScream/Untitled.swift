@@ -7,9 +7,6 @@
 
 run: |
 
-
-    security find-identity -p codesigning -v
-    security cms -D -i ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
 - name: Build and Test
 run: |
   xcodebuild clean test -project iScream.xcodeproj -scheme "iScream" -configuration Staging -destination 'platform=iOS Simulator,name=iPhone 16'
