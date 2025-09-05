@@ -6,7 +6,7 @@
 //
 
 run: |
-    KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+    
     EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
 
     # import certificate and provisioning profile from secrets
