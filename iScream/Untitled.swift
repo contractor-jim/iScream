@@ -6,8 +6,6 @@
 //
 
 run: |
-    
-    EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
 
     # import certificate and provisioning profile from secrets
     echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
