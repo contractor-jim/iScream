@@ -7,8 +7,8 @@
 
 run: |
 
+
     
-    echo -n "${{ secrets.STAGING_PROVISIONING_PROFILE_BASE64 }}" | base64 --decode -o $PP_PATH
 
     # create keychain
     security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
