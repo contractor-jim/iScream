@@ -1,4 +1,4 @@
-[![CI Tests](https://github.com/contractor-jim/iScream/actions/workflows/swift.yml/badge.svg)](https://github.com/contractor-jim/iScream/actions/workflows/swift.yml)
+[![iScream Tests](https://github.com/contractor-jim/iScream/actions/workflows/swift.yml/badge.svg?branch=develop)](https://github.com/contractor-jim/iScream/actions/workflows/swift.yml)
 
 # Preface
 
