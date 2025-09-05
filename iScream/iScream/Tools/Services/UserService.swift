@@ -65,7 +65,7 @@ class DefaultUserService: UserService {
         let parentTesting = ProcessInfo.processInfo.arguments.contains("USER_PARENT")
         let childTesting = ProcessInfo.processInfo.arguments.contains("USER_CHILD")
 
-        var userType: UserType = .child
+        var userType: UserType = .parent
         userType = parentTesting ? .parent : userType
         userType = childTesting ? .child : userType
 

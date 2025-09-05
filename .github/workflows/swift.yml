@@ -1,12 +1,12 @@
-name: "Build iScream app"
+name: "iScream Tests"
 
 on:
   workflow_dispatch:
-    branches: [main]
+    branches: [main, develop]
 
 jobs:
   build_and_test:
-    # if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request'
     name: Build and Test
     runs-on: macos-latest
 
@@ -26,7 +26,7 @@ jobs:
             PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
             KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
             EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
-
+            
             # import certificate and provisioning profile from secrets
             echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
             echo -n "${{ secrets.STAGING_PROVISIONING_PROFILE_BASE64 }}" | base64 --decode -o $PP_PATH
@@ -44,8 +44,9 @@ jobs:
             # import provisioning profile
             mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
             cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-            security find-identity -p codesigning -v
-            security cms -D -i ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
+            # security find-identity -p codesigning -v
+            # security cms -D -i ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
+
       - name: Build and Test
         run: |
-          xcodebuild clean test -project iScream.xcodeproj -scheme "iScream" -configuration Staging -destination 'platform=iOS Simulator,name=iPhone 16'
+          xcodebuild clean test -project iScream/iScream.xcodeproj -scheme "iScreamCITest" -destination 'platform=iOS Simulator,name=iPhone 16'
