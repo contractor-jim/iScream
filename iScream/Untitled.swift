@@ -8,10 +8,6 @@
 run: |
 
 
-    
-
-    # create keychain
-    security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
     security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
     security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
