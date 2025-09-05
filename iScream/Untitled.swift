@@ -6,9 +6,6 @@
 //
 
 run: |
-    # create variables
-    CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
-    PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
     KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
     EXPORT_OPTS_PATH=$RUNNER_TEMP/ExportOptions.plist
 
