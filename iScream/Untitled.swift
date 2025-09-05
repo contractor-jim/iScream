@@ -7,8 +7,8 @@
 
 run: |
 
-    security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-    security list-keychain -d user -s $KEYCHAIN_PATH
+
+    
 
     # import provisioning profile
     mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
