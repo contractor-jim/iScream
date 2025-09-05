@@ -31,6 +31,7 @@
 		9B823BAD2E5DAEB900B595E3 /* iScream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iScream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B823BBC2E5DAEBB00B595E3 /* iScreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iScreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B823BC62E5DAEBB00B595E3 /* iScreamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iScreamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B84250E2E6B10ED002730D5 /* iScreamCITest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = iScreamCITest.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -80,6 +81,7 @@
 		9B823BA42E5DAEB900B595E3 = {
 			isa = PBXGroup;
 			children = (
+				9B84250E2E6B10ED002730D5 /* iScreamCITest.xctestplan */,
 				9B823BAF2E5DAEB900B595E3 /* iScream */,
 				9B823BBF2E5DAEBB00B595E3 /* iScreamTests */,
 				9B823BC92E5DAEBB00B595E3 /* iScreamUITests */,

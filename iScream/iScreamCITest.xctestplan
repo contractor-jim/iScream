@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "A0BCC043-FC6D-4C97-A2E1-C29286CF570A",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:iScream.xcodeproj",
+        "identifier" : "9B823BBB2E5DAEBB00B595E3",
+        "name" : "iScreamTests"
+      }
+    }
+  ],
+  "version" : 1
+}
