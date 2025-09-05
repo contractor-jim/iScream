@@ -8,11 +8,6 @@
 run: |
 
 
-    
-
-    # import provisioning profile
-    mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-    cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
     security find-identity -p codesigning -v
     security cms -D -i ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
 - name: Build and Test
