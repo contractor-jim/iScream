@@ -1,3 +1,5 @@
+[![CI Tests](https://github.com/contractor-jim/iScream/actions/workflows/swift.yml/badge.svg)](https://github.com/contractor-jim/iScream/actions/workflows/swift.yml)
+
 # Preface
 
 This is a small app for my son. Since he has been born it has been a running joke about when he is being good he is earning Ice cream points. So I wanted to make an app to track these points. 

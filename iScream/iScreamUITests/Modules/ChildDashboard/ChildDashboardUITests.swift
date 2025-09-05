@@ -18,6 +18,7 @@ final class ChildDashboardUITests: XCTestCase {
     func testChildDashboardCanSeeUI() throws {
         // TODO: Need to add mocks here
         let app = XCUIApplication()
+        app.launchArguments.append("USER_CHILD")
         app.activate()
 
         XCTAssertTrue(app/*@START_MENU_TOKEN@*/.staticTexts["Welcome Daddy"]/*[[".otherElements.staticTexts[\"Welcome Daddy\"]",".staticTexts[\"Welcome Daddy\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 3.0))

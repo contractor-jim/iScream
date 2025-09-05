@@ -2,7 +2,7 @@ name: "Build iScream app"
 
 on:
   workflow_dispatch:
-    branches: [develop]
+    branches: [main, develop]
 
 jobs:
   build_and_test:
@@ -49,5 +49,4 @@ jobs:
 
       - name: Build and Test
         run: |
-          # xcodebuild build -project iScream/iScream.xcodeproj -scheme "iScream" -destination 'platform=iOS Simulator,name=iPhone 16'
           xcodebuild clean test -project iScream/iScream.xcodeproj -scheme "iScream" -destination 'platform=iOS Simulator,name=iPhone 16'

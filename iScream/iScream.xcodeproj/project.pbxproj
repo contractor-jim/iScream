@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9B50C6E02E6AC81300E0212F /* Untitled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B50C6DF2E6AC81000E0212F /* Untitled.swift */; };
 		9B823C032E5DB46200B595E3 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 9B823C022E5DB46200B595E3 /* Swinject */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +28,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9B50C6DF2E6AC81000E0212F /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
 		9B823BAD2E5DAEB900B595E3 /* iScream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iScream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B823BBC2E5DAEBB00B595E3 /* iScreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iScreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B823BC62E5DAEBB00B595E3 /* iScreamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iScreamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,7 +85,6 @@
 				9B823BC92E5DAEBB00B595E3 /* iScreamUITests */,
 				9B823C012E5DB46200B595E3 /* Frameworks */,
 				9B823BAE2E5DAEB900B595E3 /* Products */,
-				9B50C6DF2E6AC81000E0212F /* Untitled.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -256,7 +253,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B50C6E02E6AC81300E0212F /* Untitled.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
