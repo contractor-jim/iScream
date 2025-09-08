@@ -21,7 +21,7 @@ protocol BountyInteractor {
 class BountyInteractorImp: BountyInteractor {
     let entity: BountyEntity!
     var userService: UserService!
-    
+
     required init(entity: any BountyEntity,
                   userService: UserService) {
         self.entity = entity

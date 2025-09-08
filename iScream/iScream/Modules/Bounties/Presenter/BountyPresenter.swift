@@ -11,7 +11,7 @@ import SwiftData
 protocol BountyPresenter {
     var user: User? { get }
     var navPath: Binding<NavigationPath> { get }
-    
+
     func fetch() async
 }
 

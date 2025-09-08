@@ -24,7 +24,7 @@ struct ChildDashboardDefaultBuilderTests {
 
     @Test("POSITIVE - Can create a child dashboard module") func testFetch() throws {
         let builder = ChildDashboardDefaultBuilder()
-        let _ = builder.buildChildDashboardView()
+        _ = builder.buildChildDashboardView()
         try #require(builder.container.resolve(ChildDashboardEntity.self) != nil)
         try #require(builder.container.resolve(ChildDashboardInteractor.self) != nil)
         try #require(builder.container.resolve(ChildDashboardRouter.self) != nil)

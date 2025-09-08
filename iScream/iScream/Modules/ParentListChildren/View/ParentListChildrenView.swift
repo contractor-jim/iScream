@@ -30,7 +30,7 @@ struct ParentListChildrenView: View {
             .background(.mainBackground)
             .foregroundColor(.white)
         }
-        .onAppear() {
+        .onAppear {
             // TODO: Review which actor this task is created on
             Task {
                 await presenter.fetch()
@@ -46,7 +46,7 @@ struct DashboardChildCellView: View {
         ZStack {
             ScrollView {
                 if let children = presenter.user?.children {
-                    ForEach (Array(children.enumerated()), id: \.offset) { index, user in
+                    ForEach(Array(children.enumerated()), id: \.offset) { _, user in
                         // TODO: Some custom press animation
                         DashboardChildCardView(user: user)
                             .onTapGesture {

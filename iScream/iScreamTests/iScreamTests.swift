@@ -7,7 +7,7 @@
 
 import Testing
 @testable import iScream
-
+// swiftlint:disable:next type_name
 struct iScreamTests {
 
     @Test func example() async throws {

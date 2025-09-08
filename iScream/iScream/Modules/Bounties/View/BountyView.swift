@@ -23,7 +23,7 @@ struct BountyStackView: View {
     var body: some View {
         VStack(alignment: .leading) {
             List {
-                Section() {
+                Section {
                     ForEach(presenter.user?.openBounties ?? []) { bounty in
                         Text(bounty.title)
                             .listRowSeparator(.hidden)
@@ -36,7 +36,7 @@ struct BountyStackView: View {
                 .font(CustomFont.regularFontBody.weight(.regular))
                 .listRowBackground(Color.cellBackground)
 
-                Section() {
+                Section {
                     ForEach(presenter.user?.completedBounties ?? []) { bounty in
                         Text(bounty.title)
                             .listRowSeparator(.hidden)
@@ -56,7 +56,7 @@ struct BountyStackView: View {
         .navigationBarTitleDisplayMode(.inline)
         .background(.mainBackground)
         .navigationTitle("general.title.bounties")
-        .onAppear() {
+        .onAppear {
             Task {
                 await presenter.fetch()
             }

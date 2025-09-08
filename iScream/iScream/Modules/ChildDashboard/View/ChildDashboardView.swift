@@ -26,7 +26,7 @@ struct ChildDashboardView: View {
             .foregroundColor(.white)
             .background(.mainBackground)
             .scrollContentBackground(.hidden)
-            .onAppear() {
+            .onAppear {
                 Task {
                     await presenter.fetch()
                 }
@@ -73,7 +73,7 @@ struct ChildDashboardListView: View {
                 /*, !user.dataPoints.isEmpty*/
                 ChildDashboardChartView(user: user, presenter: presenter)
             }
-            .padding([.leading, .trailing,], Style.topPadding)
+            .padding([.leading, .trailing], Style.topPadding)
 
             Spacer()
         } else {

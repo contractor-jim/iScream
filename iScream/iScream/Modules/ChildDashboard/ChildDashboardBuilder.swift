@@ -17,7 +17,7 @@ class ChildDashboardDefaultBuilder: ChildDashboardBuilder {
     let container = Container(parent: AppServiceBuilder.defaultContainer)
 
     func buildChildDashboardView() -> AnyView {
-        container.register(ChildDashboardEntity.self) { c in
+        container.register(ChildDashboardEntity.self) { _ in
             ChildDashboardEntityImp()
         }
 
@@ -27,7 +27,7 @@ class ChildDashboardDefaultBuilder: ChildDashboardBuilder {
                                         userService: userService)
         }
 
-        container.register(ChildDashboardRouter.self) { c in
+        container.register(ChildDashboardRouter.self) { _ in
             ChildDashboardRouterImp()
         }
 

@@ -31,8 +31,17 @@
 		9B823BAD2E5DAEB900B595E3 /* iScream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iScream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B823BBC2E5DAEBB00B595E3 /* iScreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iScreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B823BC62E5DAEBB00B595E3 /* iScreamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iScreamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B84250E2E6B10ED002730D5 /* iScreamCITest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = iScreamCITest.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		9B281FBD2E6EE30E00C84BA8 /* Exceptions for "iScreamTests" folder in "iScreamTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				iScreamCITest.xctestplan,
+			);
+			target = 9B823BBB2E5DAEBB00B595E3 /* iScreamTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		9B823BAF2E5DAEB900B595E3 /* iScream */ = {
@@ -42,6 +51,9 @@
 		};
 		9B823BBF2E5DAEBB00B595E3 /* iScreamTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				9B281FBD2E6EE30E00C84BA8 /* Exceptions for "iScreamTests" folder in "iScreamTests" target */,
+			);
 			path = iScreamTests;
 			sourceTree = "<group>";
 		};
@@ -81,7 +93,6 @@
 		9B823BA42E5DAEB900B595E3 = {
 			isa = PBXGroup;
 			children = (
-				9B84250E2E6B10ED002730D5 /* iScreamCITest.xctestplan */,
 				9B823BAF2E5DAEB900B595E3 /* iScream */,
 				9B823BBF2E5DAEBB00B595E3 /* iScreamTests */,
 				9B823BC92E5DAEBB00B595E3 /* iScreamUITests */,
@@ -117,6 +128,7 @@
 				9B823BA92E5DAEB900B595E3 /* Sources */,
 				9B823BAA2E5DAEB900B595E3 /* Frameworks */,
 				9B823BAB2E5DAEB900B595E3 /* Resources */,
+				9B281FBC2E6EE12600C84BA8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -213,6 +225,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				9B823C002E5DB41B00B595E3 /* XCRemoteSwiftPackageReference "Swinject" */,
+				9B281FC02E6EE53300C84BA8 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9B823BAE2E5DAEB900B595E3 /* Products */;
@@ -249,6 +262,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9B281FBC2E6EE12600C84BA8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9B823BA92E5DAEB900B595E3 /* Sources */ = {
@@ -325,7 +359,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -389,7 +423,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -575,6 +609,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9B281FC02E6EE53300C84BA8 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.61.0;
+			};
+		};
 		9B823C002E5DB41B00B595E3 /* XCRemoteSwiftPackageReference "Swinject" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Swinject/Swinject.git";

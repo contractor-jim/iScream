@@ -1,0 +1,23 @@
+disabled_rules: # rule identifiers to exclude from running
+  - superfluous_disable_command
+  - identifier_name
+  - todo
+included:
+  - iScream
+  - iScreamTests
+force_cast: warning # implicitly
+force_try:
+  severity: warning # explicitly
+function_body_length: 200
+type_body_length: 400
+file_length: 500
+function_parameter_count: 5
+type_name:
+    min_length: 2
+    max_length:
+        warning: 40
+        error: 50
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle)
+line_length: 150
+cyclomatic_complexity:
+  ignores_case_statements: true

@@ -24,7 +24,7 @@ struct BountyDefaultBuilderTests {
 
     @Test("POSITIVE - Can create a child dashboard module") func testFetch() throws {
         let builder = BountyDefaultBuilder()
-        let _ = builder.buildBountyView()
+        let view = builder.buildBountyView()
         try #require(builder.container.resolve(BountyEntity.self) != nil)
         try #require(builder.container.resolve(BountyInteractor.self) != nil)
         try #require(builder.container.resolve(BountyRouter.self) != nil)

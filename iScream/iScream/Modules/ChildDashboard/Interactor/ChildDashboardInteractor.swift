@@ -1,4 +1,3 @@
-
 //
 //  ChildDashboardInteractor.swift
 //  iScream
@@ -9,7 +8,7 @@
 protocol ChildDashboardInteractor {
     init(entity: ChildDashboardEntity,
          userService: UserService)
-    
+
     var entity: ChildDashboardEntity! { get }
     var userService: UserService! { get set }
 
