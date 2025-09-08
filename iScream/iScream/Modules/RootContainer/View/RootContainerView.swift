@@ -18,7 +18,7 @@ struct RootContainerView: View {
         } else {
             ProgressView()
                 .accessibilityIdentifier("initial-tab-indicator")
-                .onAppear() {
+                .onAppear {
                 Task {
                     await presenter.fetch()
                 }

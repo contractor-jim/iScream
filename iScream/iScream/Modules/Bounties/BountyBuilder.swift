@@ -17,7 +17,7 @@ class BountyDefaultBuilder: BountyBuilder {
     let container = Container(parent: AppServiceBuilder.defaultContainer)
 
     func buildBountyView() -> AnyView {
-        container.register(BountyEntity.self) { c in
+        container.register(BountyEntity.self) { _ in
             BountyEntityImp()
         }
 
@@ -27,7 +27,7 @@ class BountyDefaultBuilder: BountyBuilder {
                                 userService: userService)
         }
 
-        container.register(BountyRouter.self) { c in
+        container.register(BountyRouter.self) { _ in
             BountyRouterImp()
         }
 

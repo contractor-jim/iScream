@@ -36,8 +36,9 @@ class RootContainerPresenterImp: RootContainerPresenter, Observable {
             return 0
         }
 
-        if user.type == .child { return user.openBounties.count }
-        else if user.type == .parent {
+        if user.type == .child {
+            return user.openBounties.count
+        } else if user.type == .parent {
             // TODO: Need another state called pending complete to tell the parent of bounties the child claims to have completed
             return 0
         }

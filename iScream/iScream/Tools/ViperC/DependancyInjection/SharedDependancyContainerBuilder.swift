@@ -15,7 +15,7 @@ class SharedDependancyContainerBuilder {
     }
 
     static var defaultContainer: Container {
-        Static.sharedContainer = Container { container in
+        Static.sharedContainer = Container { _ in
             // TODO: Register shared dependacies
         }
 

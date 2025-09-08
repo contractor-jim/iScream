@@ -19,7 +19,7 @@ class MockRootContainerInteractor: RootContainerInteractor {
         self.userService = userService
 
     }
-    
+
     func fetchMyUser() async -> User {
         didCallFetchMyuser = true
         return await userService.getUser()

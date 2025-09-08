@@ -36,13 +36,13 @@ struct ChildDashboardBountyScore: View {
                                 .goldLight, .white, .goldDark
                             ])
                 )
-                .onAppear() {
+                .onAppear {
                     withAnimation(.easeOut(duration: 5.0).repeatForever() ) { isAnimating.toggle() }
                 }
                 .accessibilityIdentifier("child-bounty-cell-icon")
 
             Spacer()
-            
+
             Text(
                 String(
                     format: NSLocalizedString("child.dash.bounties_complete.label",

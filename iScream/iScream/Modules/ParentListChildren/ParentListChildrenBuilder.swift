@@ -18,7 +18,7 @@ class ParentListChildrenDefaultBuilder: ParentListChildrenBuilder {
 
     func buildParentListChildrenView() -> AnyView {
 
-        container.register(ParentListChildrenEntity.self) { c in
+        container.register(ParentListChildrenEntity.self) { _ in
             ParentListChildrenEntityImp()
         }
 
@@ -28,7 +28,7 @@ class ParentListChildrenDefaultBuilder: ParentListChildrenBuilder {
                                             userService: userService)
         }
 
-        container.register(ParentListChildrenRouter.self) { c in
+        container.register(ParentListChildrenRouter.self) { _ in
             ParentListChildrenRouterImp()
         }
 

@@ -8,4 +8,3 @@
 protocol RootContainerEntity { }
 
 final class RootContainerEntityImp: RootContainerEntity { }
-

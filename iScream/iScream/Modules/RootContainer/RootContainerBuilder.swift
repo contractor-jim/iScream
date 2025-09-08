@@ -17,7 +17,7 @@ class RootContainerDefaultBuilder: RootContainerBuilder {
     let container = Container(parent: AppServiceBuilder.defaultContainer)
 
     func buildRootContainerView() -> AnyView {
-        container.register(RootContainerEntity.self) { c in
+        container.register(RootContainerEntity.self) { _ in
             RootContainerEntityImp()
         }
 
@@ -27,7 +27,7 @@ class RootContainerDefaultBuilder: RootContainerBuilder {
                                        userService: userService)
         }
 
-        container.register(RootContainerRouter.self) { c in
+        container.register(RootContainerRouter.self) { _ in
             RootContainerRouterImp()
         }
 

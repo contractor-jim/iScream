@@ -98,8 +98,6 @@ struct BronzeShapeStyle: ShapeStyle {
                 .init(color: Color(#colorLiteral(red: 0.5098039216, green: 0.3411764706, blue: 0.1725490196, alpha: 1)), location: 0),
                 .init(color: Color(#colorLiteral(red: 0.8078431373, green: 0.537254902, blue: 0.2745098039, alpha: 1)), location: 0.62),
                 .init(color: Color(#colorLiteral(red: 0.9882352941, green: 0.662745098, blue: 0.337254902, alpha: 1)), location: 1)
-
-
             ]),
             startPoint: .bottomTrailing,
             endPoint: .topLeading

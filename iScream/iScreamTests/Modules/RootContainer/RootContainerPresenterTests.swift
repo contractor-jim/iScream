@@ -38,7 +38,7 @@ struct RootContainerPresenterTests {
     }
 
     @Test("POSITIVE - RootContainerPresenter - getBountyBadgeCount",
-          arguments:[
+          arguments: [
             (openBounties: Bounty.threeCorrectIncompleteBounties,
              closedBounties: Bounty.threeCorrectCompletedBounties,
              userType: UserType.child,

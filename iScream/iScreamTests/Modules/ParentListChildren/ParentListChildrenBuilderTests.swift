@@ -24,7 +24,7 @@ struct ParentListChildrenBuilderTests {
 
     @Test("POSITIVE - Can create a new parent list children module") func testFetch() throws {
         let builder = ParentListChildrenDefaultBuilder()
-        let _ = builder.buildParentListChildrenView()
+        let view = builder.buildParentListChildrenView()
         try #require(builder.container.resolve(ParentListChildrenEntity.self) != nil)
         try #require(builder.container.resolve(ParentListChildrenInteractor.self) != nil)
         try #require(builder.container.resolve(ParentListChildrenRouter.self) != nil)

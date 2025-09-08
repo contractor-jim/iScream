@@ -65,36 +65,30 @@ struct User: Hashable, Identifiable {
     }
 
     var hasImproved: Bool {
-        get {
-            guard self.dataPoints.count > 1 else {
-                return false
-            }
-
-            return self.dataPoints.first?.points ?? 0 > self.dataPoints.last?.points ?? 0
+        guard self.dataPoints.count > 1 else {
+            return false
         }
+
+        return self.dataPoints.first?.points ?? 0 > self.dataPoints.last?.points ?? 0
     }
 
     var max: Int {
-        get {
-            guard self.dataPoints.count > 1 else {
-                return 0
-            }
-
-            return self.dataPoints.max{ $0.points > $1.points }?.points ?? 0
+        guard self.dataPoints.count > 1 else {
+            return 0
         }
+
+        return self.dataPoints.max { $0.points > $1.points }?.points ?? 0
     }
 
     var aggregateSinceLastMonth: Int {
-        get {
-            guard dataPoints.count > 0 else {
-                return 0
-            }
-
-            guard dataPoints.count > 1 else {
-                return dataPoints.first!.points
-            }
-
-            return dataPoints.last!.points - dataPoints.dropLast().last!.points
+        guard dataPoints.count > 0 else {
+            return 0
         }
+
+        guard dataPoints.count > 1 else {
+            return dataPoints.first!.points
+        }
+
+        return dataPoints.last!.points - dataPoints.dropLast().last!.points
     }
 }

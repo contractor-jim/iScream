@@ -24,7 +24,7 @@ struct RootContainerBuilderTests {
 
     @Test("POSITIVE - Can create a new Root COntainer module") func testFetch() throws {
         let builder = RootContainerDefaultBuilder()
-        let _ = builder.buildRootContainerView()
+        let view = builder.buildRootContainerView()
         try #require(builder.container.resolve(RootContainerEntity.self) != nil)
         try #require(builder.container.resolve(RootContainerInteractor.self) != nil)
         try #require(builder.container.resolve(RootContainerRouter.self) != nil)
