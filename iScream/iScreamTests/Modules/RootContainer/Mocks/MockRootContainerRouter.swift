@@ -6,4 +6,6 @@
 //
 
 @testable import iScream
-class MockRootContainerRouter: RootContainerRouter { }
+class MockRootContainerRouter: RootContainerRouter {
+    required init() { }
+}

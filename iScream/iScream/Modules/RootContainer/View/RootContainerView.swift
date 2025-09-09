@@ -7,9 +7,17 @@
 
 import SwiftUI
 
-struct RootContainerView: View {
+struct RootContainerView: View, GenericView {
 
-    @State var presenter: RootContainerPresenter!
+    @State var presenter: RootContainerPresenter
+
+    // TODO: This feels wrong here and should not need to be included in the defintion
+    init<P>(presenter: P) where P: GenericPresenter {
+        guard let presenter = presenter as? RootContainerPresenter else {
+            fatalError("Unsupported presenter type \(String(describing: type(of: presenter)))")
+        }
+        self.presenter = presenter
+    }
 
     var body: some View {
         // TODO: Need to show login style sheet here

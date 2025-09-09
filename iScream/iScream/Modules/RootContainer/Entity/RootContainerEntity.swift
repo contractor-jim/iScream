@@ -5,6 +5,6 @@
 //  Created by James Woodbridge on 26/08/2025.
 //
 
-protocol RootContainerEntity { }
+protocol RootContainerEntity: GenericEntity { }
 
 final class RootContainerEntityImp: RootContainerEntity { }

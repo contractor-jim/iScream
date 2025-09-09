@@ -8,23 +8,12 @@
 import SwiftUI
 
 protocol RootContainerInteractor {
-    var entity: RootContainerEntity! { get }
-    var userService: UserService! { get set }
-
-    init(entity: RootContainerEntity,
-         userService: UserService)
-
     func fetchMyUser() async -> User
 }
 
-class RootContainerInteractorImp: RootContainerInteractor {
-    let entity: RootContainerEntity!
-    var userService: UserService!
-
-    required init(entity: any RootContainerEntity,
-                  userService: UserService) {
-        self.entity = entity
-        self.userService = userService
+class RootContainerInteractorImp<U: UserService>: GenericInteractorImp<RootContainerEntityImp>, RootContainerInteractor {
+    required init<T>(entity: T, userService: (any UserService)) where T: GenericEntity {
+        super.init(entity: entity, userService: userService)
     }
 
     func fetchMyUser() async -> User {
