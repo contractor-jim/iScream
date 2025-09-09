@@ -16,15 +16,7 @@ protocol RootContainerPresenter {
 @Observable
 class RootContainerPresenterImp: GenericPresenterImp<any RootContainerInteractor, any RootContainerRouter>,
                                     RootContainerPresenter, Observable {
-    // var interactor: RootContainerInteractor!
-    // var router: RootContainerRouter!
-
     var user: User?
-
-//    init(interactor: RootContainerInteractor, router: RootContainerRouter) {
-//        self.interactor = interactor
-//        self.router = router
-//    }
 
     func fetch() async {
         user = await interactor.fetchMyUser()

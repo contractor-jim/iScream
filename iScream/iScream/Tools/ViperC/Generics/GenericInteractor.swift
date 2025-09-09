@@ -6,13 +6,15 @@
 //
 
 protocol GenericInteractor {
-    init<T>(entity: T) where T: GenericEntity
+    init<T>(entity: T, userService: (any UserService)) where T: GenericEntity
 }
 
 class GenericInteractorImp<Entity>: GenericInteractor {
     var entity: Entity
-    required init<T>(entity: T) where T: GenericEntity {
-        // TODO: GENERICS Still not happy with this
+    var userService: (any UserService)
+    required init<T>(entity: T, userService: any UserService) where T: GenericEntity {
+        // TODO: GENERICS: Still not happy with this
         self.entity = entity as! Entity
+        self.userService = userService
     }
 }

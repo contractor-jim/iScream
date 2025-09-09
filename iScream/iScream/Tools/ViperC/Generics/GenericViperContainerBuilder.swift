@@ -33,12 +33,11 @@ class GenericViperContainerBuilderImp: GenericViperContainerBuilder {
         }
 
         container.register(interactor.self) { c in
-            // TODO: Generically specailse user service
-//            guard let userService = self.container.resolve((any UserService).self)! as? DefaultUserService else {
-//                fatalError()
-//            }
-            // TODO: Do we want the user service to be appended by default?
-            return interactor.init(entity: c.resolve(entity.self)!)
+            // TODO: Generically specailse user service, array of services?
+            guard let userService = self.container.resolve((any UserService).self)! as? DefaultUserService else {
+                fatalError()
+            }
+            return interactor.init(entity: c.resolve(entity.self)!, userService: userService)
         }
 
         container.register(router.self) { _ in
