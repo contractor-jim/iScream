@@ -20,10 +20,11 @@ class RootContainerDefaultBuilder: RootContainerBuilder {
         container.register(RootContainerEntity.self) { _ in
             RootContainerEntityImp()
         }
-
+/*
         container.register(RootContainerInteractor.self) { c in
-            let userService = self.container.resolve(UserService.self)!
-            return RootContainerInteractorImp(entity: c.resolve(RootContainerEntity.self)!,
+            // TODO: Update here
+            let userService = self.container.resolve((any UserService).self) as! DefaultUserService
+            return RootContainerInteractorImp<DefaultUserService>(entity: c.resolve(RootContainerEntity.self)!,
                                        userService: userService)
         }
 
@@ -41,5 +42,7 @@ class RootContainerDefaultBuilder: RootContainerBuilder {
         }
         // TODO: Wrapping this view in an anyview causes a opaque type perhaps generics is a better way to go here
         return AnyView(container.resolve(RootContainerView.self)!)
+*/
+        return AnyView(Text("Redundant"))
     }
 }

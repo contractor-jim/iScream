@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
 
 protocol RootContainerPresenter {
     var user: User? { get }
@@ -15,16 +14,17 @@ protocol RootContainerPresenter {
 }
 
 @Observable
-class RootContainerPresenterImp: RootContainerPresenter, Observable {
-    var interactor: RootContainerInteractor!
-    var router: RootContainerRouter!
+class RootContainerPresenterImp: GenericPresenterImp<any RootContainerInteractor, any RootContainerRouter>,
+                                    RootContainerPresenter, Observable {
+    // var interactor: RootContainerInteractor!
+    // var router: RootContainerRouter!
 
     var user: User?
 
-    init(interactor: RootContainerInteractor, router: RootContainerRouter) {
-        self.interactor = interactor
-        self.router = router
-    }
+//    init(interactor: RootContainerInteractor, router: RootContainerRouter) {
+//        self.interactor = interactor
+//        self.router = router
+//    }
 
     func fetch() async {
         user = await interactor.fetchMyUser()
