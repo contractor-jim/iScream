@@ -14,7 +14,7 @@ protocol ParentListChildrenRouterProtocol: GenericRouter {
 
 final class ParentListChildrenRouter: ParentListChildrenRouterProtocol {
     var nav = NavigationPath()
-    // TODO: Test this
+
     func navigateChildDetailView(user: User) {
         nav.append(user)
     }

@@ -17,12 +17,11 @@ protocol BountyPresenterProtocol: GenericPresenter {
 class BountyPresenter: GenericPresenterImp<BountyInteractor, BountyRouter>,
                        BountyPresenterProtocol, Observable {
     var user: User?
-    // TODO: Test this
+
     var navPath: Binding<NavigationPath> {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
     }
 
-    // TODO: Test this
     func fetch() async {
         user = await interactor.fetchMyUser()
     }
