@@ -26,7 +26,7 @@ struct iScreamApp: App {
 
     var body: some Scene {
         WindowGroup {
-            StartupManagerImp.default.getFirstView()
+            StartupManager.default.getFirstView()
         }
         .modelContainer(sharedModelContainer)
     }

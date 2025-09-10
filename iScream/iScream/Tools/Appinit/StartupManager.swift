@@ -9,24 +9,24 @@ import Foundation
 import Swinject
 import SwiftUI
 
-protocol StartupManager {
-    func getFirstView() -> AnyView
+protocol StartupManagerProtocol {
+    func getFirstView() -> RootContainerView
 }
 
-class StartupManagerImp {
-    public static var `default` = StartupManagerImp()
+class StartupManager: StartupManagerProtocol {
+    public static var `default` = StartupManager()
 
     public func getFirstView() -> RootContainerView {
         return buildSignInModule()
     }
-    // TODO: This is named incorrectly
+    // TODO: Test this
     private func buildSignInModule() -> RootContainerView {
         ViperContainerBuilder().buildContainerView(
             view: RootContainerView.self,
             interactor: RootContainerInteractor.self,
             presenter: RootContainerPresenter.self,
             entity: RootContainerEntity.self,
-            router: RootContainerRouterImp.self,
+            router: RootContainerRouter.self,
             services: [DefaultUserService.self])
     }
 }
