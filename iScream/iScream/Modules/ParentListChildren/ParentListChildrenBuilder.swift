@@ -23,7 +23,7 @@ class ParentListChildrenDefaultBuilder: ParentListChildrenBuilder {
         }
 
         container.register(ParentListChildrenInteractor.self) { c in
-            let userService = self.container.resolve(UserService.self)!
+            let userService = self.container.resolve(DefaultUserService.self)!
             return ParentListChildrenInteractorImp(entity: c.resolve(ParentListChildrenEntity.self)!,
                                             userService: userService)
         }

@@ -22,7 +22,7 @@ class BountyDefaultBuilder: BountyBuilder {
         }
 
         container.register(BountyInteractor.self) { c in
-            let userService = self.container.resolve(UserService.self)!
+            let userService = self.container.resolve(DefaultUserService.self)!
             return BountyInteractorImp(entity: c.resolve(BountyEntity.self)!,
                                 userService: userService)
         }

@@ -11,7 +11,7 @@ protocol UserService: Equatable {
     func getUser() async -> User
 }
 
-class DefaultUserService: UserService {
+class DefaultUserService: GenericService, UserService {
     // TODO: At a later date build out the correct generic function to pull data from a URL and store it for now just return the user object
     // TODO: Test this
     func getUser() async -> User {
@@ -107,7 +107,6 @@ class DefaultUserService: UserService {
 
         return me
     }
-
 }
 
 extension DefaultUserService: Equatable {

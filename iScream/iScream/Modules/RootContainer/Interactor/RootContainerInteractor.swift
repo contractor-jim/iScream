@@ -11,12 +11,23 @@ protocol RootContainerInteractor {
     func fetchMyUser() async -> User
 }
 
-class RootContainerInteractorImp<U: UserService>: GenericInteractorImp<RootContainerEntityImp>, RootContainerInteractor {
-    required init<T>(entity: T, userService: (any UserService)) where T: GenericEntity {
-        super.init(entity: entity, userService: userService)
+class RootContainerInteractorImp: GenericInteractorImp<RootContainerEntityImp>, RootContainerInteractor {
+
+    var userService: DefaultUserService?
+    required init<E, S>(entity: E, services: [S]) where E: GenericEntity, S: GenericService {
+
+        // userService = services.first(where: $0.self == DefaultUserService.Type)
+
+        for service in services {
+            if let userService = service as? DefaultUserService {
+                self.userService = userService
+            }
+            print("We loaded a service: \(service)")
+        }
+        super.init(entity: entity, services: services)
     }
 
     func fetchMyUser() async -> User {
-        return await userService.getUser()
+        return await userService!.getUser()
     }
 }

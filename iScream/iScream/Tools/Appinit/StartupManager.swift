@@ -23,9 +23,10 @@ class StartupManagerImp {
     private func buildSignInModule() -> RootContainerView {
         GenericViperContainerBuilderImp().buildContainerView(
             view: RootContainerView.self,
-            interactor: RootContainerInteractorImp<DefaultUserService>.self,
+            interactor: RootContainerInteractorImp.self,
             presenter: RootContainerPresenterImp.self,
             entity: RootContainerEntityImp.self,
-            router: RootContainerRouterImp.self)
+            router: RootContainerRouterImp.self,
+            services: [DefaultUserService.self])
     }
 }
