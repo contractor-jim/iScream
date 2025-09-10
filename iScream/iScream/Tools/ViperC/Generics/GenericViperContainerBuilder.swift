@@ -21,7 +21,7 @@ protocol ViperContainerBuilderProtocol {
         router: R.Type,
         services: [S.Type]) -> V
 }
-
+// TODO: Test this
 class ViperContainerBuilder: ViperContainerBuilderProtocol {
 
     let container = Container(parent: AppServiceBuilder.defaultContainer)
@@ -63,8 +63,13 @@ class ViperContainerBuilder: ViperContainerBuilderProtocol {
         }
 
         container.register(presenter.self) { c in
+            /*
+            * This initializer can fail.
+            * This is intentional to stop misuse when services and router/interactor mismatch when
+            * not correctly passed on and initialised.
+            */
             presenter.init(interactor: c.resolve(interactor.self)!,
-                           router: c.resolve(router.self)!)
+                           router: c.resolve(router.self)!)!
         }
 
         container.register(view.self) { c in

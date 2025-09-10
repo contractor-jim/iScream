@@ -24,8 +24,8 @@ class StartupManagerImp {
         ViperContainerBuilder().buildContainerView(
             view: RootContainerView.self,
             interactor: RootContainerInteractor.self,
-            presenter: RootContainerPresenterImp.self,
-            entity: RootContainerEntityImp.self,
+            presenter: RootContainerPresenter.self,
+            entity: RootContainerEntity.self,
             router: RootContainerRouterImp.self,
             services: [DefaultUserService.self])
     }

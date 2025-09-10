@@ -11,10 +11,9 @@ protocol RootContainerInteractorProtocol {
     func fetchMyUser() async -> User
 }
 
-class RootContainerInteractor: GenericInteractorImp<RootContainerEntityImp>, RootContainerInteractorProtocol {
+class RootContainerInteractor: GenericInteractorImp<RootContainerEntity>, RootContainerInteractorProtocol {
     var userService: DefaultUserService?
     required init?<E, S>(entity: E, services: [S]) where E: GenericEntity, S: GenericService {
-        // Init services
         self.userService = services.lazy.compactMap { $0 as? DefaultUserService }.first
         if self.userService == nil {
             return nil

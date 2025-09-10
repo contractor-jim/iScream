@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-protocol RootContainerPresenter {
+protocol RootContainerPresenterProtocol {
     var user: User? { get }
     func fetch() async
     func getBountyBadgeCount() -> Int
 }
 
 @Observable
-class RootContainerPresenterImp: GenericPresenterImp<RootContainerInteractor, RootContainerRouter>,
-                                    RootContainerPresenter, Observable {
+class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootContainerRouter>,
+                              RootContainerPresenterProtocol, Observable {
     var user: User?
 
     func fetch() async {
@@ -23,7 +23,6 @@ class RootContainerPresenterImp: GenericPresenterImp<RootContainerInteractor, Ro
     }
 
     func getBountyBadgeCount() -> Int {
-
         guard let user else {
             return 0
         }
