@@ -13,9 +13,10 @@ protocol BountyInteractorProtocol: GenericInteractor {
 
 class BountyInteractor: GenericInteractorImp<BountyEntity>,
                         BountyInteractorProtocol {
-    var userService: DefaultUserService?
+    var userService: (any UserService)?
+
     required init?<E, S>(entity: E, services: [S]) where E: GenericEntity, S: GenericService {
-        self.userService = services.lazy.compactMap { $0 as? DefaultUserService }.first
+        self.userService = services.lazy.compactMap { $0 as? any UserService }.first
         if self.userService == nil {
             return nil
         }
