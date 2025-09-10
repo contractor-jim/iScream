@@ -13,7 +13,7 @@ struct ParentListChildrenRouterTests {
     let router: ParentListChildrenRouter
 
     init() throws {
-        router = ParentListChildrenRouterImp()
+        router = ParentListChildrenRouter()
     }
 
     @Test("POSITIVE - ParentListChildrenRouter - navigateChildDetails ") func testNavPath() {

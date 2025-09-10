@@ -7,4 +7,6 @@
 
 protocol RootContainerEntityProtocol: GenericEntity { }
 
-final class RootContainerEntity: RootContainerEntityProtocol { }
+class RootContainerEntity: RootContainerEntityProtocol {
+    required init() { }
+}

@@ -7,4 +7,6 @@
 
 protocol RootContainerRouterProtocol: GenericRouter { }
 
-final class RootContainerRouter: RootContainerRouterProtocol { }
+class RootContainerRouter: RootContainerRouterProtocol {
+    required init () { }
+}

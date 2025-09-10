@@ -7,7 +7,7 @@
 
 @testable import iScream
 
-class MockUserService: UserService {
+class MockUserService: GenericService, UserService {
 
     var mockUser: User?
 

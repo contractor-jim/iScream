@@ -13,23 +13,23 @@ struct ParentListChildrenInteractorTests {
     var mockUserService: MockUserService
     let router: ParentListChildrenRouter
     let interactor: ParentListChildrenInteractor
-    let presenter: ParentListChildrenPresenterImp
+    let presenter: ParentListChildrenPresenter
     let entity: ParentListChildrenEntity
 
     init() throws {
         mockUserService = MockUserService()
-        router = ParentListChildrenRouterImp()
-        entity = ParentListChildrenEntityImp()
-        interactor = ParentListChildrenInteractorImp(entity: entity, userService: mockUserService)
-        presenter = ParentListChildrenPresenterImp(interactor: interactor, router: router)
+        router = ParentListChildrenRouter()
+        entity = ParentListChildrenEntity()
+        interactor = ParentListChildrenInteractor(entity: entity, services: [mockUserService])!
+        presenter = ParentListChildrenPresenter(interactor: interactor, router: router)!
     }
 
     @Test("POSITIVE - ParentListChildrenInteractorInit ") func testInit() throws {
 
-        let interactor = ParentListChildrenInteractorImp(entity: entity,
-                                                         userService: mockUserService)
-        #expect(interactor.entity != nil)
-        #expect(interactor.userService != nil)
+        let interactor = ParentListChildrenInteractor(entity: entity,
+                                                      services: [mockUserService])
+        #expect(interactor?.entity != nil)
+        #expect(interactor?.userService != nil)
     }
 
     @Test("POSITIVE - ParentListChildrenInteractor - fetch user") func testFetch() async throws {

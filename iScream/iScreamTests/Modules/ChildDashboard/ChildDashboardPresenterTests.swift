@@ -12,26 +12,26 @@ import SwiftUI
 struct ChildDashboardPresenterTests {
 
     var mockUserService: MockUserService
-    let router: ChildDashboardRouterImp
-    let interactor: ChildDashboardInteractorImp
-    let presenter: ChildDashboardPresenterImp
-    let entity: ChildDashboardEntityImp
+    let router: ChildDashboardRouter
+    let interactor: ChildDashboardInteractor
+    let presenter: ChildDashboardPresenter
+    let entity: ChildDashboardEntity
 
     init() throws {
         mockUserService = MockUserService()
-        router = ChildDashboardRouterImp()
-        entity = ChildDashboardEntityImp()
-        interactor = ChildDashboardInteractorImp(entity: entity, userService: mockUserService)
-        presenter = ChildDashboardPresenterImp(interactor: interactor, router: router)
+        router = ChildDashboardRouter()
+        entity = ChildDashboardEntity()
+        interactor = ChildDashboardInteractor(entity: entity, services: [mockUserService])!
+        presenter = ChildDashboardPresenter(interactor: interactor, router: router)!
     }
 
     @Test("POSITIVE - ChildDashboardPresenterInit ") func testInit() throws {
 
-        let presenter = ChildDashboardPresenterImp(interactor: interactor,
+        let presenter = ChildDashboardPresenter(interactor: interactor,
                                                    router: router)
 
-        #expect(presenter.interactor != nil)
-        #expect(presenter.router != nil)
+        #expect(presenter?.interactor != nil)
+        #expect(presenter?.router != nil)
     }
 
     @Test("POSITIVE - ChildDashboardPresenter - fetch user") func testFetch() async throws {
@@ -49,16 +49,16 @@ struct ChildDashboardPresenterTests {
 
     @Test("POSITIVE - ChildDashboardPresenter - navPath return") func testNavPath() {
         // Set up expectation
-        let router = ChildDashboardRouterImp()
+        let router = ChildDashboardRouter()
         var nav = NavigationPath()
         nav.append("Test")
         // Append expectation
         router.nav = nav
-        let presenter = ChildDashboardPresenterImp(interactor: interactor, router: router)
+        let presenter = ChildDashboardPresenter(interactor: interactor, router: router)
 
-        #expect(presenter.navPath.wrappedValue.isEmpty == false)
-        #expect(presenter.navPath.wrappedValue.count == 1)
-        #expect(presenter.navPath.wrappedValue == nav)
+        #expect(presenter?.navPath.wrappedValue.isEmpty == false)
+        #expect(presenter?.navPath.wrappedValue.count == 1)
+        #expect(presenter?.navPath.wrappedValue == nav)
     }
 
     @Test("POSITIVE - ChildDashboardPresenter - user bounty scores add up") func testUserBountyCounts() async {
