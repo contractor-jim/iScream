@@ -16,7 +16,7 @@ struct IcecramPointSpread: Identifiable {
     let color: Color
 }
 
-protocol ChildDashboardPresenter {
+protocol ChildDashboardPresenterProtocol: GenericPresenter {
     var user: User? { get }
     var navPath: Binding<NavigationPath> { get }
     var points: [IcecramPointSpread] { get }
@@ -28,10 +28,8 @@ protocol ChildDashboardPresenter {
 }
 
 @Observable
-class ChildDashboardPresenterImp: ChildDashboardPresenter, Observable {
-    // ViperC conformity
-    var interactor: ChildDashboardInteractor!
-    var router: ChildDashboardRouter!
+class ChildDashboardPresenter: GenericPresenterImp<ChildDashboardInteractor, ChildDashboardRouter>,
+                               ChildDashboardPresenterProtocol, Observable {
     var user: User?
     var points: [IcecramPointSpread] = []
     var navPath: Binding<NavigationPath> {
@@ -44,11 +42,6 @@ class ChildDashboardPresenterImp: ChildDashboardPresenter, Observable {
 
     var totalBountyCount: Int {
         (user?.completedBounties.count ?? 0) + (user?.openBounties.count ?? 0)
-    }
-
-    required init(interactor: ChildDashboardInteractor, router: ChildDashboardRouter) {
-        self.interactor = interactor
-        self.router = router
     }
 
     func fetch() async {

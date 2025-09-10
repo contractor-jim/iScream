@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-protocol ChildDashboardRouter {
+protocol ChildDashboardRouterProtocol: GenericRouter {
     var nav: NavigationPath { get set }
 }
 
-class ChildDashboardRouterImp: ChildDashboardRouter {
+final class ChildDashboardRouter: ChildDashboardRouterProtocol {
     var nav = NavigationPath()
 }

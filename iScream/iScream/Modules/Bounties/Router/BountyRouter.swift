@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-protocol BountyRouter {
+protocol BountyRouterProtocol: GenericRouter {
     var nav: NavigationPath { get set }
 }
 
-class BountyRouterImp: BountyRouter {
+final class BountyRouter: BountyRouterProtocol {
     var nav = NavigationPath()
 }

@@ -5,6 +5,6 @@
 //  Created by James Woodbridge on 27/08/2025.
 //
 
-protocol ChildDashboardEntity { }
+protocol ChildDashboardEntityProtocol: GenericEntity { }
 
-final class ChildDashboardEntityImp: ChildDashboardEntity { }
+final class ChildDashboardEntity: ChildDashboardEntityProtocol { }

@@ -5,27 +5,22 @@
 //  Created by James Woodbridge on 27/08/2025.
 //
 
-protocol ChildDashboardInteractor {
-    init(entity: ChildDashboardEntity,
-         userService: UserService)
-
-    var entity: ChildDashboardEntity! { get }
-    var userService: UserService! { get set }
-
+protocol ChildDashboardInteractorProtocol: GenericInteractor {
     func fetchMyUser() async -> User
 }
 
-class ChildDashboardInteractorImp: ChildDashboardInteractor {
-    let entity: ChildDashboardEntity!
-    var userService: UserService!
+class ChildDashboardInteractor: GenericInteractorImp<ChildDashboardEntity>, ChildDashboardInteractorProtocol {
+    var userService: (any UserService)?
 
-    required init(entity: any ChildDashboardEntity,
-                  userService: UserService) {
-        self.entity = entity
-        self.userService = userService
+    required init?<E, S>(entity: E, services: [S]) where E: GenericEntity, S: GenericService {
+        self.userService = services.lazy.compactMap { $0 as? any UserService }.first
+        if self.userService == nil {
+            return nil
+        }
+        super.init(entity: entity, services: services)
     }
 
     func fetchMyUser() async -> User {
-        return await userService.getUser()
+        return await userService!.getUser()
     }
 }

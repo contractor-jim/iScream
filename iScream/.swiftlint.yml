@@ -11,7 +11,7 @@ force_try:
 function_body_length: 200
 type_body_length: 400
 file_length: 500
-function_parameter_count: 5
+function_parameter_count: 6
 type_name:
     min_length: 2
     max_length:

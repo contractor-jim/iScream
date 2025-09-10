@@ -5,39 +5,57 @@
 //  Created by James Woodbridge on 09/09/2025.
 //
 
-import SwiftUI
 import Swinject
 
-protocol GenericViperContainerBuilder {
-    func buildContainerView<V: GenericView, I: GenericInteractor, P: GenericPresenter, E: GenericEntity, R: GenericRouter>(
+protocol ViperContainerBuilderProtocol {
+    func buildContainerView<V: GenericView,
+                            I: GenericInteractor,
+                            P: GenericPresenter,
+                            E: GenericEntity,
+                            R: GenericRouter,
+                            S: GenericService>(
         view: V.Type,
         interactor: I.Type,
         presenter: P.Type,
         entity: E.Type,
-        router: R.Type) -> V
+        router: R.Type,
+        services: [S.Type]) -> V
 }
-
-class GenericViperContainerBuilderImp: GenericViperContainerBuilder {
+// TODO: Test this
+class ViperContainerBuilder: ViperContainerBuilderProtocol {
 
     let container = Container(parent: AppServiceBuilder.defaultContainer)
 
-    func buildContainerView<V: GenericView, I: GenericInteractor, P: GenericPresenter, E: GenericEntity, R: GenericRouter>(
+    func buildContainerView<V: GenericView,
+                            I: GenericInteractor,
+                            P: GenericPresenter,
+                            E: GenericEntity,
+                            R: GenericRouter,
+                            S: GenericService>(
         view: V.Type,
         interactor: I.Type,
         presenter: P.Type,
         entity: E.Type,
-        router: R.Type) -> V {
+        router: R.Type,
+        services: [S.Type]) -> V {
 
         container.register(entity.self) { _ in
             entity.init()
         }
 
         container.register(interactor.self) { c in
-            // TODO: Generically specailse user service, array of services?
-            guard let userService = self.container.resolve((any UserService).self)! as? DefaultUserService else {
-                fatalError()
+            // Append services requested for the interactor
+            var interactorServices: [S] = []
+            for serviceType in services {
+                if let service = self.container.resolve(serviceType.self) {
+                    interactorServices.append(service)
+                }
             }
-            return interactor.init(entity: c.resolve(entity.self)!, userService: userService)
+            /*
+            * Initialse the Interactor with both services and the entity present. This initializer can fail.
+            * This is intentional to stop misuse when services are not correctly passed on and initialised
+            */
+            return interactor.init(entity: c.resolve(entity.self)!, services: interactorServices)!
         }
 
         container.register(router.self) { _ in
@@ -45,8 +63,13 @@ class GenericViperContainerBuilderImp: GenericViperContainerBuilder {
         }
 
         container.register(presenter.self) { c in
+            /*
+            * This initializer can fail.
+            * This is intentional to stop misuse when services and router/interactor mismatch when
+            * not correctly passed on and initialised.
+            */
             presenter.init(interactor: c.resolve(interactor.self)!,
-                           router: c.resolve(router.self)!)
+                           router: c.resolve(router.self)!)!
         }
 
         container.register(view.self) { c in
