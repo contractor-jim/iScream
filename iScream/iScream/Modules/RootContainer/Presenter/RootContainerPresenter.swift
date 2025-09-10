@@ -14,7 +14,7 @@ protocol RootContainerPresenter {
 }
 
 @Observable
-class RootContainerPresenterImp: GenericPresenterImp<any RootContainerInteractor, any RootContainerRouter>,
+class RootContainerPresenterImp: GenericPresenterImp<RootContainerInteractor, RootContainerRouter>,
                                     RootContainerPresenter, Observable {
     var user: User?
 

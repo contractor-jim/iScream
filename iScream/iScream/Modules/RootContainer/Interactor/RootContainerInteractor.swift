@@ -7,22 +7,17 @@
 
 import SwiftUI
 
-protocol RootContainerInteractor {
+protocol RootContainerInteractorProtocol {
     func fetchMyUser() async -> User
 }
 
-class RootContainerInteractorImp: GenericInteractorImp<RootContainerEntityImp>, RootContainerInteractor {
-
+class RootContainerInteractor: GenericInteractorImp<RootContainerEntityImp>, RootContainerInteractorProtocol {
     var userService: DefaultUserService?
-    required init<E, S>(entity: E, services: [S]) where E: GenericEntity, S: GenericService {
-
-        // userService = services.first(where: $0.self == DefaultUserService.Type)
-
-        for service in services {
-            if let userService = service as? DefaultUserService {
-                self.userService = userService
-            }
-            print("We loaded a service: \(service)")
+    required init?<E, S>(entity: E, services: [S]) where E: GenericEntity, S: GenericService {
+        // Init services
+        self.userService = services.lazy.compactMap { $0 as? DefaultUserService }.first
+        if self.userService == nil {
+            return nil
         }
         super.init(entity: entity, services: services)
     }

@@ -21,9 +21,9 @@ class StartupManagerImp {
     }
     // TODO: This is named incorrectly
     private func buildSignInModule() -> RootContainerView {
-        GenericViperContainerBuilderImp().buildContainerView(
+        ViperContainerBuilder().buildContainerView(
             view: RootContainerView.self,
-            interactor: RootContainerInteractorImp.self,
+            interactor: RootContainerInteractor.self,
             presenter: RootContainerPresenterImp.self,
             entity: RootContainerEntityImp.self,
             router: RootContainerRouterImp.self,

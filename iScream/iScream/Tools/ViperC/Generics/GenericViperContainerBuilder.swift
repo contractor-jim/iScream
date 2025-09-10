@@ -5,16 +5,15 @@
 //  Created by James Woodbridge on 09/09/2025.
 //
 
-import SwiftUI
 import Swinject
 
-protocol GenericViperContainerBuilder {
+protocol ViperContainerBuilderProtocol {
     func buildContainerView<V: GenericView,
-                                I: GenericInteractor,
-                                P: GenericPresenter,
-                                E: GenericEntity,
-                                R: GenericRouter,
-                                S: GenericService>(
+                            I: GenericInteractor,
+                            P: GenericPresenter,
+                            E: GenericEntity,
+                            R: GenericRouter,
+                            S: GenericService>(
         view: V.Type,
         interactor: I.Type,
         presenter: P.Type,
@@ -23,16 +22,16 @@ protocol GenericViperContainerBuilder {
         services: [S.Type]) -> V
 }
 
-class GenericViperContainerBuilderImp: GenericViperContainerBuilder {
+class ViperContainerBuilder: ViperContainerBuilderProtocol {
 
     let container = Container(parent: AppServiceBuilder.defaultContainer)
 
     func buildContainerView<V: GenericView,
-                                I: GenericInteractor,
-                                P: GenericPresenter,
-                                E: GenericEntity,
-                                R: GenericRouter,
-                                S: GenericService>(
+                            I: GenericInteractor,
+                            P: GenericPresenter,
+                            E: GenericEntity,
+                            R: GenericRouter,
+                            S: GenericService>(
         view: V.Type,
         interactor: I.Type,
         presenter: P.Type,
@@ -45,18 +44,18 @@ class GenericViperContainerBuilderImp: GenericViperContainerBuilder {
         }
 
         container.register(interactor.self) { c in
-            // TODO: We want to pass a list of types maybe as tuples to instatiate as part of interactor intislisation
-//            guard let userService = self.container.resolve((any UserService).self)! as? DefaultUserService else {
-//                fatalError()
-//            }
+            // Append services requested for the interactor
             var interactorServices: [S] = []
             for serviceType in services {
-                print("Looking for service \(serviceType)")
-                if var service = self.container.resolve(serviceType.self) {
+                if let service = self.container.resolve(serviceType.self) {
                     interactorServices.append(service)
                 }
             }
-            return interactor.init(entity: c.resolve(entity.self)!, services: interactorServices)
+            /*
+            * Initialse the Interactor with both services and the entity present. This initializer can fail.
+            * This is intentional to stop misuse when services are not correctly passed on and initialised
+            */
+            return interactor.init(entity: c.resolve(entity.self)!, services: interactorServices)!
         }
 
         container.register(router.self) { _ in
