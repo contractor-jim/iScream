@@ -9,10 +9,11 @@ import SwiftUI
 import SwiftData
 
 @main
+// swiftlint:disable:next type_name
 struct iScreamApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Item.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -25,7 +26,7 @@ struct iScreamApp: App {
 
     var body: some Scene {
         WindowGroup {
-            StartupManagerImp.default.getFirstView()
+            StartupManager.default.getFirstView()
         }
         .modelContainer(sharedModelContainer)
     }

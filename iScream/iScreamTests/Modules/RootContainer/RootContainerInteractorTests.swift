@@ -13,28 +13,28 @@ struct RootContainerInteractorTests {
     var mockUserService: MockUserService
     let router: MockRootContainerRouter
     let interactor: RootContainerInteractor
-    let presenter: RootContainerPresenterImp
+    let presenter: RootContainerPresenter
     let entity: MockRootContainerEntity
 
     init() throws {
         mockUserService = MockUserService()
         router = MockRootContainerRouter()
-        interactor = RootContainerInteractorImp(entity: MockRootContainerEntity(), userService: mockUserService)
-        presenter = RootContainerPresenterImp(interactor: interactor, router: router)
+        interactor = RootContainerInteractor(entity: MockRootContainerEntity(), services: [mockUserService])!
+        presenter = RootContainerPresenter(interactor: interactor, router: router)!
         entity = MockRootContainerEntity()
     }
 
     @Test("POSITIVE - RootContainerInteractorInit ") func testInit() throws {
 
-        let interactor = RootContainerInteractorImp(entity: entity,
-                                       userService: mockUserService)
+        let interactor = RootContainerInteractor(entity: entity,
+                                                 services: [mockUserService])
 
-        #expect(interactor.entity != nil)
-        let mockEntity = try #require(interactor.entity as? MockRootContainerEntity)
+        #expect(interactor?.entity != nil)
+        let mockEntity = try #require(interactor?.entity as? MockRootContainerEntity)
         #expect(mockEntity == self.entity)
 
-        #expect(interactor.userService != nil)
-        let mockUserService = try #require(interactor.userService as? MockUserService)
+        #expect(interactor?.userService != nil)
+        let mockUserService = try #require(interactor?.userService as? MockUserService)
         #expect(mockUserService == self.mockUserService)
     }
 

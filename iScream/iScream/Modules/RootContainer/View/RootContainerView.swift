@@ -7,9 +7,16 @@
 
 import SwiftUI
 
-struct RootContainerView: View {
+struct RootContainerView: View, GenericView {
 
-    @State var presenter: RootContainerPresenter!
+    @State var presenter: RootContainerPresenter
+
+    init<P>(presenter: P) where P: GenericPresenter {
+        guard let presenter = presenter as? RootContainerPresenter else {
+            fatalError("Unsupported presenter type \(String(describing: type(of: presenter)))")
+        }
+        self.presenter = presenter
+    }
 
     var body: some View {
         // TODO: Need to show login style sheet here
@@ -18,7 +25,7 @@ struct RootContainerView: View {
         } else {
             ProgressView()
                 .accessibilityIdentifier("initial-tab-indicator")
-                .onAppear() {
+                .onAppear {
                 Task {
                     await presenter.fetch()
                 }
@@ -35,17 +42,35 @@ struct LoggedInTabBarView: View {
         TabView {
             Tab("general.title.people", systemImage: "person.fill") {
                 if user.type == .parent {
-                    ParentListChildrenDefaultBuilder().buildParentListChildrenView()
+                    ViperContainerBuilder().buildContainerView(
+                        view: ParentListChildrenView.self,
+                        interactor: ParentListChildrenInteractor.self,
+                        presenter: ParentListChildrenPresenter.self,
+                        entity: ParentListChildrenEntity.self,
+                        router: ParentListChildrenRouter.self,
+                        services: [DefaultUserService.self])
                         .accessibilityIdentifier("parent-children-list-view")
                 } else if user.type == .child {
-                    ChildDashboardDefaultBuilder().buildChildDashboardView()
+                    ViperContainerBuilder().buildContainerView(
+                        view: ChildDashboardView.self,
+                        interactor: ChildDashboardInteractor.self,
+                        presenter: ChildDashboardPresenter.self,
+                        entity: ChildDashboardEntity.self,
+                        router: ChildDashboardRouter.self,
+                        services: [DefaultUserService.self])
                         .accessibilityIdentifier("children-list-view")
                 }
             }
             .accessibilityIdentifier("parent-tab-bar-item-1")
 
             Tab {
-                BountyDefaultBuilder().buildBountyView()
+                ViperContainerBuilder().buildContainerView(
+                    view: BountyView.self,
+                    interactor: BountyInteractor.self,
+                    presenter: BountyPresenter.self,
+                    entity: BountyEntity.self,
+                    router: BountyRouter.self,
+                    services: [DefaultUserService.self])
                     .accessibilityIdentifier("children-list-view")
             } label: {
                 Label {
@@ -58,8 +83,7 @@ struct LoggedInTabBarView: View {
             .accessibilityIdentifier("parent-tab-bar-item-2")
 
             Tab("general.title.achievements", systemImage: "trophy.fill") {
-                BountyDefaultBuilder().buildBountyView()
-                    .accessibilityIdentifier("children-list-view")
+                Text("TODO: Achievements")
             }
             .accessibilityIdentifier("parent-tab-bar-item-3")
         }

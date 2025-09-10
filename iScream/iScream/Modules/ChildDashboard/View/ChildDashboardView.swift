@@ -7,8 +7,15 @@
 
 import SwiftUI
 
-struct ChildDashboardView: View {
-    @State var presenter: ChildDashboardPresenter!
+struct ChildDashboardView: View, GenericView {
+    @State var presenter: ChildDashboardPresenter
+
+    init<P>(presenter: P) where P: GenericPresenter {
+        guard let presenter = presenter as? ChildDashboardPresenter else {
+            fatalError("Unsupported presenter type \(String(describing: type(of: presenter)))")
+        }
+        self.presenter = presenter
+    }
 
     var body: some View {
         NavigationStack(path: presenter.navPath) {
@@ -26,7 +33,7 @@ struct ChildDashboardView: View {
             .foregroundColor(.white)
             .background(.mainBackground)
             .scrollContentBackground(.hidden)
-            .onAppear() {
+            .onAppear {
                 Task {
                     await presenter.fetch()
                 }
@@ -73,7 +80,7 @@ struct ChildDashboardListView: View {
                 /*, !user.dataPoints.isEmpty*/
                 ChildDashboardChartView(user: user, presenter: presenter)
             }
-            .padding([.leading, .trailing,], Style.topPadding)
+            .padding([.leading, .trailing], Style.topPadding)
 
             Spacer()
         } else {

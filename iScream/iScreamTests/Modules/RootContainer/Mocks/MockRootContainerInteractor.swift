@@ -8,20 +8,11 @@
 @testable import iScream
 
 class MockRootContainerInteractor: RootContainerInteractor {
-    var entity: RootContainerEntity!
-    var userService: UserService!
 
     var didCallFetchMyuser = false
 
-    required init(entity: RootContainerEntity,
-                  userService: UserService) {
-        self.entity = entity
-        self.userService = userService
-
-    }
-    
-    func fetchMyUser() async -> User {
+    override func fetchMyUser() async -> User {
         didCallFetchMyuser = true
-        return await userService.getUser()
+        return await userService!.getUser()
     }
 }

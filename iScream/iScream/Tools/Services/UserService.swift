@@ -11,7 +11,7 @@ protocol UserService: Equatable {
     func getUser() async -> User
 }
 
-class DefaultUserService: UserService {
+class DefaultUserService: GenericService, UserService {
     // TODO: At a later date build out the correct generic function to pull data from a URL and store it for now just return the user object
     // TODO: Test this
     func getUser() async -> User {
@@ -24,27 +24,27 @@ class DefaultUserService: UserService {
             IceCreamData(month: "Apr", points: 2),
             IceCreamData(month: "May", points: 9),
             IceCreamData(month: "Jun", points: -5),
-            IceCreamData(month: "Jul", points: 10),
+            IceCreamData(month: "Jul", points: 10)
         ]
 
         let mummyIceCreamDataPoints = [
-            IceCreamData(month: "Jan", points:11),
+            IceCreamData(month: "Jan", points: 11),
             IceCreamData(month: "Feb", points: 9),
             IceCreamData(month: "Mar", points: 4),
             IceCreamData(month: "Apr", points: 10),
             IceCreamData(month: "May", points: 23),
             IceCreamData(month: "Jun", points: 35),
-            IceCreamData(month: "Jul", points: 50),
+            IceCreamData(month: "Jul", points: 50)
         ]
 
         let chrisIceCreamDataPoints = [
-            IceCreamData(month: "Jan", points:0),
+            IceCreamData(month: "Jan", points: 0),
             IceCreamData(month: "Feb", points: -10),
             IceCreamData(month: "Mar", points: -99),
             IceCreamData(month: "Apr", points: -1000),
             IceCreamData(month: "May", points: -3000),
             IceCreamData(month: "Jun", points: -3500),
-            IceCreamData(month: "Jul", points: -50000),
+            IceCreamData(month: "Jul", points: -50000)
         ]
 
         let openBountyData = [
@@ -61,7 +61,7 @@ class DefaultUserService: UserService {
             Bounty(title: "Eat all your dinner", points: 2, completed: true)
         ]
 
-        //TODO: This is incorrect as we shouldn't be adding testing code in the app. Add some switching for mock json when the network is build
+        // TODO: This is incorrect as we shouldn't be adding testing code in the app. Add some switching for mock json when the network is build
         let parentTesting = ProcessInfo.processInfo.arguments.contains("USER_PARENT")
         let childTesting = ProcessInfo.processInfo.arguments.contains("USER_CHILD")
 
@@ -98,7 +98,7 @@ class DefaultUserService: UserService {
                          completedBounties: completedBountyData,
                          name: "Chris",
                          iceCreamPoints: -10000000,
-                         negativeIceCreamPoints:  -10000000,
+                         negativeIceCreamPoints: -10000000,
                          type: .child)
 
         me.children.append(jack)
@@ -107,7 +107,6 @@ class DefaultUserService: UserService {
 
         return me
     }
-
 }
 
 extension DefaultUserService: Equatable {

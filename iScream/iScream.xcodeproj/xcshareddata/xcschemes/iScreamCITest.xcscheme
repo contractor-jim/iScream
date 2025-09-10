@@ -30,7 +30,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:iScreamCITest.xctestplan"
+            reference = "container:iScreamTests/iScreamCITest.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>

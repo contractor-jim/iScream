@@ -13,23 +13,23 @@ struct ChildDashboardInteractorTests {
     var mockUserService: MockUserService
     let router: ChildDashboardRouter
     let interactor: ChildDashboardInteractor
-    let presenter: ChildDashboardPresenterImp
+    let presenter: ChildDashboardPresenter
     let entity: ChildDashboardEntity
 
     init() throws {
         mockUserService = MockUserService()
-        router = ChildDashboardRouterImp()
-        entity = ChildDashboardEntityImp()
-        interactor = ChildDashboardInteractorImp(entity: entity, userService: mockUserService)
-        presenter = ChildDashboardPresenterImp(interactor: interactor, router: router)
+        router = ChildDashboardRouter()
+        entity = ChildDashboardEntity()
+        interactor = ChildDashboardInteractor(entity: entity, services: [mockUserService])!
+        presenter = ChildDashboardPresenter(interactor: interactor, router: router)!
     }
 
     @Test("POSITIVE - ChildDashboardInteractorInit ") func testInit() throws {
 
-        let interactor = ChildDashboardInteractorImp(entity: entity,
-                                                     userService: mockUserService)
-        #expect(interactor.entity != nil)
-        #expect(interactor.userService != nil)
+        let interactor = ChildDashboardInteractor(entity: entity,
+                                                  services: [mockUserService])
+        #expect(interactor?.entity != nil)
+        #expect(interactor?.userService != nil)
     }
 
     @Test("POSITIVE - ChildDashboardInteractor - fetch user") func testFetch() async throws {

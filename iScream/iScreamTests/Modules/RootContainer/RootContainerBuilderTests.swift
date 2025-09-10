@@ -13,24 +13,28 @@ struct RootContainerBuilderTests {
     var mockService: MockUserService
     let router: MockRootContainerRouter
     let interactor: MockRootContainerInteractor
-    let presenter: RootContainerPresenterImp
+    let presenter: RootContainerPresenter
 
     init() throws {
         mockService = MockUserService()
         router = MockRootContainerRouter()
-        interactor = MockRootContainerInteractor(entity: MockRootContainerEntity(), userService: mockService)
-        presenter = RootContainerPresenterImp(interactor: interactor, router: router)
+        interactor = MockRootContainerInteractor(entity: MockRootContainerEntity(), services: [mockService])!
+        presenter = RootContainerPresenter(interactor: interactor, router: router)!
     }
 
     @Test("POSITIVE - Can create a new Root COntainer module") func testFetch() throws {
-        let builder = RootContainerDefaultBuilder()
-        let _ = builder.buildRootContainerView()
+        let builder = ViperContainerBuilder()
+        let _ = builder.buildContainerView(
+            view: RootContainerView.self,
+            interactor: RootContainerInteractor.self,
+            presenter: RootContainerPresenter.self,
+            entity: RootContainerEntity.self,
+            router: RootContainerRouter.self,
+            services: [DefaultUserService.self])
         try #require(builder.container.resolve(RootContainerEntity.self) != nil)
         try #require(builder.container.resolve(RootContainerInteractor.self) != nil)
         try #require(builder.container.resolve(RootContainerRouter.self) != nil)
         try #require(builder.container.resolve(RootContainerPresenter.self) != nil)
         try #require(builder.container.resolve(RootContainerView.self) != nil)
-        // TODO: When the opaque / boxing of the views look at this
-//        try #require(testView as? RootContainerView != nil)
     }
 }

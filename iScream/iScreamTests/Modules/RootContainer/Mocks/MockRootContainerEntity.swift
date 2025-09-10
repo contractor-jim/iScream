@@ -8,7 +8,7 @@
 @testable import iScream
 import Foundation
 
-final class MockRootContainerEntity: RootContainerEntity {
+class MockRootContainerEntity: RootContainerEntity {
     let mockId = UUID()
 }
 

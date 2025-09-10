@@ -5,6 +5,8 @@
 //  Created by James Woodbridge on 26/08/2025.
 //
 
-protocol RootContainerRouter { }
+protocol RootContainerRouterProtocol: GenericRouter { }
 
-class RootContainerRouterImp: RootContainerRouter { }
+class RootContainerRouter: RootContainerRouterProtocol {
+    required init () { }
+}

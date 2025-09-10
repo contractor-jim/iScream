@@ -6,30 +6,22 @@
 //
 
 import SwiftUI
-import SwiftData
 
-protocol BountyPresenter {
+protocol BountyPresenterProtocol: GenericPresenter {
     var user: User? { get }
     var navPath: Binding<NavigationPath> { get }
-    
     func fetch() async
 }
 
 @Observable
-class BountyPresenterImp: BountyPresenter, Observable {
-    var interactor: BountyInteractor!
-    var router: BountyRouter!
+class BountyPresenter: GenericPresenterImp<BountyInteractor, BountyRouter>,
+                       BountyPresenterProtocol, Observable {
     var user: User?
-    // TODO: Test this
+
     var navPath: Binding<NavigationPath> {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
     }
 
-    init(interactor: BountyInteractor, router: BountyRouter) {
-        self.interactor = interactor
-        self.router = router
-    }
-    // TODO: Test this
     func fetch() async {
         user = await interactor.fetchMyUser()
     }

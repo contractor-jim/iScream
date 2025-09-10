@@ -13,13 +13,13 @@ struct RootContainerPresenterTests {
     var mockUserService: MockUserService
     let router: MockRootContainerRouter
     let interactor: MockRootContainerInteractor
-    let presenter: RootContainerPresenterImp
+    let presenter: RootContainerPresenter
 
     init() throws {
         mockUserService = MockUserService()
         router = MockRootContainerRouter()
-        interactor = MockRootContainerInteractor(entity: MockRootContainerEntity(), userService: mockUserService)
-        presenter = RootContainerPresenterImp(interactor: interactor, router: router)
+        interactor = MockRootContainerInteractor(entity: MockRootContainerEntity(), services: [mockUserService])!
+        presenter = RootContainerPresenter(interactor: interactor, router: router)!
     }
 
     @Test("POSITIVE - RootContainerPresenter - fetch user") func testFetch() async throws {
@@ -38,7 +38,7 @@ struct RootContainerPresenterTests {
     }
 
     @Test("POSITIVE - RootContainerPresenter - getBountyBadgeCount",
-          arguments:[
+          arguments: [
             (openBounties: Bounty.threeCorrectIncompleteBounties,
              closedBounties: Bounty.threeCorrectCompletedBounties,
              userType: UserType.child,

@@ -7,8 +7,15 @@
 
 import SwiftUI
 
-struct BountyView: View {
-    @State var presenter: BountyPresenter!
+struct BountyView: View, GenericView {
+    @State var presenter: BountyPresenter
+
+    init<P>(presenter: P) where P: GenericPresenter {
+        guard let presenter = presenter as? BountyPresenter else {
+            fatalError("Unsupported presenter type \(String(describing: type(of: presenter)))")
+        }
+        self.presenter = presenter
+    }
 
     var body: some View {
         NavigationStack(path: presenter.navPath) {
@@ -23,7 +30,7 @@ struct BountyStackView: View {
     var body: some View {
         VStack(alignment: .leading) {
             List {
-                Section() {
+                Section {
                     ForEach(presenter.user?.openBounties ?? []) { bounty in
                         Text(bounty.title)
                             .listRowSeparator(.hidden)
@@ -36,7 +43,7 @@ struct BountyStackView: View {
                 .font(CustomFont.regularFontBody.weight(.regular))
                 .listRowBackground(Color.cellBackground)
 
-                Section() {
+                Section {
                     ForEach(presenter.user?.completedBounties ?? []) { bounty in
                         Text(bounty.title)
                             .listRowSeparator(.hidden)
@@ -56,7 +63,7 @@ struct BountyStackView: View {
         .navigationBarTitleDisplayMode(.inline)
         .background(.mainBackground)
         .navigationTitle("general.title.bounties")
-        .onAppear() {
+        .onAppear {
             Task {
                 await presenter.fetch()
             }

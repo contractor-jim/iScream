@@ -8,28 +8,18 @@
 import SwiftUI
 import SwiftData
 
-protocol ParentListChildrenPresenter {
-    var user: User? { get }
-    var navPath: Binding<NavigationPath> { get }
-
+protocol ParentListChildrenPresenterProtocol: GenericPresenter {
     func fetch() async
     func navigateChildDetailView(user: User)
 }
 
 @Observable
-class ParentListChildrenPresenterImp: ParentListChildrenPresenter, Observable {
-    // ViperC conformity
-    var interactor: ParentListChildrenInteractor!
-    var router: ParentListChildrenRouter!
+class ParentListChildrenPresenter: GenericPresenterImp<ParentListChildrenInteractor, ParentListChildrenRouter>,
+                                    ParentListChildrenPresenterProtocol,
+                                    Observable {
     var user: User?
-
     var navPath: Binding<NavigationPath> {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
-    }
-
-    init(interactor: ParentListChildrenInteractor, router: ParentListChildrenRouter) {
-        self.interactor = interactor
-        self.router = router
     }
 
     func fetch() async {
