@@ -19,7 +19,7 @@ class StartupManager: StartupManagerProtocol {
     public func getFirstView() -> RootContainerView {
         return buildSignInModule()
     }
-    // TODO: Test this
+
     private func buildSignInModule() -> RootContainerView {
         ViperContainerBuilder().buildContainerView(
             view: RootContainerView.self,

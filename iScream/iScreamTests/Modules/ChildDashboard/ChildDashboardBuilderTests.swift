@@ -24,7 +24,7 @@ struct ChildDashboardDefaultBuilderTests {
 
     @Test("POSITIVE - Can create a child dashboard module") func testFetch() throws {
         let builder = ViperContainerBuilder()
-        let view = builder.buildContainerView(
+        let _ = builder.buildContainerView(
             view: ChildDashboardView.self,
             interactor: ChildDashboardInteractor.self,
             presenter: ChildDashboardPresenter.self,

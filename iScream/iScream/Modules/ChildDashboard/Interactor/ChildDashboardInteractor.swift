@@ -11,7 +11,7 @@ protocol ChildDashboardInteractorProtocol: GenericInteractor {
 
 class ChildDashboardInteractor: GenericInteractorImp<ChildDashboardEntity>, ChildDashboardInteractorProtocol {
     var userService: (any UserService)?
-    
+
     required init?<E, S>(entity: E, services: [S]) where E: GenericEntity, S: GenericService {
         self.userService = services.lazy.compactMap { $0 as? any UserService }.first
         if self.userService == nil {
