@@ -5,6 +5,6 @@
 //  Created by James Woodbridge on 26/08/2025.
 //
 
-protocol ParentListChildrenEntity { }
+protocol ParentListChildrenEntityProtocol: GenericEntity { }
 
-final class ParentListChildrenEntityImp: ParentListChildrenEntity { }
+final class ParentListChildrenEntity: ParentListChildrenEntityProtocol { }

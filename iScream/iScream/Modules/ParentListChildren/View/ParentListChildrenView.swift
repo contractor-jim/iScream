@@ -7,9 +7,16 @@
 
 import SwiftUI
 
-struct ParentListChildrenView: View {
+struct ParentListChildrenView: View, GenericView {
 
-    @State var presenter: ParentListChildrenPresenter!
+    @State var presenter: ParentListChildrenPresenter
+
+    init<P>(presenter: P) where P: GenericPresenter {
+        guard let presenter = presenter as? ParentListChildrenPresenter else {
+            fatalError("Unsupported presenter type \(String(describing: type(of: presenter)))")
+        }
+        self.presenter = presenter
+    }
 
     var body: some View {
         NavigationStack(path: presenter.navPath) {

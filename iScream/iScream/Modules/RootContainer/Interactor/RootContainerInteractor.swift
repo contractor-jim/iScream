@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol RootContainerInteractorProtocol {
+protocol RootContainerInteractorProtocol: GenericInteractor {
     func fetchMyUser() async -> User
 }
 

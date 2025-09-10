@@ -55,6 +55,7 @@ class ViperContainerBuilder: ViperContainerBuilderProtocol {
             * Initialse the Interactor with both services and the entity present. This initializer can fail.
             * This is intentional to stop misuse when services are not correctly passed on and initialised
             */
+            print("INITING entity \(entity) interactorServices \(interactorServices)")
             return interactor.init(entity: c.resolve(entity.self)!, services: interactorServices)!
         }
 

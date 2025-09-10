@@ -7,8 +7,15 @@
 
 import SwiftUI
 
-struct ChildDashboardView: View {
-    @State var presenter: ChildDashboardPresenter!
+struct ChildDashboardView: View, GenericView {
+    @State var presenter: ChildDashboardPresenter
+
+    init<P>(presenter: P) where P: GenericPresenter {
+        guard let presenter = presenter as? ChildDashboardPresenter else {
+            fatalError("Unsupported presenter type \(String(describing: type(of: presenter)))")
+        }
+        self.presenter = presenter
+    }
 
     var body: some View {
         NavigationStack(path: presenter.navPath) {

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol RootContainerPresenterProtocol {
+protocol RootContainerPresenterProtocol: GenericPresenter {
     var user: User? { get }
     func fetch() async
     func getBountyBadgeCount() -> Int

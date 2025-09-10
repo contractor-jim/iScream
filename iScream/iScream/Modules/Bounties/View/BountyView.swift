@@ -7,8 +7,15 @@
 
 import SwiftUI
 
-struct BountyView: View {
-    @State var presenter: BountyPresenter!
+struct BountyView: View, GenericView {
+    @State var presenter: BountyPresenter
+
+    init<P>(presenter: P) where P: GenericPresenter {
+        guard let presenter = presenter as? BountyPresenter else {
+            fatalError("Unsupported presenter type \(String(describing: type(of: presenter)))")
+        }
+        self.presenter = presenter
+    }
 
     var body: some View {
         NavigationStack(path: presenter.navPath) {

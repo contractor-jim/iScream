@@ -7,14 +7,12 @@
 
 import SwiftUI
 
-protocol ParentListChildrenRouter {
+protocol ParentListChildrenRouterProtocol: GenericRouter {
     var nav: NavigationPath { get set }
-
     func navigateChildDetailView(user: User)
 }
 
-@Observable
-class ParentListChildrenRouterImp: ParentListChildrenRouter {
+final class ParentListChildrenRouter: ParentListChildrenRouterProtocol {
     var nav = NavigationPath()
     // TODO: Test this
     func navigateChildDetailView(user: User) {

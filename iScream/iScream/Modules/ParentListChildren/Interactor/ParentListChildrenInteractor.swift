@@ -5,29 +5,22 @@
 //  Created by James Woodbridge on 26/08/2025.
 //
 
-import SwiftUI
-
-protocol ParentListChildrenInteractor {
-    init(entity: ParentListChildrenEntity,
-         userService: any UserService)
-
-    var entity: ParentListChildrenEntity! { get }
-    var userService: UserService! { get set }
-
+protocol ParentListChildrenInteractorProtocol: GenericInteractor {
     func fetchMyUser() async -> User
 }
 
-class ParentListChildrenInteractorImp: ParentListChildrenInteractor {
-    let entity: ParentListChildrenEntity!
-    var userService: UserService!
+class ParentListChildrenInteractor: GenericInteractorImp<ParentListChildrenEntity>, ParentListChildrenInteractorProtocol {
+    var userService: DefaultUserService?
 
-    required init(entity: any ParentListChildrenEntity,
-                  userService: any UserService) {
-        self.entity = entity
-        self.userService = userService
+    required init?<E, S>(entity: E, services: [S]) where E: GenericEntity, S: GenericService {
+        self.userService = services.lazy.compactMap { $0 as? DefaultUserService }.first
+        if self.userService == nil {
+            return nil
+        }
+        super.init(entity: entity, services: services)
     }
 
     func fetchMyUser() async -> User {
-        return await userService.getUser()
+        return await userService!.getUser()
     }
 }

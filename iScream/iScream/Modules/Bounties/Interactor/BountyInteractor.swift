@@ -7,28 +7,22 @@
 
 import SwiftUI
 
-protocol BountyInteractor {
-    var entity: BountyEntity! { get }
-    var userService: UserService! { get set }
-
-    init(entity: BountyEntity,
-         userService: UserService
-    )
-
+protocol BountyInteractorProtocol: GenericInteractor {
     func fetchMyUser() async -> User
 }
 
-class BountyInteractorImp: BountyInteractor {
-    let entity: BountyEntity!
-    var userService: UserService!
-
-    required init(entity: any BountyEntity,
-                  userService: UserService) {
-        self.entity = entity
-        self.userService = userService
+class BountyInteractor: GenericInteractorImp<BountyEntity>,
+                        BountyInteractorProtocol {
+    var userService: DefaultUserService?
+    required init?<E, S>(entity: E, services: [S]) where E: GenericEntity, S: GenericService {
+        self.userService = services.lazy.compactMap { $0 as? DefaultUserService }.first
+        if self.userService == nil {
+            return nil
+        }
+        super.init(entity: entity, services: services)
     }
 
     func fetchMyUser() async -> User {
-        return await userService.getUser()
+        return await userService!.getUser()
     }
 }
