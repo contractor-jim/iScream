@@ -1,8 +1,5 @@
 name: "iScream Tests"
 
-on:
-  push
-
 jobs:
   build_and_test:
     if: github.event_name == 'pull_request'
