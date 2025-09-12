@@ -24,7 +24,7 @@ struct ParentListChildrenBuilderTests {
 
     @Test("POSITIVE - Can create a new parent list children module") func testFetch() throws {
         let builder = ViperContainerBuilder()
-        let _ = builder.buildContainerView(
+        _ = builder.buildContainerView(
             view: ParentListChildrenView.self,
             interactor: ParentListChildrenInteractor.self,
             presenter: ParentListChildrenPresenter.self,
