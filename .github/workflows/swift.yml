@@ -7,6 +7,14 @@ on:
       - 'develop'
 
 jobs:
+  SwiftLint:
+    runs-on: ghcr.io/cirruslabs/macos-runner:sonoma
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cirruslabs/swiftlint-action@v1
+        with:
+          version: latest
+
   build_and_test:
     if: github.event_name == 'pull_request'
     name: Build and Test
