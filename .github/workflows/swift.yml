@@ -1,5 +1,14 @@
 name: "iScream Tests"
 
+on:
+  pull_request:
+    branches:
+      - 'main'
+      - 'develop'
+  push:
+    branches:
+      - 'feature/swift_linit_CI'
+      
 jobs:
   build_and_test:
     if: github.event_name == 'pull_request'
