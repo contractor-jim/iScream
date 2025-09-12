@@ -1,10 +1,7 @@
 name: "iScream Tests"
 
 on:
-push:
-  branches:
-    - 'main'
-    - 'develop'
+  push
 
 jobs:
   build_and_test:
