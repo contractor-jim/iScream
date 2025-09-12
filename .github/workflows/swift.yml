@@ -1,7 +1,15 @@
 name: "iScream Tests"
 
+#on:
+#  pull_request:
+  branches:
+    - 'main'
+    - 'develop'
+
 jobs:
   build_and_test:
+    if: github.event_name == 'pull_request'
+    name: Build and Test
     runs-on: macos-latest
 
     steps:
