@@ -7,8 +7,8 @@ on:
       - 'develop'
   push:
     branches:
-      - 'feature/swift_linit_CI'
-      
+      - 'feature/**'
+
 jobs:
   build_and_test:
     if: github.event_name == 'pull_request'
