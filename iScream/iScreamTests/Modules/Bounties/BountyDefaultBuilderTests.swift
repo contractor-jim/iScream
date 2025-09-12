@@ -24,7 +24,7 @@ struct BountyDefaultBuilderTests {
 
     @Test("POSITIVE - Can create a child dashboard module") func testFetch() throws {
         let builder = ViperContainerBuilder()
-        let _ = builder.buildContainerView(
+        _ = builder.buildContainerView(
             view: BountyView.self,
             interactor: BountyInteractor.self,
             presenter: BountyPresenter.self,

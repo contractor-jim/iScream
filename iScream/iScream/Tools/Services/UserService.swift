@@ -12,11 +12,17 @@ protocol UserService: Equatable {
 }
 
 class DefaultUserService: GenericService, UserService {
-    // TODO: At a later date build out the correct generic function to pull data from a URL and store it for now just return the user object
-    // TODO: Test this
-    func getUser() async -> User {
-        // TODO: This is mocked. Need to pull from DB / API on Entity
-        // Mocked for now whilst we are only dealing with users
+    // TODO: This is mocked. Need to pull from DB / API on Entity / Mocks
+    var mockUser = User(dataPoints: [],
+                        openBounties: [],
+                        completedBounties: [],
+                        name: "",
+                        iceCreamPoints: 0,
+                        negativeIceCreamPoints: 0,
+                        type: .unknown)
+
+    override init() {
+
         let jackIceCreamDataPoints = [
             IceCreamData(month: "Jan", points: 5),
             IceCreamData(month: "Feb", points: 11),
@@ -61,7 +67,7 @@ class DefaultUserService: GenericService, UserService {
             Bounty(title: "Eat all your dinner", points: 2, completed: true)
         ]
 
-        // TODO: This is incorrect as we shouldn't be adding testing code in the app. Add some switching for mock json when the network is build
+        // TODO: This is incorrect as we shouldn't be adding testing code in the app. Add some switching for mock json when the network is built
         let parentTesting = ProcessInfo.processInfo.arguments.contains("USER_PARENT")
         let childTesting = ProcessInfo.processInfo.arguments.contains("USER_CHILD")
 
@@ -69,7 +75,7 @@ class DefaultUserService: GenericService, UserService {
         userType = parentTesting ? .parent : userType
         userType = childTesting ? .child : userType
 
-        var me = User(dataPoints: jackIceCreamDataPoints,
+        mockUser = User(dataPoints: jackIceCreamDataPoints,
                       openBounties: openBountyData,
                       completedBounties: completedBountyData,
                       name: "Daddy",
@@ -101,18 +107,18 @@ class DefaultUserService: GenericService, UserService {
                          negativeIceCreamPoints: -10000000,
                          type: .child)
 
-        me.children.append(jack)
-        me.children.append(jem)
-        me.children.append(chris)
+        mockUser.children.append(jack)
+        mockUser.children.append(jem)
+        mockUser.children.append(chris)
+    }
 
-        return me
+    func getUser() async -> User {
+        return mockUser
     }
 }
 
 extension DefaultUserService: Equatable {
     static func == (lhs: DefaultUserService, rhs: DefaultUserService) -> Bool {
-        // TODO: This needs to be tested
-        // TODO: This needs to actually return a user from disk / mocked API
-        true
+        rhs.mockUser == rhs.mockUser
     }
 }

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// TODO: Write tests for these
 struct CustomFont {
     // Font names
     static let headerFontName = "Avenir Black"
