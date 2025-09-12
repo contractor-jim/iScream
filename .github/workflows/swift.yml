@@ -1,7 +1,6 @@
 name: "iScream Tests"
 
 on:
-#  pull_request:
 push:
   branches:
     - 'main'
