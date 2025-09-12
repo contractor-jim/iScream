@@ -23,8 +23,6 @@ class MockUserService: GenericService, UserService {
 
 extension MockUserService: Equatable {
     static func == (lhs: MockUserService, rhs: MockUserService) -> Bool {
-        // TODO: This needs to be tested
-        // TODO: This needs to actually return a user from disk / mocked API
-        true
+        lhs.mockUser == rhs.mockUser
     }
 }

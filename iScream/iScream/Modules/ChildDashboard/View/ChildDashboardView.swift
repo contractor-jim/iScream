@@ -41,7 +41,7 @@ struct ChildDashboardView: View, GenericView {
         }
     }
 }
-// TODO: break this out into its own file
+
 struct ChildDashboardListView: View {
     var presenter: ChildDashboardPresenter
 

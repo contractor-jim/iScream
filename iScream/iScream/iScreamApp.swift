@@ -11,6 +11,7 @@ import SwiftData
 @main
 // swiftlint:disable:next type_name
 struct iScreamApp: App {
+    /*
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self
@@ -23,11 +24,11 @@ struct iScreamApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
-
+    */
     var body: some Scene {
         WindowGroup {
             StartupManager.default.getFirstView()
         }
-        .modelContainer(sharedModelContainer)
+        // .modelContainer(sharedModelContainer)
     }
 }

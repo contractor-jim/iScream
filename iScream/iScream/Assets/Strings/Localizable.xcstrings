@@ -17,9 +17,6 @@
     "%lld" : {
 
     },
-    "Add Item" : {
-
-    },
     "bounties.complete.title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -176,13 +173,10 @@
         }
       }
     },
-    "Item at %@" : {
-
-    },
     "Key 1" : {
       "extractionState" : "manual"
     },
-    "Select an item" : {
+    "TODO: Achievements" : {
 
     },
     "TODO: Achievements" : {
