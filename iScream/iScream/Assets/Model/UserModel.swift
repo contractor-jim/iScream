@@ -13,6 +13,13 @@ struct IceCreamData: Identifiable, Hashable {
     let month: String
     let points: Int
 }
+// TODO: This is not correct as ID should also be used as Unique but this would come from the Server
+extension IceCreamData: Equatable {
+    static func == (lhs: IceCreamData, rhs: IceCreamData) -> Bool {
+        rhs.month == rhs.month &&
+        rhs.points == rhs.points
+    }
+}
 
 struct Bounty: Identifiable, Hashable {
     let id = UUID()
@@ -27,7 +34,7 @@ enum UserType {
     case child
 }
 
-struct User: Hashable, Identifiable {
+struct User: Identifiable {
     let id = UUID()
     let dataPoints: [IceCreamData]
     let name: String
@@ -56,14 +63,6 @@ struct User: Hashable, Identifiable {
         self.children = children
     }
 
-    static func == (lhs: User, rhs: User) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-
     var hasImproved: Bool {
         guard self.dataPoints.count > 1 else {
             return false
@@ -90,5 +89,24 @@ struct User: Hashable, Identifiable {
         }
 
         return dataPoints.last!.points - dataPoints.dropLast().last!.points
+    }
+}
+
+extension User: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+extension User: Equatable {
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.name == rhs.name &&
+        lhs.dataPoints == rhs.dataPoints  &&
+        lhs.iceCreamPoints == rhs.iceCreamPoints &&
+        lhs.negativeIceCreamPoints == rhs.negativeIceCreamPoints &&
+        lhs.type == rhs.type &&
+        lhs.children == rhs.children &&
+        lhs.openBounties == rhs.openBounties &&
+        lhs.completedBounties == rhs.completedBounties
     }
 }

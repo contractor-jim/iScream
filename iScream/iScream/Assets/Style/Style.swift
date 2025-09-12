@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// TODO: Write tests for these
-// TODO: Is there not a better place for this?
 struct Style {
     static let cornerRadius: CGFloat = 16
 

@@ -27,7 +27,6 @@ struct ParentListChildrenView: View, GenericView {
                 }
             }
             .navigationDestination(for: User.self) { user in
-                // TODO: Replace this with the child dashboard
                 Text("Child Detail view")
                     .navigationTitle(user.name)
                     .navigationBarTitleDisplayMode(.inline)

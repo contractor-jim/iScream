@@ -24,7 +24,7 @@ struct ChildDashboardDefaultBuilderTests {
 
     @Test("POSITIVE - Can create a child dashboard module") func testFetch() throws {
         let builder = ViperContainerBuilder()
-        let _ = builder.buildContainerView(
+        _ = builder.buildContainerView(
             view: ChildDashboardView.self,
             interactor: ChildDashboardInteractor.self,
             presenter: ChildDashboardPresenter.self,
@@ -36,7 +36,5 @@ struct ChildDashboardDefaultBuilderTests {
         try #require(builder.container.resolve(ChildDashboardPresenter.self) != nil)
         try #require(builder.container.resolve(ChildDashboardEntity.self) != nil)
         try #require(builder.container.resolve(ChildDashboardRouter.self) != nil)
-        // TODO: When the opaque / boxing of the views look at this
-//        try #require(testView as? RootContainerView != nil)
     }
 }
