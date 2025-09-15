@@ -31,6 +31,7 @@ struct ChildDashboardChartView: View {
                 .padding([.bottom], Style.fullPadding)
                 .padding([.leading, .trailing], Style.halfPadding)
                 .accessibilityIdentifier("child-dashboard-chart-view")
+
         }
         .frame(maxWidth: .infinity, maxHeight: 180)
         .background(.cellBackground)

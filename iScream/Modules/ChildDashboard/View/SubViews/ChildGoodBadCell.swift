@@ -21,6 +21,7 @@ struct ChildGoodBadCell: View {
                 .accessibilityIdentifier("child-is-naughty-cell-title")
 
             GoodOrBadDoughnutGraph(points: presenter.points)
+
         }
         .frame(maxWidth: .infinity, maxHeight: 200)
         .padding(0)
