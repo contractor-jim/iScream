@@ -2,14 +2,14 @@
 //  iScreamUITestsLaunchTests.swift
 //  iScreamUITests
 //
-//  Created by james Woodbridge on 26/08/2025.
+//  Created by James Woodbridge on 26/08/2025.
 //
 
 import XCTest
-
+// swiftlint:disable:next type_name
 final class iScreamUITestsLaunchTests: XCTestCase {
 
-    override class var runsForEachTargetApplicationUIConfiguration: Bool {
+    override static var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }
 
