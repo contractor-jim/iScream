@@ -10,7 +10,6 @@ jobs:
   SwiftLint:
     steps:
       - uses: actions/checkout@v4
-      - uses: cirruslabs/swiftlint-action@v1
         with:
           version: latest
 
