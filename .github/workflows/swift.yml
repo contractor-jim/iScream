@@ -7,12 +7,6 @@ on:
       - 'develop'
 
 jobs:
-  SwiftLint:
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          version: latest
-
   build_and_test:
     if: github.event_name == 'pull_request'
     name: Build and Test
