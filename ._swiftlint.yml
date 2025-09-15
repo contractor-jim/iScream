@@ -1,0 +1,2 @@
+included: # paths to include during linting
+    - ./iScream
