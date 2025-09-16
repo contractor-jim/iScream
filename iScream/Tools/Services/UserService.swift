@@ -46,7 +46,6 @@ class DefaultUserService: GenericService, UserService {
 
         // TODO: This is incorrect as we shouldn't be adding testing code in the app. Add some switching for mock json when the network is built
         let parentTesting = ProcessInfo.processInfo.arguments.contains("USER_PARENT")
-
         let userFetchDescriptor = FetchDescriptor<User>(predicate: #Predicate { user in
             user.type == ( parentTesting ? "child" : "parent")
         })
@@ -70,13 +69,13 @@ extension DefaultUserService {
                               iceCreamPoints: 1000,
                               negativeIceCreamPoints: 20,
                               type: "child"),
-                   graphData: [("Jan", 11),
-                               ("Feb", 9),
-                               ("Mar", 10),
-                               ("Apr", 23),
-                               ("May", 35),
-                               ("Jun", 50),
-                               ("Jul", 55)])
+                   graphData: [("2025-01-01T00:00:00Z", 11),
+                               ("2025-02-01T00:00:00Z", 9),
+                               ("2025-03-01T00:00:00Z", 10),
+                               ("2025-04-01T00:00:00Z", 23),
+                               ("2025-05-01T00:00:00Z", 35),
+                               ("2025-06-01T00:00:00Z", 40),
+                               ("2025-07-01T00:00:00Z", 55)])
 
         createUser(modelContext: modelContext,
                    id: jemsUUID,
@@ -87,13 +86,13 @@ extension DefaultUserService {
                               iceCreamPoints: 450,
                               negativeIceCreamPoints: 20,
                               type: "child"),
-                   graphData: [("Jan", 11),
-                               ("Feb", 9),
-                               ("Mar", 10),
-                               ("Apr", 23),
-                               ("May", 35),
-                               ("Jun", 50),
-                               ("Jul", 55)])
+                   graphData: [("2025-01-01T00:00:00Z", 11),
+                               ("2025-02-01T00:00:00Z", 9),
+                               ("2025-03-01T00:00:00Z", 10),
+                               ("2025-04-01T00:00:00Z", 23),
+                               ("2025-05-01T00:00:00Z", 35),
+                               ("2025-06-01T00:00:00Z", 50),
+                               ("2025-07-01T00:00:00Z", 55)])
 
         createUser(modelContext: modelContext,
                    id: chrisUUID,
@@ -104,13 +103,13 @@ extension DefaultUserService {
                               iceCreamPoints: -10000000,
                               negativeIceCreamPoints: -10000000,
                               type: "child"),
-                   graphData: [("Jan", 0),
-                               ("Feb", -10),
-                               ("Mar", -99),
-                               ("Apr", -1000),
-                               ("May", -3000),
-                               ("Jun", -3500),
-                               ("Jul", -5000)])
+                   graphData: [("2025-01-01T00:00:00Z", 0),
+                               ("2025-02-01T00:00:00Z", -10),
+                               ("2025-03-01T00:00:00Z", -99),
+                               ("2025-04-01T00:00:00Z", -1000),
+                               ("2025-05-01T00:00:00Z", -3000),
+                               ("2025-06-01T00:00:00Z", -3500),
+                               ("2025-07-01T00:00:00Z", -5000)])
 
         do {
             let userFetchDescriptor = FetchDescriptor<User>()
@@ -141,7 +140,8 @@ extension DefaultUserService {
             let user = try modelContext.fetch(userFetchDescriptor).first!
 
             for data in graphData {
-                modelContext.insert(PointData(id: UUID(), month: data.0, points: data.1, user: user))
+                let formatter = ISO8601DateFormatter()
+                modelContext.insert(PointData(id: UUID(), month: formatter.date(from: data.0)!, points: data.1, user: user))
             }
 
             modelContext.insert(Bounty(id: UUID(), title: "Clean your room", points: 10, completed: false, user: user))

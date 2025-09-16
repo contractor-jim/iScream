@@ -11,12 +11,18 @@ import SwiftData
 @Model
 final class PointData {
     @Attribute(.unique) var id: UUID
-    var month: String
+    var month: Date
     var points: Int
     var user: User
 
+    @Transient lazy var monthString: String = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM"
+        return formatter.string(from: month)
+    }()
+
     init(id: UUID,
-         month: String,
+         month: Date,
          points: Int,
          user: User) {
         self.id = id

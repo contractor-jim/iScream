@@ -25,6 +25,10 @@ final class User {
     var type: String
     @Relationship(deleteRule: .cascade) var children: [User]?
     @Relationship(deleteRule: .cascade, inverse: \Bounty.user) var bounties: [Bounty]
+    // TODO: Test this
+    @Transient lazy var orderedDataPoints: [PointData] = {
+        dataPoints.sorted { $0.month < $1.month }
+    }()
 
     init(id: UUID,
          dataPoints: [PointData],
@@ -57,31 +61,32 @@ extension User {
     }
 
     var hasImproved: Bool {
-        guard self.dataPoints.count > 1 else {
+        guard self.orderedDataPoints.count > 1 else {
             return false
         }
 
-        return self.dataPoints.first?.points ?? 0 > self.dataPoints.last?.points ?? 0
+        return self.orderedDataPoints.first?.points ?? 0 > self.orderedDataPoints.last?.points ?? 0
     }
 
     var max: Int {
-        guard self.dataPoints.count > 1 else {
+        guard self.orderedDataPoints.count > 1 else {
             return 0
         }
 
-        return self.dataPoints.max { $0.points > $1.points }?.points ?? 0
+        return self.orderedDataPoints.max { $0.points > $1.points }?.points ?? 0
     }
 
     var aggregateSinceLastMonth: Int {
-        guard dataPoints.count > 0 else {
+
+        guard orderedDataPoints.count > 0 else {
             return 0
         }
 
-        guard dataPoints.count > 1 else {
-            return dataPoints.first!.points
+        guard orderedDataPoints.count > 1 else {
+            return orderedDataPoints.first!.points
         }
 
-        return dataPoints.last!.points - dataPoints.dropLast().last!.points
+        return orderedDataPoints.last!.points - orderedDataPoints.dropLast().last!.points
     }
 }
 
