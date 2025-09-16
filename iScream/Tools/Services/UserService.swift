@@ -20,6 +20,7 @@ class DefaultUserService: GenericService, UserService {
     // TODO: test this
     override init() {
 
+        super.init()
         if !DefaultUserService.didLoad {
             // Mocked data for now till we get the database in place
             guard let modelContext = DefaultUserService.modelContext else {
@@ -27,110 +28,21 @@ class DefaultUserService: GenericService, UserService {
             }
 
             do {
-                try modelContext.delete(model: PointData.self)
                 try modelContext.delete(model: User.self)
-                try modelContext.delete(model: Bounty.self)
             } catch {
                 fatalError("Failed to clear the cache \(error)")
             }
-            // Jacks mocked data
-            modelContext.insert(PointData(id: UUID(), month: "Jan", points: 5))
-            modelContext.insert(PointData(id: UUID(), month: "Feb", points: 11))
-            modelContext.insert(PointData(id: UUID(), month: "Mar", points: -2))
-            modelContext.insert(PointData(id: UUID(), month: "Apr", points: 2))
-            modelContext.insert(PointData(id: UUID(), month: "May", points: 9))
-            modelContext.insert(PointData(id: UUID(), month: "Jun", points: -5))
-            modelContext.insert(PointData(id: UUID(), month: "Jul", points: 10))
 
-            modelContext.insert(Bounty(id: UUID(), title: "Clean your room", points: 10, completed: false))
-            modelContext.insert(Bounty(id: UUID(), title: "Mow the lawn", points: 20, completed: false))
-            modelContext.insert(Bounty(id: UUID(), title: "Take out the bins", points: 2, completed: false))
-            modelContext.insert(Bounty(id: UUID(), title: "Do your math homework", points: 5, completed: false))
+            let jacksUUID = UUID()
+            let jemsUUID = UUID()
+            let chrisUUID = UUID()
 
-            modelContext.insert(Bounty(id: UUID(), title: "Do Geography Homework", points: 5, completed: true))
-            modelContext.insert(Bounty(id: UUID(), title: "Tidy up your toys", points: 2, completed: true))
-            modelContext.insert(Bounty(id: UUID(), title: "Be a good boy for Nanny", points: 10, completed: true))
-            modelContext.insert(Bounty(id: UUID(), title: "Eat all your dinner", points: 2, completed: true))
-
-            let pointDataFetchDescriptor = FetchDescriptor<PointData>()
-            let incompleteBountyFetchDescriptor = FetchDescriptor<Bounty>(predicate: #Predicate { bounty in
-                bounty.completed == false
-            })
-            let completeBountyFetchDescriptor = FetchDescriptor<Bounty>(predicate: #Predicate { bounty in
-                bounty.completed == true
-            })
-
-            do {
-                let dataPoints = try modelContext.fetch(pointDataFetchDescriptor)
-                let incompleteBounties = try modelContext.fetch(incompleteBountyFetchDescriptor)
-                let completeBounties = try modelContext.fetch(completeBountyFetchDescriptor)
-
-                for dataPoint in dataPoints {
-                    print(">>> dataPoint \(dataPoint.month)")
-                }
-
-                for bounty in incompleteBounties {
-                    print(">>> incompleteBounty \(bounty.title)")
-                }
-
-                for bounty in completeBounties {
-                    print(">>> dataPoint \(bounty.title)")
-                }
-
-                // Insert Jack
-                modelContext.insert(User(id: UUID(),
-                                         dataPoints: dataPoints,
-                                         openBounties: incompleteBounties,
-                                         completedBounties: completeBounties,
-                                         name: "Jack",
-                                         iceCreamPoints: 1000,
-                                         negativeIceCreamPoints: 20,
-                                         type: "child"))
-                // Insert Jem
-                modelContext.insert(User(id: UUID(),
-                                         dataPoints: dataPoints,
-                                         openBounties: incompleteBounties,
-                                         completedBounties: completeBounties,
-                                         name: "Mummy",
-                                         iceCreamPoints: 450,
-                                         negativeIceCreamPoints: 20,
-                                         type: "child"))
-
-                // Insert Chris
-                modelContext.insert(User(id: UUID(),
-                                         dataPoints: dataPoints,
-                                         openBounties: incompleteBounties,
-                                         completedBounties: completeBounties,
-                                         name: "Chris",
-                                         iceCreamPoints: -10000000,
-                                         negativeIceCreamPoints: -10000000,
-                                         type: "child"))
-
-            } catch {
-                print("Failed to create mock user model. \(error)")
-            }
+            createJack(modelContext: modelContext, id: jacksUUID)
+            createJem(modelContext: modelContext, id: jemsUUID)
+            createChris(modelContext: modelContext, id: chrisUUID)
 
             DefaultUserService.didLoad = true
             /*
-             let mummyIceCreamDataPoints = [
-             IceCreamData(month: "Jan", points: 11),
-             IceCreamData(month: "Feb", points: 9),
-             IceCreamData(month: "Mar", points: 4),
-             IceCreamData(month: "Apr", points: 10),
-             IceCreamData(month: "May", points: 23),
-             IceCreamData(month: "Jun", points: 35),
-             IceCreamData(month: "Jul", points: 50)
-             ]
-
-             let chrisIceCreamDataPoints = [
-             IceCreamData(month: "Jan", points: 0),
-             IceCreamData(month: "Feb", points: -10),
-             IceCreamData(month: "Mar", points: -99),
-             IceCreamData(month: "Apr", points: -1000),
-             IceCreamData(month: "May", points: -3000),
-             IceCreamData(month: "Jun", points: -3500),
-             IceCreamData(month: "Jul", points: -50000)
-             ]
 
              // TODO: This is incorrect as we shouldn't be adding testing code in the app. Add some switching for mock json when the network is built
              let parentTesting = ProcessInfo.processInfo.arguments.contains("USER_PARENT")
@@ -170,5 +82,123 @@ extension DefaultUserService: Equatable {
         // TODO: Need to equate this or do we ?
         true
         // rhs.mockUser == rhs.mockUser
+    }
+}
+
+extension DefaultUserService {
+    func createJack(modelContext: ModelContext, id: UUID) {
+        modelContext.insert(User(id: id,
+                                 dataPoints: [],
+                                 bounties: [],
+                                 name: "Jack",
+                                 iceCreamPoints: 1000,
+                                 negativeIceCreamPoints: 20,
+                                 type: "child"))
+
+        let jackFetchDescriptor = FetchDescriptor<User>(predicate: #Predicate { user in
+            user.id == id
+        })
+
+        do {
+            let jack = try modelContext.fetch(jackFetchDescriptor).first!
+
+            // Jacks mocked data
+            modelContext.insert(PointData(id: UUID(), month: "Jan", points: 5, user: jack))
+            modelContext.insert(PointData(id: UUID(), month: "Feb", points: 11, user: jack))
+            modelContext.insert(PointData(id: UUID(), month: "Mar", points: -2, user: jack))
+            modelContext.insert(PointData(id: UUID(), month: "Apr", points: 2, user: jack))
+            modelContext.insert(PointData(id: UUID(), month: "May", points: 9, user: jack))
+            modelContext.insert(PointData(id: UUID(), month: "Jun", points: -5, user: jack))
+            modelContext.insert(PointData(id: UUID(), month: "Jul", points: 10, user: jack))
+
+            modelContext.insert(Bounty(id: UUID(), title: "Clean your room", points: 10, completed: false, user: jack))
+            modelContext.insert(Bounty(id: UUID(), title: "Mow the lawn", points: 20, completed: false, user: jack))
+            modelContext.insert(Bounty(id: UUID(), title: "Take out the bins", points: 2, completed: false, user: jack))
+            modelContext.insert(Bounty(id: UUID(), title: "Do your math homework", points: 5, completed: false, user: jack))
+
+            modelContext.insert(Bounty(id: UUID(), title: "Do Geography Homework", points: 5, completed: true, user: jack))
+            modelContext.insert(Bounty(id: UUID(), title: "Tidy up your toys", points: 2, completed: true, user: jack))
+            modelContext.insert(Bounty(id: UUID(), title: "Be a good boy for Nanny", points: 10, completed: true, user: jack))
+            modelContext.insert(Bounty(id: UUID(), title: "Eat all your dinner", points: 2, completed: true, user: jack))
+        } catch {
+            print(">>> FAILED TO CREATE JACK")
+        }
+    }
+
+    func createJem(modelContext: ModelContext, id: UUID) {
+        modelContext.insert(User(id: id,
+                                 dataPoints: [],
+                                 bounties: [],
+                                 name: "Mummy",
+                                 iceCreamPoints: 450,
+                                 negativeIceCreamPoints: 20,
+                                 type: "child"))
+
+        let userFetchDescriptor = FetchDescriptor<User>(predicate: #Predicate { user in
+            user.id == id
+        })
+
+        do {
+            let user = try modelContext.fetch(userFetchDescriptor).first!
+
+            modelContext.insert(PointData(id: UUID(), month: "Jan", points: 11, user: user))
+            modelContext.insert(PointData(id: UUID(), month: "Feb", points: 9, user: user))
+            modelContext.insert(PointData(id: UUID(), month: "Mar", points: 10, user: user))
+            modelContext.insert(PointData(id: UUID(), month: "Apr", points: 23, user: user))
+            modelContext.insert(PointData(id: UUID(), month: "May", points: 35, user: user))
+            modelContext.insert(PointData(id: UUID(), month: "Jun", points: 50, user: user))
+            modelContext.insert(PointData(id: UUID(), month: "Jul", points: 55, user: user))
+
+            modelContext.insert(Bounty(id: UUID(), title: "Clean your room", points: 10, completed: false, user: user))
+            modelContext.insert(Bounty(id: UUID(), title: "Mow the lawn", points: 20, completed: false, user: user))
+            modelContext.insert(Bounty(id: UUID(), title: "Take out the bins", points: 2, completed: false, user: user))
+            modelContext.insert(Bounty(id: UUID(), title: "Do your math homework", points: 5, completed: false, user: user))
+
+            modelContext.insert(Bounty(id: UUID(), title: "Do Geography Homework", points: 5, completed: true, user: user))
+            modelContext.insert(Bounty(id: UUID(), title: "Tidy up your toys", points: 2, completed: true, user: user))
+            modelContext.insert(Bounty(id: UUID(), title: "Be a good boy for Nanny", points: 10, completed: true, user: user))
+            modelContext.insert(Bounty(id: UUID(), title: "Eat all your dinner", points: 2, completed: true, user: user))
+        } catch {
+            print(">>> FAILED TO CREATE USER")
+        }
+    }
+
+    func createChris(modelContext: ModelContext, id: UUID) {
+        
+        modelContext.insert(User(id: id,
+                                 dataPoints: [],
+                                 bounties: [],
+                                 name: "Chris",
+                                 iceCreamPoints: -10000000,
+                                 negativeIceCreamPoints: -10000000,
+                                 type: "child"))
+
+        let userFetchDescriptor = FetchDescriptor<User>(predicate: #Predicate { user in
+            user.id == id
+        })
+
+        do {
+            let user = try modelContext.fetch(userFetchDescriptor).first!
+
+            modelContext.insert(PointData(id: UUID(), month: "Jan", points: 0, user: user))
+            modelContext.insert(PointData(id: UUID(), month: "Feb", points: -10, user: user))
+            modelContext.insert(PointData(id: UUID(), month: "Mar", points: -99, user: user))
+            modelContext.insert(PointData(id: UUID(), month: "Apr", points: -1000, user: user))
+            modelContext.insert(PointData(id: UUID(), month: "May", points: -3000, user: user))
+            modelContext.insert(PointData(id: UUID(), month: "Jun", points: -3500, user: user))
+            modelContext.insert(PointData(id: UUID(), month: "Jul", points: -5000, user: user))
+
+            modelContext.insert(Bounty(id: UUID(), title: "Clean your room", points: 10, completed: false, user: user))
+            modelContext.insert(Bounty(id: UUID(), title: "Mow the lawn", points: 20, completed: false, user: user))
+            modelContext.insert(Bounty(id: UUID(), title: "Take out the bins", points: 2, completed: false, user: user))
+            modelContext.insert(Bounty(id: UUID(), title: "Do your math homework", points: 5, completed: false, user: user))
+
+            modelContext.insert(Bounty(id: UUID(), title: "Do Geography Homework", points: 5, completed: true, user: user))
+            modelContext.insert(Bounty(id: UUID(), title: "Tidy up your toys", points: 2, completed: true, user: user))
+            modelContext.insert(Bounty(id: UUID(), title: "Be a good boy for Nanny", points: 10, completed: true, user: user))
+            modelContext.insert(Bounty(id: UUID(), title: "Eat all your dinner", points: 2, completed: true, user: user))
+        } catch {
+            print(">>> FAILED TO CREATE USER")
+        }
     }
 }

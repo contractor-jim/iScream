@@ -13,13 +13,16 @@ final class PointData {
     @Attribute(.unique) var id: UUID
     var month: String
     var points: Int
+    var user: User
 
     init(id: UUID,
          month: String,
-         points: Int) {
+         points: Int,
+         user: User) {
         self.id = id
         self.month = month
         self.points = points
+        self.user = user
     }
 }
 

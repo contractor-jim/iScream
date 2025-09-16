@@ -14,15 +14,17 @@ final class Bounty {
     var title: String
     var points: Int
     var completed: Bool
-
+    var user: User
+    
     init(id: UUID,
          title: String,
          points: Int,
-         completed: Bool) {
+         completed: Bool,
+         user: User) {
         self.id = id
         self.title = title
         self.points = points
         self.completed = completed
-
+        self.user = user
     }
 }
