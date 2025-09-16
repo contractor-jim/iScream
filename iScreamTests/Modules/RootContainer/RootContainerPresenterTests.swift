@@ -7,6 +7,7 @@
 
 @testable import iScream
 import Testing
+import Foundation
 
 struct RootContainerPresenterTests {
 
@@ -41,29 +42,29 @@ struct RootContainerPresenterTests {
           arguments: [
             (openBounties: Bounty.threeCorrectIncompleteBounties,
              closedBounties: Bounty.threeCorrectCompletedBounties,
-             userType: UserType.child,
+             userType: "child",
              expectedCount: 3),
 
             (openBounties: Bounty.threeCorrectIncompleteBounties,
              closedBounties: Bounty.threeCorrectCompletedBounties,
-             userType: UserType.parent,
+             userType: "parent",
              expectedCount: 0),
 
             (openBounties: Bounty.threeCorrectIncompleteBounties,
              closedBounties: Bounty.threeCorrectCompletedBounties,
-             userType: UserType.unknown,
+             userType: "unknown",
              expectedCount: 0)
 
     ])
     func testGetChildBountyBadgeCount_ReturnsCountOf3(
         openBounties: [Bounty],
         closedBounties: [Bounty],
-        userType: UserType,
+        userType: String,
         expectedCount: Int
         ) async throws {
-            mockUserService.mockUser = User(dataPoints: [],
-                                            openBounties: openBounties,
-                                            completedBounties: closedBounties,
+            mockUserService.mockUser = User(id: UUID(),
+                                            dataPoints: [],
+                                            bounties: openBounties,
                                             name: "McTest",
                                             iceCreamPoints: 1,
                                             negativeIceCreamPoints: 1,

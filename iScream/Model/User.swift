@@ -49,11 +49,11 @@ final class User {
 extension User {
     // TODO: test this
     var openBounties: [Bounty] {
-        bounties.filter{ $0.completed == false }
+        bounties.filter { $0.completed == false }
     }
     // TODO: test this
     var completedBounties: [Bounty] {
-        bounties.filter{ $0.completed == true }
+        bounties.filter { $0.completed == true }
     }
 
     var hasImproved: Bool {

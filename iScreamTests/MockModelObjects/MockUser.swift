@@ -6,15 +6,21 @@
 //
 
 @testable import iScream
+import Foundation
 
 extension User {
     static var mockUser: User {
-        User(dataPoints: [IceCreamData(month: "Jan", points: 5),
-                          IceCreamData(month: "Feb", points: 11)],
-             openBounties: Bounty.threeCorrectIncompleteBounties,
-             completedBounties: Bounty.threeCorrectCompletedBounties,
+        let user = User(id: UUID(),
+             dataPoints: [],
+             bounties: Bounty.threeCorrectIncompleteBounties,
              name: "Test",
              iceCreamPoints: 1000,
-             negativeIceCreamPoints: 50)
+             negativeIceCreamPoints: 50,
+             type: "child")
+
+        user.dataPoints = [PointData(id: UUID(), month: "Jan", points: 5, user: user),
+                           PointData(id: UUID(), month: "Feb", points: 11, user: user)]
+
+        return user
     }
 }

@@ -15,7 +15,7 @@ final class Bounty {
     var points: Int
     var completed: Bool
     var user: User
-    
+
     init(id: UUID,
          title: String,
          points: Int,

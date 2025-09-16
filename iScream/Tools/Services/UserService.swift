@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 import SwiftUI
 
-protocol UserService: Equatable {
+protocol UserService {
     func getUser() async throws -> User?
 }
 
@@ -45,26 +45,13 @@ class DefaultUserService: GenericService, UserService {
         }
 
         // TODO: This is incorrect as we shouldn't be adding testing code in the app. Add some switching for mock json when the network is built
-        /// let parentTesting = ProcessInfo.processInfo.arguments.contains("USER_PARENT")
-        // let childTesting = ProcessInfo.processInfo.arguments.contains("USER_CHILD")
-
-        // var userType: UserType = .parent
-        // userType = parentTesting ? .parent : userType
-        // userType = childTesting ? .child : userType
+        let parentTesting = ProcessInfo.processInfo.arguments.contains("USER_PARENT")
 
         let userFetchDescriptor = FetchDescriptor<User>(predicate: #Predicate { user in
-            user.type == "parent"
+            user.type == ( parentTesting ? "child" : "parent")
         })
         // TODO: This needs to be an actual search on the user post login
         return try modelContext.fetch(userFetchDescriptor).first
-    }
-}
-
-extension DefaultUserService: Equatable {
-    static func == (lhs: DefaultUserService, rhs: DefaultUserService) -> Bool {
-        // TODO: Need to equate this or do we ?
-        true
-        // rhs.mockUser == rhs.mockUser
     }
 }
 

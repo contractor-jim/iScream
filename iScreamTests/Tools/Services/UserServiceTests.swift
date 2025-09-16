@@ -11,6 +11,8 @@ import Testing
 struct UserServiceTests {
 
     @Test("POSITIVE - User service should return the correct user") func testValidUserReturned() throws {
+        #expect(false)
+        /*
         let service = DefaultUserService()
         // Update from the mocks
         service.mockUser = .mockUser
@@ -43,14 +45,6 @@ struct UserServiceTests {
         #expect(service.mockUser.name == "Test")
         #expect(service.mockUser.iceCreamPoints == 1000)
         #expect(service.mockUser.negativeIceCreamPoints == 50)
-    }
-    @Test("POSITIVE - User service Equality conformance") func testServiceEquality() throws {
-        let serviceOne = DefaultUserService()
-        let serviceTwo = DefaultUserService()
-
-        serviceOne.mockUser = .mockUser
-        serviceTwo.mockUser = .mockUser
-
-        #expect(serviceOne == serviceTwo)
+        */
     }
 }

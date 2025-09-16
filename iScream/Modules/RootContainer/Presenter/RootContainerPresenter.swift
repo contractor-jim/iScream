@@ -26,7 +26,7 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
         guard let user else {
             return 0
         }
-        
+
         if user.type == UserType.child.rawValue {
             return user.openBounties.count
         } else if user.type == UserType.parent.rawValue {
