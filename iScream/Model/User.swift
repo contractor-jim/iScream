@@ -1,58 +1,42 @@
 //
-//  UserModel.swift
+//  User.swift
 //  iScream
 //
-//  Created by James Woodbridge on 29/08/2025.
+//  Created by James Woodbridge on 16/09/2025.
 //
 
 import Foundation
+import SwiftData
 
-// TODO: This model will need to be moved to a better location. SwiftDataModel?
-struct IceCreamData: Identifiable, Hashable {
-    let id = UUID()
-    let month: String
-    let points: Int
-}
-// TODO: This is not correct as ID should also be used as Unique but this would come from the Server
-extension IceCreamData: Equatable {
-    static func == (lhs: IceCreamData, rhs: IceCreamData) -> Bool {
-        rhs.month == rhs.month &&
-        rhs.points == rhs.points
-    }
-}
-
-struct Bounty: Identifiable, Hashable {
-    let id = UUID()
-    let title: String
-    let points: Int
-    let completed: Bool
-}
-
-enum UserType {
+enum UserType: String, CaseIterable, Codable {
     case unknown
     case parent
     case child
 }
 
-struct User: Identifiable {
-    let id = UUID()
-    let dataPoints: [IceCreamData]
-    let name: String
-    let iceCreamPoints: Int
-    let negativeIceCreamPoints: Int
-    let type: UserType
-    var children: [User]
-    var openBounties: [Bounty] = []
-    var completedBounties: [Bounty] = []
+@Model
+final class User {
 
-    init(dataPoints: [IceCreamData],
+    @Attribute(.unique) var id: UUID
+    var dataPoints: [PointData]
+    var name: String
+    var iceCreamPoints: Int
+    var negativeIceCreamPoints: Int
+    var type: String
+    @Relationship(deleteRule: .cascade) var children: [User]?
+    @Relationship(deleteRule: .cascade) var openBounties: [Bounty] = []
+    @Relationship(deleteRule: .cascade) var completedBounties: [Bounty] = []
+
+    init(id: UUID,
+         dataPoints: [PointData],
          openBounties: [Bounty],
          completedBounties: [Bounty],
          name: String,
          iceCreamPoints: Int,
          negativeIceCreamPoints: Int,
-         type: UserType = .unknown,
+         type: String,
          children: [User] = []) {
+        self.id = id
         self.dataPoints = dataPoints
         self.openBounties = openBounties
         self.completedBounties = completedBounties
@@ -62,7 +46,10 @@ struct User: Identifiable {
         self.type =  type
         self.children = children
     }
+}
 
+// Functions on a users data for calculating user scores
+extension User {
     var hasImproved: Bool {
         guard self.dataPoints.count > 1 else {
             return false

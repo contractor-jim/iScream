@@ -6,7 +6,7 @@
 //
 
 protocol ParentListChildrenInteractorProtocol: GenericInteractor {
-    func fetchMyUser() async -> User
+    func fetchMyUser() async -> User?
 }
 
 class ParentListChildrenInteractor: GenericInteractorImp<ParentListChildrenEntity>, ParentListChildrenInteractorProtocol {
@@ -18,8 +18,12 @@ class ParentListChildrenInteractor: GenericInteractorImp<ParentListChildrenEntit
         }
         super.init(entity: entity, services: services)
     }
-
-    func fetchMyUser() async -> User {
-        return await userService!.getUser()
+    // TODO: test this
+    func fetchMyUser() async -> User? {
+        do {
+            return try await userService!.getUser()
+        } catch {
+            return nil
+        }
     }
 }

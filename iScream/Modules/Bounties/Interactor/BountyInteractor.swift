@@ -8,7 +8,7 @@
 import SwiftUI
 
 protocol BountyInteractorProtocol: GenericInteractor {
-    func fetchMyUser() async -> User
+    func fetchMyUser() async -> User?
 }
 
 class BountyInteractor: GenericInteractorImp<BountyEntity>,
@@ -23,7 +23,11 @@ class BountyInteractor: GenericInteractorImp<BountyEntity>,
         super.init(entity: entity, services: services)
     }
 
-    func fetchMyUser() async -> User {
-        return await userService!.getUser()
+    func fetchMyUser() async -> User? {
+        do {
+            return try await userService!.getUser()
+        } catch {
+            return nil
+        }
     }
 }
