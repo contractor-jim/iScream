@@ -38,7 +38,7 @@ class DefaultUserService: GenericService, UserService {
             DefaultUserService.didLoad = true
         }
     }
-    // TODO: test this
+
     func getUser() async throws -> User? {
         guard let modelContext = DefaultUserService.modelContext else {
             return nil

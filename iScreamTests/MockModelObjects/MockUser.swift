@@ -9,10 +9,10 @@
 import Foundation
 
 extension User {
-    static var mockUser: User {
+    static var mockUser: User = {
         let user = User(id: UUID(),
              dataPoints: [],
-             bounties: Bounty.threeCorrectIncompleteBounties,
+             bounties: [],
              name: "Test",
              iceCreamPoints: 1000,
              negativeIceCreamPoints: 50,
@@ -29,6 +29,13 @@ extension User {
                                      points: 11,
                                      user: user)]
 
+        user.bounties = [Bounty(id: UUID(), title: "Test1", points: 1, completed: true, user: user),
+                         Bounty(id: UUID(), title: "Test2", points: 2, completed: true, user: user),
+                         Bounty(id: UUID(), title: "Test3", points: 3, completed: true, user: user),
+                         Bounty(id: UUID(), title: "Test1", points: 1, completed: false, user: user),
+                         Bounty(id: UUID(), title: "Test2", points: 2, completed: false, user: user),
+                         Bounty(id: UUID(), title: "Test3", points: 3, completed: false, user: user)]
+
         return user
-    }
+    }()
 }
