@@ -51,6 +51,7 @@ final class User {
 
 // Functions on a users data for calculating user scores
 extension User {
+
     var openBounties: [Bounty] {
         bounties.filter { $0.completed == false }
     }
@@ -63,6 +64,7 @@ extension User {
         guard self.orderedDataPoints.count > 1 else {
             return false
         }
+
         return self.orderedDataPoints.first?.points ?? 0 < self.orderedDataPoints.last?.points ?? 0
     }
 

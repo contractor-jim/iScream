@@ -55,6 +55,7 @@ class DefaultUserService: GenericService, UserService {
 }
 
 extension DefaultUserService {
+
     fileprivate func createMockUsers(modelContext: ModelContext) {
         let jacksUUID = UUID()
         let jemsUUID = UUID()
