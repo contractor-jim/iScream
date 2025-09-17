@@ -9,7 +9,7 @@ Now he is getting older he is also losing points for being naughty!
 This also gives me a playground to play about with the more recent language, library and SDK changes in Swift / SwiftUI / iOS.
 
 > [!IMPORTANT]
-> In addition to this I wanted to try out a bunch of Architectures with the latest SwiftUI changes including navigation. This project is done as a ViperC Architected project. Though I know isn't recommended by Apple and sometimes frowned upon, I wanted to see how well it would fair in a more modern SwifTUI world for a bit of fun.
+> In addition to this I wanted to try out a bunch of Architectures with the latest SwiftUI changes including navigation. This project is done as a ViperC Architected project. Though I know isn't recommended by Apple and sometimes frowned upon, I wanted to see how well it would fair in a more modern SwiftUI world for a bit of fun.
 
 ## Features
 > [!NOTE]
@@ -17,7 +17,7 @@ This also gives me a playground to play about with the more recent language, lib
 
 ### Swift
 
-````Swift6```` ````Protocols```` ````Equatable```` ````Generics```` ````Failable Initializers```` ````SwiftData````
+````Swift6```` ````Protocols```` ````Equatable```` ````Generics```` ````Failable Initializers```` ````SwiftData```` ````Computed Properties```` ````Lazy Vars```` ````Hashable````
 
 ### SwiftUI
 
@@ -30,7 +30,7 @@ This also gives me a playground to play about with the more recent language, lib
 
 ### Testing
 
-````XCtest```` ````UItest```` ````SwiftTest```` ````Github Actions````
+````XCTest```` ````XCUITest```` ````SwiftTest```` ````Github Actions````
 
 ### Tools
 

@@ -25,7 +25,7 @@ final class User {
     var type: String
     @Relationship(deleteRule: .cascade) var children: [User]?
     @Relationship(deleteRule: .cascade, inverse: \Bounty.user) var bounties: [Bounty]
-    // TODO: Test this
+
     @Transient lazy var orderedDataPoints: [PointData] = {
         dataPoints.sorted { $0.month < $1.month }
     }()
@@ -51,11 +51,10 @@ final class User {
 
 // Functions on a users data for calculating user scores
 extension User {
-    // TODO: test this
     var openBounties: [Bounty] {
         bounties.filter { $0.completed == false }
     }
-    // TODO: test this
+
     var completedBounties: [Bounty] {
         bounties.filter { $0.completed == true }
     }
@@ -64,13 +63,16 @@ extension User {
         guard self.orderedDataPoints.count > 1 else {
             return false
         }
-
-        return self.orderedDataPoints.first?.points ?? 0 > self.orderedDataPoints.last?.points ?? 0
+        return self.orderedDataPoints.first?.points ?? 0 < self.orderedDataPoints.last?.points ?? 0
     }
 
     var max: Int {
-        guard self.orderedDataPoints.count > 1 else {
+        guard self.orderedDataPoints.count > 0 else {
             return 0
+        }
+
+        guard self.orderedDataPoints.count == 1 else {
+            return orderedDataPoints[0].points
         }
 
         return self.orderedDataPoints.max { $0.points > $1.points }?.points ?? 0

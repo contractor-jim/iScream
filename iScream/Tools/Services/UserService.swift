@@ -17,7 +17,7 @@ class DefaultUserService: GenericService, UserService {
 
     static var modelContext: ModelContext?
     static var didLoad = false
-    // TODO: test this
+
     override init() {
 
         super.init()
@@ -55,7 +55,7 @@ class DefaultUserService: GenericService, UserService {
 }
 
 extension DefaultUserService {
-    func createMockUsers(modelContext: ModelContext) {
+    fileprivate func createMockUsers(modelContext: ModelContext) {
         let jacksUUID = UUID()
         let jemsUUID = UUID()
         let chrisUUID = UUID()
@@ -125,7 +125,7 @@ extension DefaultUserService {
                                      children: children))
 
         } catch {
-            print("Failed ot create parent")
+            print("Failed ot create parent \(error)")
         }
     }
 
@@ -154,7 +154,7 @@ extension DefaultUserService {
             modelContext.insert(Bounty(id: UUID(), title: "Be a good boy for Nanny", points: 10, completed: true, user: user))
             modelContext.insert(Bounty(id: UUID(), title: "Eat all your dinner", points: 2, completed: true, user: user))
         } catch {
-            print(">>> FAILED TO CREATE USER")
+            print("Failed to create the user \(error)")
         }
     }
 }

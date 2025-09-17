@@ -83,7 +83,7 @@ struct LoggedInTabBarView: View {
             .accessibilityIdentifier("parent-tab-bar-item-2")
 
             Tab("general.title.achievements", systemImage: "trophy.fill") {
-                Text("TODO: Achievements")
+                Text("Achievements")
             }
             .accessibilityIdentifier("parent-tab-bar-item-3")
         }
