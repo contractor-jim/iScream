@@ -45,9 +45,22 @@ class DefaultUserService: GenericService, UserService {
         }
 
         // TODO: This is incorrect as we shouldn't be adding testing code in the app. Add some switching for mock json when the network is built
+        var type = "parent"
+        var userName = "Daddy"
+
         let parentTesting = ProcessInfo.processInfo.arguments.contains("USER_PARENT")
+        if parentTesting {
+            type = "parent"
+            userName = "Daddy"
+        }
+
+        let childTesting = ProcessInfo.processInfo.arguments.contains("USER_CHILD")
+        if childTesting {
+            type = "child"
+            userName = "Jack"
+        }
         let userFetchDescriptor = FetchDescriptor<User>(predicate: #Predicate { user in
-            user.type == ( parentTesting ? "child" : "parent")
+            user.type == type && user.name == userName
         })
         // TODO: This needs to be an actual search on the user post login
         return try modelContext.fetch(userFetchDescriptor).first
