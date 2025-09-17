@@ -11,24 +11,31 @@ import SwiftData
 @main
 // swiftlint:disable:next type_name
 struct iScreamApp: App {
-    /*
-    var sharedModelContainer: ModelContainer = {
+
+    let modelContainer: ModelContainer
+
+    init() {
         let schema = Schema([
-            Item.self
+            User.self,
+            PointData.self,
+            Bounty.self
         ])
+
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            modelContainer = try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
-    }()
-    */
-    var body: some Scene {
+
+        DefaultUserService.modelContext = modelContainer.mainContext
+    }
+
+     var body: some Scene {
         WindowGroup {
             StartupManager.default.getFirstView()
         }
-        // .modelContainer(sharedModelContainer)
+        .modelContainer(modelContainer)
     }
 }

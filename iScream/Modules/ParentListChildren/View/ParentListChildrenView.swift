@@ -51,6 +51,7 @@ struct DashboardChildCellView: View {
     var body: some View {
         ZStack {
             ScrollView {
+                // TODO: These should be ordered too
                 if let children = presenter.user?.children {
                     ForEach(Array(children.enumerated()), id: \.offset) { _, user in
                         // TODO: Some custom press animation

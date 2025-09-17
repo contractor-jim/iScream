@@ -69,7 +69,7 @@ struct DashBoardChildCardScoreView: View {
                     format: NSLocalizedString("dashboard.childpoints.since.label",
                                               bundle: .main,
                                               comment: ""),
-                    user.dataPoints.dropLast().last!.month)
+                    user.dataPoints.dropLast().last!.monthString)
             )
             .font(CustomFont.smallFontBody)
             .multilineTextAlignment(.center)
@@ -87,16 +87,16 @@ struct DashBoardChildCardChartView: View {
     // TODO: Some custom fade in animation
     var body: some View {
         Chart {
-            ForEach(user.dataPoints) {
+            ForEach(user.orderedDataPoints) {
                 LineMark(
-                    x: .value("", $0.month),
+                    x: .value("", $0.monthString),
                     y: .value("", $0.points)
                 )
                 .interpolationMethod(.catmullRom)
                 .foregroundStyle( user.hasImproved ? .red : .green)
 
                 AreaMark(
-                    x: .value("", $0.month),
+                    x: .value("", $0.monthString),
                     yStart: .value("", $0.points),
                     yEnd: .value("", user.max)
                 )

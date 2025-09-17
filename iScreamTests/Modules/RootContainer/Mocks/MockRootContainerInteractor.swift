@@ -11,8 +11,12 @@ class MockRootContainerInteractor: RootContainerInteractor {
 
     var didCallFetchMyuser = false
 
-    override func fetchMyUser() async -> User {
+    override func fetchMyUser() async -> User? {
         didCallFetchMyuser = true
-        return await userService!.getUser()
+        do {
+            return try await userService!.getUser()
+        } catch {
+            return nil
+        }
     }
 }
