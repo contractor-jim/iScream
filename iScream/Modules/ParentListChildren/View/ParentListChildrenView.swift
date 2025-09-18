@@ -23,7 +23,9 @@ struct ParentListChildrenView: View, GenericView {
             DashboardChildCellView(presenter: presenter)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    ToolBarPlus()
+                    Button("AddPerson", systemImage: "plus") {
+
+                    }
                 }
             }
             .navigationDestination(for: User.self) { user in
@@ -31,7 +33,9 @@ struct ParentListChildrenView: View, GenericView {
                     .navigationTitle(user.name)
                     .navigationBarTitleDisplayMode(.inline)
             }
-            .navigationTitle("general.title.people")
+            .navigationTitle(Text("general.title.people"))
+            .navigationSubtitle("Synced just now")
+            .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)
             .background(.mainBackground)
             .foregroundColor(.white)
@@ -65,19 +69,5 @@ struct DashboardChildCellView: View {
                 }
             }
         }
-    }
-}
-
-struct ToolBarPlus: View {
-    var body: some View {
-        Image(systemName: "plus")
-            .resizable()
-            .frame(width: 14, height: 14)
-            .background {
-                Circle()
-                    .foregroundStyle(Color.white.opacity(0.2))
-                    .frame(width: 28, height: 28)
-            }
-            .padding(.trailing, Style.fullPadding)
     }
 }

@@ -24,11 +24,19 @@ struct ChildDashboardView: View, GenericView {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    ToolBarSettings()
+                    Button("Child Settings", systemImage: "gear") {
+
+                    }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .navigationTitle("")
+            .navigationTitle(
+                String(
+                    format: NSLocalizedString("child.dashboard.title",
+                                              bundle: .main,
+                                              comment: ""),
+                    presenter.user?.name ?? "")
+            )
             .navigationBarTitleDisplayMode(.inline)
             .foregroundColor(.white)
             .background(.mainBackground)
@@ -48,16 +56,6 @@ struct ChildDashboardListView: View {
     var body: some View {
         if let user = presenter.user {
             VStack(alignment: .leading) {
-                Text(
-                    String(
-                        format: NSLocalizedString("child.dashboard.title",
-                                                  bundle: .main,
-                                                  comment: ""),
-                        user.name)
-                )
-                .font(CustomFont.headerFont)
-                .foregroundStyle(.white)
-                .padding(.top, Style.topPadding)
                 // TODO: This needs to be looked as it should be total points followed by increase since last X time period
                 Text(
                     String(
@@ -99,19 +97,5 @@ struct ChildDashboardGoalCells: View {
             ChildDashboardBountyScore(presenter: presenter)
         }
         .fixedSize(horizontal: false, vertical: false)
-    }
-}
-
-struct ToolBarSettings: View {
-    var body: some View {
-        Image(systemName: "gear")
-            .resizable()
-            .frame(width: 22, height: 22)
-            .background {
-                Circle()
-                    .foregroundStyle(Color.white.opacity(0.2))
-                    .frame(width: 28, height: 28)
-            }
-            .padding(.trailing, Style.fullPadding)
     }
 }
