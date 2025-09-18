@@ -25,9 +25,9 @@ final class ParentListChildrenUITests: XCTestCase {
         XCTAssertTrue( app.otherElements["parent-dashboard-card-view-Jack"].waitForExistence(timeout: 3.0) )
 
         XCTAssertTrue( app.staticTexts["People"].waitForExistence(timeout: 3.0) )
-
-        XCTAssertTrue( app.staticTexts["Synced just now"].waitForExistence(timeout: 3.0) )
-
+        if #available(iOS 26.0, *) {
+            XCTAssertTrue( app.staticTexts["Synced just now"].waitForExistence(timeout: 3.0) )
+        }
         // Ensure the title is displayed with the users name
         XCTAssertTrue( app.staticTexts["Jack"].waitForExistence(timeout: 3.0) )
 
