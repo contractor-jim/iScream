@@ -21,20 +21,6 @@ struct ParentListChildrenView: View, GenericView {
     var body: some View {
         NavigationStack(path: presenter.navPath) {
             DashboardChildCellView(presenter: presenter)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    ToolBarPlus()
-                }
-            }
-            .navigationDestination(for: User.self) { user in
-                Text("Child Detail view")
-                    .navigationTitle(user.name)
-                    .navigationBarTitleDisplayMode(.inline)
-            }
-            .navigationTitle("general.title.people")
-            .scrollContentBackground(.hidden)
-            .background(.mainBackground)
-            .foregroundColor(.white)
         }
         .onAppear {
             // TODO: Review which actor this task is created on
@@ -65,19 +51,23 @@ struct DashboardChildCellView: View {
                 }
             }
         }
-    }
-}
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("AddPerson", systemImage: "plus") {
 
-struct ToolBarPlus: View {
-    var body: some View {
-        Image(systemName: "plus")
-            .resizable()
-            .frame(width: 14, height: 14)
-            .background {
-                Circle()
-                    .foregroundStyle(Color.white.opacity(0.2))
-                    .frame(width: 28, height: 28)
+                }
             }
-            .padding(.trailing, Style.fullPadding)
+        }
+        .navigationDestination(for: User.self) { user in
+            Text("Child Detail view")
+                .navigationTitle(user.name)
+                .navigationBarTitleDisplayMode(.inline)
+        }
+        .navigationTitle(Text("general.title.people"))
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationSubtitle("Synced just now")
+        .scrollContentBackground(.hidden)
+        .background(.mainBackground)
+        .foregroundColor(.white)
     }
 }
