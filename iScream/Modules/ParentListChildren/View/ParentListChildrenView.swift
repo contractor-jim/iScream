@@ -20,12 +20,7 @@ struct ParentListChildrenView: View, GenericView {
 
     var body: some View {
         NavigationStack(path: presenter.navPath) {
-            if #available(iOS 26.0, *) {
-                DashboardChildCellView(presenter: presenter)
-                    .navigationSubtitle("Synced just now")
-            } else {
-                DashboardChildCellView(presenter: presenter)
-            }
+            DashboardChildCellView(presenter: presenter)
         }
         .onAppear {
             // TODO: Review which actor this task is created on
@@ -70,6 +65,7 @@ struct DashboardChildCellView: View {
         }
         .navigationTitle(Text("general.title.people"))
         .navigationBarTitleDisplayMode(.inline)
+        .navigationSubtitle("Synced just now")
         .scrollContentBackground(.hidden)
         .background(.mainBackground)
         .foregroundColor(.white)
