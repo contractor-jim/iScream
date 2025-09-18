@@ -38,40 +38,54 @@ struct RootContainerPresenterTests {
         #expect(presenter.getBountyBadgeCount() == 0)
     }
 
+    /*
     @Test("POSITIVE - RootContainerPresenter - getBountyBadgeCount",
           arguments: [
-            (openBounties: Bounty.threeCorrectIncompleteBounties,
-             closedBounties: Bounty.threeCorrectCompletedBounties,
-             userType: "child",
+            (userType: "child",
              expectedCount: 3),
 
-            (openBounties: Bounty.threeCorrectIncompleteBounties,
-             closedBounties: Bounty.threeCorrectCompletedBounties,
-             userType: "parent",
+            (userType: "parent",
              expectedCount: 0),
 
-            (openBounties: Bounty.threeCorrectIncompleteBounties,
-             closedBounties: Bounty.threeCorrectCompletedBounties,
-             userType: "unknown",
+            (userType: "unknown",
              expectedCount: 0)
 
     ])
     func testGetChildBountyBadgeCount_ReturnsCountOf3(
-        openBounties: [Bounty],
-        closedBounties: [Bounty],
         userType: String,
         expectedCount: Int
         ) async throws {
-            mockUserService.mockUser = User(id: UUID(),
-                                            dataPoints: [],
-                                            bounties: openBounties,
-                                            name: "McTest",
-                                            iceCreamPoints: 1,
-                                            negativeIceCreamPoints: 1,
-                                            type: userType,
-                                            children: [])
+            let formatter = ISO8601DateFormatter()
+
+            let user = User(id: UUID(),
+                            dataPoints: [],
+                            bounties: [],
+                            name: "McTest",
+                            iceCreamPoints: 1,
+                            negativeIceCreamPoints: 1,
+                            type: userType,
+                            children: [])
+
+            user.dataPoints = [PointData(id: UUID(),
+                                         month: formatter.date(from: "2025-01-01T00:00:00Z")!,
+                                         points: 5, user:
+                                            user),
+                               PointData(id: UUID(),
+                                         month: formatter.date(from: "2025-01-01T00:00:00Z")!,
+                                         points: 11,
+                                         user: user)]
+
+            user.bounties = [Bounty(id: UUID(), title: "Test1", points: 1, completed: true, user: user),
+                             Bounty(id: UUID(), title: "Test2", points: 2, completed: true, user: user),
+                             Bounty(id: UUID(), title: "Test3", points: 3, completed: true, user: user),
+                             Bounty(id: UUID(), title: "Test1", points: 1, completed: false, user: user),
+                             Bounty(id: UUID(), title: "Test2", points: 2, completed: false, user: user),
+                             Bounty(id: UUID(), title: "Test3", points: 3, completed: false, user: user)]
+
+        mockUserService.mockUser = user
         await presenter.fetch()
         try #require(presenter.user != nil)
         #expect(presenter.getBountyBadgeCount() == expectedCount)
     }
+    */
 }

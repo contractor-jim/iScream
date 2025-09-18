@@ -13,6 +13,7 @@ struct UserServiceTests {
     @Test("POSITIVE - User service init") func testUserServiceInit() async throws {
         _ = DefaultUserService()
         #expect(DefaultUserService.modelContext != nil)
+        #expect(DefaultUserService.didLoad == true)
     }
 
     @Test("POSITIVE - User service should return the parent user") func testValidUserReturned() async throws {

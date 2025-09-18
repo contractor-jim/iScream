@@ -17,7 +17,7 @@ class DefaultUserService: GenericService, UserService {
 
     static var modelContext: ModelContext?
     static var didLoad = false
-    // TODO: test this
+
     override init() {
 
         super.init()
@@ -45,9 +45,22 @@ class DefaultUserService: GenericService, UserService {
         }
 
         // TODO: This is incorrect as we shouldn't be adding testing code in the app. Add some switching for mock json when the network is built
+        var type = "parent"
+        var userName = "Daddy"
+
         let parentTesting = ProcessInfo.processInfo.arguments.contains("USER_PARENT")
+        if parentTesting {
+            type = "parent"
+            userName = "Daddy"
+        }
+
+        let childTesting = ProcessInfo.processInfo.arguments.contains("USER_CHILD")
+        if childTesting {
+            type = "child"
+            userName = "Jack"
+        }
         let userFetchDescriptor = FetchDescriptor<User>(predicate: #Predicate { user in
-            user.type == ( parentTesting ? "child" : "parent")
+            user.type == type && user.name == userName
         })
         // TODO: This needs to be an actual search on the user post login
         return try modelContext.fetch(userFetchDescriptor).first
@@ -55,7 +68,8 @@ class DefaultUserService: GenericService, UserService {
 }
 
 extension DefaultUserService {
-    func createMockUsers(modelContext: ModelContext) {
+
+    fileprivate func createMockUsers(modelContext: ModelContext) {
         let jacksUUID = UUID()
         let jemsUUID = UUID()
         let chrisUUID = UUID()
@@ -125,7 +139,7 @@ extension DefaultUserService {
                                      children: children))
 
         } catch {
-            print("Failed ot create parent")
+            print("Failed ot create parent \(error)")
         }
     }
 
@@ -154,7 +168,7 @@ extension DefaultUserService {
             modelContext.insert(Bounty(id: UUID(), title: "Be a good boy for Nanny", points: 10, completed: true, user: user))
             modelContext.insert(Bounty(id: UUID(), title: "Eat all your dinner", points: 2, completed: true, user: user))
         } catch {
-            print(">>> FAILED TO CREATE USER")
+            print("Failed to create the user \(error)")
         }
     }
 }

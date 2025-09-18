@@ -18,7 +18,7 @@ class ParentListChildrenInteractor: GenericInteractorImp<ParentListChildrenEntit
         }
         super.init(entity: entity, services: services)
     }
-    // TODO: test this
+
     func fetchMyUser() async -> User? {
         do {
             return try await userService!.getUser()

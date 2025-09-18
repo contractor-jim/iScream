@@ -7,7 +7,7 @@
 
 @testable import iScream
 import Foundation
-// TODO: Delete this
+
 extension Bounty {
     static var threeCorrectCompletedBounties: [Bounty] {
         [
