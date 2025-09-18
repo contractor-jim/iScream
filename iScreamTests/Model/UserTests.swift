@@ -126,69 +126,157 @@ struct UserTests {
     }
 
     @Test("POSITIVE - hasImproved true") func testChildhasImproved_Yes() async throws {
-        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 10, user: childUser),
-                                       PointData(id: UUID(), month: Date(), points: 16, user: childUser)]
-        childUser.dataPoints = dataPoints
-        #expect(childUser.hasImproved == true)
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
+        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 10, user: user),
+                                       PointData(id: UUID(), month: Date(), points: 16, user: user)]
+        user.dataPoints = dataPoints
+        #expect(user.hasImproved == true)
     }
 
     @Test("POSITIVE - hasImproved false") func testChildhasImproved_No() async throws {
-        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 16, user: childUser),
-                                       PointData(id: UUID(), month: Date(), points: 10, user: childUser)]
-        childUser.dataPoints = dataPoints
-        #expect(childUser.hasImproved == false)
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
+        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 16, user: user),
+                                       PointData(id: UUID(), month: Date(), points: 10, user: user)]
+        user.dataPoints = dataPoints
+        #expect(user.hasImproved == false)
     }
 
     @Test("POSITIVE - hasImproved false one entry") func testChildhasImproved_No_OneEntry() async throws {
-        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 16, user: childUser)]
-        childUser.dataPoints = dataPoints
-        #expect(childUser.hasImproved == false)
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
+        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 16, user: user)]
+        user.dataPoints = dataPoints
+        #expect(user.hasImproved == false)
     }
 
     @Test("POSITIVE - max") func testChildMax() async throws {
-        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 16, user: childUser),
-                                       PointData(id: UUID(), month: Date(), points: 10, user: childUser)]
-        childUser.dataPoints = dataPoints
-        #expect(childUser.max == 16)
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
+        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 16, user: user),
+                                       PointData(id: UUID(), month: Date(), points: 10, user: user)]
+        user.dataPoints = dataPoints
+        #expect(user.max == 16)
     }
 
     @Test("POSITIVE - max one value") func testChildMax_OneValue() async throws {
-        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 99, user: childUser)]
-        childUser.dataPoints = dataPoints
-        childUser.dataPoints = dataPoints
-        #expect(childUser.max == 99)
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
+        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 99, user: user)]
+        user.dataPoints = dataPoints
+        #expect(user.max == 99)
     }
 
     @Test("NEGATIVE - max no values") func testChildMax_NoValue() async throws {
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
         let dataPoints: [PointData] = []
-        childUser.dataPoints = dataPoints
-        #expect(childUser.max == 0)
+        user.dataPoints = dataPoints
+        #expect(user.max == 0)
     }
 
     @Test("POSITIVE - aggregate negative score") func testChild_aggregateSinceLastMonth_NegativeScore() async throws {
-        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 16, user: childUser),
-                                       PointData(id: UUID(), month: Date(), points: 10, user: childUser)]
-        childUser.dataPoints = dataPoints
-        #expect(childUser.aggregateSinceLastMonth == -6)
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 16, user: user),
+                                       PointData(id: UUID(), month: Date(), points: 10, user: user)]
+        user.dataPoints = dataPoints
+        #expect(user.aggregateSinceLastMonth == -6)
     }
 
     @Test("POSITIVE - aggregate positive score") func testChild_aggregateSinceLastMonth_PositiveScore() async throws {
-        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 14, user: childUser),
-                                       PointData(id: UUID(), month: Date(), points: 24, user: childUser)]
-        childUser.dataPoints = dataPoints
-        #expect(childUser.aggregateSinceLastMonth == 10)
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
+        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 14, user: user),
+                                       PointData(id: UUID(), month: Date(), points: 24, user: user)]
+        user.dataPoints = dataPoints
+        #expect(user.aggregateSinceLastMonth == 10)
     }
 
     @Test("POSITIVE - aggregate no score") func testChild_aggregateSinceLastMonth_NoScore() async throws {
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
         let dataPoints: [PointData] = []
-        childUser.dataPoints = dataPoints
-        #expect(childUser.aggregateSinceLastMonth == 0)
+        user.dataPoints = dataPoints
+        #expect(user.aggregateSinceLastMonth == 0)
     }
 
     @Test("POSITIVE - aggregate single score") func testChild_aggregateSinceLastMonth_SingleScore() async throws {
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
         let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 99, user: childUser)]
-        childUser.dataPoints = dataPoints
-        #expect(childUser.aggregateSinceLastMonth == 99)
+        user.dataPoints = dataPoints
+        #expect(user.aggregateSinceLastMonth == 99)
     }
 
     @Test("POSITIVE - orderdDataPoints") func testChild_orderedPoints() async throws {
@@ -196,12 +284,22 @@ struct UserTests {
         let date1 = Date(timeIntervalSince1970: 1000)
         let date2 = Date(timeIntervalSince1970: 1000000)
         let date3 = Date(timeIntervalSince1970: 10000000000)
-        let dataPoints: [PointData] = [PointData(id: UUID(), month: date3, points: 3, user: childUser),
-                                       PointData(id: UUID(), month: date1, points: 1, user: childUser),
-                                       PointData(id: UUID(), month: date2, points: 2, user: childUser)]
-        childUser.dataPoints = dataPoints
-        #expect(childUser.orderedDataPoints[0].points == 1)
-        #expect(childUser.orderedDataPoints[1].points == 2)
-        #expect(childUser.orderedDataPoints[2].points == 3)
+
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
+        let dataPoints: [PointData] = [PointData(id: UUID(), month: date3, points: 3, user: user),
+                                       PointData(id: UUID(), month: date1, points: 1, user: user),
+                                       PointData(id: UUID(), month: date2, points: 2, user: user)]
+        user.dataPoints = dataPoints
+        #expect(user.orderedDataPoints[0].points == 1)
+        #expect(user.orderedDataPoints[1].points == 2)
+        #expect(user.orderedDataPoints[2].points == 3)
     }
 }
