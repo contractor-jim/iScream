@@ -22,7 +22,7 @@ struct ParentListChildrenView: View, GenericView {
         NavigationStack(path: presenter.navPath) {
             if #available(iOS 26.0, *) {
                 DashboardChildCellView(presenter: presenter)
-                    //.navigationSubtitle("Synced just now")
+                    .navigationSubtitle("Synced just now")
             } else {
                 DashboardChildCellView(presenter: presenter)
             }
