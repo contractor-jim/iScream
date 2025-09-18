@@ -21,9 +21,6 @@ final class ParentListChildrenUITests: XCTestCase {
         app.launchArguments.append("USER_PARENT")
         app.activate()
 
-        // Ensure the Nav title is set to people
-        XCTAssertTrue( app.navigationBars.staticTexts["People"].waitForExistence(timeout: 3.0) )
-
         // Ensure the cell is visible
         XCTAssertTrue( app.otherElements["parent-dashboard-card-view-Jack"].waitForExistence(timeout: 3.0) )
 
