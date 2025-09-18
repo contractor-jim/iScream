@@ -20,25 +20,12 @@ struct ParentListChildrenView: View, GenericView {
 
     var body: some View {
         NavigationStack(path: presenter.navPath) {
-            DashboardChildCellView(presenter: presenter)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("AddPerson", systemImage: "plus") {
-
-                    }
-                }
+            if #available(iOS 26.0, *) {
+                DashboardChildCellView(presenter: presenter)
+                    .navigationSubtitle("Synced just now")
+            } else {
+                DashboardChildCellView(presenter: presenter)
             }
-            .navigationDestination(for: User.self) { user in
-                Text("Child Detail view")
-                    .navigationTitle(user.name)
-                    .navigationBarTitleDisplayMode(.inline)
-            }
-            .navigationTitle(Text("general.title.people"))
-            .navigationSubtitle("Synced just now")
-            .navigationBarTitleDisplayMode(.inline)
-            .scrollContentBackground(.hidden)
-            .background(.mainBackground)
-            .foregroundColor(.white)
         }
         .onAppear {
             // TODO: Review which actor this task is created on
@@ -69,5 +56,22 @@ struct DashboardChildCellView: View {
                 }
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("AddPerson", systemImage: "plus") {
+
+                }
+            }
+        }
+        .navigationDestination(for: User.self) { user in
+            Text("Child Detail view")
+                .navigationTitle(user.name)
+                .navigationBarTitleDisplayMode(.inline)
+        }
+        .navigationTitle(Text("general.title.people"))
+        .navigationBarTitleDisplayMode(.inline)
+        .scrollContentBackground(.hidden)
+        .background(.mainBackground)
+        .foregroundColor(.white)
     }
 }
