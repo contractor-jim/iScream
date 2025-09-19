@@ -45,8 +45,8 @@ class DefaultUserService: GenericService, UserService {
         }
 
         // TODO: This is incorrect as we shouldn't be adding testing code in the app. Add some switching for mock json when the network is built
-        var type = "parent"
-        var userName = "Daddy"
+        var type = "child"
+        var userName = "Jack"
 
         let parentTesting = ProcessInfo.processInfo.arguments.contains("USER_PARENT")
         if parentTesting {
@@ -73,7 +73,7 @@ extension DefaultUserService {
         let jacksUUID = UUID()
         let jemsUUID = UUID()
         let chrisUUID = UUID()
-/*
+
         createUser(modelContext: modelContext,
                    id: jacksUUID,
                    user: User(id: jacksUUID,
@@ -107,7 +107,7 @@ extension DefaultUserService {
                                ("2025-05-01T00:00:00Z", 35),
                                ("2025-06-01T00:00:00Z", 50),
                                ("2025-07-01T00:00:00Z", 55)])
-*/
+
         createUser(modelContext: modelContext,
                    id: chrisUUID,
                    user: User(id: chrisUUID,
