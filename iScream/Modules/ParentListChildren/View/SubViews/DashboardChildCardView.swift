@@ -93,7 +93,7 @@ struct DashBoardChildCardChartView: View {
                     y: .value("", $0.points)
                 )
                 .interpolationMethod(.catmullRom)
-                .foregroundStyle( user.hasImproved ? .red : .green)
+                .foregroundStyle( user.hasImproved ? .green : .red )
 
                 AreaMark(
                     x: .value("", $0.monthString),
@@ -104,8 +104,8 @@ struct DashBoardChildCardChartView: View {
                 .foregroundStyle(
                     LinearGradient(
                         gradient: Gradient(colors: [
-                            user.hasImproved ? .red.opacity(0.5) : .green.opacity(0.5),
-                            user.hasImproved ? .red.opacity(0.05) : .green.opacity(0.05)
+                            user.hasImproved ? .green.opacity(0.5) : .red.opacity(0.5),
+                            user.hasImproved ? .green.opacity(0.05) : .red.opacity(0.05)
                         ]),
                         startPoint: .top,
                         endPoint: .bottom

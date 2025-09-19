@@ -28,13 +28,13 @@ struct ChildDashboardChartView: View {
             .padding(.top, Style.topPadding)
 
             Chart {
-                ForEach(user.dataPoints) {
+                ForEach(user.orderedDataPoints) {
                     LineMark(
                         x: .value("", $0.month),
                         y: .value("", $0.points)
                     )
                     .interpolationMethod(.catmullRom)
-                    .foregroundStyle(user.hasImproved ? .red : .green)
+                    .foregroundStyle(user.hasImproved ? .green : .red )
                     .alignsMarkStylesWithPlotArea()
 
                     AreaMark(
@@ -46,8 +46,8 @@ struct ChildDashboardChartView: View {
                     .foregroundStyle(
                         LinearGradient(
                             gradient: Gradient(colors: [
-                                user.hasImproved ? .red.opacity(0.5) : .green.opacity(0.5),
-                                user.hasImproved ? .red.opacity(0.05) : .green.opacity(0.05)
+                                user.hasImproved ? .green.opacity(0.5) : .red.opacity(0.5),
+                                user.hasImproved ? .green.opacity(0.05) : .red.opacity(0.05)
                             ]),
                             startPoint: .top,
                             endPoint: .bottom

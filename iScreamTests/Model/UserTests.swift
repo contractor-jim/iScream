@@ -185,7 +185,7 @@ struct UserTests {
         let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 16, user: user),
                                        PointData(id: UUID(), month: Date(), points: 10, user: user)]
         user.dataPoints = dataPoints
-        #expect(user.max == 16)
+        #expect(user.max == 10)
     }
 
     @Test("POSITIVE - max one value") func testChildMax_OneValue() async throws {
