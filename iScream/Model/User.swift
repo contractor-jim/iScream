@@ -73,7 +73,7 @@ extension User {
             return 0
         }
 
-        guard self.orderedDataPoints.count == 1 else {
+        guard self.orderedDataPoints.count > 1 else {
             return orderedDataPoints[0].points
         }
 

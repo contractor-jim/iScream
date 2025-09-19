@@ -73,7 +73,7 @@ extension DefaultUserService {
         let jacksUUID = UUID()
         let jemsUUID = UUID()
         let chrisUUID = UUID()
-
+/*
         createUser(modelContext: modelContext,
                    id: jacksUUID,
                    user: User(id: jacksUUID,
@@ -107,7 +107,7 @@ extension DefaultUserService {
                                ("2025-05-01T00:00:00Z", 35),
                                ("2025-06-01T00:00:00Z", 50),
                                ("2025-07-01T00:00:00Z", 55)])
-
+*/
         createUser(modelContext: modelContext,
                    id: chrisUUID,
                    user: User(id: chrisUUID,
