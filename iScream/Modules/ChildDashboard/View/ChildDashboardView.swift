@@ -51,7 +51,7 @@ struct ChildDashboardView: View, GenericView {
 }
 
 struct ChildDashboardListView: View {
-    var presenter: ChildDashboardPresenter
+    @State var presenter: ChildDashboardPresenter
 
     var body: some View {
         if let user = presenter.user {
