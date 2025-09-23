@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 // TODO: move this further down to the model
-struct IcecramPointSpread: Identifiable {
+struct IceCreamPointSpread: Identifiable {
     let id = UUID()
     let title: String
     let points: Int
@@ -19,7 +19,7 @@ struct IcecramPointSpread: Identifiable {
 protocol ChildDashboardPresenterProtocol: GenericPresenter {
     var user: User? { get }
     var navPath: Binding<NavigationPath> { get }
-    var points: [IcecramPointSpread] { get }
+    var points: [IceCreamPointSpread] { get }
     var openBountyCount: Int { get }
     var totalBountyCount: Int { get }
 
@@ -31,7 +31,7 @@ protocol ChildDashboardPresenterProtocol: GenericPresenter {
 class ChildDashboardPresenter: GenericPresenterImp<ChildDashboardInteractor, ChildDashboardRouter>,
                                ChildDashboardPresenterProtocol, Observable {
     var user: User?
-    var points: [IcecramPointSpread] = []
+    var points: [IceCreamPointSpread] = []
     var navPath: Binding<NavigationPath> {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
     }
@@ -48,8 +48,8 @@ class ChildDashboardPresenter: GenericPresenterImp<ChildDashboardInteractor, Chi
         user = await interactor.fetchMyUser()
         guard let user else { return }
         points = [
-            IcecramPointSpread.init(title: String(localized: "general.good.label"), points: user.iceCreamPoints, color: .green),
-            IcecramPointSpread.init(title: String(localized: "general.naughty.label"), points: user.negativeIceCreamPoints, color: .red)
+            IceCreamPointSpread.init(title: String(localized: "general.good.label"), points: user.iceCreamPoints, color: .green),
+            IceCreamPointSpread.init(title: String(localized: "general.naughty.label"), points: user.negativeIceCreamPoints, color: .red)
         ]
     }
 

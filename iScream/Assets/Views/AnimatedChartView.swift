@@ -14,16 +14,15 @@ struct AnimatedChartView: View {
 
     var body: some View {
         animatedChart(user: user)
-            .onAppear {
-                for i in 0..<user.orderedDataPoints.count {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                        withAnimation(.easeInOut.delay(Double(i) * 0.05)) {
-                            interpolationValue = 1.0
-                        }
+        .onAppear {
+            for i in 0..<user.orderedDataPoints.count {
+                DispatchQueue.main.asyncAfter(deadline: .now() + Style.animationDelay) {
+                    withAnimation(.easeInOut.delay(Double(i) * Style.animationDuration)) {
+                        interpolationValue = 1.0
                     }
                 }
             }
-
+        }
     }
 
     private func chartLayer<V: ChartContent>(@ChartContentBuilder v: () -> V) -> some View {
