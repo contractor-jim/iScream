@@ -79,7 +79,7 @@ extension User {
 
         return self.orderedDataPoints.max { $0.points > $1.points }?.points ?? 0
     }
-    // TODO: Test this
+
     var chartYMax: Int {
         guard self.orderedDataPoints.count > 0 else {
             return 0
@@ -91,7 +91,7 @@ extension User {
 
         return self.orderedDataPoints.max { $0.points < $1.points }?.points ?? 0
     }
-    // TODO: Test this
+
     var chartYMin: Int {
         guard self.orderedDataPoints.count > 0 else {
             return 0

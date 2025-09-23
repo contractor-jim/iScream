@@ -14,7 +14,7 @@ struct Style {
     static let topPadding: CGFloat = 26
     static let fullPadding: CGFloat = 16
     static let halfPadding: CGFloat = 8
-    // TODO: Test this
+
     // Animation
     static let animationDuration: Double = 0.35
     static let animationDelay: Double = 0.15
