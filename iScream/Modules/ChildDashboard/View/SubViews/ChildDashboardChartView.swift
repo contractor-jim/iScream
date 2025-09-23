@@ -10,6 +10,7 @@ import SwiftUI
 struct ChildDashboardChartView: View {
     @State var user: User!
     @State private var interpolationValue: CGFloat = 0.0
+
     var presenter: ChildDashboardPresenter
 
     var body: some View {
@@ -31,7 +32,6 @@ struct ChildDashboardChartView: View {
                 .padding([.bottom], Style.fullPadding)
                 .padding([.leading, .trailing], Style.halfPadding)
                 .accessibilityIdentifier("child-dashboard-chart-view")
-
         }
         .frame(maxWidth: .infinity, maxHeight: 180)
         .background(.cellBackground)
