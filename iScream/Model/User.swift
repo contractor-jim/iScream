@@ -80,6 +80,30 @@ extension User {
         return self.orderedDataPoints.max { $0.points > $1.points }?.points ?? 0
     }
 
+    var chartYMax: Int {
+        guard self.orderedDataPoints.count > 0 else {
+            return 0
+        }
+
+        guard self.orderedDataPoints.count > 1 else {
+            return orderedDataPoints[0].points
+        }
+
+        return self.orderedDataPoints.max { $0.points < $1.points }?.points ?? 0
+    }
+
+    var chartYMin: Int {
+        guard self.orderedDataPoints.count > 0 else {
+            return 0
+        }
+
+        guard self.orderedDataPoints.count > 1 else {
+            return orderedDataPoints[0].points
+        }
+
+        return self.orderedDataPoints.min { $0.points < $1.points }?.points ?? 0
+    }
+
     var aggregateSinceLastMonth: Int {
 
         guard orderedDataPoints.count > 0 else {

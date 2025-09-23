@@ -302,4 +302,92 @@ struct UserTests {
         #expect(user.orderedDataPoints[1].points == 2)
         #expect(user.orderedDataPoints[2].points == 3)
     }
+
+    @Test("POSITIVE - chart Y Max is correct") func testChild_chartYMax_ValidValue() async throws {
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
+        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 99, user: childUser),
+                                       PointData(id: UUID(), month: Date(), points: 10, user: childUser)]
+        user.dataPoints = dataPoints
+        #expect(user.chartYMax == 99)
+    }
+
+    @Test("POSITIVE - chart Y Max is 0 with no values") func testChild_chartYMax_NoValidValue() async throws {
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
+        #expect(user.chartYMax == 0)
+    }
+
+    @Test("POSITIVE - chart Y Max is same value if only 1 value exists") func testChild_chartYMax_OneValidValue() async throws {
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
+        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 10, user: childUser)]
+         user.dataPoints = dataPoints
+        #expect(user.chartYMax == 10)
+    }
+
+    @Test("POSITIVE - chart Y Min is correct") func testChild_chartYMin_ValidValue() async throws {
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
+        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 99, user: childUser),
+                                       PointData(id: UUID(), month: Date(), points: 10, user: childUser)]
+        user.dataPoints = dataPoints
+        #expect(user.chartYMin == 10)
+    }
+
+    @Test("POSITIVE - chart Y Min is 0 with no values") func testChild_chartYMin_NoValidValue() async throws {
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
+        #expect(user.chartYMin == 0)
+    }
+
+    @Test("POSITIVE - chart Y Min is same value if only 1 value exists") func testChild_chartYMin_OneValidValue() async throws {
+        let user = User(id: UUID(),
+                             dataPoints: [],
+                             bounties: [],
+                             name: "Test",
+                             iceCreamPoints: 1000,
+                             negativeIceCreamPoints: -100,
+                             type: "child",
+                             children: [])
+
+        let dataPoints: [PointData] = [PointData(id: UUID(), month: Date(), points: 10, user: childUser)]
+         user.dataPoints = dataPoints
+        #expect(user.chartYMin == 10)
+    }
 }

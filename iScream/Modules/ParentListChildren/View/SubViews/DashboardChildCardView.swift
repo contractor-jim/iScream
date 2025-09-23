@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import Charts
 
 struct DashboardChildCardView: View {
-    let user: User!
+    @State var user: User!
+    @State private var interpolationValue: CGFloat = 0.0
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,9 +22,8 @@ struct DashboardChildCardView: View {
 
                 HStack(alignment: .top, spacing: 0) {
                     DashBoardChildCardScoreView(user: user)
-                    DashBoardChildCardChartView(user: user)
+                    AnimatedChartView(user: user)
                 }
-                .frame(maxHeight: 90)
             }
             .padding(.all, Style.fullPadding)
             .font(CustomFont.subHeaderFont)
@@ -78,51 +77,5 @@ struct DashBoardChildCardScoreView: View {
         }
         .frame(maxWidth: 65)
         .padding([.trailing], Style.halfPadding)
-    }
-}
-
-struct DashBoardChildCardChartView: View {
-
-    let user: User!
-    // TODO: Some custom fade in animation
-    var body: some View {
-        Chart {
-            ForEach(user.orderedDataPoints) {
-                LineMark(
-                    x: .value("", $0.monthString),
-                    y: .value("", $0.points)
-                )
-                .interpolationMethod(.catmullRom)
-                .foregroundStyle( user.hasImproved ? .green : .red )
-
-                AreaMark(
-                    x: .value("", $0.monthString),
-                    yStart: .value("", $0.points),
-                    yEnd: .value("", user.max)
-                )
-                .interpolationMethod(.catmullRom)
-                .foregroundStyle(
-                    LinearGradient(
-                        gradient: Gradient(colors: [
-                            user.hasImproved ? .green.opacity(0.5) : .red.opacity(0.5),
-                            user.hasImproved ? .green.opacity(0.05) : .red.opacity(0.05)
-                        ]),
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-            }
-        }
-        .chartLegend(.hidden)
-        .chartXAxis { AxisMarks(values: .automatic) {
-            AxisValueLabel()
-                .foregroundStyle(Color.white)
-            }
-        }
-        .chartYAxis { AxisMarks(values: .automatic) {
-            AxisValueLabel()
-                .foregroundStyle(Color.white)
-            }
-        }
     }
 }
