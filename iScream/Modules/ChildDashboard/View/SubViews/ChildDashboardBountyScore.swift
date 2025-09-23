@@ -39,6 +39,7 @@ struct ChildDashboardBountyScore: View {
                 .onAppear {
                     withAnimation(.easeOut(duration: 5.0).repeatForever() ) { isAnimating.toggle() }
                 }
+                .symbolEffect(.bounce, options: .nonRepeating)
                 .accessibilityIdentifier("child-bounty-cell-icon")
 
             Spacer()
