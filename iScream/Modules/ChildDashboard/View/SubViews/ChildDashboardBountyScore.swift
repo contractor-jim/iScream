@@ -28,9 +28,10 @@ struct ChildDashboardBountyScore: View {
                 .foregroundStyle(
                     MeshGradient(width: 3, height: 3, points: [
                         [isAnimating ? -0.6 : 0.0, 0.0], [isAnimating ? 0.2 : 0.9, 0.0], [isAnimating ? 1.6 : 1.0, 0.0],
-                                [isAnimating ? -0.6 : 0.0, 0.5], [isAnimating ? 0.1 : 0.9, isAnimating ? 0.5 : 0.8], [1.0, isAnimating ? 0.7 : 1],
-                                [isAnimating ? -0.6 : -0.0, 1.0], [isAnimating ? 0.1 : 0.9, 1.0], [1.0, 1.0]
-                            ], colors: [
+                        [isAnimating ? -0.6 : 0.0, 0.5], [isAnimating ? 0.1 : 0.9, isAnimating ? 0.5 : 0.8],
+                        [1.0, isAnimating ? 0.7 : 1], [isAnimating ? -0.6 : -0.0, 1.0], [isAnimating ? 0.1 : 0.9, 1.0],
+                        [1.0, 1.0]],
+                                 colors: [
                                 .goldLight, .white, .goldLight,
                                 .goldMid, .yellow, .goldMid,
                                 .goldLight, .white, .goldDark
