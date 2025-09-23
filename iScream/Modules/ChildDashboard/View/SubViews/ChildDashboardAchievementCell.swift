@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ChildDashboardAchievementCell: View {
     var presenter: ChildDashboardPresenter
+    @State var points: [Int] = [0, 0, 0, 0]
+    // TODO: This needs to come from the model
+    let actualPoints: [Int] = [0, 2, 4, 12]
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -16,30 +19,39 @@ struct ChildDashboardAchievementCell: View {
                 .padding(Style.halfPadding)
 
             HStack(alignment: .center) {
-                ChildDashboardAchievementLabel(points: 0)
+                ChildDashboardAchievementLabel(points: points[0])
                     .foregroundStyle( PlatinumShapeStyle() )
                     .accessibilityIdentifier("child-dashboard-achievement-cell-midnight")
 
                 Spacer()
 
-                ChildDashboardAchievementLabel(points: 2)
+                ChildDashboardAchievementLabel(points: points[1])
                     .foregroundStyle( GoldShapeStyle() )
                     .accessibilityIdentifier("child-dashboard-achievement-cell-gold")
 
                 Spacer()
 
-                ChildDashboardAchievementLabel(points: 4)
+                ChildDashboardAchievementLabel(points: points[2])
                     .foregroundStyle( SilverShapeStyle() )
                     .accessibilityIdentifier("child-dashboard-achievement-cell-silver")
 
                 Spacer()
 
-                ChildDashboardAchievementLabel(points: 12)
+                ChildDashboardAchievementLabel(points: points[3])
                     .foregroundStyle( BronzeShapeStyle() )
                     .accessibilityIdentifier("child-dashboard-achievement-cell-bronze")
             }
             .padding(0)
             .padding(.bottom, Style.halfPadding)
+        }
+        .onAppear {
+            for i in 0..<actualPoints.count {
+                DispatchQueue.main.asyncAfter(deadline: .now() + Style.animationDelay) {
+                    withAnimation(.easeIn.delay(Double(i) * Style.animationDuration)) {
+                        points = actualPoints.map { $0 }
+                    }
+                }
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: 60)
         .padding(Style.fullPadding)
@@ -111,7 +123,9 @@ struct ChildDashboardAchievementLabel: View {
     var body: some View {
         Image(systemName: "trophy.fill")
 
-        Text("\(points)")
-            .foregroundColor(Color.white)
+        AnimatedNumberTextView(points) { value in
+            Text("\(value)")
+                .foregroundColor(Color.white)
+        }
     }
 }

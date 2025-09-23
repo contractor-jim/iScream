@@ -45,8 +45,8 @@ class DefaultUserService: GenericService, UserService {
         }
 
         // TODO: This is incorrect as we shouldn't be adding testing code in the app. Add some switching for mock json when the network is built
-        var type = "parent"
-        var userName = "Daddy"
+        var type = "child"
+        var userName = "Jack"
 
         let parentTesting = ProcessInfo.processInfo.arguments.contains("USER_PARENT")
         if parentTesting {
