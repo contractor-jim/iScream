@@ -11,8 +11,7 @@ struct NavigationBarModifier: ViewModifier {
     init() {
 
         let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.configureWithOpaqueBackground()
-        navBarAppearance.backgroundColor = .navBackground
+        navBarAppearance.configureWithTransparentBackground()
 
         navBarAppearance.titleTextAttributes = [
             .foregroundColor: UIColor.white,

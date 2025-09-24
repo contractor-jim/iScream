@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-import Charts
 
 struct ChildDashboardChartView: View {
     @State var user: User!
+    @State private var interpolationValue: CGFloat = 0.0
+
     var presenter: ChildDashboardPresenter
 
     var body: some View {
@@ -27,48 +28,10 @@ struct ChildDashboardChartView: View {
             .padding(0)
             .padding(.top, Style.topPadding)
 
-            Chart {
-                ForEach(user.dataPoints) {
-                    LineMark(
-                        x: .value("", $0.month),
-                        y: .value("", $0.points)
-                    )
-                    .interpolationMethod(.catmullRom)
-                    .foregroundStyle(user.hasImproved ? .red : .green)
-                    .alignsMarkStylesWithPlotArea()
-
-                    AreaMark(
-                        x: .value("", $0.month),
-                        yStart: .value("", $0.points),
-                        yEnd: .value("", user.max)
-                    )
-                    .interpolationMethod(.catmullRom)
-                    .foregroundStyle(
-                        LinearGradient(
-                            gradient: Gradient(colors: [
-                                user.hasImproved ? .red.opacity(0.5) : .green.opacity(0.5),
-                                user.hasImproved ? .red.opacity(0.05) : .green.opacity(0.05)
-                            ]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
-                }
-            }
-            .padding([.bottom], Style.fullPadding)
-            .padding([.leading, .trailing], Style.halfPadding)
-            .chartLegend(.hidden)
-            .chartXAxis { AxisMarks(values: .automatic) {
-                AxisValueLabel()
-                    .foregroundStyle(Color.white)
-                }
-            }
-            .chartYAxis { AxisMarks(values: .automatic) {
-                AxisValueLabel()
-                    .foregroundStyle(Color.white)
-                }
-            }
-            .accessibilityIdentifier("child-dashboard-chart-view")
+            AnimatedChartView(user: user)
+                .padding([.bottom], Style.fullPadding)
+                .padding([.leading, .trailing], Style.halfPadding)
+                .accessibilityIdentifier("child-dashboard-chart-view")
         }
         .frame(maxWidth: .infinity, maxHeight: 180)
         .background(.cellBackground)

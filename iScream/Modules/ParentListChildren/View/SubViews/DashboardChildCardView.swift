@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
-import Charts
 
 struct DashboardChildCardView: View {
-    let user: User!
+    @State var user: User!
+    @State private var interpolationValue: CGFloat = 0.0
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,9 +22,8 @@ struct DashboardChildCardView: View {
 
                 HStack(alignment: .top, spacing: 0) {
                     DashBoardChildCardScoreView(user: user)
-                    DashBoardChildCardChartView(user: user)
+                    AnimatedChartView(user: user)
                 }
-                .frame(maxHeight: 90)
             }
             .padding(.all, Style.fullPadding)
             .font(CustomFont.subHeaderFont)
@@ -69,7 +68,7 @@ struct DashBoardChildCardScoreView: View {
                     format: NSLocalizedString("dashboard.childpoints.since.label",
                                               bundle: .main,
                                               comment: ""),
-                    user.dataPoints.dropLast().last!.month)
+                    user.dataPoints.dropLast().last!.monthString)
             )
             .font(CustomFont.smallFontBody)
             .multilineTextAlignment(.center)
@@ -78,51 +77,5 @@ struct DashBoardChildCardScoreView: View {
         }
         .frame(maxWidth: 65)
         .padding([.trailing], Style.halfPadding)
-    }
-}
-
-struct DashBoardChildCardChartView: View {
-
-    let user: User!
-    // TODO: Some custom fade in animation
-    var body: some View {
-        Chart {
-            ForEach(user.dataPoints) {
-                LineMark(
-                    x: .value("", $0.month),
-                    y: .value("", $0.points)
-                )
-                .interpolationMethod(.catmullRom)
-                .foregroundStyle( user.hasImproved ? .red : .green)
-
-                AreaMark(
-                    x: .value("", $0.month),
-                    yStart: .value("", $0.points),
-                    yEnd: .value("", user.max)
-                )
-                .interpolationMethod(.catmullRom)
-                .foregroundStyle(
-                    LinearGradient(
-                        gradient: Gradient(colors: [
-                            user.hasImproved ? .red.opacity(0.5) : .green.opacity(0.5),
-                            user.hasImproved ? .red.opacity(0.05) : .green.opacity(0.05)
-                        ]),
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-            }
-        }
-        .chartLegend(.hidden)
-        .chartXAxis { AxisMarks(values: .automatic) {
-            AxisValueLabel()
-                .foregroundStyle(Color.white)
-            }
-        }
-        .chartYAxis { AxisMarks(values: .automatic) {
-            AxisValueLabel()
-                .foregroundStyle(Color.white)
-            }
-        }
     }
 }

@@ -24,11 +24,19 @@ struct ChildDashboardView: View, GenericView {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    ToolBarSettings()
+                    Button("Child Settings", systemImage: "gear") {
+
+                    }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .navigationTitle("")
+            .navigationTitle(
+                String(
+                    format: NSLocalizedString("child.dashboard.title",
+                                              bundle: .main,
+                                              comment: ""),
+                    presenter.user?.name ?? "")
+            )
             .navigationBarTitleDisplayMode(.inline)
             .foregroundColor(.white)
             .background(.mainBackground)
@@ -43,32 +51,25 @@ struct ChildDashboardView: View, GenericView {
 }
 
 struct ChildDashboardListView: View {
-    var presenter: ChildDashboardPresenter
+    @State var presenter: ChildDashboardPresenter
+    @State private var totalPoints: Int = 0
 
     var body: some View {
         if let user = presenter.user {
             VStack(alignment: .leading) {
-                Text(
-                    String(
-                        format: NSLocalizedString("child.dashboard.title",
-                                                  bundle: .main,
-                                                  comment: ""),
-                        user.name)
-                )
-                .font(CustomFont.headerFont)
-                .foregroundStyle(.white)
-                .padding(.top, Style.topPadding)
                 // TODO: This needs to be looked as it should be total points followed by increase since last X time period
-                Text(
-                    String(
-                        format: NSLocalizedString("child.dashboard.points",
-                                                  bundle: .main,
-                                                  comment: ""),
-                        user.hasImproved ? "+" : "-", user.iceCreamPoints
+                AnimatedNumberTextView(totalPoints) { value in
+                    Text(
+                        String(
+                            format: NSLocalizedString("child.dashboard.points",
+                                                      bundle: .main,
+                                                      comment: ""),
+                            user.hasImproved ? "+" : "-", value
+                        )
                     )
-                )
-                .font(CustomFont.smallSubHeaderFont.bold())
-                .foregroundStyle(user.hasImproved ? .red : .green )
+                    .font(CustomFont.smallSubHeaderFont.bold())
+                    .foregroundStyle(user.hasImproved ? .green : .red )
+                }
 
                 // Child achievements
                 ChildDashboardAchievementCell(presenter: presenter)
@@ -81,6 +82,11 @@ struct ChildDashboardListView: View {
                 ChildDashboardChartView(user: user, presenter: presenter)
             }
             .padding([.leading, .trailing], Style.topPadding)
+            .onAppear {
+                withAnimation(.easeIn.delay(Style.animationDuration)) {
+                    totalPoints = user.iceCreamPoints
+                }
+            }
 
             Spacer()
         } else {
@@ -99,19 +105,5 @@ struct ChildDashboardGoalCells: View {
             ChildDashboardBountyScore(presenter: presenter)
         }
         .fixedSize(horizontal: false, vertical: false)
-    }
-}
-
-struct ToolBarSettings: View {
-    var body: some View {
-        Image(systemName: "gear")
-            .resizable()
-            .frame(width: 22, height: 22)
-            .background {
-                Circle()
-                    .foregroundStyle(Color.white.opacity(0.2))
-                    .frame(width: 28, height: 28)
-            }
-            .padding(.trailing, Style.fullPadding)
     }
 }

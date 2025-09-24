@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct ParentListChildrenView: View, GenericView {
 
@@ -21,20 +22,6 @@ struct ParentListChildrenView: View, GenericView {
     var body: some View {
         NavigationStack(path: presenter.navPath) {
             DashboardChildCellView(presenter: presenter)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    ToolBarPlus()
-                }
-            }
-            .navigationDestination(for: User.self) { user in
-                Text("Child Detail view")
-                    .navigationTitle(user.name)
-                    .navigationBarTitleDisplayMode(.inline)
-            }
-            .navigationTitle("general.title.people")
-            .scrollContentBackground(.hidden)
-            .background(.mainBackground)
-            .foregroundColor(.white)
         }
         .onAppear {
             // TODO: Review which actor this task is created on
@@ -46,37 +33,41 @@ struct ParentListChildrenView: View, GenericView {
 }
 
 struct DashboardChildCellView: View {
-    var presenter: ParentListChildrenPresenter
+    @State var presenter: ParentListChildrenPresenter
 
     var body: some View {
         ZStack {
             ScrollView {
+                // TODO: These should be ordered too
                 if let children = presenter.user?.children {
                     ForEach(Array(children.enumerated()), id: \.offset) { _, user in
-                        // TODO: Some custom press animation
                         DashboardChildCardView(user: user)
-                            .onTapGesture {
-                                presenter.navigateChildDetailView(user: user)
-                            }
-                            .padding(.top, Style.fullPadding)
-                            .padding([.trailing, .leading], Style.fullPadding)
+                        .onTapGesture {
+                            presenter.navigateChildDetailView(user: user)
+                        }
+                        .padding(.top, Style.fullPadding)
+                        .padding([.trailing, .leading], Style.fullPadding)
                     }
                 }
             }
         }
-    }
-}
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("AddPerson", systemImage: "plus") {
 
-struct ToolBarPlus: View {
-    var body: some View {
-        Image(systemName: "plus")
-            .resizable()
-            .frame(width: 14, height: 14)
-            .background {
-                Circle()
-                    .foregroundStyle(Color.white.opacity(0.2))
-                    .frame(width: 28, height: 28)
+                }
             }
-            .padding(.trailing, Style.fullPadding)
+        }
+        .navigationDestination(for: User.self) { user in
+            Text("Child Detail view")
+                .navigationTitle(user.name)
+                .navigationBarTitleDisplayMode(.inline)
+        }
+        .navigationTitle(Text("general.title.people"))
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationSubtitle("Synced just now")
+        .scrollContentBackground(.hidden)
+        .background(.mainBackground)
+        .foregroundColor(.white)
     }
 }

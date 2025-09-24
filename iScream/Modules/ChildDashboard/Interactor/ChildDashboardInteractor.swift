@@ -6,7 +6,7 @@
 //
 
 protocol ChildDashboardInteractorProtocol: GenericInteractor {
-    func fetchMyUser() async -> User
+    func fetchMyUser() async -> User?
 }
 
 class ChildDashboardInteractor: GenericInteractorImp<ChildDashboardEntity>, ChildDashboardInteractorProtocol {
@@ -20,7 +20,11 @@ class ChildDashboardInteractor: GenericInteractorImp<ChildDashboardEntity>, Chil
         super.init(entity: entity, services: services)
     }
 
-    func fetchMyUser() async -> User {
-        return await userService!.getUser()
+    func fetchMyUser() async -> User? {
+        do {
+            return try await userService!.getUser()
+        } catch {
+            return nil
+        }
     }
 }

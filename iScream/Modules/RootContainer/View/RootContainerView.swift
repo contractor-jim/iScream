@@ -41,7 +41,7 @@ struct LoggedInTabBarView: View {
     var body: some View {
         TabView {
             Tab("general.title.people", systemImage: "person.fill") {
-                if user.type == .parent {
+                if user.type == UserType.parent.rawValue {
                     ViperContainerBuilder().buildContainerView(
                         view: ParentListChildrenView.self,
                         interactor: ParentListChildrenInteractor.self,
@@ -50,7 +50,7 @@ struct LoggedInTabBarView: View {
                         router: ParentListChildrenRouter.self,
                         services: [DefaultUserService.self])
                         .accessibilityIdentifier("parent-children-list-view")
-                } else if user.type == .child {
+                } else if user.type == UserType.child.rawValue {
                     ViperContainerBuilder().buildContainerView(
                         view: ChildDashboardView.self,
                         interactor: ChildDashboardInteractor.self,
@@ -83,7 +83,7 @@ struct LoggedInTabBarView: View {
             .accessibilityIdentifier("parent-tab-bar-item-2")
 
             Tab("general.title.achievements", systemImage: "trophy.fill") {
-                Text("TODO: Achievements")
+                Text("Achievements")
             }
             .accessibilityIdentifier("parent-tab-bar-item-3")
         }

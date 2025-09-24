@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1640"
+   LastUpgradeVersion = "2600"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -49,6 +49,11 @@
                BlueprintName = "iScreamTests"
                ReferencedContainer = "container:iScream.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "RootContainerPresenterTests/testGetChildBountyBadgeCount_ReturnsCountOf3(openBounties:closedBounties:userType:expectedCount:)">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO"

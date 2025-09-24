@@ -6,18 +6,20 @@
 //
 
 @testable import iScream
+import Foundation
 
 class MockUserService: GenericService, UserService {
 
     var mockUser: User?
 
-    func getUser() async -> User {
-        return mockUser ?? User(dataPoints: [],
-                                openBounties: [],
-                                completedBounties: [],
+    func getUser() async throws -> iScream.User? {
+        return mockUser ?? User(id: UUID(),
+                                dataPoints: [],
+                                bounties: [],
                                 name: "",
                                 iceCreamPoints: 0,
-                                negativeIceCreamPoints: 0)
+                                negativeIceCreamPoints: 0,
+                                type: "parent")
     }
 }
 

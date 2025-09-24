@@ -68,7 +68,7 @@ struct ChildDashboardPresenterTests {
         await presenter.fetch()
 
         #expect(presenter.openBountyCount == 3 )
-        #expect(presenter.totalBountyCount == 6)
+        #expect(presenter.totalBountyCount == 6 )
     }
 
     @Test("POSITIVE - ChildDashboardPresenter - this year is returned") func testCurrentYear() async {

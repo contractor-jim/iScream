@@ -19,4 +19,9 @@ struct StyleTests {
         #expect(Style.fullPadding == 16)
         #expect(Style.halfPadding == 8)
     }
+
+    @Test("POSITIVE - Animation duration") func testAnimationDurations() throws {
+        #expect(Style.animationDuration == 0.35)
+        #expect(Style.animationDelay == 0.15)
+    }
 }
