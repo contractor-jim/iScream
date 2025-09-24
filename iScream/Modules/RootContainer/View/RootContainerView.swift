@@ -18,18 +18,123 @@ struct RootContainerView: View, GenericView {
         self.presenter = presenter
     }
 
+    // TODO: Move this down to a service
+    @State var requiringLogIn: Bool = true
+    @State var email: String = ""
+    @State var password: String = ""
+
+    private var signUpString: AttributedString {
+        var result = AttributedString("signup here")
+        result.font = CustomFont.regularFontBody
+        result.foregroundColor = .pink
+        result.backgroundColor = .clear
+        result.link = URL(string: "://sign_up")
+        return result
+    }
+
+    private var forgotPasswordString: AttributedString {
+        var result = AttributedString("Forgot password")
+        result.font = CustomFont.regularFontBody
+        result.foregroundColor = .blue
+        result.backgroundColor = .clear
+        result.link = URL(string: "://forgot_password")
+        return result
+    }
+
+    struct CustomButton: ButtonStyle {
+        func makeBody(configuration: Configuration) -> some View {
+            configuration.label
+                .padding()
+                .background(.pink)
+                .foregroundStyle(.white)
+                .clipShape(Capsule())
+                .font(CustomFont.regularFontBody)
+        }
+    }
+
+    //  All the way to here
     var body: some View {
-        // TODO: Need to show login style sheet here
         if let user = presenter.user {
             LoggedInTabBarView(user: user, presenter: presenter)
         } else {
-            ProgressView()
-                .accessibilityIdentifier("initial-tab-indicator")
-                .onAppear {
-                Task {
-                    await presenter.fetch()
-                }
+            VStack {
+                ProgressView()
+                    .onAppear {
+                        Task {
+                            // await presenter.fetch()
+                        }
+                    }
+                    .sheet(isPresented: $requiringLogIn) {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Spacer()
+
+                                Text("Login")
+                                    .padding(.top, Style.fullPadding)
+                                    .font(CustomFont.subHeaderFont)
+
+                                Spacer()
+                            }
+
+                            Spacer()
+
+                            Text("If you don't already have an account " + signUpString)
+                                .padding(.top, Style.fullPadding)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .lineLimit(4)
+                                .font(CustomFont.regularFontBody)
+
+                            Text(forgotPasswordString)
+                                .padding(.top, Style.fullPadding)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .lineLimit(4)
+                                .font(CustomFont.regularFontBody)
+
+                            Spacer()
+
+                            // TODO: Make custom text input fields with error handeling and validation
+                            TextField("Email", text: $email)
+                                .frame(height: 14)
+                                .padding(EdgeInsets(top: 0, leading: 10, bottom: 14, trailing: 10))
+                                .cornerRadius(Style.cornerRadius)
+                                .padding(.top, Style.fullPadding)
+                                .background(.white)
+                                .foregroundStyle(Color.mainBackground)
+                                .autocapitalization(.none)
+                                .clipShape(Capsule())
+
+                            TextField("Password", text: $password)
+                                .frame(height: 14)
+                                .padding(EdgeInsets(top: 0, leading: 10, bottom: 14, trailing: 10))
+                                .cornerRadius(Style.cornerRadius)
+                                .padding(.top, Style.fullPadding)
+                                .background(.white)
+                                .foregroundStyle(Color.mainBackground)
+                                .autocapitalization(.none)
+                                .clipShape(Capsule())
+
+                            Button("Login") {
+                                print(">>> Call login here")
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.top, Style.fullPadding)
+                            .buttonStyle(CustomButton())
+                        }
+                        .padding(Style.fullPadding)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.cellBackground)
+                        .presentationDetents([.medium, .medium])
+                        .presentationDragIndicator(.hidden)
+                        .environment(\.openURL, OpenURLAction { url in
+                            print(">>> URL \(url)")
+                            return .handled
+                        })
+                    }
+                    .accessibilityIdentifier("initial-tab-indicator")
+                    .foregroundStyle(.white)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.mainBackground)
         }
     }
 }

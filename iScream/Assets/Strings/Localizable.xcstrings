@@ -136,6 +136,9 @@
         }
       }
     },
+    "Email" : {
+
+    },
     "general.good.label" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -192,6 +195,12 @@
     },
     "Key 1" : {
       "extractionState" : "manual"
+    },
+    "Login" : {
+
+    },
+    "Password" : {
+
     },
     "Synced just now" : {
       "comment" : "A subtitle that indicates when a list of items was last updated.",
