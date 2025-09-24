@@ -65,9 +65,6 @@ struct RootContainerView: View, GenericView {
     var body: some View {
         if let user = presenter.user {
             LoggedInTabBarView(user: user, presenter: presenter)
-                .onAppear {
-                    dismiss()
-                }
         } else {
             VStack {
                 ProgressView()
@@ -107,7 +104,7 @@ struct RootContainerView: View, GenericView {
                             // TODO: Make custom text input fields with error handeling and validation
                             TextField(.loginTextfieldEmailLabel, text: $email)
                                 .frame(height: 14)
-                                .padding(EdgeInsets(top: 0, leading: 10, bottom: 14, trailing: 10))
+                                .padding(EdgeInsets(top: 0, leading: 14, bottom: 17, trailing: 14))
                                 .cornerRadius(Style.cornerRadius)
                                 .padding(.top, Style.fullPadding)
                                 .background(.white)
@@ -117,7 +114,7 @@ struct RootContainerView: View, GenericView {
 
                             SecureField(.loginTextfieldPasswordLabel, text: $password)
                                 .frame(height: 14)
-                                .padding(EdgeInsets(top: 0, leading: 10, bottom: 14, trailing: 10))
+                                .padding(EdgeInsets(top: 0, leading: 14, bottom: 17, trailing: 14))
                                 .cornerRadius(Style.cornerRadius)
                                 .padding(.top, Style.fullPadding)
                                 .background(.white)
@@ -127,6 +124,7 @@ struct RootContainerView: View, GenericView {
 
                             Button(.generalLabelLogin) {
                                 // TODO: Initial not logging in just to get past the login screen
+                                requiringLogIn = false
                                 Task {
                                     await presenter.fetch()
                                 }
