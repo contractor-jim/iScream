@@ -10,6 +10,7 @@ import SwiftUI
 struct RootContainerView: View, GenericView {
 
     @State var presenter: RootContainerPresenter
+    @Environment(\.dismiss) var dismiss
 
     init<P>(presenter: P) where P: GenericPresenter {
         guard let presenter = presenter as? RootContainerPresenter else {
@@ -24,6 +25,14 @@ struct RootContainerView: View, GenericView {
     @State var password: String = ""
 
     private var signUpString: AttributedString {
+        var result = AttributedString(localized: .loginBodyNonLinkBody)
+        result.font = CustomFont.regularFontBody
+        result.foregroundColor = .white
+        result.backgroundColor = .clear
+        return result
+    }
+
+    private var signUpStringLink: AttributedString {
         var result = AttributedString("signup here")
         result.font = CustomFont.regularFontBody
         result.foregroundColor = .pink
@@ -33,7 +42,7 @@ struct RootContainerView: View, GenericView {
     }
 
     private var forgotPasswordString: AttributedString {
-        var result = AttributedString("Forgot password")
+        var result = AttributedString(localized: .loginForgotPasswordLabel)
         result.font = CustomFont.regularFontBody
         result.foregroundColor = .blue
         result.backgroundColor = .clear
@@ -56,6 +65,9 @@ struct RootContainerView: View, GenericView {
     var body: some View {
         if let user = presenter.user {
             LoggedInTabBarView(user: user, presenter: presenter)
+                .onAppear {
+                    dismiss()
+                }
         } else {
             VStack {
                 ProgressView()
@@ -69,7 +81,7 @@ struct RootContainerView: View, GenericView {
                             HStack {
                                 Spacer()
 
-                                Text("Login")
+                                Text(.generalLabelLogin)
                                     .padding(.top, Style.fullPadding)
                                     .font(CustomFont.subHeaderFont)
 
@@ -78,7 +90,7 @@ struct RootContainerView: View, GenericView {
 
                             Spacer()
 
-                            Text("If you don't already have an account " + signUpString)
+                            Text(signUpString + signUpStringLink)
                                 .padding(.top, Style.fullPadding)
                                 .fixedSize(horizontal: false, vertical: true)
                                 .lineLimit(4)
@@ -93,7 +105,7 @@ struct RootContainerView: View, GenericView {
                             Spacer()
 
                             // TODO: Make custom text input fields with error handeling and validation
-                            TextField("Email", text: $email)
+                            TextField(.loginTextfieldEmailLabel, text: $email)
                                 .frame(height: 14)
                                 .padding(EdgeInsets(top: 0, leading: 10, bottom: 14, trailing: 10))
                                 .cornerRadius(Style.cornerRadius)
@@ -103,7 +115,7 @@ struct RootContainerView: View, GenericView {
                                 .autocapitalization(.none)
                                 .clipShape(Capsule())
 
-                            TextField("Password", text: $password)
+                            SecureField(.loginTextfieldPasswordLabel, text: $password)
                                 .frame(height: 14)
                                 .padding(EdgeInsets(top: 0, leading: 10, bottom: 14, trailing: 10))
                                 .cornerRadius(Style.cornerRadius)
@@ -113,8 +125,11 @@ struct RootContainerView: View, GenericView {
                                 .autocapitalization(.none)
                                 .clipShape(Capsule())
 
-                            Button("Login") {
-                                print(">>> Call login here")
+                            Button(.generalLabelLogin) {
+                                // TODO: Initial not logging in just to get past the login screen
+                                Task {
+                                    await presenter.fetch()
+                                }
                             }
                             .frame(maxWidth: .infinity)
                             .padding(.top, Style.fullPadding)
