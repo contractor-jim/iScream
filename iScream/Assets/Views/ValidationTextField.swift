@@ -52,13 +52,19 @@ struct ValidationTextField: View {
                         .frame(height: 14)
                 }
             }
-            .background(.white)
             .frame(height: 42)
             .cornerRadius(Style.cornerRadius)
-            .background(.white)
-            .clipShape(Capsule())
             .autocapitalization(.none)
             .foregroundStyle(Color.mainBackground)
+            .clipShape(Capsule())
+            .background(
+                Capsule()
+                    .fill(.shadow(
+                        .inner(color: .gray, radius: 1, x: 1, y: 1))
+                        .shadow(.inner(color: .white, radius: 1, x: -1, y: -1))
+                    )
+                    .foregroundColor(.white)
+            )
         }
         .padding(.top, Style.fullPadding)
     }
