@@ -88,4 +88,49 @@ struct RootContainerPresenterTests {
         #expect(presenter.getBountyBadgeCount() == expectedCount)
     }
     */
+
+    @Test("POSITIVE - RootContainerPresenter - testEmailValidation",
+          arguments: [
+            (email: "",
+             result: "Missing Email"),
+
+            (email: "flobbyDobby",
+             result: "Invalid Email"),
+
+            (email: "test@test.com",
+             result: "")
+    ])
+    func testEmailValidation_ReturnsCountOf3(
+        email: String,
+        result: String
+    ) async throws {
+        presenter.email = email
+        #expect(presenter.isValidEmail() == result)
+    }
+
+    @Test("POSITIVE - RootContainerPresenter - testPasswordValidation",
+          arguments: [
+            (password: "",
+             result: "Missing Password"),
+
+            (password: "flobbyDobby",
+             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( #?!@$%^&*-_ )"),
+
+            (password: "12343",
+             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( #?!@$%^&*-_ )"),
+
+            (password: "*£$£@$£$@£",
+             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( #?!@$%^&*-_ )"),
+
+            (password: "*ValidPassword1_",
+             result: "")
+    ])
+    func testEmailValidation_ReturnsCountOf3(
+        password: String,
+        result: String
+    ) async throws {
+        presenter.password = password
+        #expect(presenter.isValidPassword() == result)
+    }
+
 }

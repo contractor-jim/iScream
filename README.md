@@ -18,6 +18,7 @@ This also gives me a playground to play about with the more recent language, lib
 ### Swift
 
 ````Swift6```` ````Protocols```` ````Equatable```` ````Generics```` ````Failable Initializers```` ````SwiftData```` ````Computed Properties```` ````Lazy Vars```` ````Hashable````
+````Closures````
 
 ### SwiftUI
 

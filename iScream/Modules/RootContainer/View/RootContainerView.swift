@@ -19,7 +19,6 @@ struct RootContainerView: View, GenericView {
         self.presenter = presenter
     }
 
-    //  All the way to here
     var body: some View {
         if let user = presenter.user {
             LoggedInTabBarView(user: user, presenter: presenter)
@@ -103,26 +102,16 @@ struct LoginSheet: View {
 
             Spacer()
 
-            // TODO: Make custom text input fields with error handeling and validation
-            TextField(.loginTextfieldEmailLabel, text: $presenter.email)
-                .frame(height: 14)
-                .padding(EdgeInsets(top: 0, leading: 14, bottom: 17, trailing: 14))
-                .cornerRadius(Style.cornerRadius)
-                .padding(.top, Style.fullPadding)
-                .background(.white)
-                .foregroundStyle(Color.mainBackground)
-                .autocapitalization(.none)
-                .clipShape(Capsule())
+            ValidationTextField(placeholder: String(localized: .loginTextfieldEmailLabel),
+                                icon: "envelope",
+                                resultString: $presenter.email,
+                                regExValidation: presenter.isValidEmail)
 
-            SecureField(.loginTextfieldPasswordLabel, text: $presenter.password)
-                .frame(height: 14)
-                .padding(EdgeInsets(top: 0, leading: 14, bottom: 17, trailing: 14))
-                .cornerRadius(Style.cornerRadius)
-                .padding(.top, Style.fullPadding)
-                .background(.white)
-                .foregroundStyle(Color.mainBackground)
-                .autocapitalization(.none)
-                .clipShape(Capsule())
+            ValidationTextField(placeholder: String(localized: .loginTextfieldPasswordLabel),
+                                icon: "lock",
+                                resultString: $presenter.password,
+                                isSecure: true,
+                                regExValidation: presenter.isValidPassword)
 
             Button(.generalLabelLogin) {
                 // TODO: Initial not logging in just to get past the login screen
