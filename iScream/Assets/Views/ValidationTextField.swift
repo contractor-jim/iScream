@@ -13,11 +13,10 @@ struct ValidationTextField: View {
     var icon: String?
     @Binding var resultString: String
     @State var isSecure: Bool = false
-
     @State var errorPromptMessage: String = ""
+    var regExValidation: ((String) -> String)?
 
     var body: some View {
-
         VStack(alignment: .leading) {
             if errorPromptMessage != "" {
                 Text(errorPromptMessage)
@@ -67,5 +66,10 @@ struct ValidationTextField: View {
             )
         }
         .padding(.top, Style.fullPadding)
+        .onChange(of: resultString) {
+            if regExValidation != nil && resultString != resultString {
+                errorPromptMessage = regExValidation!(resultString)
+            }
+        }
     }
 }

@@ -104,36 +104,14 @@ struct LoginSheet: View {
 
             ValidationTextField(placeholder: String(localized: .loginTextfieldEmailLabel),
                                 icon: "envelope",
-                                resultString: $presenter.email)
+                                resultString: $presenter.email,
+                                regExValidation: presenter.isValidEmail)
 
             ValidationTextField(placeholder: String(localized: .loginTextfieldPasswordLabel),
                                 icon: "lock",
                                 resultString: $presenter.password,
-                                isSecure: true)
-
-            //
-            //
-
-            // TODO: Make custom text input fields with error handeling and validation
-//            TextField(.loginTextfieldEmailLabel, text: $presenter.email)
-//                .frame(height: 14)
-//                .padding(EdgeInsets(top: 0, leading: 14, bottom: 17, trailing: 14))
-//                .cornerRadius(Style.cornerRadius)
-//                .padding(.top, Style.fullPadding)
-//                .background(.white)
-//                .foregroundStyle(Color.mainBackground)
-//                .autocapitalization(.none)
-//                .clipShape(Capsule())
-//
-//            SecureField(.loginTextfieldPasswordLabel, text: $presenter.password)
-//                .frame(height: 14)
-//                .padding(EdgeInsets(top: 0, leading: 14, bottom: 17, trailing: 14))
-//                .cornerRadius(Style.cornerRadius)
-//                .padding(.top, Style.fullPadding)
-//                .background(.white)
-//                .foregroundStyle(Color.mainBackground)
-//                .autocapitalization(.none)
-//                .clipShape(Capsule())
+                                isSecure: true,
+                                regExValidation: presenter.isValidPassword)
 
             Button(.generalLabelLogin) {
                 // TODO: Initial not logging in just to get past the login screen

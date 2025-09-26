@@ -8,12 +8,18 @@
 import SwiftUI
 
 protocol RootContainerPresenterProtocol: GenericPresenter {
+    // Observed Properties
     var user: User? { get }
     var email: String { get set }
     var password: String { get set }
 
+    // Validation
+    func isValidEmail(input: String) -> String
+    func isValidPassword(input: String) -> String
+
     func fetch() async
     func getBountyBadgeCount() -> Int
+
 }
 
 @Observable
@@ -23,6 +29,19 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
     var email: String = ""
     var password: String = ""
     var requiringLogIn: Bool = true
+
+    // TODO: Test this
+    func isValidEmail(input: String) -> String {
+
+        return ""
+    }
+
+    // TODO: Test this
+    func isValidPassword(input: String) -> String {
+
+        return ""
+    }
+
 
     func fetch() async {
         user = await interactor.fetchMyUser()
