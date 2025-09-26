@@ -19,10 +19,35 @@ struct RootContainerView: View, GenericView {
         self.presenter = presenter
     }
 
-    // TODO: Move this down to a service
-    @State var requiringLogIn: Bool = true
-    @State var email: String = ""
-    @State var password: String = ""
+    //  All the way to here
+    var body: some View {
+        if let user = presenter.user {
+            LoggedInTabBarView(user: user, presenter: presenter)
+        } else {
+            VStack {
+                ProgressView()
+                    .onAppear {
+                        Task {
+                            // TODO: Need to check if a user is logged in, token needs refreshing e.t.c.
+                            // await presenter.fetch()
+                        }
+                    }
+                    .sheet(isPresented: $presenter.requiringLogIn) {
+                        LoginSheet(presenter: presenter, requiringLogIn: $presenter.requiringLogIn)
+                    }
+                    .accessibilityIdentifier("initial-tab-indicator")
+                    .foregroundStyle(.white)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.mainBackground)
+        }
+    }
+}
+struct LoginSheet: View {
+
+    @State var presenter: RootContainerPresenter
+    @Binding var requiringLogIn: Bool
+    @Environment(\.dismiss) var dismiss
 
     private var signUpString: AttributedString {
         var result = AttributedString(localized: .loginBodyNonLinkBody)
@@ -50,105 +75,76 @@ struct RootContainerView: View, GenericView {
         return result
     }
 
-    struct CustomButton: ButtonStyle {
-        func makeBody(configuration: Configuration) -> some View {
-            configuration.label
-                .padding()
-                .background(.pink)
-                .foregroundStyle(.white)
-                .clipShape(Capsule())
-                .font(CustomFont.regularFontBody)
-        }
-    }
-
-    //  All the way to here
     var body: some View {
-        if let user = presenter.user {
-            LoggedInTabBarView(user: user, presenter: presenter)
-        } else {
-            VStack {
-                ProgressView()
-                    .onAppear {
-                        Task {
-                            // await presenter.fetch()
-                        }
-                    }
-                    .sheet(isPresented: $requiringLogIn) {
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Spacer()
+        VStack(alignment: .leading) {
+            HStack {
+                Spacer()
 
-                                Text(.generalLabelLogin)
-                                    .padding(.top, Style.fullPadding)
-                                    .font(CustomFont.subHeaderFont)
+                Text(.generalLabelLogin)
+                    .padding(.top, Style.fullPadding)
+                    .font(CustomFont.subHeaderFont)
 
-                                Spacer()
-                            }
-
-                            Spacer()
-
-                            Text(signUpString + signUpStringLink)
-                                .padding(.top, Style.fullPadding)
-                                .fixedSize(horizontal: false, vertical: true)
-                                .lineLimit(4)
-                                .font(CustomFont.regularFontBody)
-
-                            Text(forgotPasswordString)
-                                .padding(.top, Style.fullPadding)
-                                .fixedSize(horizontal: false, vertical: true)
-                                .lineLimit(4)
-                                .font(CustomFont.regularFontBody)
-
-                            Spacer()
-
-                            // TODO: Make custom text input fields with error handeling and validation
-                            TextField(.loginTextfieldEmailLabel, text: $email)
-                                .frame(height: 14)
-                                .padding(EdgeInsets(top: 0, leading: 14, bottom: 17, trailing: 14))
-                                .cornerRadius(Style.cornerRadius)
-                                .padding(.top, Style.fullPadding)
-                                .background(.white)
-                                .foregroundStyle(Color.mainBackground)
-                                .autocapitalization(.none)
-                                .clipShape(Capsule())
-
-                            SecureField(.loginTextfieldPasswordLabel, text: $password)
-                                .frame(height: 14)
-                                .padding(EdgeInsets(top: 0, leading: 14, bottom: 17, trailing: 14))
-                                .cornerRadius(Style.cornerRadius)
-                                .padding(.top, Style.fullPadding)
-                                .background(.white)
-                                .foregroundStyle(Color.mainBackground)
-                                .autocapitalization(.none)
-                                .clipShape(Capsule())
-
-                            Button(.generalLabelLogin) {
-                                // TODO: Initial not logging in just to get past the login screen
-                                requiringLogIn = false
-                                Task {
-                                    await presenter.fetch()
-                                }
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding(.top, Style.fullPadding)
-                            .buttonStyle(CustomButton())
-                        }
-                        .padding(Style.fullPadding)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color.cellBackground)
-                        .presentationDetents([.medium, .medium])
-                        .presentationDragIndicator(.hidden)
-                        .environment(\.openURL, OpenURLAction { url in
-                            print(">>> URL \(url)")
-                            return .handled
-                        })
-                    }
-                    .accessibilityIdentifier("initial-tab-indicator")
-                    .foregroundStyle(.white)
+                Spacer()
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.mainBackground)
+
+            Spacer()
+
+            Text(signUpString + signUpStringLink)
+                .padding(.top, Style.fullPadding)
+                .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(4)
+                .font(CustomFont.regularFontBody)
+
+            Text(forgotPasswordString)
+                .padding(.top, Style.fullPadding)
+                .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(4)
+                .font(CustomFont.regularFontBody)
+
+            Spacer()
+
+            // TODO: Make custom text input fields with error handeling and validation
+            TextField(.loginTextfieldEmailLabel, text: $presenter.email)
+                .frame(height: 14)
+                .padding(EdgeInsets(top: 0, leading: 14, bottom: 17, trailing: 14))
+                .cornerRadius(Style.cornerRadius)
+                .padding(.top, Style.fullPadding)
+                .background(.white)
+                .foregroundStyle(Color.mainBackground)
+                .autocapitalization(.none)
+                .clipShape(Capsule())
+
+            SecureField(.loginTextfieldPasswordLabel, text: $presenter.password)
+                .frame(height: 14)
+                .padding(EdgeInsets(top: 0, leading: 14, bottom: 17, trailing: 14))
+                .cornerRadius(Style.cornerRadius)
+                .padding(.top, Style.fullPadding)
+                .background(.white)
+                .foregroundStyle(Color.mainBackground)
+                .autocapitalization(.none)
+                .clipShape(Capsule())
+
+            Button(.generalLabelLogin) {
+                // TODO: Initial not logging in just to get past the login screen
+                requiringLogIn = false
+                Task {
+                    await presenter.fetch()
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.top, Style.fullPadding)
+            .buttonStyle(CustomButton())
         }
+        .padding(Style.fullPadding)
+        .interactiveDismissDisabled()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.cellBackground)
+        .presentationDetents([.medium, .medium])
+        .presentationDragIndicator(.hidden)
+        .environment(\.openURL, OpenURLAction { url in
+            print(">>> URL \(url)")
+            return .handled
+        })
     }
 }
 
