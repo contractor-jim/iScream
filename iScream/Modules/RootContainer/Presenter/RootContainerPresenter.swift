@@ -14,8 +14,8 @@ protocol RootContainerPresenterProtocol: GenericPresenter {
     var password: String { get set }
 
     // Validation
-    func isValidEmail(input: String) -> String
-    func isValidPassword(input: String) -> String
+    func isValidEmail() -> String
+    func isValidPassword() -> String
 
     func fetch() async
     func getBountyBadgeCount() -> Int
@@ -30,8 +30,7 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
     var password: String = ""
     var requiringLogIn: Bool = true
 
-    // TODO: Test this
-    func isValidEmail(input: String) -> String {
+    func isValidEmail() -> String {
         if email.isEmpty {
             return "Missing Email"
         }
@@ -47,7 +46,7 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
     }
 
     // TODO: Test this
-    func isValidPassword(input: String) -> String {
+    func isValidPassword() -> String {
         if password.isEmpty {
             return "Missing Password"
         }
@@ -56,7 +55,7 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
         let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
 
         if !predicate.evaluate(with: password) {
-            return "Invalid Password"
+            return "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( #?!@$%^&*-_ )"
         }
 
         return ""

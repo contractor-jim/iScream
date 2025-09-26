@@ -14,7 +14,7 @@ struct ValidationTextField: View {
     @Binding var resultString: String
     @State var isSecure: Bool = false
     @State var errorPromptMessage: String = ""
-    var regExValidation: ((String) -> String)?
+    var regExValidation: (() -> String)?
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -69,7 +69,7 @@ struct ValidationTextField: View {
         .onChange(of: resultString) {
             if regExValidation != nil {
                 withAnimation(.easeInOut.delay(Double(Style.animationDuration) )) {
-                    errorPromptMessage = regExValidation!(resultString)
+                    errorPromptMessage = regExValidation!()
                 }
             }
         }
