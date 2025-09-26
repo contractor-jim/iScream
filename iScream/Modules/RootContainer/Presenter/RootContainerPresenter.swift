@@ -32,16 +32,35 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
 
     // TODO: Test this
     func isValidEmail(input: String) -> String {
+        if email.isEmpty {
+            return "Missing Email"
+        }
+
+        let regex = "^[A-Z0-9a-z._%+-]{1,}@[A-Za-z0-9-]{1,}(\\.[A-Za-z]{2,15}){1,2}$"
+        let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
+
+        if !predicate.evaluate(with: email) {
+            return "Invalid Email"
+        }
 
         return ""
     }
 
     // TODO: Test this
     func isValidPassword(input: String) -> String {
+        if password.isEmpty {
+            return "Missing Password"
+        }
+
+        let regex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,}$"
+        let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
+
+        if !predicate.evaluate(with: password) {
+            return "Invalid Password"
+        }
 
         return ""
     }
-
 
     func fetch() async {
         user = await interactor.fetchMyUser()

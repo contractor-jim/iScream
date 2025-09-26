@@ -67,8 +67,10 @@ struct ValidationTextField: View {
         }
         .padding(.top, Style.fullPadding)
         .onChange(of: resultString) {
-            if regExValidation != nil && resultString != resultString {
-                errorPromptMessage = regExValidation!(resultString)
+            if regExValidation != nil {
+                withAnimation(.easeInOut.delay(Double(Style.animationDuration) )) {
+                    errorPromptMessage = regExValidation!(resultString)
+                }
             }
         }
     }
