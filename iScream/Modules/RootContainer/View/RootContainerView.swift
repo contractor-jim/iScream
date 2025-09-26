@@ -10,6 +10,7 @@ import SwiftUI
 struct RootContainerView: View, GenericView {
 
     @State var presenter: RootContainerPresenter
+    @Environment(\.dismiss) var dismiss
 
     init<P>(presenter: P) where P: GenericPresenter {
         guard let presenter = presenter as? RootContainerPresenter else {
@@ -18,19 +19,132 @@ struct RootContainerView: View, GenericView {
         self.presenter = presenter
     }
 
+    //  All the way to here
     var body: some View {
-        // TODO: Need to show login style sheet here
         if let user = presenter.user {
             LoggedInTabBarView(user: user, presenter: presenter)
         } else {
-            ProgressView()
-                .accessibilityIdentifier("initial-tab-indicator")
-                .onAppear {
+            VStack {
+                ProgressView()
+                    .onAppear {
+                        Task {
+                            // TODO: Need to check if a user is logged in, token needs refreshing e.t.c.
+                            // await presenter.fetch()
+                        }
+                    }
+                    .sheet(isPresented: $presenter.requiringLogIn) {
+                        LoginSheet(presenter: presenter, requiringLogIn: $presenter.requiringLogIn)
+                    }
+                    .accessibilityIdentifier("initial-tab-indicator")
+                    .foregroundStyle(.white)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.mainBackground)
+        }
+    }
+}
+struct LoginSheet: View {
+
+    @State var presenter: RootContainerPresenter
+    @Binding var requiringLogIn: Bool
+    @Environment(\.dismiss) var dismiss
+
+    private var signUpString: AttributedString {
+        var result = AttributedString(localized: .loginBodyNonLinkBody)
+        result.font = CustomFont.regularFontBody
+        result.foregroundColor = .white
+        result.backgroundColor = .clear
+        return result
+    }
+
+    private var signUpStringLink: AttributedString {
+        var result = AttributedString("signup here")
+        result.font = CustomFont.regularFontBody
+        result.foregroundColor = .pink
+        result.backgroundColor = .clear
+        result.link = URL(string: "://sign_up")
+        return result
+    }
+
+    private var forgotPasswordString: AttributedString {
+        var result = AttributedString(localized: .loginForgotPasswordLabel)
+        result.font = CustomFont.regularFontBody
+        result.foregroundColor = .blue
+        result.backgroundColor = .clear
+        result.link = URL(string: "://forgot_password")
+        return result
+    }
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Spacer()
+
+                Text(.generalLabelLogin)
+                    .padding(.top, Style.fullPadding)
+                    .font(CustomFont.subHeaderFont)
+
+                Spacer()
+            }
+
+            Spacer()
+
+            Text(signUpString + signUpStringLink)
+                .padding(.top, Style.fullPadding)
+                .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(4)
+                .font(CustomFont.regularFontBody)
+
+            Text(forgotPasswordString)
+                .padding(.top, Style.fullPadding)
+                .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(4)
+                .font(CustomFont.regularFontBody)
+
+            Spacer()
+
+            // TODO: Make custom text input fields with error handeling and validation
+            TextField(.loginTextfieldEmailLabel, text: $presenter.email)
+                .frame(height: 14)
+                .padding(EdgeInsets(top: 0, leading: 14, bottom: 17, trailing: 14))
+                .cornerRadius(Style.cornerRadius)
+                .padding(.top, Style.fullPadding)
+                .background(.white)
+                .foregroundStyle(Color.mainBackground)
+                .autocapitalization(.none)
+                .clipShape(Capsule())
+
+            SecureField(.loginTextfieldPasswordLabel, text: $presenter.password)
+                .frame(height: 14)
+                .padding(EdgeInsets(top: 0, leading: 14, bottom: 17, trailing: 14))
+                .cornerRadius(Style.cornerRadius)
+                .padding(.top, Style.fullPadding)
+                .background(.white)
+                .foregroundStyle(Color.mainBackground)
+                .autocapitalization(.none)
+                .clipShape(Capsule())
+
+            Button(.generalLabelLogin) {
+                // TODO: Initial not logging in just to get past the login screen
+                requiringLogIn = false
                 Task {
                     await presenter.fetch()
                 }
             }
+            .frame(maxWidth: .infinity)
+            .padding(.top, Style.fullPadding)
+            .buttonStyle(CustomButton())
         }
+        .padding(Style.fullPadding)
+        .interactiveDismissDisabled()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.cellBackground)
+        .presentationDetents([.medium, .medium])
+        .presentationDragIndicator(.hidden)
+        .environment(\.openURL, OpenURLAction { url in
+            print(">>> URL \(url)")
+            return .handled
+        })
     }
 }
 

@@ -23,8 +23,8 @@ struct CustomFontTests {
         #expect(CustomFont.headerFont == Font.custom(CustomFont.headerFontName, fixedSize: CustomFont.fontHeaderLargeSize))
         #expect(CustomFont.subHeaderFont == Font.custom(CustomFont.headerFontName, fixedSize: CustomFont.fontSubHeaderLargeSize))
         #expect(CustomFont.smallSubHeaderFont == Font.custom(CustomFont.headerFontName, fixedSize: CustomFont.fontSubHeaderSmallSize))
-        #expect(CustomFont.regularFontBody == Font.custom(CustomFont.headerFontName, fixedSize: CustomFont.fontRegularBodySize))
-        #expect(CustomFont.smallFontBody == Font.custom(CustomFont.headerFontName, fixedSize: CustomFont.fontSmallBodySize))
+        #expect(CustomFont.regularFontBody == Font.custom(CustomFont.regularFontName, fixedSize: CustomFont.fontRegularBodySize))
+        #expect(CustomFont.smallFontBody == Font.custom(CustomFont.regularFontName, fixedSize: CustomFont.fontSmallBodySize))
         #expect(CustomFont.extraSmallFontBody == Font.custom(CustomFont.regularFontName, fixedSize: CustomFont.fontExtraSmallSize))
     }
 

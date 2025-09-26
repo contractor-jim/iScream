@@ -147,6 +147,17 @@
         }
       }
     },
+    "general.label.login" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login"
+          }
+        }
+      }
+    },
     "general.naughty.label" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -192,6 +203,50 @@
     },
     "Key 1" : {
       "extractionState" : "manual"
+    },
+    "login.body.non_link_body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you don't already have an account "
+          }
+        }
+      }
+    },
+    "login.forgot_password.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forgot password"
+          }
+        }
+      }
+    },
+    "login.textfield.email.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        }
+      }
+    },
+    "login.textfield.password.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
+          }
+        }
+      }
     },
     "Synced just now" : {
       "comment" : "A subtitle that indicates when a list of items was last updated.",

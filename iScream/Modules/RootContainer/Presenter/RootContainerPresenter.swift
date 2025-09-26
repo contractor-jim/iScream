@@ -9,6 +9,9 @@ import SwiftUI
 
 protocol RootContainerPresenterProtocol: GenericPresenter {
     var user: User? { get }
+    var email: String { get set }
+    var password: String { get set }
+
     func fetch() async
     func getBountyBadgeCount() -> Int
 }
@@ -17,6 +20,9 @@ protocol RootContainerPresenterProtocol: GenericPresenter {
 class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootContainerRouter>,
                               RootContainerPresenterProtocol, Observable {
     var user: User?
+    var email: String = ""
+    var password: String = ""
+    var requiringLogIn: Bool = true
 
     func fetch() async {
         user = await interactor.fetchMyUser()
