@@ -69,7 +69,7 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
 
         return ""
     }
-    // TODO: Test this
+
     func isValidNickName() -> String {
         if signupUserName.isEmpty {
             return "Missing Nickname"
@@ -79,7 +79,8 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
         let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
 
         if !predicate.evaluate(with: signupUserName) {
-            return "Invalid Nickname"
+            // TODO: Need to make this more descriptive
+            return "Invalid Nickname: A-Z, 2 to 15 charachters long"
         }
 
         return ""
