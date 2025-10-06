@@ -11,7 +11,7 @@ protocol LoginPresenterProtocol: GenericPresenter {
     var email: String { get set }
     var password: String { get set }
     var signupUserName: String { get set }
-    
+
     // TODO: Test this
     func showSignUpModule()
 }
@@ -23,45 +23,42 @@ class LoginPresenter: GenericPresenterImp<LoginInteractor, LoginRouter>,
     var password: String = ""
     var showSignUp: Bool = false
     var signupUserName: String = ""
-    
+
     // TODO: This needs to be shared as in some common lib
-    // TODO: This needs to use the strings file
     func isValidEmail() -> String {
         if email.isEmpty {
-            return "Missing Email"
+            return String(localized: .validationMissingEmailMessage)
         }
 
         let regex = "^[A-Z0-9a-z._%+-]{1,}@[A-Za-z0-9-]{1,}(\\.[A-Za-z]{2,15}){1,2}$"
         let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
 
         if !predicate.evaluate(with: email) {
-            return "Invalid Email"
+            return String(localized: .validationEmailIncorrectMessage)
         }
 
         return ""
     }
     // TODO: This needs to be shared as in some common lib
-    // TODO: This needs to use the strings file
     func isValidPassword() -> String {
         if password.isEmpty {
-            return "Missing Password"
+            return String(localized: .validationMissingPasswordMessage)
         }
 
         let regex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,}$"
         let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
 
         if !predicate.evaluate(with: password) {
-            return "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( #?!@$%^&*-_ )"
+            return String(localized: .validationPasswordIncorrectMessage)
         }
 
         return ""
     }
-    
+
     // TODO: This needs to be shared as in some common lib
-    // TODO: This needs to use the strings file
     func isValidNickName() -> String {
         if signupUserName.isEmpty {
-            return "Missing Nickname"
+            return String(localized: .validationMissingNicknameMessage)
         }
 
         let regex = "^[A-Za-z]{2,15}$"
@@ -69,7 +66,7 @@ class LoginPresenter: GenericPresenterImp<LoginInteractor, LoginRouter>,
 
         if !predicate.evaluate(with: signupUserName) {
             // TODO: Need to make this more descriptive
-            return "Invalid Nickname: A-Z, 2 to 15 charachters long"
+            return String(localized: .validationIncorrectNicknameMessage)
         }
 
         return ""
