@@ -10,81 +10,18 @@ import SwiftUI
 protocol RootContainerPresenterProtocol: GenericPresenter {
     // Observed Properties
     var user: User? { get }
-    var email: String { get set }
-    var password: String { get set }
-
-    // Signup Model
-    var signupUserName: String { get set }
-
-    // Validation
-    func isValidEmail() -> String
-    func isValidPassword() -> String
-    func isValidNickName() -> String
 
     func fetch() async
     func getBountyBadgeCount() -> Int
-    // TODO: Test this
-    func showSignUpModule()
-
 }
 
 @Observable
 class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootContainerRouter>,
                               RootContainerPresenterProtocol, Observable {
     var user: User?
-    var email: String = ""
-    var password: String = ""
-
-    var signupUserName: String = ""
 
     var requiringLogIn: Bool = true
     var showSignUp: Bool = false
-
-    func isValidEmail() -> String {
-        if email.isEmpty {
-            return "Missing Email"
-        }
-
-        let regex = "^[A-Z0-9a-z._%+-]{1,}@[A-Za-z0-9-]{1,}(\\.[A-Za-z]{2,15}){1,2}$"
-        let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
-
-        if !predicate.evaluate(with: email) {
-            return "Invalid Email"
-        }
-
-        return ""
-    }
-
-    func isValidPassword() -> String {
-        if password.isEmpty {
-            return "Missing Password"
-        }
-
-        let regex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,}$"
-        let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
-
-        if !predicate.evaluate(with: password) {
-            return "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( #?!@$%^&*-_ )"
-        }
-
-        return ""
-    }
-
-    func isValidNickName() -> String {
-        if signupUserName.isEmpty {
-            return "Missing Nickname"
-        }
-
-        let regex = "^[A-Za-z]{2,15}$"
-        let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
-
-        if !predicate.evaluate(with: signupUserName) {
-            // TODO: Need to make this more descriptive
-            return "Invalid Nickname: A-Z, 2 to 15 charachters long"
-        }
-
-        return ""
-    }
 
     func fetch() async {
         user = await interactor.fetchMyUser()
@@ -103,10 +40,5 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
         }
 
         return 0
-    }
-
-    // TODO: Test this
-    func showSignUpModule() {
-        showSignUp = true
     }
 }

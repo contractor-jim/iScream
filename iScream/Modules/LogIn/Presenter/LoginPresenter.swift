@@ -10,6 +10,10 @@ import SwiftUI
 protocol LoginPresenterProtocol: GenericPresenter {
     var email: String { get set }
     var password: String { get set }
+    var signupUserName: String { get set }
+    
+    // TODO: Test this
+    func showSignUpModule()
 }
 
 @Observable
@@ -17,6 +21,9 @@ class LoginPresenter: GenericPresenterImp<LoginInteractor, LoginRouter>,
                       LoginPresenterProtocol, Observable {
     var email: String = ""
     var password: String = ""
+    var showSignUp: Bool = false
+    var signupUserName: String = ""
+    
     // TODO: This needs to be shared as in some common lib
     // TODO: This needs to use the strings file
     func isValidEmail() -> String {
@@ -48,5 +55,28 @@ class LoginPresenter: GenericPresenterImp<LoginInteractor, LoginRouter>,
         }
 
         return ""
+    }
+    
+    // TODO: This needs to be shared as in some common lib
+    // TODO: This needs to use the strings file
+    func isValidNickName() -> String {
+        if signupUserName.isEmpty {
+            return "Missing Nickname"
+        }
+
+        let regex = "^[A-Za-z]{2,15}$"
+        let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
+
+        if !predicate.evaluate(with: signupUserName) {
+            // TODO: Need to make this more descriptive
+            return "Invalid Nickname: A-Z, 2 to 15 charachters long"
+        }
+
+        return ""
+    }
+
+    // TODO: Test this
+    func showSignUpModule() {
+        showSignUp = true
     }
 }

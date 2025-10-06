@@ -10,7 +10,6 @@ import SwiftUI
 struct RootContainerView: View, GenericView {
 
     @State var presenter: RootContainerPresenter
-    @Environment(\.dismiss) var dismiss
 
     init<P>(presenter: P) where P: GenericPresenter {
         guard let presenter = presenter as? RootContainerPresenter else {
@@ -31,9 +30,6 @@ struct RootContainerView: View, GenericView {
                             // await presenter.fetch()
                         }
                     }
-                    .sheet(isPresented: $presenter.showSignUp) {
-                        SignUpSheetView(presenter: presenter)
-                    }
                     .sheet(isPresented: $presenter.requiringLogIn) {
                         ViperContainerBuilder().buildContainerView(
                             view: LoginView.self,
@@ -42,8 +38,6 @@ struct RootContainerView: View, GenericView {
                             entity: LoginEntity.self,
                             router: LoginRouter.self,
                             services: [DefaultUserService.self])
-
-                        // LoginSheet(presenter: presenter, requiringLogIn: $presenter.requiringLogIn)
                     }
                     .accessibilityIdentifier("initial-tab-indicator")
                     .foregroundStyle(.white)
@@ -51,72 +45,6 @@ struct RootContainerView: View, GenericView {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.mainBackground)
         }
-    }
-}
-
-// TODO: Break this out into its own module
-struct SignUpSheetView: View {
-    @State var presenter: RootContainerPresenter
-    @Environment(\.dismiss) var dismiss
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Spacer()
-
-                Text(.signupLabelSignup)
-                    .padding(.top, Style.fullPadding)
-                    .font(CustomFont.subHeaderFont)
-
-                Spacer()
-            }
-
-            Spacer()
-
-            Text(.signupDetailsLabel)
-                .padding(.top, Style.fullPadding)
-                .fixedSize(horizontal: false, vertical: true)
-                .lineLimit(4)
-                .font(CustomFont.regularFontBody)
-
-            ValidationTextField(placeholder: String(localized: .signupNicknameTextfield),
-                                icon: "person",
-                                resultString: $presenter.signupUserName,
-                                regExValidation: presenter.isValidNickName)
-
-            ValidationTextField(placeholder: String(localized: .loginTextfieldEmailLabel),
-                                icon: "envelope",
-                                resultString: $presenter.email,
-                                regExValidation: presenter.isValidEmail)
-
-            ValidationTextField(placeholder: String(localized: .loginTextfieldPasswordLabel),
-                                icon: "lock",
-                                resultString: $presenter.password,
-                                isSecure: true,
-                                regExValidation: presenter.isValidPassword)
-
-            Button(.signupLabelSignup) {
-                // TODO: Initial not logging in just to get past the login screen
-                dismiss()
-                /*
-                requiringLogIn = false
-                Task {
-                    await presenter.fetch()
-                }
-                */
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.top, Style.fullPadding)
-            .buttonStyle(CustomButton())
-
-            Spacer()
-        }
-        .padding(Style.fullPadding)
-        .interactiveDismissDisabled()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.cellBackground)
-        .presentationDetents([.medium, .medium])
-        .presentationDragIndicator(.hidden)
     }
 }
 
