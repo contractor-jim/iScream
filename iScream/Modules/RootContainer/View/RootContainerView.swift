@@ -49,13 +49,14 @@ struct RootContainerView: View, GenericView {
 // TODO: Break this out into its own module
 struct SignUpSheetView: View {
     @State var presenter: RootContainerPresenter
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Spacer()
 
-                Text("Sign Up")
+                Text(.signupLabelSignup)
                     .padding(.top, Style.fullPadding)
                     .font(CustomFont.subHeaderFont)
 
@@ -64,13 +65,13 @@ struct SignUpSheetView: View {
 
             Spacer()
 
-            Text("Signup as a new parent. When you are registered you will be able to register your own children.")
+            Text(.signupDetailsLabel)
                 .padding(.top, Style.fullPadding)
                 .fixedSize(horizontal: false, vertical: true)
                 .lineLimit(4)
                 .font(CustomFont.regularFontBody)
 
-            ValidationTextField(placeholder: String(localized: "Nickname"),
+            ValidationTextField(placeholder: String(localized: .signupNicknameTextfield),
                                 icon: "person",
                                 resultString: $presenter.signupUserName,
                                 regExValidation: presenter.isValidEmail)
@@ -86,8 +87,9 @@ struct SignUpSheetView: View {
                                 isSecure: true,
                                 regExValidation: presenter.isValidPassword)
 
-            Button("Sign Up") {
+            Button(.signupLabelSignup) {
                 // TODO: Initial not logging in just to get past the login screen
+                dismiss()
                 /*
                 requiringLogIn = false
                 Task {
