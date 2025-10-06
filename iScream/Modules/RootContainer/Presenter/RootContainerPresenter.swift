@@ -15,12 +15,11 @@ protocol RootContainerPresenterProtocol: GenericPresenter {
 
     // Signup Model
     var signupUserName: String { get set }
-    var signUpEmail: String { get set }
-    var signUpPassword: String { get set }
 
     // Validation
     func isValidEmail() -> String
     func isValidPassword() -> String
+    func isValidNickName() -> String
 
     func fetch() async
     func getBountyBadgeCount() -> Int
@@ -37,8 +36,6 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
     var password: String = ""
 
     var signupUserName: String = ""
-    var signUpEmail: String = ""
-    var signUpPassword: String = ""
 
     var requiringLogIn: Bool = true
     var showSignUp: Bool = false
@@ -68,6 +65,21 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
 
         if !predicate.evaluate(with: password) {
             return "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( #?!@$%^&*-_ )"
+        }
+
+        return ""
+    }
+    // TODO: Test this
+    func isValidNickName() -> String {
+        if signupUserName.isEmpty {
+            return "Missing Nickname"
+        }
+
+        let regex = "^[A-Za-z]{2,15}$"
+        let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
+
+        if !predicate.evaluate(with: signupUserName) {
+            return "Invalid Nickname"
         }
 
         return ""

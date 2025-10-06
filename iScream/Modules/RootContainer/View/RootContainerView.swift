@@ -74,16 +74,16 @@ struct SignUpSheetView: View {
             ValidationTextField(placeholder: String(localized: .signupNicknameTextfield),
                                 icon: "person",
                                 resultString: $presenter.signupUserName,
-                                regExValidation: presenter.isValidEmail)
+                                regExValidation: presenter.isValidNickName)
 
             ValidationTextField(placeholder: String(localized: .loginTextfieldEmailLabel),
                                 icon: "envelope",
-                                resultString: $presenter.signUpEmail,
+                                resultString: $presenter.email,
                                 regExValidation: presenter.isValidEmail)
 
             ValidationTextField(placeholder: String(localized: .loginTextfieldPasswordLabel),
                                 icon: "lock",
-                                resultString: $presenter.signUpPassword,
+                                resultString: $presenter.password,
                                 isSecure: true,
                                 regExValidation: presenter.isValidPassword)
 
