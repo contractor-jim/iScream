@@ -13,12 +13,19 @@ protocol RootContainerPresenterProtocol: GenericPresenter {
     var email: String { get set }
     var password: String { get set }
 
+    // Signup Model
+    var signupUserName: String { get set }
+    var signUpEmail: String { get set }
+    var signUpPassword: String { get set }
+
     // Validation
     func isValidEmail() -> String
     func isValidPassword() -> String
 
     func fetch() async
     func getBountyBadgeCount() -> Int
+    // TODO: Test this
+    func showSignUpModule()
 
 }
 
@@ -28,7 +35,13 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
     var user: User?
     var email: String = ""
     var password: String = ""
+
+    var signupUserName: String = ""
+    var signUpEmail: String = ""
+    var signUpPassword: String = ""
+
     var requiringLogIn: Bool = true
+    var showSignUp: Bool = false
 
     func isValidEmail() -> String {
         if email.isEmpty {
@@ -45,7 +58,6 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
         return ""
     }
 
-    // TODO: Test this
     func isValidPassword() -> String {
         if password.isEmpty {
             return "Missing Password"
@@ -78,5 +90,10 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
         }
 
         return 0
+    }
+
+    // TODO: Test this
+    func showSignUpModule() {
+        showSignUp = true
     }
 }

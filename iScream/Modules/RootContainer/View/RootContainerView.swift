@@ -31,6 +31,9 @@ struct RootContainerView: View, GenericView {
                             // await presenter.fetch()
                         }
                     }
+                    .sheet(isPresented: $presenter.showSignUp) {
+                        SignUpSheetView(presenter: presenter)
+                    }
                     .sheet(isPresented: $presenter.requiringLogIn) {
                         LoginSheet(presenter: presenter, requiringLogIn: $presenter.requiringLogIn)
                     }
@@ -42,6 +45,72 @@ struct RootContainerView: View, GenericView {
         }
     }
 }
+
+// TODO: Break this out into its own module
+struct SignUpSheetView: View {
+    @State var presenter: RootContainerPresenter
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Spacer()
+
+                Text("Sign Up")
+                    .padding(.top, Style.fullPadding)
+                    .font(CustomFont.subHeaderFont)
+
+                Spacer()
+            }
+
+            Spacer()
+
+            Text("Signup as a new parent. When you are registered you will be able to register your own children.")
+                .padding(.top, Style.fullPadding)
+                .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(4)
+                .font(CustomFont.regularFontBody)
+
+            ValidationTextField(placeholder: String(localized: "Nickname"),
+                                icon: "person",
+                                resultString: $presenter.signupUserName,
+                                regExValidation: presenter.isValidEmail)
+
+            ValidationTextField(placeholder: String(localized: .loginTextfieldEmailLabel),
+                                icon: "envelope",
+                                resultString: $presenter.signUpEmail,
+                                regExValidation: presenter.isValidEmail)
+
+            ValidationTextField(placeholder: String(localized: .loginTextfieldPasswordLabel),
+                                icon: "lock",
+                                resultString: $presenter.signUpPassword,
+                                isSecure: true,
+                                regExValidation: presenter.isValidPassword)
+
+            Button("Sign Up") {
+                // TODO: Initial not logging in just to get past the login screen
+                /*
+                requiringLogIn = false
+                Task {
+                    await presenter.fetch()
+                }
+                */
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.top, Style.fullPadding)
+            .buttonStyle(CustomButton())
+
+            Spacer()
+        }
+        .padding(Style.fullPadding)
+        .interactiveDismissDisabled()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.cellBackground)
+        .presentationDetents([.medium, .medium])
+        .presentationDragIndicator(.hidden)
+    }
+}
+
+// TODO: break this out into its own Module
 struct LoginSheet: View {
 
     @State var presenter: RootContainerPresenter
@@ -131,7 +200,10 @@ struct LoginSheet: View {
         .presentationDetents([.medium, .medium])
         .presentationDragIndicator(.hidden)
         .environment(\.openURL, OpenURLAction { url in
-            print(">>> URL \(url)")
+            // TODO: Test this
+            if url.absoluteString == "://sign_up" {
+                presenter.showSignUpModule()
+            }
             return .handled
         })
     }
