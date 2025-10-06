@@ -88,7 +88,6 @@ struct RootContainerPresenterTests {
         #expect(presenter.getBountyBadgeCount() == expectedCount)
     }
     */
-
     @Test("POSITIVE - RootContainerPresenter - testEmailValidation",
           arguments: [
             (email: "",
@@ -160,5 +159,4 @@ struct RootContainerPresenterTests {
         presenter.signupUserName = nickname
         #expect(presenter.isValidNickName() == result)
     }
-
 }
