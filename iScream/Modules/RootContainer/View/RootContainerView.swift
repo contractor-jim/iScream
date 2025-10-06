@@ -38,6 +38,12 @@ struct RootContainerView: View, GenericView {
                             entity: LoginEntity.self,
                             router: LoginRouter.self,
                             services: [DefaultUserService.self])
+                        .onDisappear {
+                            Task {
+                                // TODO: Need to check if a user is logged in, token needs refreshing e.t.c.
+                                await presenter.fetch()
+                            }
+                        }
                     }
                     .accessibilityIdentifier("initial-tab-indicator")
                     .foregroundStyle(.white)
