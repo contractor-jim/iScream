@@ -133,4 +133,32 @@ struct RootContainerPresenterTests {
         #expect(presenter.isValidPassword() == result)
     }
 
+    @Test("POSITIVE - RootContainerPresenter - testSignUpNicknameValidation",
+          arguments: [
+            (nickname: "",
+             result: "Missing Nickname"),
+
+            (nickname: "a",
+             result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
+
+            (nickname: "12343",
+             result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
+
+            (nickname: "*£$£VBD$£$@£",
+             result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
+
+            (nickname: "Alan",
+             result: ""),
+
+            (nickname: "alan",
+             result: "")
+    ])
+    func testEmailValidation_ReturnsCountOf3(
+        nickname: String,
+        result: String
+    ) async throws {
+        presenter.signupUserName = nickname
+        #expect(presenter.isValidNickName() == result)
+    }
+
 }
