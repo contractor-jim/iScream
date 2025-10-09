@@ -114,11 +114,18 @@ struct LoginView: GenericView, View {
             return .handled
         })
         .sheet(isPresented: $presenter.showSignUp) {
-            SignUpSheetView(presenter: presenter)
+            ViperContainerBuilder().buildContainerView(
+                view: SignUpView.self,
+                interactor: SignUpInteractor.self,
+                presenter: SignUpPresenter.self,
+                entity: SignUpEntity.self,
+                router: SignUpRouter.self,
+                services: [DefaultUserService.self])
         }
     }
 }
 
+/*
 struct SignUpSheetView: View {
     @State var presenter: LoginPresenter
     @Environment(\.dismiss) var dismiss
@@ -176,3 +183,4 @@ struct SignUpSheetView: View {
         .presentationDragIndicator(.hidden)
     }
 }
+*/
