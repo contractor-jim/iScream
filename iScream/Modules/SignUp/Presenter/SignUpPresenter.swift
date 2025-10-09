@@ -22,16 +22,19 @@ class SignUpPresenter: GenericPresenterImp<SignUpInteractor, SignUpRouter>,
 
     func isValidEmail() -> String {
         // TODO: This should be passsed in as a dependancy
-        return UserValidationService.defaultUserValidationService.isValidEmail(email: email)
+        // return UserValidationService.defaultUserValidationService.isValidEmail(email: email)
+        return ""
     }
 
     func isValidPassword() -> String {
         // TODO: This should be passsed in as a dependancy
-        return UserValidationService.defaultUserValidationService.isValidPassword(password: password)
+        // return UserValidationService.defaultUserValidationService.isValidPassword(password: password)
+        return ""
     }
 
     func isValidNickName() -> String {
         // TODO: This should be passsed in as a dependancy
-        return UserValidationService.defaultUserValidationService.isValidNickName(userName: userName)
+        // return UserValidationService.defaultUserValidationService.isValidNickName(userName: userName)
+        return ""
     }
 }

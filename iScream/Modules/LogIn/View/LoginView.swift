@@ -120,67 +120,8 @@ struct LoginView: GenericView, View {
                 presenter: SignUpPresenter.self,
                 entity: SignUpEntity.self,
                 router: SignUpRouter.self,
-                services: [DefaultUserService.self])
+                services: [DefaultUserService.self,
+                           DefaultUserValidationService.self])
         }
     }
 }
-
-/*
-struct SignUpSheetView: View {
-    @State var presenter: LoginPresenter
-    @Environment(\.dismiss) var dismiss
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Spacer()
-
-                Text(.signupLabelSignup)
-                    .padding(.top, Style.fullPadding)
-                    .font(CustomFont.subHeaderFont)
-
-                Spacer()
-            }
-
-            Spacer()
-
-            Text(.signupDetailsLabel)
-                .padding(.top, Style.fullPadding)
-                .fixedSize(horizontal: false, vertical: true)
-                .lineLimit(4)
-                .font(CustomFont.regularFontBody)
-
-            ValidationTextField(placeholder: String(localized: .signupNicknameTextfield),
-                                icon: "person",
-                                resultString: $presenter.signupUserName,
-                                regExValidation: presenter.isValidNickName)
-
-            ValidationTextField(placeholder: String(localized: .loginTextfieldEmailLabel),
-                                icon: "envelope",
-                                resultString: $presenter.email,
-                                regExValidation: presenter.isValidEmail)
-
-            ValidationTextField(placeholder: String(localized: .loginTextfieldPasswordLabel),
-                                icon: "lock",
-                                resultString: $presenter.password,
-                                isSecure: true,
-                                regExValidation: presenter.isValidPassword)
-
-            Button(.signupLabelSignup) {
-                dismiss()
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.top, Style.fullPadding)
-            .buttonStyle(CustomButton())
-
-            Spacer()
-        }
-        .padding(Style.fullPadding)
-        .interactiveDismissDisabled()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.cellBackground)
-        .presentationDetents([.medium, .medium])
-        .presentationDragIndicator(.hidden)
-    }
-}
-*/

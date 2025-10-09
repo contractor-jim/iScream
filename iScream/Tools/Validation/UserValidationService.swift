@@ -7,25 +7,13 @@
 
 import Foundation
 
-protocol UserValidationServiceProtocol {
+protocol UserValidationService {
     func isValidEmail(email: String) -> String
     func isValidPassword(password: String) -> String
     func isValidNickName(userName: String) -> String
 }
 
-class UserValidationService: GenericService, UserValidationServiceProtocol {
-
-    fileprivate struct Static {
-        static var service: UserValidationService?
-    }
-
-    static var defaultUserValidationService: UserValidationService {
-        if Static.service == nil {
-            Static.service = UserValidationService()
-        }
-
-        return Static.service!
-    }
+class DefaultUserValidationService: GenericService, UserValidationService {
 
     func isValidEmail(email: String) -> String {
         if email.isEmpty {

@@ -25,11 +25,13 @@ class LoginPresenter: GenericPresenterImp<LoginInteractor, LoginRouter>,
 
     func isValidEmail() -> String {
         // TODO: This should be passsed in as a dependancy
-        return UserValidationService.defaultUserValidationService.isValidEmail(email: email)
+        // return UserValidationService.defaultUserValidationService.isValidEmail(email: email)
+        return ""
     }
     // TODO: This needs to be shared as in some common lib
     func isValidPassword() -> String {
-        return UserValidationService.defaultUserValidationService.isValidPassword(password: password)
+        // return UserValidationService.defaultUserValidationService.isValidPassword(password: password)
+        return "" 
     }
 
     // TODO: Test this
