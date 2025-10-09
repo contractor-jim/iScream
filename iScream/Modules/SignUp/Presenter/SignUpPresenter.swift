@@ -16,25 +16,23 @@ protocol SignUpPresenterProtocol: GenericPresenter {
 @Observable
 class SignUpPresenter: GenericPresenterImp<SignUpInteractor, SignUpRouter>,
                        SignUpPresenterProtocol, Observable {
+
     var email: String = ""
     var password: String = ""
     var userName: String = ""
 
+    // TODO: Test this
     func isValidEmail() -> String {
-        // TODO: This should be passsed in as a dependancy
-        // return UserValidationService.defaultUserValidationService.isValidEmail(email: email)
-        return ""
+        return interactor.isValidEmail(email: email)
     }
 
+    // TODO: Test this
     func isValidPassword() -> String {
-        // TODO: This should be passsed in as a dependancy
-        // return UserValidationService.defaultUserValidationService.isValidPassword(password: password)
-        return ""
+        return interactor.isValidPassword(password: password)
     }
 
+    // TODO: Test this
     func isValidNickName() -> String {
-        // TODO: This should be passsed in as a dependancy
-        // return UserValidationService.defaultUserValidationService.isValidNickName(userName: userName)
-        return ""
+        return interactor.isValidNickName(nickname: userName)
     }
 }
