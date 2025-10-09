@@ -38,7 +38,8 @@ struct RootContainerView: View, GenericView {
                             presenter: LoginPresenter.self,
                             entity: LoginEntity.self,
                             router: LoginRouter.self,
-                            services: [DefaultUserService.self])
+                            services: [DefaultUserService.self,
+                                       DefaultUserValidationService.self])
                         .onDisappear {
                             Task {
                                 // TODO: Need to check if a user is logged in, token needs refreshing e.t.c.

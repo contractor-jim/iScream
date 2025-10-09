@@ -16,8 +16,13 @@ class AppServiceBuilder {
 
     static var defaultContainer: Container {
         Static.sharedContainer = Container { container in
-            container.register(DefaultUserService.self) { _ in
+
+            container.register(GenericService.self, name: "DefaultUserService") { _ in
                 return DefaultUserService()
+            }
+
+            container.register(GenericService.self, name: "DefaultUserValidationService") { _ in
+                return DefaultUserValidationService()
             }
         }
 

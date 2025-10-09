@@ -8,7 +8,6 @@
 import SwiftUI
 
 protocol RootContainerPresenterProtocol: GenericPresenter {
-    // Observed Properties
     var user: User? { get }
 
     func fetch() async
