@@ -10,6 +10,7 @@ import SwiftUI
 struct RootContainerView: View, GenericView {
 
     @State var presenter: RootContainerPresenter
+    @Environment(\.dismiss) var dismiss
 
     init<P>(presenter: P) where P: GenericPresenter {
         guard let presenter = presenter as? RootContainerPresenter else {

@@ -19,9 +19,7 @@ protocol RootContainerPresenterProtocol: GenericPresenter {
 class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootContainerRouter>,
                               RootContainerPresenterProtocol, Observable {
     var user: User?
-
     var requiringLogIn: Bool = true
-    var showSignUp: Bool = false
 
     func fetch() async {
         user = await interactor.fetchMyUser()
