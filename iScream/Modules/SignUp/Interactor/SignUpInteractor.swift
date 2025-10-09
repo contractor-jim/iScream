@@ -1,15 +1,20 @@
 //
-//  LoginInteractor.swift
+//  SignUpInteractor.swift
 //  iScream
 //
-//  Created by James Woodbridge on 06/10/2025.
+//  Created by James Woodbridge on 09/10/2025.
 //
 
 import SwiftUI
 
-protocol LoginInteractorProtocol: GenericInteractor { }
+protocol SignUpInteractorProtocol: GenericInteractor {
+    func isValidEmail(email: String) -> String
+    func isValidPassword(password: String) -> String
+    func isValidNickName(nickname: String) -> String
+}
 
-class LoginInteractor: GenericInteractorImp<LoginEntity>, LoginInteractorProtocol {
+class SignUpInteractor: GenericInteractorImp<SignUpEntity>, SignUpInteractorProtocol {
+
     private var userService: (any UserService)?
     private var userValidationService: (any UserValidationService)?
 
@@ -29,5 +34,9 @@ class LoginInteractor: GenericInteractorImp<LoginEntity>, LoginInteractorProtoco
 
     func isValidPassword(password: String) -> String {
         return userValidationService!.isValidPassword(password: password)
+    }
+
+    func isValidNickName(nickname: String) -> String {
+        return userValidationService!.isValidNickName(userName: nickname)
     }
 }

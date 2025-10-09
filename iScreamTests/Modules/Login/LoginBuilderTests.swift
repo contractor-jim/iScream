@@ -18,7 +18,7 @@ struct LoginBuilderTests {
     init() throws {
         mockService = MockUserService()
         router = MockRootContainerRouter()
-        interactor = MockRootContainerInteractor(entity: MockRootContainerEntity(), services: [mockService])!
+        interactor = MockRootContainerInteractor(entity: MockRootContainerEntity(), services: [mockService, DefaultUserValidationService()])!
         presenter = RootContainerPresenter(interactor: interactor, router: router)!
     }
 
@@ -30,7 +30,7 @@ struct LoginBuilderTests {
             presenter: LoginPresenter.self,
             entity: LoginEntity.self,
             router: LoginRouter.self,
-            services: [DefaultUserService.self])
+            services: [DefaultUserService.self, DefaultUserValidationService.self])
         try #require(builder.container.resolve(LoginEntity.self) != nil)
         try #require(builder.container.resolve(LoginInteractor.self) != nil)
         try #require(builder.container.resolve(LoginRouter.self) != nil)

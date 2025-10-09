@@ -12,14 +12,13 @@ protocol ViperContainerBuilderProtocol {
                             I: GenericInteractor,
                             P: GenericPresenter,
                             E: GenericEntity,
-                            R: GenericRouter,
-                            S: GenericService>(
+                            R: GenericRouter>(
         view: V.Type,
         interactor: I.Type,
         presenter: P.Type,
         entity: E.Type,
         router: R.Type,
-        services: [S.Type]) -> V
+        services: [GenericService.Type]) -> V
 }
 // TODO: Test this
 class ViperContainerBuilder: ViperContainerBuilderProtocol {
@@ -30,14 +29,13 @@ class ViperContainerBuilder: ViperContainerBuilderProtocol {
                             I: GenericInteractor,
                             P: GenericPresenter,
                             E: GenericEntity,
-                            R: GenericRouter,
-                            S: GenericService>(
+                            R: GenericRouter>(
         view: V.Type,
         interactor: I.Type,
         presenter: P.Type,
         entity: E.Type,
         router: R.Type,
-        services: [S.Type]) -> V {
+        services: [GenericService.Type]) -> V {
 
         container.register(entity.self) { _ in
             entity.init()
@@ -45,9 +43,9 @@ class ViperContainerBuilder: ViperContainerBuilderProtocol {
 
         container.register(interactor.self) { c in
             // Append services requested for the interactor
-            var interactorServices: [S] = []
+            var interactorServices: [GenericService] = []
             for serviceType in services {
-                if let service = self.container.resolve(serviceType.self) {
+                if let service = self.container.resolve(serviceType.self, name: "\(serviceType)") {
                     interactorServices.append(service)
                 }
             }
