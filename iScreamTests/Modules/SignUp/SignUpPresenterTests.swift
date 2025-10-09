@@ -1,34 +1,29 @@
 //
-//  LoginPresenterTests.swift
+//  SignUpPresenterTests.swift
 //  iScream
 //
-//  Created by James Woodbridge on 06/10/2025.
+//  Created by James Woodbridge on 09/10/2025.
 //
 
 @testable import iScream
 import Testing
 import Foundation
 
-struct LoginPresenterTests {
+struct SignUpPresenterTests {
 
     var mockUserService: MockUserService
-    let router: LoginRouter
-    let interactor: LoginInteractor
-    let presenter: LoginPresenter
+    let router: SignUpRouter
+    let interactor: SignUpInteractor
+    let presenter: SignUpPresenter
 
     init() throws {
         mockUserService = MockUserService()
-        router = LoginRouter()
-        interactor = LoginInteractor(entity: LoginEntity(), services: [mockUserService, DefaultUserValidationService()])!
-        presenter = LoginPresenter(interactor: interactor, router: router)!
+        router = SignUpRouter()
+        interactor = SignUpInteractor(entity: SignUpEntity(), services: [mockUserService, DefaultUserValidationService()])!
+        presenter = SignUpPresenter(interactor: interactor, router: router)!
     }
 
-    @Test("POSITIVE - user can display signup screen") func testShowUserSignUp() throws {
-        presenter.showSignUpModule()
-        try #require(presenter.showSignUp == true)
-    }
-
-    @Test("POSITIVE - LoginPresenter - testEmailValidation",
+    @Test("POSITIVE - SignUpPresenter - testEmailValidation",
           arguments: [
             (email: "",
              result: "Missing Email"),
@@ -47,7 +42,7 @@ struct LoginPresenterTests {
         #expect(presenter.isValidEmail() == result)
     }
 
-    @Test("POSITIVE - LoginPresenter - testPasswordValidation",
+    @Test("POSITIVE - SignUpPresenter - testPasswordValidation",
           arguments: [
             (password: "",
              result: "Missing Password"),
@@ -70,5 +65,33 @@ struct LoginPresenterTests {
     ) async throws {
         presenter.password = password
         #expect(presenter.isValidPassword() == result)
+    }
+
+    @Test("POSITIVE - SignUpPresenter - testSignUpNicknameValidation",
+          arguments: [
+            (nickname: "",
+             result: "Missing Nickname"),
+
+            (nickname: "a",
+             result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
+
+            (nickname: "12343",
+             result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
+
+            (nickname: "*£$£VBD$£$@£",
+             result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
+
+            (nickname: "Alan",
+             result: ""),
+
+            (nickname: "alan",
+             result: "")
+    ])
+    func testEmailValidation(
+        nickname: String,
+        result: String
+    ) async throws {
+        presenter.userName = nickname
+        #expect(presenter.isValidNickName() == result)
     }
 }

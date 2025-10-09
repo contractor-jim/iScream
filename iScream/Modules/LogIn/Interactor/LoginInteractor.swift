@@ -23,11 +23,10 @@ class LoginInteractor: GenericInteractorImp<LoginEntity>, LoginInteractorProtoco
         super.init(entity: entity, services: services)
     }
 
-    // TODO: Test this
     func isValidEmail(email: String) -> String {
         return userValidationService!.isValidEmail(email: email)
     }
-    // TODO: Test this
+
     func isValidPassword(password: String) -> String {
         return userValidationService!.isValidPassword(password: password)
     }
