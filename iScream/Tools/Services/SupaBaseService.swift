@@ -14,6 +14,8 @@ class DefaultSupaBaseService: GenericService, SupaBaseService {
 
     override init() {
         super.init()
-        let client = SupabaseClient(supabaseURL: URL(string: "TODO:")!, supabaseKey: "publishable-or-anon-key")
+        if ProcessInfo.processInfo.environment["XCTestSessionIdentifier"] == nil {
+            let client = SupabaseClient(supabaseURL: URL(string: EnvVars.envSupabaseUrl)!, supabaseKey: EnvVars.envSupabaseAuthKey)
+        }
     }
 }

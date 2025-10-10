@@ -56,7 +56,7 @@ class EnvVarsCreateScript {
         fileString.append("import Foundation\n\n")
         fileString.append("struct EnvVars {\n")
         for (key, value) in varDict {
-            fileString.append("\tlet \(key) = \"\(value)\"\n")
+            fileString.append("\tstatic let \(key) = \"\(value)\"\n")
         }
 
         fileString.append("\n}\n")

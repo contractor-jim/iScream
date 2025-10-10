@@ -15,6 +15,7 @@ struct AppServiceBuilderTests {
         // Make sure that when new services are added to the graph this test fails to indicate test should be updated
         #expect(AppServiceBuilder.defaultContainer.description == """
         [
+            { Service: GenericService, Name: "DefaultSupaBaseService", Factory: Resolver -> GenericService, ObjectScope: graph },
             { Service: GenericService, Name: "DefaultUserService", Factory: Resolver -> GenericService, ObjectScope: graph },
             { Service: GenericService, Name: "DefaultUserValidationService", Factory: Resolver -> GenericService, ObjectScope: graph }
         ]
@@ -22,5 +23,6 @@ struct AppServiceBuilderTests {
         // Check out actual services exist in the graph
         #expect(AppServiceBuilder.defaultContainer.resolve(GenericService.self, name: "DefaultUserService") != nil)
         #expect(AppServiceBuilder.defaultContainer.resolve(GenericService.self, name: "DefaultUserValidationService") != nil)
+        #expect(AppServiceBuilder.defaultContainer.resolve(GenericService.self, name: "DefaultSupaBaseService") != nil)
     }
 }
