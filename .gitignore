@@ -22,7 +22,7 @@ DerivedData/
 
 ## Env Vars
 *.env
-*.EnvVarCreate
+.EnvVarCreate
 
 ## Playgrounds
 timeline.xctimeline
