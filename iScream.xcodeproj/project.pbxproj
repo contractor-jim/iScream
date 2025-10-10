@@ -47,11 +47,21 @@
 			);
 			target = 9B823BBB2E5DAEBB00B595E3 /* iScreamTests */;
 		};
+		9BB0247D2E99024800A2F17B /* Exceptions for "iScream" folder in "iScream" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Environment/EnvVarsCreateScript.swift,
+			);
+			target = 9B823BAC2E5DAEB900B595E3 /* iScream */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		9B823BAF2E5DAEB900B595E3 /* iScream */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				9BB0247D2E99024800A2F17B /* Exceptions for "iScream" folder in "iScream" target */,
+			);
 			path = iScream;
 			sourceTree = "<group>";
 		};
@@ -137,6 +147,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B823BD02E5DAEBB00B595E3 /* Build configuration list for PBXNativeTarget "iScream" */;
 			buildPhases = (
+				9BB0247C2E99006B00A2F17B /* MakeEnvVars */,
 				9B823BA92E5DAEB900B595E3 /* Sources */,
 				9B823BAA2E5DAEB900B595E3 /* Frameworks */,
 				9B823BAB2E5DAEB900B595E3 /* Resources */,
@@ -301,6 +312,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		9BB0247C2E99006B00A2F17B /* MakeEnvVars */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = MakeEnvVars;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "xcrun --sdk macosx swiftc -parse-as-library iScream/Environment/EnvVarsCreateScript.swift -o EnvVarCreate\n./EnvVarCreate\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
