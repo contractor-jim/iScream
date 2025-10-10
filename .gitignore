@@ -20,6 +20,9 @@ DerivedData/
 *.dSYM.zip
 *.dSYM
 
+## Env Vars
+*.env
+
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
