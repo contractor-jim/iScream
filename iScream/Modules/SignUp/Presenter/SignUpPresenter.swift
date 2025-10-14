@@ -11,7 +11,6 @@ protocol SignUpPresenterProtocol: GenericPresenter {
     var email: String { get set }
     var password: String { get set }
     var userName: String { get set }
-    // TODO: test this
     var validationPassed: Bool { get }
 
     var isLoading: Bool { get set }
@@ -29,7 +28,6 @@ class SignUpPresenter: GenericPresenterImp<SignUpInteractor, SignUpRouter>,
     var email: String = ""
     var password: String = ""
     var userName: String = ""
-    // TODO: test this
     var validationPassed: Bool = false
 
     var isLoading: Bool = false
@@ -50,12 +48,11 @@ class SignUpPresenter: GenericPresenterImp<SignUpInteractor, SignUpRouter>,
         formValidation()
         return interactor.isValidNickName(nickname: userName)
     }
-// TODO: test this
+
     private func formValidation() {
         validationPassed = interactor.isValidEmail(email: email) == "" &&
         interactor.isValidPassword(password: password) == "" &&
         interactor.isValidNickName(nickname: userName) == ""
-
     }
 
 // TODO: Test this

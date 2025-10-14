@@ -21,6 +21,8 @@ class MockUserService: GenericService, UserService {
                                 negativeIceCreamPoints: 0,
                                 type: "parent")
     }
+
+    func registerUser(email: String, password: String, nickname: String) async throws { }
 }
 
 extension MockUserService: Equatable {

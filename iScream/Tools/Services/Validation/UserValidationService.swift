@@ -35,7 +35,7 @@ class DefaultUserValidationService: GenericService, UserValidationService {
             return String(localized: .validationMissingPasswordMessage)
         }
 
-        let regex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,}$"
+        let regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*?[#?!@$%^&*-_]).{8,24}$"
         let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
 
         if !predicate.evaluate(with: password) {

@@ -94,4 +94,58 @@ struct SignUpPresenterTests {
         presenter.userName = nickname
         #expect(presenter.isValidNickName() == result)
     }
+
+    @Test("POSITIVE - SignUpPresenter - testFormValidation",
+          arguments: [
+            (email: "",
+             password: "",
+             userName: "",
+             result: false),
+
+            (email: "test@test.test",
+             password: "",
+             userName: "",
+             result: false),
+
+            (email: "test@test.test",
+             password: "ABCD1234_",
+             userName: "",
+             result: false),
+
+            (email: "testtrue@test.test",
+             password: "Abcd1234_",
+             userName: "Alan",
+             result: true),
+
+            (email: "test@test",
+             password: "ABCD1234_",
+             userName: "Alan",
+             result: false),
+
+            (email: "test@test.com",
+             password: "ABCDbc",
+             userName: "Alan",
+             result: false),
+
+            (email: "test@test.com",
+             password: "ABCDbc",
+             userName: "A",
+             result: false),
+
+            (email: "test@test.com",
+             password: "ABCDbc12",
+             userName: "A",
+             result: false)
+    ])
+    func testEmailValidation_ReturnsCountOf3(
+        email: String,
+        password: String,
+        userName: String,
+        result: Bool
+    ) async throws {
+        presenter.email = email
+        presenter.password = password
+        presenter.userName = userName
+        #expect(presenter.validationPassed == result)
+    }
 }
