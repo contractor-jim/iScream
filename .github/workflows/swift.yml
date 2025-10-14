@@ -20,6 +20,10 @@ jobs:
         run: |
           brew update
 
+      - name: Mock EnvVars
+        run: |
+          sh DefaultEnvVars.sh
+
       - name: Install swiftlint
         run: |
           brew install swiftlint

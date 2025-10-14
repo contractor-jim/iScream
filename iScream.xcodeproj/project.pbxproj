@@ -147,11 +147,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B823BD02E5DAEBB00B595E3 /* Build configuration list for PBXNativeTarget "iScream" */;
 			buildPhases = (
-				9BB0247C2E99006B00A2F17B /* MakeEnvVars */,
+				9BDDBD652E9E4BF600B00548 /* Make Vars */,
+				9B281FBC2E6EE12600C84BA8 /* SwiftLint */,
 				9B823BA92E5DAEB900B595E3 /* Sources */,
 				9B823BAA2E5DAEB900B595E3 /* Frameworks */,
 				9B823BAB2E5DAEB900B595E3 /* Resources */,
-				9B281FBC2E6EE12600C84BA8 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -294,7 +294,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9B281FBC2E6EE12600C84BA8 /* Run Script */ = {
+		9B281FBC2E6EE12600C84BA8 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -304,7 +304,7 @@
 			);
 			inputPaths = (
 			);
-			name = "Run Script";
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -313,9 +313,8 @@
 			shellPath = /bin/sh;
 			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		9BB0247C2E99006B00A2F17B /* MakeEnvVars */ = {
+		9BDDBD652E9E4BF600B00548 /* Make Vars */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -323,7 +322,7 @@
 			);
 			inputPaths = (
 			);
-			name = MakeEnvVars;
+			name = "Make Vars";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -521,6 +520,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TREAT_MISSING_SCRIPT_PHASE_OUTPUTS_AS_ERRORS = NO;
 			};
 			name = Debug;
 		};
@@ -550,6 +550,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TREAT_MISSING_SCRIPT_PHASE_OUTPUTS_AS_ERRORS = NO;
 			};
 			name = Release;
 		};
