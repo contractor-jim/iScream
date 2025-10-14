@@ -17,7 +17,6 @@ protocol SignUpPresenterProtocol: GenericPresenter {
     var errorShown: Bool { get set }
     var signupError: Error? { get set }
 
-    // TODO: Test this
     func signUp() async throws
 }
 
@@ -55,7 +54,6 @@ class SignUpPresenter: GenericPresenterImp<SignUpInteractor, SignUpRouter>,
         interactor.isValidNickName(nickname: userName) == ""
     }
 
-// TODO: Test this
     func signUp() async throws {
         try await interactor.signUp(email: email, password: password, nickname: userName)
     }

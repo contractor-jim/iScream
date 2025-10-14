@@ -148,4 +148,13 @@ struct SignUpPresenterTests {
         presenter.userName = userName
         #expect(presenter.validationPassed == result)
     }
+
+    @Test("POSITIVE - SignupPresenter - Signup") func testFetch() async throws {
+        presenter.email = "test@test.test"
+        presenter.password = "ABCD1234_"
+        presenter.userName = "Alan"
+        await #expect(throws: Never.self) {
+            try await presenter.signUp()
+        }
+    }
 }
