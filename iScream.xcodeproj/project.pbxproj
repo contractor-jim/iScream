@@ -330,7 +330,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -f ./.env ]\nthen\nxcrun --sdk macosx swiftc -parse-as-library iScream/Environment/EnvVarsCreateScript.swift -o EnvVarCreate\n./EnvVarCreate\nfi\n";
+			shellScript = "if [ -f ./.env ]\nthen\nxcrun --sdk macosx swiftc -parse-as-library iScream/Environment/EnvVarsCreateScript.swift -o EnvVarCreate\n./EnvVarCreate\nelse \ntouch ./.env\necho \"ENV_SUPABASE_URL=ENV_SUPABASE_URL\\nENV_SUPABASE_AUTH_KEY=ENV_SUPABASE_AUTH_KEY\" > ./.env\nxcrun --sdk macosx swiftc -parse-as-library iScream/Environment/EnvVarsCreateScript.swift -o EnvVarCreate\n./EnvVarCreate\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
