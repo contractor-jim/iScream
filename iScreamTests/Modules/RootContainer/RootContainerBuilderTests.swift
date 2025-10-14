@@ -22,7 +22,7 @@ struct RootContainerBuilderTests {
         presenter = RootContainerPresenter(interactor: interactor, router: router)!
     }
 
-    @Test("POSITIVE - Can create a new Root COntainer module") func testFetch() throws {
+    @Test("POSITIVE - Can create a new RootContainer module") func testFetch() throws {
         let builder = ViperContainerBuilder()
         _ = builder.buildContainerView(
             view: RootContainerView.self,

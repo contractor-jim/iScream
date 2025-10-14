@@ -20,7 +20,7 @@ protocol ViperContainerBuilderProtocol {
         router: R.Type,
         services: [GenericService.Type]) -> V
 }
-// TODO: Test this
+
 class ViperContainerBuilder: ViperContainerBuilderProtocol {
 
     let container = Container(parent: AppServiceBuilder.defaultContainer)
