@@ -89,4 +89,28 @@ struct SignUpInteractorTests {
     ) async throws {
         #expect(interactor.isValidNickName(nickname: nickname) == result)
     }
+
+    @Test("POSITIVE - SignUpInteractor - Signup",
+          arguments: [
+            (email: "flobbyDobby",
+             shouldThrow: true),
+
+            (email: "test@test.test",
+             shouldThrow: false)
+    ])
+    func testSignUp(
+        email: String,
+        shouldThrow: Bool
+    ) async throws {
+        mockUserService.shouldFailSignup = shouldThrow
+        if shouldThrow {
+            await #expect(throws: (any Error).self ) {
+               try await interactor.signUp(email: email, password: "ABCD1234_", nickname: "Alan")
+           }
+        } else {
+            await #expect(throws: Never.self ) {
+               try await interactor.signUp(email: email, password: "ABCD1234_", nickname: "Alan")
+           }
+        }
+    }
 }

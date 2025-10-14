@@ -23,6 +23,7 @@ class AppServiceBuilder {
 
             container.register(GenericService.self, name: "DefaultUserService") { _ in
                 let supabaseService = container.resolve(GenericService.self, name: "DefaultSupaBaseService")!
+                // swiftlint:disable:next force_cast
                 return DefaultUserService(supabaseService: supabaseService as! SupaBaseService)
             }
 

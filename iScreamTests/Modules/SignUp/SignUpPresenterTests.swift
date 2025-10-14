@@ -137,7 +137,7 @@ struct SignUpPresenterTests {
              userName: "A",
              result: false)
     ])
-    func testEmailValidation_ReturnsCountOf3(
+    func testFormValidation(
         email: String,
         password: String,
         userName: String,
