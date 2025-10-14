@@ -72,16 +72,15 @@ struct SignUpView: GenericView, View {
                             presenter.errorShown = true
                         }
                     }
-
-
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top, Style.fullPadding)
                 .buttonStyle(CustomButton())
-                .alert("Signup Error", isPresented: $presenter.errorShown,
+                .alert(.dialogSignupErrorTitle,
+                       isPresented: $presenter.errorShown,
                        presenting: $presenter.signupError,
                        actions: { _ in
-                    Button("Ok") {
+                    Button(.genericButtonOk) {
                         presenter.isLoading = false
                     }
                     .keyboardShortcut(.defaultAction)
