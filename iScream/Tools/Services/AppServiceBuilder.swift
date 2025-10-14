@@ -17,17 +17,19 @@ class AppServiceBuilder {
     static var defaultContainer: Container {
         Static.sharedContainer = Container { container in
 
+            container.register(GenericService.self, name: "DefaultSupaBaseService") { _ in
+                return DefaultSupaBaseService()
+            }
+
             container.register(GenericService.self, name: "DefaultUserService") { _ in
-                return DefaultUserService()
+                let supabaseService = container.resolve(GenericService.self, name: "DefaultSupaBaseService")!
+                return DefaultUserService(supabaseService: supabaseService as! SupaBaseService)
             }
 
             container.register(GenericService.self, name: "DefaultUserValidationService") { _ in
                 return DefaultUserValidationService()
             }
 
-            container.register(GenericService.self, name: "DefaultSupaBaseService") { _ in
-                return DefaultSupaBaseService()
-            }
         }
 
         return Static.sharedContainer!

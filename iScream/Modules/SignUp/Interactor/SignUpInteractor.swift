@@ -11,6 +11,9 @@ protocol SignUpInteractorProtocol: GenericInteractor {
     func isValidEmail(email: String) -> String
     func isValidPassword(password: String) -> String
     func isValidNickName(nickname: String) -> String
+
+    // TODO: Test this
+    func signUp(email: String, password: String, nickname: String) async throws
 }
 
 class SignUpInteractor: GenericInteractorImp<SignUpEntity>, SignUpInteractorProtocol {
@@ -38,5 +41,10 @@ class SignUpInteractor: GenericInteractorImp<SignUpEntity>, SignUpInteractorProt
 
     func isValidNickName(nickname: String) -> String {
         return userValidationService!.isValidNickName(userName: nickname)
+    }
+
+    // TODO: Test this
+    func signUp(email: String, password: String, nickname: String) async throws {
+        try await userService!.registerUser(email: email, password: password, nickname: nickname)
     }
 }

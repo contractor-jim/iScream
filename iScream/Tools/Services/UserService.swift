@@ -11,16 +11,21 @@ import SwiftUI
 
 protocol UserService {
     func getUser() async throws -> User?
+    func registerUser(email: String, password: String, nickname: String) async throws
 }
 
 class DefaultUserService: GenericService, UserService {
 
     static var modelContext: ModelContext?
     static var didLoad = false
+    let supabaseService: SupaBaseService
 
-    override init() {
+    init(supabaseService: SupaBaseService) {
+
+        self.supabaseService = supabaseService
 
         super.init()
+
         if !DefaultUserService.didLoad {
             // Mocked data for now till we get the database in place
             guard let modelContext = DefaultUserService.modelContext else {
@@ -64,6 +69,15 @@ class DefaultUserService: GenericService, UserService {
         })
         // TODO: This needs to be an actual search on the user post login
         return try modelContext.fetch(userFetchDescriptor).first
+    }
+
+    // TODO: Test this
+    func registerUser(email: String, password: String, nickname: String) async throws {
+        try await supabaseService.client?.auth.signUp(
+          email: email,
+          password: password,
+          data: ["display_name": .string(nickname)]
+        )
     }
 }
 

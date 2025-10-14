@@ -20,56 +20,96 @@ struct SignUpView: GenericView, View {
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
+        ZStack {
+
+            VStack(alignment: .leading) {
+                HStack {
+                    Spacer()
+
+                    Text(.signupLabelSignup)
+                        .padding(.top, Style.fullPadding)
+                        .font(CustomFont.subHeaderFont)
+
+                    Spacer()
+                }
+
                 Spacer()
 
-                Text(.signupLabelSignup)
+                Text(.signupDetailsLabel)
                     .padding(.top, Style.fullPadding)
-                    .font(CustomFont.subHeaderFont)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(4)
+                    .font(CustomFont.regularFontBody)
+
+                ValidationTextField(placeholder: String(localized: .signupNicknameTextfield),
+                                    icon: "person",
+                                    resultString: $presenter.userName,
+                                    regExValidation: presenter.isValidNickName)
+
+                ValidationTextField(placeholder: String(localized: .loginTextfieldEmailLabel),
+                                    icon: "envelope",
+                                    resultString: $presenter.email,
+                                    regExValidation: presenter.isValidEmail)
+
+                ValidationTextField(placeholder: String(localized: .loginTextfieldPasswordLabel),
+                                    icon: "lock",
+                                    resultString: $presenter.password,
+                                    isSecure: true,
+                                    regExValidation: presenter.isValidPassword)
+
+                Button(.signupLabelSignup) {
+                    presenter.isLoading = true
+
+                    Task {
+                        do {
+                            try await presenter.signUp()
+                            presenter.isLoading = false
+
+                            // TODO: Need to sign user in and get profile e.t.c.
+                            // dismiss()
+                        } catch {
+                            presenter.signupError = error
+                            presenter.errorShown = true
+                        }
+                    }
+
+
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.top, Style.fullPadding)
+                .buttonStyle(CustomButton())
+                .alert("Signup Error", isPresented: $presenter.errorShown,
+                       presenting: $presenter.signupError,
+                       actions: { _ in
+                    Button("Ok") {
+                        presenter.isLoading = false
+                    }
+                    .keyboardShortcut(.defaultAction)
+
+                }, message: { signupError in
+                    Text("\(signupError.wrappedValue!.localizedDescription)")
+                })
 
                 Spacer()
             }
+            .padding(Style.fullPadding)
+            .interactiveDismissDisabled()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.cellBackground)
+            .presentationDetents([.medium, .medium])
+            .presentationDragIndicator(.hidden)
 
-            Spacer()
-
-            Text(.signupDetailsLabel)
-                .padding(.top, Style.fullPadding)
-                .fixedSize(horizontal: false, vertical: true)
-                .lineLimit(4)
-                .font(CustomFont.regularFontBody)
-
-            ValidationTextField(placeholder: String(localized: .signupNicknameTextfield),
-                                icon: "person",
-                                resultString: $presenter.userName,
-                                regExValidation: presenter.isValidNickName)
-
-            ValidationTextField(placeholder: String(localized: .loginTextfieldEmailLabel),
-                                icon: "envelope",
-                                resultString: $presenter.email,
-                                regExValidation: presenter.isValidEmail)
-
-            ValidationTextField(placeholder: String(localized: .loginTextfieldPasswordLabel),
-                                icon: "lock",
-                                resultString: $presenter.password,
-                                isSecure: true,
-                                regExValidation: presenter.isValidPassword)
-
-            Button(.signupLabelSignup) {
-                dismiss()
+            if presenter.isLoading {
+                VStack(alignment: .center) {
+                    Spacer()
+                    ProgressView()
+                        .tint(.white)
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(.black.opacity(0.7))
             }
-            .frame(maxWidth: .infinity)
-            .padding(.top, Style.fullPadding)
-            .buttonStyle(CustomButton())
-
-            Spacer()
         }
-        .padding(Style.fullPadding)
-        .interactiveDismissDisabled()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.cellBackground)
-        .presentationDetents([.medium, .medium])
-        .presentationDragIndicator(.hidden)
     }
 
 }
