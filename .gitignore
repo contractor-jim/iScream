@@ -23,6 +23,7 @@ DerivedData/
 ## Env Vars
 *.env
 .EnvVarCreate
+iScream/Environment/EnvVars.swift
 
 ## Playgrounds
 timeline.xctimeline
