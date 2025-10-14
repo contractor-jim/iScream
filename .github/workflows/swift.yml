@@ -22,8 +22,7 @@ jobs:
 
       - name: Mock EnvVars
         run: |
-          touch iScream/Environment/EnvVars.swift
-          echo "import Foundation\n\nstruct EnvVars {\n\tstatic let envSupabaseUrl = \"\"\n\tstatic let envSupabaseAuthKey = \"\"\n}" > iScream/Environment/EnvVars.swift
+          sh DefaultEnvVars.sh
 
       - name: Install swiftlint
         run: |
