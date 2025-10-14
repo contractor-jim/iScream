@@ -57,37 +57,7 @@ struct SignUpView: GenericView, View {
                                     isSecure: true,
                                     regExValidation: presenter.isValidPassword)
 
-                Button(.signupLabelSignup) {
-                    presenter.isLoading = true
-
-                    Task {
-                        do {
-                            try await presenter.signUp()
-                            presenter.isLoading = false
-
-                            // TODO: Need to sign user in and get profile e.t.c.
-                            // dismiss()
-                        } catch {
-                            presenter.signupError = error
-                            presenter.errorShown = true
-                        }
-                    }
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.top, Style.fullPadding)
-                .buttonStyle(CustomButton())
-                .alert(.dialogSignupErrorTitle,
-                       isPresented: $presenter.errorShown,
-                       presenting: $presenter.signupError,
-                       actions: { _ in
-                    Button(.genericButtonOk) {
-                        presenter.isLoading = false
-                    }
-                    .keyboardShortcut(.defaultAction)
-
-                }, message: { signupError in
-                    Text("\(signupError.wrappedValue!.localizedDescription)")
-                })
+                SignUpButton(presenter: presenter)
 
                 Spacer()
             }
@@ -110,5 +80,44 @@ struct SignUpView: GenericView, View {
             }
         }
     }
+}
 
+private struct SignUpButton: View {
+    @State var presenter: SignUpPresenter
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        Button(.signupLabelSignup) {
+            presenter.isLoading = true
+            Task {
+                do {
+                    try await presenter.signUp()
+                    presenter.isLoading = false
+
+                    // TODO: Need to sign user in and get profile e.t.c.
+                    dismiss()
+                } catch {
+                    presenter.signupError = error
+                    presenter.errorShown = true
+                }
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.top, Style.fullPadding)
+        .buttonStyle(CustomButton())
+        .opacity(presenter.validationPassed ? 1.0 : 0.5)
+        .disabled(!presenter.validationPassed)
+        .alert(.dialogSignupErrorTitle,
+               isPresented: $presenter.errorShown,
+               presenting: $presenter.signupError,
+               actions: { _ in
+            Button(.genericButtonOk) {
+                presenter.isLoading = false
+            }
+            .keyboardShortcut(.defaultAction)
+
+        }, message: { signupError in
+            Text("\(signupError.wrappedValue!.localizedDescription)")
+        })
+    }
 }
