@@ -10,6 +10,4 @@ import Supabase
 
 class MockSupaBaseService: GenericService, SupaBaseService {
     var client: Supabase.SupabaseClient?
-    
-    
 }
