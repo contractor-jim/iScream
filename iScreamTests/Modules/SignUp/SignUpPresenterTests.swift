@@ -114,17 +114,17 @@ struct SignUpPresenterTests {
 
             (email: "testtrue@test.test",
              password: "Abcd1234_",
-             userName: "Alan",
+             userName: "Alan1",
              result: true),
 
             (email: "test@test",
              password: "ABCD1234_",
-             userName: "Alan",
+             userName: "Alan2",
              result: false),
 
             (email: "test@test.com",
              password: "ABCDbc",
-             userName: "Alan",
+             userName: "Alan3",
              result: false),
 
             (email: "test@test.com",
@@ -146,6 +146,7 @@ struct SignUpPresenterTests {
         presenter.email = email
         presenter.password = password
         presenter.userName = userName
+        presenter.formValidation()
         #expect(presenter.validationPassed == result)
     }
 

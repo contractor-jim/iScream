@@ -71,7 +71,6 @@ class DefaultUserService: GenericService, UserService {
         return try modelContext.fetch(userFetchDescriptor).first
     }
 
-    // TODO: Test this
     func registerUser(email: String, password: String, nickname: String) async throws {
         try await supabaseService.client?.auth.signUp(
           email: email,

@@ -48,7 +48,7 @@ class SignUpPresenter: GenericPresenterImp<SignUpInteractor, SignUpRouter>,
         return interactor.isValidNickName(nickname: userName)
     }
 
-    private func formValidation() {
+    func formValidation() {
         validationPassed = interactor.isValidEmail(email: email) == "" &&
         interactor.isValidPassword(password: password) == "" &&
         interactor.isValidNickName(nickname: userName) == ""
