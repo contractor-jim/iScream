@@ -30,7 +30,6 @@ class AppServiceBuilder {
             container.register(GenericService.self, name: "DefaultUserValidationService") { _ in
                 return DefaultUserValidationService()
             }
-
         }
 
         return Static.sharedContainer!

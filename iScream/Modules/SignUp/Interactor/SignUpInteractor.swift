@@ -11,7 +11,6 @@ protocol SignUpInteractorProtocol: GenericInteractor {
     func isValidEmail(email: String) -> String
     func isValidPassword(password: String) -> String
     func isValidNickName(nickname: String) -> String
-
     func signUp(email: String, password: String, nickname: String) async throws
 }
 
