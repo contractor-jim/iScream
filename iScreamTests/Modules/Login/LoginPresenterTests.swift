@@ -71,4 +71,49 @@ struct LoginPresenterTests {
         presenter.password = password
         #expect(presenter.isValidPassword() == result)
     }
+
+    @Test("POSITIVE - LoginPresenter - testFormValidation",
+          arguments: [
+            (email: "",
+             password: "",
+             result: false),
+
+            (email: "test@test.test",
+             password: "",
+             result: false),
+
+            (email: "test@test.test",
+             password: "ABCD1234_",
+             result: true),
+
+            (email: "testtrue@test.test",
+             password: "Abcd1234@",
+             result: true),
+
+            (email: "test@test",
+             password: "ABCD1234_",
+             result: false),
+
+            (email: "test@test.com",
+             password: "ABCDbc",
+             result: false),
+
+            (email: "test@test.com",
+             password: "ABCDbc",
+             result: false),
+
+            (email: "test@test.com",
+             password: "ABCDbc12",
+             result: true)
+    ])
+    func testFormValidation(
+        email: String,
+        password: String,
+        result: Bool
+    ) async throws {
+        presenter.email = email
+        presenter.password = password
+        presenter.formValidation()
+        #expect(presenter.validationPassed == result)
+    }
 }

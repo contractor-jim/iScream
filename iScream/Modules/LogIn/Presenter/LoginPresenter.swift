@@ -10,7 +10,6 @@ import SwiftUI
 protocol LoginPresenterProtocol: GenericPresenter {
     var email: String { get set }
     var password: String { get set }
-    // TODO: Test this
     var validationPassed: Bool { get }
 
     // TODO: test this

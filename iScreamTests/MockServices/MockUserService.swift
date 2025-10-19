@@ -10,12 +10,14 @@ import Foundation
 
 enum TestSignupError: Error {
     case signupError(String)
+    case loginError(String)
 }
 
 class MockUserService: GenericService, UserService {
 
     var mockUser: User?
     var shouldFailSignup: Bool = false
+    var shouldFailLogin: Bool = false
 
     func getUser() async throws -> iScream.User? {
         return mockUser ?? User(id: UUID(),
@@ -30,6 +32,12 @@ class MockUserService: GenericService, UserService {
     func registerUser(email: String, password: String, nickname: String) async throws {
         if shouldFailSignup {
             throw TestSignupError.signupError("Errr")
+        }
+    }
+
+    func loginUser(email: String, password: String) async throws {
+        if shouldFailLogin {
+            throw TestSignupError.loginError("Errr")
         }
     }
 }
