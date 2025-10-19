@@ -50,7 +50,7 @@ class DefaultUserValidationService: GenericService, UserValidationService {
             return String(localized: .validationMissingNicknameMessage)
         }
 
-        let regex = "^[A-Za-z]{2,15}$"
+        let regex = "^[A-Za-z0-9]{2,15}$"
         let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
 
         if !predicate.evaluate(with: userName) {

@@ -69,19 +69,17 @@ struct SignUpPresenterTests {
 
     @Test("POSITIVE - SignUpPresenter - testSignUpNicknameValidation",
           arguments: [
+
             (nickname: "",
              result: "Missing Nickname"),
 
             (nickname: "a",
              result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
 
-            (nickname: "12343",
-             result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
-
             (nickname: "*£$£VBD$£$@£",
              result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
 
-            (nickname: "Alan",
+            (nickname: "Alan1",
              result: ""),
 
             (nickname: "alan",
@@ -113,7 +111,7 @@ struct SignUpPresenterTests {
              result: false),
 
             (email: "testtrue@test.test",
-             password: "Abcd1234_",
+             password: "Abcd1234@",
              userName: "Alan1",
              result: true),
 
@@ -143,6 +141,7 @@ struct SignUpPresenterTests {
         userName: String,
         result: Bool
     ) async throws {
+        let presenter = SignUpPresenter(interactor: interactor, router: router)!
         presenter.email = email
         presenter.password = password
         presenter.userName = userName
