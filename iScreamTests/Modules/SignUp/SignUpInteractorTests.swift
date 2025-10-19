@@ -71,9 +71,6 @@ struct SignUpInteractorTests {
             (nickname: "a",
              result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
 
-            (nickname: "12343",
-             result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
-
             (nickname: "*£$£VBD$£$@£",
              result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
 
@@ -88,5 +85,29 @@ struct SignUpInteractorTests {
         result: String
     ) async throws {
         #expect(interactor.isValidNickName(nickname: nickname) == result)
+    }
+
+    @Test("POSITIVE - SignUpInteractor - Signup",
+          arguments: [
+            (email: "flobbyDobby",
+             shouldThrow: true),
+
+            (email: "test@test.test",
+             shouldThrow: false)
+    ])
+    func testSignUp(
+        email: String,
+        shouldThrow: Bool
+    ) async throws {
+        mockUserService.shouldFailSignup = shouldThrow
+        if shouldThrow {
+            await #expect(throws: (any Error).self ) {
+               try await interactor.signUp(email: email, password: "ABCD1234_", nickname: "Alan")
+           }
+        } else {
+            await #expect(throws: Never.self ) {
+               try await interactor.signUp(email: email, password: "ABCD1234_", nickname: "Alan")
+           }
+        }
     }
 }

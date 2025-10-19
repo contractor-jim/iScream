@@ -8,14 +8,18 @@
 import Supabase
 import Foundation
 
-protocol SupaBaseService { }
+protocol SupaBaseService {
+    var client: SupabaseClient? { get }
+}
 
 class DefaultSupaBaseService: GenericService, SupaBaseService {
 
+    var client: SupabaseClient?
+
     override init() {
-        super.init()
         if ProcessInfo.processInfo.environment["XCTestSessionIdentifier"] == nil {
-            let client = SupabaseClient(supabaseURL: URL(string: EnvVars.envSupabaseUrl)!, supabaseKey: EnvVars.envSupabaseAuthKey)
+            client = SupabaseClient(supabaseURL: URL(string: EnvVars.envSupabaseUrl)!, supabaseKey: EnvVars.envSupabaseAuthKey)
         }
+        super.init()
     }
 }
