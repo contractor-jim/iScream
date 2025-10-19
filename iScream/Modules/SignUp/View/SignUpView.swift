@@ -21,7 +21,6 @@ struct SignUpView: GenericView, View {
 
     var body: some View {
         ZStack {
-
             VStack(alignment: .leading) {
                 HStack {
                     Spacer()
@@ -93,8 +92,6 @@ private struct SignUpButton: View {
                 do {
                     try await presenter.signUp()
                     presenter.isLoading = false
-
-                    // TODO: Need to sign user in and get profile e.t.c.
                     dismiss()
                 } catch {
                     presenter.signupError = error

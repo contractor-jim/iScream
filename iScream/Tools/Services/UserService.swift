@@ -12,6 +12,7 @@ import SwiftUI
 protocol UserService {
     func getUser() async throws -> User?
     func registerUser(email: String, password: String, nickname: String) async throws
+    func loginUser(email: String, password: String) async throws
 }
 
 class DefaultUserService: GenericService, UserService {
@@ -70,13 +71,20 @@ class DefaultUserService: GenericService, UserService {
         // TODO: This needs to be an actual search on the user post login
         return try modelContext.fetch(userFetchDescriptor).first
     }
-
+    // TODO: Test this ?
     func registerUser(email: String, password: String, nickname: String) async throws {
         try await supabaseService.client?.auth.signUp(
           email: email,
           password: password,
           data: ["display_name": .string(nickname)]
         )
+    }
+    // TODO: Test this ?
+    func loginUser(email: String, password: String) async throws {
+        try await supabaseService.client?.auth.signIn(
+            email: email,
+            password: password
+          )
     }
 }
 
