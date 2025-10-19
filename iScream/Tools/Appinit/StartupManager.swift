@@ -21,12 +21,6 @@ class StartupManager: StartupManagerProtocol {
     }
 
     private func buildSignInModule() -> RootContainerView {
-        ViperContainerBuilder().buildContainerView(
-            view: RootContainerView.self,
-            interactor: RootContainerInteractor.self,
-            presenter: RootContainerPresenter.self,
-            entity: RootContainerEntity.self,
-            router: RootContainerRouter.self,
-            services: [DefaultUserService.self])
+        ViperContainerBuilder.buildRootContainerViewBuilder()
     }
 }

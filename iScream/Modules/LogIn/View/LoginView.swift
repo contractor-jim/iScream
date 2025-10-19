@@ -114,14 +114,7 @@ struct LoginView: GenericView, View {
             return .handled
         })
         .sheet(isPresented: $presenter.showSignUp) {
-            ViperContainerBuilder().buildContainerView(
-                view: SignUpView.self,
-                interactor: SignUpInteractor.self,
-                presenter: SignUpPresenter.self,
-                entity: SignUpEntity.self,
-                router: SignUpRouter.self,
-                services: [DefaultUserService.self,
-                           DefaultUserValidationService.self])
+            ViperContainerBuilder.buildSignUpView()
         }
     }
 }

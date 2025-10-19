@@ -35,7 +35,7 @@ class DefaultUserValidationService: GenericService, UserValidationService {
             return String(localized: .validationMissingPasswordMessage)
         }
 
-        let regex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,}$"
+        let regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*?[#?!@$%^&*-_]).{8,24}$"
         let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
 
         if !predicate.evaluate(with: password) {
@@ -50,7 +50,7 @@ class DefaultUserValidationService: GenericService, UserValidationService {
             return String(localized: .validationMissingNicknameMessage)
         }
 
-        let regex = "^[A-Za-z]{2,15}$"
+        let regex = "^[A-Za-z0-9]{2,15}$"
         let predicate = NSPredicate(format: "SELF MATCHES[c] %@", regex)
 
         if !predicate.evaluate(with: userName) {

@@ -32,14 +32,7 @@ struct RootContainerView: View, GenericView {
                         }
                     }
                     .sheet(isPresented: $presenter.requiringLogIn) {
-                        ViperContainerBuilder().buildContainerView(
-                            view: LoginView.self,
-                            interactor: LoginInteractor.self,
-                            presenter: LoginPresenter.self,
-                            entity: LoginEntity.self,
-                            router: LoginRouter.self,
-                            services: [DefaultUserService.self,
-                                       DefaultUserValidationService.self])
+                        ViperContainerBuilder.buildLoginView()
                         .onDisappear {
                             Task {
                                 // TODO: Need to check if a user is logged in, token needs refreshing e.t.c.
@@ -64,35 +57,17 @@ struct LoggedInTabBarView: View {
         TabView {
             Tab("general.title.people", systemImage: "person.fill") {
                 if user.type == UserType.parent.rawValue {
-                    ViperContainerBuilder().buildContainerView(
-                        view: ParentListChildrenView.self,
-                        interactor: ParentListChildrenInteractor.self,
-                        presenter: ParentListChildrenPresenter.self,
-                        entity: ParentListChildrenEntity.self,
-                        router: ParentListChildrenRouter.self,
-                        services: [DefaultUserService.self])
+                    ViperContainerBuilder.buildParentListChildrenViewBuilder()
                         .accessibilityIdentifier("parent-children-list-view")
                 } else if user.type == UserType.child.rawValue {
-                    ViperContainerBuilder().buildContainerView(
-                        view: ChildDashboardView.self,
-                        interactor: ChildDashboardInteractor.self,
-                        presenter: ChildDashboardPresenter.self,
-                        entity: ChildDashboardEntity.self,
-                        router: ChildDashboardRouter.self,
-                        services: [DefaultUserService.self])
+                    ViperContainerBuilder.buildChildDashboardView()
                         .accessibilityIdentifier("children-list-view")
                 }
             }
             .accessibilityIdentifier("parent-tab-bar-item-1")
 
             Tab {
-                ViperContainerBuilder().buildContainerView(
-                    view: BountyView.self,
-                    interactor: BountyInteractor.self,
-                    presenter: BountyPresenter.self,
-                    entity: BountyEntity.self,
-                    router: BountyRouter.self,
-                    services: [DefaultUserService.self])
+                ViperContainerBuilder.buildBountyView()
                     .accessibilityIdentifier("children-list-view")
             } label: {
                 Label {

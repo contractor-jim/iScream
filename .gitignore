@@ -20,6 +20,11 @@ DerivedData/
 *.dSYM.zip
 *.dSYM
 
+## Env Vars
+*.env
+.EnvVarCreate
+iScream/Environment/EnvVars.swift
+
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace

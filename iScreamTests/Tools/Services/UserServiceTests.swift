@@ -11,13 +11,13 @@ import Testing
 struct UserServiceTests {
 
     @Test("POSITIVE - User service init") func testUserServiceInit() async throws {
-        _ = DefaultUserService()
+        _ = DefaultUserService(supabaseService: MockSupaBaseService())
         #expect(DefaultUserService.modelContext != nil)
         #expect(DefaultUserService.didLoad == true)
     }
 
     @Test("POSITIVE - User service should return the parent user") func testValidUserReturned() async throws {
-        let service = DefaultUserService()
+        let service = DefaultUserService(supabaseService: MockSupaBaseService())
         // Update from the mocks
         guard let user = try await service.getUser() else {
             fatalError("No user found")

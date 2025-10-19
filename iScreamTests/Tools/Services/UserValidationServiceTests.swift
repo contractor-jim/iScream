@@ -59,9 +59,6 @@ struct UserValidationServiceTests {
             (nickname: "a",
              result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
 
-            (nickname: "12343",
-             result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
-
             (nickname: "*£$£VBD$£$@£",
              result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
 

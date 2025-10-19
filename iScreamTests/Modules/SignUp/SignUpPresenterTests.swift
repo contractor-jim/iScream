@@ -69,19 +69,17 @@ struct SignUpPresenterTests {
 
     @Test("POSITIVE - SignUpPresenter - testSignUpNicknameValidation",
           arguments: [
+
             (nickname: "",
              result: "Missing Nickname"),
 
             (nickname: "a",
              result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
 
-            (nickname: "12343",
-             result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
-
             (nickname: "*£$£VBD$£$@£",
              result: "Invalid Nickname: A-Z, 2 to 15 charachters long"),
 
-            (nickname: "Alan",
+            (nickname: "Alan1",
              result: ""),
 
             (nickname: "alan",
@@ -93,5 +91,70 @@ struct SignUpPresenterTests {
     ) async throws {
         presenter.userName = nickname
         #expect(presenter.isValidNickName() == result)
+    }
+
+    @Test("POSITIVE - SignUpPresenter - testFormValidation",
+          arguments: [
+            (email: "",
+             password: "",
+             userName: "",
+             result: false),
+
+            (email: "test@test.test",
+             password: "",
+             userName: "",
+             result: false),
+
+            (email: "test@test.test",
+             password: "ABCD1234_",
+             userName: "",
+             result: false),
+
+            (email: "testtrue@test.test",
+             password: "Abcd1234@",
+             userName: "Alan1",
+             result: true),
+
+            (email: "test@test",
+             password: "ABCD1234_",
+             userName: "Alan2",
+             result: false),
+
+            (email: "test@test.com",
+             password: "ABCDbc",
+             userName: "Alan3",
+             result: false),
+
+            (email: "test@test.com",
+             password: "ABCDbc",
+             userName: "A",
+             result: false),
+
+            (email: "test@test.com",
+             password: "ABCDbc12",
+             userName: "A",
+             result: false)
+    ])
+    func testFormValidation(
+        email: String,
+        password: String,
+        userName: String,
+        result: Bool
+    ) async throws {
+        let presenter = SignUpPresenter(interactor: interactor, router: router)!
+        presenter.email = email
+        presenter.password = password
+        presenter.userName = userName
+        presenter.formValidation()
+        #expect(presenter.validationPassed == result)
+    }
+
+    @Test("POSITIVE - SignupPresenter - Signup") func testFetch() async throws {
+        presenter.email = "test@test.test"
+        presenter.password = "ABCD1234_"
+        presenter.userName = "Alan"
+        await #expect(throws: Never.self) {
+            try await presenter.signUp()
+        }
     }
 }
