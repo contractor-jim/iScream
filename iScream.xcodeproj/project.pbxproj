@@ -315,6 +315,7 @@
 		};
 		9BDDBD652E9E4BF600B00548 /* Make Vars */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -330,6 +331,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ -f ./.env ]\nthen\nxcrun --sdk macosx swiftc -parse-as-library iScream/Environment/EnvVarsCreateScript.swift -o EnvVarCreate\n./EnvVarCreate\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 

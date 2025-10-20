@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-protocol LoginInteractorProtocol: GenericInteractor { }
+protocol LoginInteractorProtocol: GenericInteractor {
+    func loginUser(email: String, password: String) async throws
+}
 
 class LoginInteractor: GenericInteractorImp<LoginEntity>, LoginInteractorProtocol {
     private var userService: (any UserService)?
@@ -29,5 +31,9 @@ class LoginInteractor: GenericInteractorImp<LoginEntity>, LoginInteractorProtoco
 
     func isValidPassword(password: String) -> String {
         return userValidationService!.isValidPassword(password: password)
+    }
+
+    func loginUser(email: String, password: String) async throws {
+        try await userService?.loginUser(email: email, password: password)
     }
 }
