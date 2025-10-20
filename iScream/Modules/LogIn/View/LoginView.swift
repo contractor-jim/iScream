@@ -86,22 +86,6 @@ struct LoginView: GenericView, View {
                                     regExValidation: presenter.isValidPassword)
 
                 LoginButton(presenter: presenter)
-                /*
-                Button(.generalLabelLogin) {
-                    //                dismiss()
-
-                    Task {
-                        do {
-                            try await presenter.loginUser()
-                        } catch {
-
-                        }
-                    }
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.top, Style.fullPadding)
-                .buttonStyle(CustomButton())
-                */
             }
             .padding(Style.fullPadding)
             .interactiveDismissDisabled()

@@ -44,7 +44,9 @@ struct LoginPresenterTests {
         result: String
     ) async throws {
         presenter.email = email
+        presenter.password = "ABCDabcd1234_@"
         #expect(presenter.isValidEmail() == result)
+        #expect(presenter.validationPassed == (result == "") )
     }
 
     @Test("POSITIVE - LoginPresenter - testPasswordValidation",
@@ -64,14 +66,16 @@ struct LoginPresenterTests {
             (password: "*ValidPassword1_",
              result: "")
     ])
-    func testEmailValidation_ReturnsCountOf3(
+    func testPasswordValidation_ReturnsCountOf3(
         password: String,
         result: String
     ) async throws {
+        presenter.email = "test@test.test"
         presenter.password = password
         #expect(presenter.isValidPassword() == result)
+        #expect(presenter.validationPassed == (result == "") )
     }
-
+// TODO: The validation on the password is still incorrect fix this in a later bug ticket
     @Test("POSITIVE - LoginPresenter - testFormValidation",
           arguments: [
             (email: "",
@@ -115,5 +119,30 @@ struct LoginPresenterTests {
         presenter.password = password
         presenter.formValidation()
         #expect(presenter.validationPassed == result)
+    }
+
+    @Test("POSITIVE - LoginPresenter - Login") func testLoginSuccess() async throws {
+        presenter.email = "test@test.test"
+        presenter.password = "ABCD1234_"
+        mockUserService.shouldFailLogin = false
+        await #expect(throws: Never.self) {
+            try await presenter.loginUser()
+            #expect(presenter.errorShown == false)
+            #expect(presenter.loginError == nil)
+            #expect(presenter.isLoading == true)
+        }
+    }
+
+    @Test("POSITIVE - LoginPresenter - Login") func testLoginFails() async throws {
+        presenter.email = "test@test.test"
+        presenter.password = "ABCD"
+        mockUserService.shouldFailLogin = true
+        await #expect(throws: TestError.self) {
+            try await presenter.loginUser()
+            #expect(presenter.errorShown == true)
+            let testError = presenter.loginError as? TestError
+            #expect(testError == .loginError("Errr"))
+            #expect(presenter.isLoading == true)
+        }
     }
 }

@@ -12,11 +12,8 @@ protocol LoginPresenterProtocol: GenericPresenter {
     var password: String { get set }
     var validationPassed: Bool { get }
 
-    // TODO: test this
     var errorShown: Bool { get set }
-    // TODO: Test this
     var loginError: Error? { get set }
-    // TODO: Test this
     var isLoading: Bool { get set }
 
     func showSignUpModule()
@@ -35,12 +32,12 @@ class LoginPresenter: GenericPresenterImp<LoginInteractor, LoginRouter>,
     var isLoading: Bool = false
     var errorShown: Bool = false
     var loginError: Error?
-    // TODO: re-Test this
+
     func isValidEmail() -> String {
         formValidation()
         return interactor.isValidEmail(email: email)
     }
-    // TODO: re-Test this
+
     func isValidPassword() -> String {
         formValidation()
         return interactor.isValidPassword(password: password)
@@ -55,7 +52,6 @@ class LoginPresenter: GenericPresenterImp<LoginInteractor, LoginRouter>,
         interactor.isValidPassword(password: password) == ""
     }
 
-    // TODO: Test this
     func loginUser() async throws {
         isLoading = true
         try await interactor.loginUser(email: email, password: password)
