@@ -62,4 +62,18 @@ struct LoginInteractorTests {
     ) async throws {
         #expect(interactor.isValidPassword(password: password) == result)
     }
+
+    @Test("POSITIVE - LoginInteractor - Login") func testLoginSuccess() async throws {
+        mockUserService.shouldFailLogin = false
+        await #expect(throws: Never.self) {
+            try await interactor.loginUser(email: "test@test.test", password: "ABCD1234_")
+        }
+    }
+
+    @Test("POSITIVE - LoginInteractor - Login") func testLoginFails() async throws {
+        mockUserService.shouldFailLogin = true
+        await #expect(throws: TestError.self) {
+            try await interactor.loginUser(email: "test@test.test", password: "ABCD")
+        }
+    }
 }

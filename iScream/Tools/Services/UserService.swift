@@ -71,7 +71,7 @@ class DefaultUserService: GenericService, UserService {
         // TODO: This needs to be an actual search on the user post login
         return try modelContext.fetch(userFetchDescriptor).first
     }
-    // TODO: Test this ?
+
     func registerUser(email: String, password: String, nickname: String) async throws {
         try await supabaseService.client?.auth.signUp(
           email: email,
@@ -79,7 +79,7 @@ class DefaultUserService: GenericService, UserService {
           data: ["display_name": .string(nickname)]
         )
     }
-    // TODO: Test this ?
+
     func loginUser(email: String, password: String) async throws {
         try await supabaseService.client?.auth.signIn(
             email: email,

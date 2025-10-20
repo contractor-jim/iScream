@@ -32,7 +32,7 @@ class LoginInteractor: GenericInteractorImp<LoginEntity>, LoginInteractorProtoco
     func isValidPassword(password: String) -> String {
         return userValidationService!.isValidPassword(password: password)
     }
-    // TODO: Test this
+
     func loginUser(email: String, password: String) async throws {
         try await userService?.loginUser(email: email, password: password)
     }
