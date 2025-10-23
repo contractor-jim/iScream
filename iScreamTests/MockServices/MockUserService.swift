@@ -14,25 +14,37 @@ enum TestError: Error, Equatable {
 }
 
 class MockUserService: GenericService, UserService {
-    func registerUser(email: String, password: String, nickname: String) async throws -> UUID {
-        return UUID()
-    }
-
-    func loginUser(email: String, password: String) async throws -> UUID {
-        return UUID()
-    }
-
-    func insertProfile(profile: iScream.Profile) async throws {
-
-    }
-
-    func fetchProfile(userId: UUID) async throws -> iScream.Profile? {
-        return nil
-    }
 
     var mockUser: User?
     var shouldFailSignup: Bool = false
     var shouldFailLogin: Bool = false
+
+    var mockProfile: Profile?
+    var mockUserID = UUID()
+
+    func registerUser(email: String, password: String, nickname: String) async throws -> UUID {
+        if shouldFailSignup {
+            throw TestError.signupError("Errr")
+        }
+
+        return mockUserID
+    }
+
+    func loginUser(email: String, password: String) async throws -> UUID {
+        if shouldFailLogin {
+            throw TestError.loginError("Errr")
+        }
+
+        return mockUserID
+    }
+
+    func insertProfile(profile: Profile) async throws {
+        mockProfile = profile
+    }
+
+    func fetchProfile(userId: UUID) async throws -> iScream.Profile? {
+        return mockProfile
+    }
 
     func getUser() async throws -> iScream.User? {
         return mockUser ?? User(id: UUID(),
@@ -42,18 +54,6 @@ class MockUserService: GenericService, UserService {
                                 iceCreamPoints: 0,
                                 negativeIceCreamPoints: 0,
                                 type: "parent")
-    }
-
-    func registerUser(email: String, password: String, nickname: String) async throws {
-        if shouldFailSignup {
-            throw TestError.signupError("Errr")
-        }
-    }
-
-    func loginUser(email: String, password: String) async throws {
-        if shouldFailLogin {
-            throw TestError.loginError("Errr")
-        }
     }
 }
 

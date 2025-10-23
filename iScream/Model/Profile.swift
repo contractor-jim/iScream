@@ -9,7 +9,7 @@ import Foundation
 
 // TODO: This needs to be an actual model item in the DB
 struct Profile: Codable {
-    var id: UUID? = nil
+    var id: UUID?
     let userName: String
     let type: String
     let points: Int

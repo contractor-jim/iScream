@@ -59,7 +59,6 @@ class LoginPresenter: GenericPresenterImp<LoginInteractor, LoginRouter>,
 
     func loginUser() async throws {
         isLoading = true
-        // TODO: Test this
         _ = try await interactor.loginUser(email: email, password: password)
         email = ""
         password = ""

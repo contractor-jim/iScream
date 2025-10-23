@@ -35,10 +35,9 @@ class LoginInteractor: GenericInteractorImp<LoginEntity>, LoginInteractorProtoco
 
     func loginUser(email: String, password: String) async throws -> Profile {
         let userId = try await userService?.loginUser(email: email, password: password)
-        // TODO: Test this
-        // TODO: This needs to be better habdeld error wise
+        // TODO: This needs to be better handeld error wise
         let profile = try await userService?.fetchProfile(userId: userId!)
-        // TODO: Need to handle error case when a profile doesn't return corredctly
+        // TODO: Need to handle error case when a profile doesn't return correctly
         return profile!
     }
 }

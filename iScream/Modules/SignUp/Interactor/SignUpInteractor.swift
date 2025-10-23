@@ -43,7 +43,6 @@ class SignUpInteractor: GenericInteractorImp<SignUpEntity>, SignUpInteractorProt
 
     func signUp(email: String, password: String, nickname: String) async throws {
         let userId = try await userService!.registerUser(email: email, password: password, nickname: nickname)
-        // TODO: Test this
         try await userService!.insertProfile(profile: Profile(userName: nickname,
                                                               type: "parent",
                                                               points: 0,
