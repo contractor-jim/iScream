@@ -14,6 +14,21 @@ enum TestError: Error, Equatable {
 }
 
 class MockUserService: GenericService, UserService {
+    func registerUser(email: String, password: String, nickname: String) async throws -> UUID {
+        return UUID()
+    }
+
+    func loginUser(email: String, password: String) async throws -> UUID {
+        return UUID()
+    }
+
+    func insertProfile(profile: iScream.Profile) async throws {
+
+    }
+
+    func fetchProfile(userId: UUID) async throws -> iScream.Profile? {
+        return nil
+    }
 
     var mockUser: User?
     var shouldFailSignup: Bool = false
