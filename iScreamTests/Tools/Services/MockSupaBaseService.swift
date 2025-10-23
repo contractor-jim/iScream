@@ -10,4 +10,10 @@ import Supabase
 
 class MockSupaBaseService: SupaBaseService {
     var client: Supabase.SupabaseClient?
+
+    func fetch<T>(table: String, eq: [String: any PostgrestFilterValue], type: T.Type) async throws -> T? where T: Decodable, T: Encodable {
+        return nil
+    }
+
+    func insert<T>(table: String, object: T) async throws where T: Decodable, T: Encodable { }
 }

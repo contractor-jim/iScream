@@ -18,6 +18,14 @@ struct LoginPresenterTests {
 
     init() throws {
         mockUserService = MockUserService()
+        mockUserService.mockProfile = Profile(id: nil,
+                                           userName: "Test",
+                                           type: "parent",
+                                           points: 0,
+                                           negativePoints: 0,
+                                           parentId: UUID(),
+                                           authId: UUID())
+
         router = LoginRouter()
         interactor = LoginInteractor(entity: LoginEntity(), services: [mockUserService, DefaultUserValidationService()])!
         presenter = LoginPresenter(interactor: interactor, router: router)!
@@ -125,6 +133,7 @@ struct LoginPresenterTests {
         presenter.email = "test@test.test"
         presenter.password = "ABCD1234_"
         mockUserService.shouldFailLogin = false
+
         await #expect(throws: Never.self) {
             try await presenter.loginUser()
             #expect(presenter.errorShown == false)

@@ -14,9 +14,16 @@ struct LoginInteractorTests {
     var mockUserService: MockUserService
     let router: LoginRouter
     let interactor: LoginInteractor
-
+    let testUUID = UUID()
     init() throws {
         mockUserService = MockUserService()
+        mockUserService.mockProfile = Profile(id: nil,
+                                           userName: "Test",
+                                           type: "parent",
+                                           points: 0,
+                                           negativePoints: 0,
+                                           parentId: testUUID,
+                                           authId: testUUID)
         router = LoginRouter()
         interactor = LoginInteractor(entity: LoginEntity(), services: [mockUserService, DefaultUserValidationService()])!
     }
@@ -66,7 +73,15 @@ struct LoginInteractorTests {
     @Test("POSITIVE - LoginInteractor - Login") func testLoginSuccess() async throws {
         mockUserService.shouldFailLogin = false
         await #expect(throws: Never.self) {
-            try await interactor.loginUser(email: "test@test.test", password: "ABCD1234_")
+            let profile = try await interactor.loginUser(email: "test@test.test", password: "ABCD1234_")
+            #expect(profile.id == nil)
+            #expect(profile.userName == "Test")
+            #expect(profile.type == "parent")
+            #expect(profile.points == 0)
+            #expect(profile.negativePoints == 0)
+            #expect(profile.parentId == testUUID)
+            #expect(profile.authId == testUUID)
+
         }
     }
 

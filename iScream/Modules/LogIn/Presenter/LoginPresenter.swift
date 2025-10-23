@@ -8,14 +8,19 @@
 import SwiftUI
 
 protocol LoginPresenterProtocol: GenericPresenter {
+    // Form fields
     var email: String { get set }
     var password: String { get set }
     var validationPassed: Bool { get }
 
+    // Error Handeling
     var errorShown: Bool { get set }
     var loginError: Error? { get set }
+
+    // State change
     var isLoading: Bool { get set }
 
+    // Actions
     func showSignUpModule()
     func loginUser() async throws
 }
@@ -54,7 +59,7 @@ class LoginPresenter: GenericPresenterImp<LoginInteractor, LoginRouter>,
 
     func loginUser() async throws {
         isLoading = true
-        try await interactor.loginUser(email: email, password: password)
+        _ = try await interactor.loginUser(email: email, password: password)
         email = ""
         password = ""
     }

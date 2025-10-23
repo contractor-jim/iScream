@@ -106,7 +106,14 @@ struct SignUpInteractorTests {
            }
         } else {
             await #expect(throws: Never.self ) {
-               try await interactor.signUp(email: email, password: "ABCD1234_", nickname: "Alan")
+                try await interactor.signUp(email: email, password: "ABCD1234_", nickname: "Alan")
+                #expect(mockUserService.mockProfile?.id == nil)
+                #expect(mockUserService.mockProfile?.userName == "Alan")
+                #expect(mockUserService.mockProfile?.type == "parent")
+                #expect(mockUserService.mockProfile?.points == 0)
+                #expect(mockUserService.mockProfile?.negativePoints == 0)
+                #expect(mockUserService.mockProfile?.parentId == nil)
+                #expect(mockUserService.mockProfile?.authId == mockUserService.mockUserID)
            }
         }
     }

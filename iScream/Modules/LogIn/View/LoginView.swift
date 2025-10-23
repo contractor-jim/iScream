@@ -129,8 +129,6 @@ private struct LoginButton: View {
                 do {
                     try await presenter.loginUser()
                     presenter.isLoading = false
-
-                    // TODO: Need to get profile e.t.c.
                     dismiss()
                 } catch {
                     presenter.loginError = error
