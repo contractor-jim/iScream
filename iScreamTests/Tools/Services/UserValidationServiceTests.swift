@@ -26,7 +26,7 @@ struct UserValidationServiceTests {
     ) async throws {
         #expect(DefaultUserValidationService().isValidEmail(email: email) == result)
     }
-    // TODO: The password does not actually work correctly with the special chars wait till we integrate the Auth component
+
     @Test("POSITIVE - UserValidation - testPasswordValidation",
           arguments: [
             (password: "",

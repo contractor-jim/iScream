@@ -46,75 +46,112 @@ struct LoginView: GenericView, View {
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Spacer()
+        ZStack {
+            VStack(alignment: .leading) {
+                HStack {
+                    Spacer()
 
-                Text(.generalLabelLogin)
-                    .padding(.top, Style.fullPadding)
-                    .font(CustomFont.subHeaderFont)
+                    Text(.generalLabelLogin)
+                        .padding(.top, Style.fullPadding)
+                        .font(CustomFont.subHeaderFont)
 
-                Spacer()
-            }
-
-            Spacer()
-
-            Text(signUpString + signUpStringLink)
-                .padding(.top, Style.fullPadding)
-                .fixedSize(horizontal: false, vertical: true)
-                .lineLimit(4)
-                .font(CustomFont.regularFontBody)
-
-            Text(forgotPasswordString)
-                .padding(.top, Style.fullPadding)
-                .fixedSize(horizontal: false, vertical: true)
-                .lineLimit(4)
-                .font(CustomFont.regularFontBody)
-
-            Spacer()
-
-            ValidationTextField(placeholder: String(localized: .loginTextfieldEmailLabel),
-                                icon: "envelope",
-                                resultString: $presenter.email,
-                                regExValidation: presenter.isValidEmail)
-
-            ValidationTextField(placeholder: String(localized: .loginTextfieldPasswordLabel),
-                                icon: "lock",
-                                resultString: $presenter.password,
-                                isSecure: true,
-                                regExValidation: presenter.isValidPassword)
-
-            Button(.generalLabelLogin) {
-                // TODO: Initial not logging in just to get past the login screen
-
-                // TODO: This needs to be a call back to the root containing view with some sort of closure
-                dismiss()
-                /*
-                requiringLogIn = false
-                Task {
-                    await presenter.fetch()
+                    Spacer()
                 }
-                */
+
+                Spacer()
+
+                Text(signUpString + signUpStringLink)
+                    .padding(.top, Style.fullPadding)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(4)
+                    .font(CustomFont.regularFontBody)
+
+                Text(forgotPasswordString)
+                    .padding(.top, Style.fullPadding)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(4)
+                    .font(CustomFont.regularFontBody)
+
+                Spacer()
+
+                ValidationTextField(placeholder: String(localized: .loginTextfieldEmailLabel),
+                                    icon: "envelope",
+                                    resultString: $presenter.email,
+                                    regExValidation: presenter.isValidEmail)
+
+                ValidationTextField(placeholder: String(localized: .loginTextfieldPasswordLabel),
+                                    icon: "lock",
+                                    resultString: $presenter.password,
+                                    isSecure: true,
+                                    regExValidation: presenter.isValidPassword)
+
+                LoginButton(presenter: presenter)
             }
-            .frame(maxWidth: .infinity)
-            .padding(.top, Style.fullPadding)
-            .buttonStyle(CustomButton())
+            .padding(Style.fullPadding)
+            .interactiveDismissDisabled()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.cellBackground)
+            .presentationDetents([.medium, .medium])
+            .presentationDragIndicator(.hidden)
+            .environment(\.openURL, OpenURLAction { url in
+                // TODO: Test this
+                if url.absoluteString == "://sign_up" {
+                    presenter.showSignUpModule()
+                }
+                return .handled
+            })
+            .sheet(isPresented: $presenter.showSignUp) {
+                ViperContainerBuilder.buildSignUpView()
+            }
+
+            if presenter.isLoading {
+                VStack(alignment: .center) {
+                    Spacer()
+                    ProgressView()
+                        .tint(.white)
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(.black.opacity(0.7))
+            }
         }
-        .padding(Style.fullPadding)
-        .interactiveDismissDisabled()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.cellBackground)
-        .presentationDetents([.medium, .medium])
-        .presentationDragIndicator(.hidden)
-        .environment(\.openURL, OpenURLAction { url in
-            // TODO: Test this
-            if url.absoluteString == "://sign_up" {
-                presenter.showSignUpModule()
+    }
+}
+
+private struct LoginButton: View {
+    @State var presenter: LoginPresenter
+    @Environment(\.dismiss) var dismiss
+
+    var body: some View {
+        Button(.generalLabelLogin) {
+            presenter.isLoading = true
+            Task {
+                do {
+                    try await presenter.loginUser()
+                    presenter.isLoading = false
+                    dismiss()
+                } catch {
+                    presenter.loginError = error
+                    presenter.errorShown = true
+                }
             }
-            return .handled
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.top, Style.fullPadding)
+        .buttonStyle(CustomButton())
+        .opacity(presenter.validationPassed ? 1.0 : 0.5)
+        .disabled(!presenter.validationPassed)
+        .alert(.dialogSignupErrorTitle,
+               isPresented: $presenter.errorShown,
+               presenting: $presenter.loginError,
+               actions: { _ in
+            Button(.genericButtonOk) {
+                presenter.isLoading = false
+            }
+            .keyboardShortcut(.defaultAction)
+
+        }, message: { signupError in
+            Text("\(signupError.wrappedValue!.localizedDescription)")
         })
-        .sheet(isPresented: $presenter.showSignUp) {
-            ViperContainerBuilder.buildSignUpView()
-        }
     }
 }

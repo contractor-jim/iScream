@@ -7,11 +7,14 @@
 
 import Foundation
 import SwiftData
-import SwiftUI
 
 protocol UserService {
     func getUser() async throws -> User?
-    func registerUser(email: String, password: String, nickname: String) async throws
+    func registerUser(email: String, password: String, nickname: String) async throws -> UUID
+    func loginUser(email: String, password: String) async throws -> UUID
+
+    func insertProfile(profile: Profile) async throws
+    func fetchProfile(userId: UUID) async throws -> Profile?
 }
 
 class DefaultUserService: GenericService, UserService {
@@ -71,12 +74,36 @@ class DefaultUserService: GenericService, UserService {
         return try modelContext.fetch(userFetchDescriptor).first
     }
 
-    func registerUser(email: String, password: String, nickname: String) async throws {
-        try await supabaseService.client?.auth.signUp(
+    /*
+     WE ARE CALLING ACTUALL FUNCTIONS FROM HERE
+     */
+    func registerUser(email: String, password: String, nickname: String) async throws -> UUID {
+        let response = try await supabaseService.client?.auth.signUp(
           email: email,
           password: password,
           data: ["display_name": .string(nickname)]
         )
+
+        // TODO: Test that a UUID exists and the response was succesfull
+        return response!.user.id
+    }
+
+    func loginUser(email: String, password: String) async throws -> UUID {
+        let response = try await supabaseService.client?.auth.signIn(
+            email: email,
+            password: password
+        )
+
+        // TODO: Test that a UUID exists and the response was succesfull
+        return response!.user.id
+    }
+
+    func insertProfile(profile: Profile) async throws {
+        try await supabaseService.insert(table: "user_profile", object: profile)
+    }
+
+    func fetchProfile(userId: UUID) async throws -> Profile? {
+        return try await supabaseService.fetch(table: "user_profile", eq: ["authId": userId], type: Profile.self)
     }
 }
 
