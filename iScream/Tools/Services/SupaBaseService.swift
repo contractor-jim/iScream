@@ -10,6 +10,7 @@ import Foundation
 
 protocol SupaBaseService {
     var client: SupabaseClient? { get }
+
     func fetch<T: Codable>(table: String, eq: [String: PostgrestFilterValue], type: T.Type) async throws -> T?
     func insert<T: Codable>(table: String, object: T) async throws
 }
