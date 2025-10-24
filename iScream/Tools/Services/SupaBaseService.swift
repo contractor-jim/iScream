@@ -11,8 +11,10 @@ import Foundation
 protocol SupaBaseService {
     var client: SupabaseClient? { get }
 
+    func fetchArr<T: Codable>(table: String, eq: [String: PostgrestFilterValue], type: T.Type) async throws -> [T]
     func fetch<T: Codable>(table: String, eq: [String: PostgrestFilterValue], type: T.Type) async throws -> T?
     func insert<T: Codable>(table: String, object: T) async throws
+    func function<T: Codable>(functionName: String, params: [String: some Encodable & Sendable], object: T.Type) async throws -> [T]
 }
 
 class DefaultSupaBaseService: GenericService, SupaBaseService {
@@ -25,10 +27,8 @@ class DefaultSupaBaseService: GenericService, SupaBaseService {
         }
         super.init()
     }
-
-    // TODO: Test this? 
-    func fetch<T: Codable>(table: String, eq: [String: PostgrestFilterValue], type: T.Type) async throws -> T? {
-
+    // TODO: Test this?
+    func fetchArr<T: Codable>(table: String, eq: [String: PostgrestFilterValue], type: T.Type) async throws -> [T] {
         let query = client?
           .from(table)
           .select()
@@ -45,6 +45,19 @@ class DefaultSupaBaseService: GenericService, SupaBaseService {
 
         if objects.count < 0 {
             // TODO: Test and handle error when no profile is found
+            return []
+        }
+
+        return objects
+    }
+
+    // TODO: Test this?
+    func fetch<T: Codable>(table: String,
+                           eq: [String: PostgrestFilterValue],
+                           type: T.Type) async throws -> T? {
+        let objects: [T] = try await fetchArr(table: table, eq: eq, type: type)
+        if objects.count < 0 {
+            // TODO: Test and handle error when no profile is found
             return nil
         }
 
@@ -57,5 +70,22 @@ class DefaultSupaBaseService: GenericService, SupaBaseService {
             .from(table)
             .insert(object)
             .execute()
+    }
+
+    func function<T: Codable>(functionName: String,
+                              params: [String: some Encodable & Sendable],
+                              object: T.Type) async throws -> [T] {
+        let response = try await client?.rpc(functionName,
+                                             params: params).execute()
+
+        let decoder = JSONDecoder()
+        let objects = try decoder.decode([T].self, from: response!.data)
+
+        if objects.count < 0 {
+            // TODO: Test and handle error when no profile is found
+            return []
+        }
+
+        return objects
     }
 }

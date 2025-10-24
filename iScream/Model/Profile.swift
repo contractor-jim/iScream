@@ -16,4 +16,12 @@ struct Profile: Codable {
     let negativePoints: Int
     let parentId: UUID?
     let authId: UUID
+    let children: [Profile]?
+
+    enum CodingKeys: String, CodingKey {
+        case id, type, points, negativePoints, children
+        case userName = "user_name"
+        case parentId = "parent_id"
+        case authId = "auth_id"
+    }
 }

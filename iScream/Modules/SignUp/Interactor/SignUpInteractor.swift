@@ -48,6 +48,7 @@ class SignUpInteractor: GenericInteractorImp<SignUpEntity>, SignUpInteractorProt
                                                               points: 0,
                                                               negativePoints: 0,
                                                               parentId: nil,
-                                                              authId: userId))
+                                                              authId: userId,
+                                                              children: nil))
     }
 }

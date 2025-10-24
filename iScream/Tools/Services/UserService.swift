@@ -9,10 +9,9 @@ import Foundation
 import SwiftData
 
 protocol UserService {
-    func getUser() async throws -> User?
+    func getLoggedInUserId() async throws -> UUID?
     func registerUser(email: String, password: String, nickname: String) async throws -> UUID
     func loginUser(email: String, password: String) async throws -> UUID
-
     func insertProfile(profile: Profile) async throws
     func fetchProfile(userId: UUID) async throws -> Profile?
 }
@@ -46,7 +45,7 @@ class DefaultUserService: GenericService, UserService {
             DefaultUserService.didLoad = true
         }
     }
-
+/*
     func getUser() async throws -> User? {
         guard let modelContext = DefaultUserService.modelContext else {
             return nil
@@ -73,10 +72,14 @@ class DefaultUserService: GenericService, UserService {
         // TODO: This needs to be an actual search on the user post login
         return try modelContext.fetch(userFetchDescriptor).first
     }
-
+*/
     /*
      WE ARE CALLING ACTUALL FUNCTIONS FROM HERE
      */
+    func getLoggedInUserId() async throws -> UUID? {
+        return try await supabaseService.client?.auth.user().id
+    }
+
     func registerUser(email: String, password: String, nickname: String) async throws -> UUID {
         let response = try await supabaseService.client?.auth.signUp(
           email: email,
@@ -103,7 +106,10 @@ class DefaultUserService: GenericService, UserService {
     }
 
     func fetchProfile(userId: UUID) async throws -> Profile? {
-        return try await supabaseService.fetch(table: "user_profile", eq: ["authId": userId], type: Profile.self)
+
+        return try await supabaseService.function(functionName: "get_profile",
+                                                   params: ["auth_id": userId],
+                                                   object: Profile.self)[0]
     }
 }
 

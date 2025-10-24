@@ -20,8 +20,8 @@ struct RootContainerView: View, GenericView {
     }
 
     var body: some View {
-        if let user = presenter.user {
-            LoggedInTabBarView(user: user, presenter: presenter)
+        if let profile = presenter.userProfile {
+            LoggedInTabBarView(profile: profile, presenter: presenter)
         } else {
             VStack {
                 ProgressView()
@@ -50,16 +50,16 @@ struct RootContainerView: View, GenericView {
 }
 
 struct LoggedInTabBarView: View {
-    let user: User
+    let profile: Profile
     let presenter: RootContainerPresenter
 
     var body: some View {
         TabView {
             Tab("general.title.people", systemImage: "person.fill") {
-                if user.type == UserType.parent.rawValue {
+                if profile.type == UserType.parent.rawValue {
                     ViperContainerBuilder.buildParentListChildrenViewBuilder()
                         .accessibilityIdentifier("parent-children-list-view")
-                } else if user.type == UserType.child.rawValue {
+                } else if profile.type == UserType.child.rawValue {
                     ViperContainerBuilder.buildChildDashboardView()
                         .accessibilityIdentifier("children-list-view")
                 }

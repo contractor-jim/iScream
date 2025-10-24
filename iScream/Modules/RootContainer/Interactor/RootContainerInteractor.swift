@@ -8,7 +8,7 @@
 import SwiftUI
 
 protocol RootContainerInteractorProtocol: GenericInteractor {
-    func fetchMyUser() async -> User?
+    func fetchMyUserProfile() async throws -> Profile?
 }
 
 class RootContainerInteractor: GenericInteractorImp<RootContainerEntity>, RootContainerInteractorProtocol {
@@ -22,11 +22,26 @@ class RootContainerInteractor: GenericInteractorImp<RootContainerEntity>, RootCo
         super.init(entity: entity, services: services)
     }
 
-    func fetchMyUser() async -> User? {
-        do {
-            return try await userService!.getUser()
-        } catch {
+    // TODO: Test this
+    // TODO: Surely this could be better refactored
+    func fetchMyUserProfile() async throws -> Profile? {
+        print(">>> ROOT fetchMyUserProfile 1")
+        // TODO: need to throw error if there is no valid user service
+        guard let userService = userService,
+              let userId = try await userService.getLoggedInUserId() else {
+            // TODO: Add error handeling here
+            print(">>> ROOT ERR  1")
             return nil
         }
+
+        guard let profile =  try await userService.fetchProfile(userId: userId) else {
+            // TODO: Add error handeling her
+            print(">>> ROOT ERR  2")
+            return nil
+        }
+
+        print(">>> profile \(profile)")
+
+        return profile
     }
 }
