@@ -15,12 +15,11 @@ protocol RootContainerPresenterProtocol: GenericPresenter {
 @Observable
 class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootContainerRouter>,
                               RootContainerPresenterProtocol, Observable {
-    // var user: User?
+
     var userProfile: Profile?
     var requiringLogIn: Bool = true
 
     func fetch() async {
-        // user = await interactor.fetchMyUser()
         // TODO: Handle the error elegantly
         do {
             userProfile = try await interactor.fetchMyUserProfile()
@@ -29,11 +28,13 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
     }
     // TODO: Retest this
     func getBountyBadgeCount() -> Int {
+        // TODO: Reimplement the badge count when we add database bounties
+
+        /*
         guard let userProfile else {
             return 0
         }
-        // TODO: Reimplement the badge count when we add database bounties
-        /*
+
         if user.type == UserType.child.rawValue {
             return user.openBounties.count
         } else if user.type == UserType.parent.rawValue {

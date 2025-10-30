@@ -44,7 +44,7 @@ struct DashboardChildCellView: View {
                         DashboardChildCardView(profile: childProfile)
                         .onTapGesture {
                             // TODO: Re implement this
-                            //presenter.navigateChildDetailView(user: user)
+                            // presenter.navigateChildDetailView(user: user)
                         }
                         .padding(.top, Style.fullPadding)
                         .padding([.trailing, .leading], Style.fullPadding)

@@ -6,15 +6,16 @@
 //
 
 @testable import iScream
+import Foundation
 
 class MockRootContainerInteractor: RootContainerInteractor {
 
     var didCallFetchMyuser = false
 
-    override func fetchMyUser() async -> User? {
+    override func fetchMyUserProfile() async throws -> Profile? {
         didCallFetchMyuser = true
         do {
-            return try await userService!.getUser()
+            return try await userService!.fetchProfile()
         } catch {
             return nil
         }

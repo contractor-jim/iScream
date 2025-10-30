@@ -23,18 +23,27 @@ struct RootContainerPresenterTests {
         presenter = RootContainerPresenter(interactor: interactor, router: router)!
     }
 
-    @Test("POSITIVE - RootContainerPresenter - fetch user") func testFetch() async throws {
-        let testUser = User.mockUser
+    @Test("POSITIVE - RootContainerPresenter - fetch user profile") func testFetch() async throws {
+        let id = UUID()
+        let authId = UUID()
+        let profile = Profile(id: id,
+                              userName: "McTest",
+                              type: "parent",
+                              points: 1000,
+                              negativePoints: -100,
+                              parentId: nil,
+                              authId: authId,
+                              children: [])
 
-        mockUserService.mockUser = testUser
+        mockUserService.mockProfile = profile
         await presenter.fetch()
 
-        #expect(presenter.user != nil)
-        #expect(presenter.user == testUser)
+        #expect(presenter.userProfile != nil)
+        #expect(presenter.userProfile == profile)
     }
 
     @Test("POSITIVE - RootContainerPresenter - nil user") func testGetBountyBadgeCountNilUser_ReturnsNil() {
-        #expect(presenter.user == nil)
+        #expect(presenter.userProfile == nil)
         #expect(presenter.getBountyBadgeCount() == 0)
     }
 

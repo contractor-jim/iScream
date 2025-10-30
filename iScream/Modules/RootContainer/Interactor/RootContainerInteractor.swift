@@ -22,25 +22,13 @@ class RootContainerInteractor: GenericInteractorImp<RootContainerEntity>, RootCo
         super.init(entity: entity, services: services)
     }
 
-    // TODO: Test this
-    // TODO: Surely this could be better refactored
     func fetchMyUserProfile() async throws -> Profile? {
-        print(">>> ROOT fetchMyUserProfile 1")
-        // TODO: need to throw error if there is no valid user service
+
         guard let userService = userService,
-              let userId = try await userService.getLoggedInUserId() else {
-            // TODO: Add error handeling here
-            print(">>> ROOT ERR  1")
-            return nil
-        }
-
-        guard let profile =  try await userService.fetchProfile(userId: userId) else {
+              let profile =  try await userService.fetchProfile() else {
             // TODO: Add error handeling her
-            print(">>> ROOT ERR  2")
             return nil
         }
-
-        print(">>> profile \(profile)")
 
         return profile
     }

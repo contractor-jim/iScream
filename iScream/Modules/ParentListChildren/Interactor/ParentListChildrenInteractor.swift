@@ -20,18 +20,12 @@ class ParentListChildrenInteractor: GenericInteractorImp<ParentListChildrenEntit
         }
         super.init(entity: entity, services: services)
     }
-    // TODO: Test this
-    // TODO: Surely this could be better refactored
-    func fetchMyUserProfile() async throws -> Profile? {
-        // TODO: need to throw error if there is no valid user service
-        guard let userService = userService,
-              let userId = try await userService.getLoggedInUserId() else {
-            // TODO: Add error handeling here
-            return nil
-        }
 
-        guard let profile =  try await userService.fetchProfile(userId: userId) else {
-            // TODO: Add error handeling her
+    func fetchMyUserProfile() async throws -> Profile? {
+
+        guard let userService = userService,
+              let profile = try await userService.fetchProfile() else {
+            // TODO: Add error handeling here
             return nil
         }
 

@@ -22,7 +22,7 @@ class ParentListChildrenPresenter: GenericPresenterImp<ParentListChildrenInterac
     var navPath: Binding<NavigationPath> {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
     }
-    // TODO: Test this
+
     func fetch() async {
         // TODO: Handle the error elegantly
         do {

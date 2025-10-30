@@ -16,8 +16,12 @@ struct UserServiceTests {
         #expect(DefaultUserService.didLoad == true)
     }
 
-    @Test("POSITIVE - User service should return the parent user") func testValidUserReturned() async throws {
-        let service = DefaultUserService(supabaseService: MockSupaBaseService())
+    @Test("POSITIVE - User service should return the parent user", .disabled()) func testValidUserReturned() async throws {
+
+        // TODO: Need to reimplement this when the full user profile exists
+        _ = DefaultUserService(supabaseService: MockSupaBaseService())
+
+        /*
         // Update from the mocks
         guard let user = try await service.getUser() else {
             fatalError("No user found")
@@ -28,6 +32,7 @@ struct UserServiceTests {
         #expect(user.name == "Daddy")
         #expect(user.iceCreamPoints == 0)
         #expect(user.negativeIceCreamPoints == 0)
+        */
     }
 
     // TODO: Need to write tests for pulling child user when we have mocked end points

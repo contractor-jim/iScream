@@ -19,6 +19,7 @@ struct DashboardChildCardView: View {
             VStack(alignment: .leading) {
                 DashBoardChildCardTitleView(profile: profile)
                     .accessibilityIdentifier("parent-dashboard-card-title-view-\(profile.userName)")
+                // TODO: Add this again when we have added user chart data
                 /*
                 HStack(alignment: .top, spacing: 0) {
                     DashBoardChildCardScoreView(user: user)

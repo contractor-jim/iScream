@@ -13,7 +13,7 @@ protocol UserService {
     func registerUser(email: String, password: String, nickname: String) async throws -> UUID
     func loginUser(email: String, password: String) async throws -> UUID
     func insertProfile(profile: Profile) async throws
-    func fetchProfile(userId: UUID) async throws -> Profile?
+    func fetchProfile() async throws -> Profile?
 }
 
 class DefaultUserService: GenericService, UserService {
@@ -105,7 +105,12 @@ class DefaultUserService: GenericService, UserService {
         try await supabaseService.insert(table: "user_profile", object: profile)
     }
 
-    func fetchProfile(userId: UUID) async throws -> Profile? {
+    func fetchProfile() async throws -> Profile? {
+        // TODO: need to throw error if there is no valid user service
+        guard let userId = try await getLoggedInUserId() else {
+            // TODO: Add error handeling here
+            return nil
+        }
 
         return try await supabaseService.function(functionName: "get_profile",
                                                    params: ["auth_id": userId],

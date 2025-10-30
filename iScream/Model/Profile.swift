@@ -25,3 +25,16 @@ struct Profile: Codable {
         case authId = "auth_id"
     }
 }
+
+extension Profile: Equatable {
+    static func == (lhs: Profile, rhs: Profile) -> Bool {
+        return lhs.id == rhs.id &&
+        lhs.userName == rhs.userName  &&
+        lhs.type == rhs.type &&
+        lhs.points == rhs.points &&
+        lhs.negativePoints == rhs.negativePoints &&
+        lhs.parentId == rhs.parentId &&
+        lhs.authId == rhs.authId &&
+        lhs.children == rhs.children
+    }
+}
