@@ -17,13 +17,17 @@ protocol ParentListChildrenPresenterProtocol: GenericPresenter {
 class ParentListChildrenPresenter: GenericPresenterImp<ParentListChildrenInteractor, ParentListChildrenRouter>,
                                     ParentListChildrenPresenterProtocol,
                                     Observable {
-    var user: User?
+    var userProfile: Profile?
+
     var navPath: Binding<NavigationPath> {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
     }
 
     func fetch() async {
-        user = await interactor.fetchMyUser()
+        // TODO: Handle the error elegantly
+        do {
+            userProfile = try await interactor.fetchMyUserProfile()
+        } catch { }
     }
 
     func navigateChildDetailView(user: User) {

@@ -42,18 +42,12 @@ class MockUserService: GenericService, UserService {
         mockProfile = profile
     }
 
-    func fetchProfile(userId: UUID) async throws -> iScream.Profile? {
+    func fetchProfile() async throws -> iScream.Profile? {
         return mockProfile
     }
 
-    func getUser() async throws -> iScream.User? {
-        return mockUser ?? User(id: UUID(),
-                                dataPoints: [],
-                                bounties: [],
-                                name: "",
-                                iceCreamPoints: 0,
-                                negativeIceCreamPoints: 0,
-                                type: "parent")
+    func getLoggedInUserId() async throws -> UUID? {
+        return UUID()
     }
 }
 

@@ -39,11 +39,12 @@ struct DashboardChildCellView: View {
         ZStack {
             ScrollView {
                 // TODO: These should be ordered too
-                if let children = presenter.user?.children {
-                    ForEach(Array(children.enumerated()), id: \.offset) { _, user in
-                        DashboardChildCardView(user: user)
+                if let children = presenter.userProfile?.children {
+                    ForEach(Array(children.enumerated()), id: \.offset) { _, childProfile in
+                        DashboardChildCardView(profile: childProfile)
                         .onTapGesture {
-                            presenter.navigateChildDetailView(user: user)
+                            // TODO: Re implement this
+                            // presenter.navigateChildDetailView(user: user)
                         }
                         .padding(.top, Style.fullPadding)
                         .padding([.trailing, .leading], Style.fullPadding)

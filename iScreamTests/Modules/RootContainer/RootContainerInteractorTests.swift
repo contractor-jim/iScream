@@ -7,6 +7,7 @@
 
 @testable import iScream
 import Testing
+import Foundation
 
 struct RootContainerInteractorTests {
 
@@ -40,10 +41,20 @@ struct RootContainerInteractorTests {
 
     @Test("POSITIVE - RootContainerInteractor - fetch user") func testFetch() async throws {
 
-        let mockedUser = User.mockUser
-        mockUserService.mockUser = mockedUser
+        let id = UUID()
+        let authId = UUID()
+        let profile = Profile(id: id,
+                              userName: "McTest",
+                              type: "parent",
+                              points: 1000,
+                              negativePoints: -100,
+                              parentId: nil,
+                              authId: authId,
+                              children: [])
 
-        let user = await interactor.fetchMyUser()
-        try #require(user == mockedUser)
+        mockUserService.mockProfile = profile
+
+        let userProfile = try await interactor.fetchMyUserProfile()
+        try #require(profile == userProfile)
     }
 }

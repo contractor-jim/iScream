@@ -20,7 +20,8 @@ struct ProfileTests {
                                 points: 0,
                                 negativePoints: 0,
                                 parentId: nil,
-                                authId: parentAuthId)
+                                authId: parentAuthId,
+                                children: [])
 
     }
 

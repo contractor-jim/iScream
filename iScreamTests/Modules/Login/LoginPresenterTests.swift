@@ -24,7 +24,8 @@ struct LoginPresenterTests {
                                            points: 0,
                                            negativePoints: 0,
                                            parentId: UUID(),
-                                           authId: UUID())
+                                              authId: UUID(),
+                                              children: [])
 
         router = LoginRouter()
         interactor = LoginInteractor(entity: LoginEntity(), services: [mockUserService, DefaultUserValidationService()])!

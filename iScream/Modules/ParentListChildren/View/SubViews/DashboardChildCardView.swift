@@ -8,34 +8,37 @@
 import SwiftUI
 
 struct DashboardChildCardView: View {
-    @State var user: User!
+    @State var profile: Profile!
     @State private var interpolationValue: CGFloat = 0.0
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(user.name)
+            Text(profile.userName)
                 .font(CustomFont.subHeaderFont.bold())
 
             VStack(alignment: .leading) {
-                DashBoardChildCardTitleView(user: user)
-                    .accessibilityIdentifier("parent-dashboard-card-title-view-\(user.name)")
-
+                DashBoardChildCardTitleView(profile: profile)
+                    .accessibilityIdentifier("parent-dashboard-card-title-view-\(profile.userName)")
+                // TODO: Add this again when we have added user chart data
+                /*
                 HStack(alignment: .top, spacing: 0) {
                     DashBoardChildCardScoreView(user: user)
+                    // TODO: This needs to be re added when we have user data
                     AnimatedChartView(user: user)
                 }
+                */
             }
             .padding(.all, Style.fullPadding)
             .font(CustomFont.subHeaderFont)
             .background(.cellBackground)
             .cornerRadius(Style.cornerRadius)
-            .accessibilityIdentifier("parent-dashboard-card-view-\(user.name)")
+            .accessibilityIdentifier("parent-dashboard-card-view-\(profile.userName)")
         }
     }
 }
 
 struct DashBoardChildCardTitleView: View {
-    let user: User!
+    let profile: Profile!
 
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
@@ -44,7 +47,7 @@ struct DashBoardChildCardTitleView: View {
                     format: NSLocalizedString("dashboard.childpoints.label",
                                               bundle: .main,
                                               comment: ""),
-                    user.iceCreamPoints)
+                    profile.points)
             )
             .font(CustomFont.regularFontBody)
 

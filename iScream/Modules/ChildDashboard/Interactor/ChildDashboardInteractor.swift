@@ -21,10 +21,15 @@ class ChildDashboardInteractor: GenericInteractorImp<ChildDashboardEntity>, Chil
     }
 
     func fetchMyUser() async -> User? {
+
+        // TODO: Need to get the child user here
+        return nil
+        /*
         do {
             return try await userService!.getUser()
         } catch {
             return nil
         }
+        */
     }
 }

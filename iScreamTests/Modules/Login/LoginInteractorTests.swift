@@ -23,7 +23,8 @@ struct LoginInteractorTests {
                                            points: 0,
                                            negativePoints: 0,
                                            parentId: testUUID,
-                                           authId: testUUID)
+                                              authId: testUUID,
+                                              children: [])
         router = LoginRouter()
         interactor = LoginInteractor(entity: LoginEntity(), services: [mockUserService, DefaultUserValidationService()])!
     }

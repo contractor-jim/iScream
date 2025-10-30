@@ -5,8 +5,10 @@
 //  Created by James Woodbridge on 26/08/2025.
 //
 
+import Foundation
+
 protocol ParentListChildrenInteractorProtocol: GenericInteractor {
-    func fetchMyUser() async -> User?
+    func fetchMyUserProfile() async throws -> Profile?
 }
 
 class ParentListChildrenInteractor: GenericInteractorImp<ParentListChildrenEntity>, ParentListChildrenInteractorProtocol {
@@ -19,11 +21,14 @@ class ParentListChildrenInteractor: GenericInteractorImp<ParentListChildrenEntit
         super.init(entity: entity, services: services)
     }
 
-    func fetchMyUser() async -> User? {
-        do {
-            return try await userService!.getUser()
-        } catch {
+    func fetchMyUserProfile() async throws -> Profile? {
+
+        guard let userService = userService,
+              let profile = try await userService.fetchProfile() else {
+            // TODO: Add error handeling here
             return nil
         }
+
+        return profile
     }
 }

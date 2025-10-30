@@ -7,6 +7,7 @@
 
 @testable import iScream
 import Testing
+import Foundation
 
 struct ParentListChildrenInteractorTests {
 
@@ -32,12 +33,21 @@ struct ParentListChildrenInteractorTests {
         #expect(interactor?.userService != nil)
     }
 
-    @Test("POSITIVE - ParentListChildrenInteractor - fetch user") func testFetch() async throws {
+    @Test("POSITIVE - ParentListChildrenInteractor - fetch user profile") func testFetch() async throws {
+        let id = UUID()
+        let authId = UUID()
+        let profile = Profile(id: id,
+                              userName: "McTest",
+                              type: "parent",
+                              points: 1000,
+                              negativePoints: -100,
+                              parentId: nil,
+                              authId: authId,
+                              children: [])
 
-        let mockedUser = User.mockUser
-        mockUserService.mockUser = mockedUser
+        mockUserService.mockProfile = profile
 
-        let user = await interactor.fetchMyUser()
-        try #require(user == mockedUser)
+        let userProfile = try await interactor.fetchMyUserProfile()
+        try #require(userProfile == profile)
     }
 }
