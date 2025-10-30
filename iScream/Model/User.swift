@@ -24,7 +24,7 @@ final class User {
     var negativeIceCreamPoints: Int
     var type: String
     @Relationship(deleteRule: .cascade) var children: [User]?
-    @Relationship(deleteRule: .cascade, inverse: \Bounty.user) var bounties: [Bounty]
+    // @Relationship(deleteRule: .cascade, inverse: \Bounty.user) var bounties: [Bounty]
 
     @Transient lazy var orderedDataPoints: [PointData] = {
         dataPoints.sorted { $0.month < $1.month }
@@ -40,7 +40,7 @@ final class User {
          children: [User] = []) {
         self.id = id
         self.dataPoints = dataPoints
-        self.bounties = bounties
+        // self.bounties = bounties
         self.name = name
         self.iceCreamPoints = iceCreamPoints
         self.negativeIceCreamPoints = negativeIceCreamPoints
@@ -51,14 +51,6 @@ final class User {
 
 // Functions on a users data for calculating user scores
 extension User {
-
-    var openBounties: [Bounty] {
-        bounties.filter { $0.completed == false }
-    }
-
-    var completedBounties: [Bounty] {
-        bounties.filter { $0.completed == true }
-    }
 
     var hasImproved: Bool {
         guard self.orderedDataPoints.count > 1 else {
@@ -131,7 +123,6 @@ extension User: Equatable {
         lhs.iceCreamPoints == rhs.iceCreamPoints &&
         lhs.negativeIceCreamPoints == rhs.negativeIceCreamPoints &&
         lhs.type == rhs.type &&
-        lhs.children == rhs.children &&
-        lhs.bounties == rhs.bounties
+        lhs.children == rhs.children
     }
 }

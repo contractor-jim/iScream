@@ -35,7 +35,7 @@ struct ChildDashboardView: View, GenericView {
                     format: NSLocalizedString("child.dashboard.title",
                                               bundle: .main,
                                               comment: ""),
-                    presenter.user?.name ?? "")
+                    presenter.profile?.userName ?? "")
             )
             .navigationBarTitleDisplayMode(.inline)
             .foregroundColor(.white)
@@ -43,7 +43,7 @@ struct ChildDashboardView: View, GenericView {
             .scrollContentBackground(.hidden)
             .onAppear {
                 Task {
-                    await presenter.fetch()
+                    try await presenter.fetch()
                 }
             }
         }
@@ -55,22 +55,24 @@ struct ChildDashboardListView: View {
     @State private var totalPoints: Int = 0
 
     var body: some View {
-        if let user = presenter.user {
+        if let profile = presenter.profile {
             VStack(alignment: .leading) {
                 // TODO: This needs to be looked as it should be total points followed by increase since last X time period
+                // TODO: Re-implement this when we have added user data points from Supabase
+                /*
                 AnimatedNumberTextView(totalPoints) { value in
                     Text(
                         String(
                             format: NSLocalizedString("child.dashboard.points",
                                                       bundle: .main,
                                                       comment: ""),
-                            user.hasImproved ? "+" : "-", value
+                            profile.hasImproved ? "+" : "-", value
                         )
                     )
                     .font(CustomFont.smallSubHeaderFont.bold())
-                    .foregroundStyle(user.hasImproved ? .green : .red )
+                    .foregroundStyle(profile.hasImproved ? .green : .red )
                 }
-
+                */
                 // Child achievements
                 ChildDashboardAchievementCell(presenter: presenter)
 
@@ -79,12 +81,13 @@ struct ChildDashboardListView: View {
 
                 // TODO: Handle when no data points are present
                 /*, !user.dataPoints.isEmpty*/
-                ChildDashboardChartView(user: user, presenter: presenter)
+                // TODO: Re-implement this when we have pulled user data points from Supabase
+                // ChildDashboardChartView(user: profile, presenter: presenter)
             }
             .padding([.leading, .trailing], Style.topPadding)
             .onAppear {
                 withAnimation(.easeIn.delay(Style.animationDuration)) {
-                    totalPoints = user.iceCreamPoints
+                    totalPoints = profile.points
                 }
             }
 

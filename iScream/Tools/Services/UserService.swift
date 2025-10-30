@@ -209,6 +209,8 @@ extension DefaultUserService {
                 modelContext.insert(PointData(id: UUID(), month: formatter.date(from: data.0)!, points: data.1, user: user))
             }
 
+            // TODO: Review the adding of mocked bounties
+            /*
             modelContext.insert(Bounty(id: UUID(), title: "Clean your room", points: 10, completed: false, user: user))
             modelContext.insert(Bounty(id: UUID(), title: "Mow the lawn", points: 20, completed: false, user: user))
             modelContext.insert(Bounty(id: UUID(), title: "Take out the bins", points: 2, completed: false, user: user))
@@ -218,6 +220,7 @@ extension DefaultUserService {
             modelContext.insert(Bounty(id: UUID(), title: "Tidy up your toys", points: 2, completed: true, user: user))
             modelContext.insert(Bounty(id: UUID(), title: "Be a good boy for Nanny", points: 10, completed: true, user: user))
             modelContext.insert(Bounty(id: UUID(), title: "Eat all your dinner", points: 2, completed: true, user: user))
+            */
         } catch {
             print("Failed to create the user \(error)")
         }
