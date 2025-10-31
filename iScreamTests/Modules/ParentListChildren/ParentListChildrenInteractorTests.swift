@@ -38,12 +38,14 @@ struct ParentListChildrenInteractorTests {
         let authId = UUID()
         let profile = Profile(id: id,
                               userName: "McTest",
-                              type: "parent",
+                              type: .parent,
                               points: 1000,
                               negativePoints: -100,
                               parentId: nil,
                               authId: authId,
-                              children: [])
+                              children: [],
+                              managedBounties: [],
+                              bounties: [])
 
         mockUserService.mockProfile = profile
 

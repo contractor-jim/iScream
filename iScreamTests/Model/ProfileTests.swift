@@ -10,29 +10,35 @@ import Foundation
 
 struct ProfileTests {
 
+    let id = UUID()
     let parentId = UUID()
     let parentAuthId = UUID()
     let parentProfile: Profile
 
     init() {
-        parentProfile = Profile(userName: "Test",
-                                type: "parent",
-                                points: 0,
-                                negativePoints: 0,
-                                parentId: nil,
+        parentProfile = Profile(id: id,
+                                userName: "McTest",
+                                type: .parent,
+                                points: 1000,
+                                negativePoints: -100,
+                                parentId: parentId,
                                 authId: parentAuthId,
-                                children: [])
+                                children: [],
+                                managedBounties: [],
+                                bounties: [])
 
     }
 
     @Test("POSITIVE - user profile parent init") func testInitParentUserProfile() async throws {
-
-        #expect(parentProfile.id == nil)
-        #expect(parentProfile.userName == "Test")
-        #expect(parentProfile.type == "parent")
-        #expect(parentProfile.points == 0)
-        #expect(parentProfile.negativePoints == 0)
-        #expect(parentProfile.parentId == nil)
+        #expect(parentProfile.id == id)
+        #expect(parentProfile.userName == "McTest")
+        #expect(parentProfile.type == .parent)
+        #expect(parentProfile.points == 1000)
+        #expect(parentProfile.negativePoints == -100)
+        #expect(parentProfile.parentId == parentId)
         #expect(parentProfile.authId == parentAuthId)
+        #expect(parentProfile.children == [])
+        #expect(parentProfile.managedBounties == [])
+        #expect(parentProfile.bounties == [])
     }
 }

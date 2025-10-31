@@ -34,15 +34,26 @@ struct BountyPresenterTests {
         #expect(presenter?.router != nil)
     }
 
-    @Test("POSITIVE - BountyPresenter - fetch user", .disabled()) func testFetch() async throws {
-        // TODO: Fix this test when we have a full user profile
-        let testUser = User.mockUser
+    @Test("POSITIVE - BountyPresenter - fetch user") func testFetch() async throws {
+        let id = UUID()
+        let authId = UUID()
+        let profile = Profile(id: id,
+                              userName: "McTest",
+                              type: .parent,
+                              points: 1000,
+                              negativePoints: -100,
+                              parentId: nil,
+                              authId: authId,
+                              children: [],
+                              managedBounties: [],
+                              bounties: [])
 
-        mockUserService.mockUser = testUser
-        await presenter.fetch()
+        mockUserService.mockProfile = profile
 
-        #expect(presenter.user != nil)
-        #expect(presenter.user == testUser)
+        try await presenter.fetch()
+
+        #expect(presenter.profile != nil)
+        #expect(presenter.profile == profile)
     }
 
     @Test("POSITIVE - BountyPresenter - navPath return") func testNavPath() {

@@ -14,17 +14,22 @@ struct LoginInteractorTests {
     var mockUserService: MockUserService
     let router: LoginRouter
     let interactor: LoginInteractor
+    let id = UUID()
+    let authId = UUID()
     let testUUID = UUID()
     init() throws {
         mockUserService = MockUserService()
-        mockUserService.mockProfile = Profile(id: nil,
-                                           userName: "Test",
-                                           type: "parent",
-                                           points: 0,
-                                           negativePoints: 0,
-                                           parentId: testUUID,
-                                              authId: testUUID,
-                                              children: [])
+
+        mockUserService.mockProfile = Profile(id: id,
+                                              userName: "McTest",
+                                              type: .parent,
+                                              points: 1000,
+                                              negativePoints: -100,
+                                              parentId: nil,
+                                              authId: authId,
+                                              children: [],
+                                              managedBounties: [],
+                                              bounties: [])
         router = LoginRouter()
         interactor = LoginInteractor(entity: LoginEntity(), services: [mockUserService, DefaultUserValidationService()])!
     }
@@ -75,14 +80,16 @@ struct LoginInteractorTests {
         mockUserService.shouldFailLogin = false
         await #expect(throws: Never.self) {
             let profile = try await interactor.loginUser(email: "test@test.test", password: "ABCD1234_")
-            #expect(profile.id == nil)
-            #expect(profile.userName == "Test")
-            #expect(profile.type == "parent")
-            #expect(profile.points == 0)
-            #expect(profile.negativePoints == 0)
-            #expect(profile.parentId == testUUID)
-            #expect(profile.authId == testUUID)
-
+            #expect(profile.id == id)
+            #expect(profile.userName == "McTest")
+            #expect(profile.type == .parent)
+            #expect(profile.points == 1000)
+            #expect(profile.negativePoints == -100)
+            #expect(profile.parentId == nil)
+            #expect(profile.authId == authId)
+            #expect(profile.children == [])
+            #expect(profile.managedBounties == [])
+            #expect(profile.bounties == [])
         }
     }
 

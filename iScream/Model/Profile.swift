@@ -6,18 +6,25 @@
 //
 
 import Foundation
+import SwiftData
 
-// TODO: This needs to be an actual model item in the DB
-struct Profile: Codable {
+enum UserType: String, CaseIterable, Codable {
+    case unknown
+    case parent
+    case child
+}
+
+@Model
+final class Profile: Codable {
     var id: UUID?
-    let userName: String
-    // TODO: Need to use user type here
-    let type: String
-    let points: Int
-    let negativePoints: Int
-    let parentId: UUID?
-    let authId: UUID
-    let children: [Profile]?
+    var userName: String
+    var type: UserType
+    var points: Int
+    var negativePoints: Int
+    var parentId: UUID?
+    var authId: UUID
+    var children: [Profile]?
+    var managedBounties: [Bounty]?
     var bounties: [Bounty]?
 
     enum CodingKeys: String, CodingKey {
@@ -25,17 +32,19 @@ struct Profile: Codable {
         case userName = "user_name"
         case parentId = "parent_id"
         case authId = "auth_id"
+        case managedBounties = "managed_bounties"
     }
 
     init(id: UUID? = nil,
          userName: String,
-         type: String,
+         type: UserType,
          points: Int,
          negativePoints: Int,
-         parentId: UUID? = nil,
+         parentId: UUID?,
          authId: UUID,
-         children: [Profile]? = nil,
-         bounties: [Bounty]? = nil) {
+         children: [Profile]?,
+         managedBounties: [Bounty]?,
+         bounties: [Bounty]?) {
         self.id = id
         self.userName = userName
         self.type = type
@@ -44,6 +53,7 @@ struct Profile: Codable {
         self.parentId = parentId
         self.authId = authId
         self.children = children
+        self.managedBounties = managedBounties
         self.bounties = bounties
     }
 
@@ -51,13 +61,14 @@ struct Profile: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(UUID.self, forKey: .id)
         userName = try container.decode(String.self, forKey: .userName)
-        type = try container.decode(String.self, forKey: .type)
+        type = try container.decode(UserType.self, forKey: .type)
         points = try container.decode(Int.self, forKey: .points)
         negativePoints = try container.decode(Int.self, forKey: .negativePoints)
-        parentId = try container.decode(UUID.self, forKey: .parentId)
+        parentId = try container.decodeIfPresent(UUID.self, forKey: .parentId)
         authId = try container.decode(UUID.self, forKey: .authId)
-        children = try container.decode([Profile].self, forKey: .children)
-        bounties = try container.decode([Bounty].self, forKey: .bounties)
+        children = try container.decodeIfPresent([Profile].self, forKey: .children)
+        managedBounties = try container.decodeIfPresent([Bounty].self, forKey: .managedBounties)
+        bounties = try container.decodeIfPresent([Bounty].self, forKey: .managedBounties)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -70,6 +81,7 @@ struct Profile: Codable {
         try container.encode(parentId, forKey: .parentId)
         try container.encode(authId, forKey: .authId)
         try container.encode(children, forKey: .children)
+        try container.encode(managedBounties, forKey: .managedBounties)
         try container.encode(bounties, forKey: .bounties)
     }
 }

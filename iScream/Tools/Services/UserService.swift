@@ -132,8 +132,7 @@ extension DefaultUserService {
                               bounties: [],
                               name: "Jack",
                               iceCreamPoints: 1000,
-                              negativeIceCreamPoints: 20,
-                              type: "child"),
+                              negativeIceCreamPoints: 20),
                    graphData: [("2025-01-01T00:00:00Z", 11),
                                ("2025-02-01T00:00:00Z", 9),
                                ("2025-03-01T00:00:00Z", 10),
@@ -149,8 +148,7 @@ extension DefaultUserService {
                               bounties: [],
                               name: "Mummy",
                               iceCreamPoints: 450,
-                              negativeIceCreamPoints: 20,
-                              type: "child"),
+                              negativeIceCreamPoints: 20),
                    graphData: [("2025-01-01T00:00:00Z", 11),
                                ("2025-02-01T00:00:00Z", 9),
                                ("2025-03-01T00:00:00Z", 10),
@@ -166,8 +164,7 @@ extension DefaultUserService {
                               bounties: [],
                               name: "Chris",
                               iceCreamPoints: -10000000,
-                              negativeIceCreamPoints: -10000000,
-                              type: "child"),
+                              negativeIceCreamPoints: -10000000),
                    graphData: [("2025-01-01T00:00:00Z", 0),
                                ("2025-02-01T00:00:00Z", -10),
                                ("2025-03-01T00:00:00Z", -99),
@@ -178,16 +175,14 @@ extension DefaultUserService {
 
         do {
             let userFetchDescriptor = FetchDescriptor<User>()
-            let children = try modelContext.fetch(userFetchDescriptor)
+            _ = try modelContext.fetch(userFetchDescriptor)
 
             modelContext.insert(User(id: UUID(),
                                      dataPoints: [],
                                      bounties: [],
                                      name: "Daddy",
                                      iceCreamPoints: 0,
-                                     negativeIceCreamPoints: 0,
-                                     type: "parent",
-                                     children: children))
+                                     negativeIceCreamPoints: 0))
 
         } catch {
             print("Failed ot create parent \(error)")
@@ -209,7 +204,6 @@ extension DefaultUserService {
                 modelContext.insert(PointData(id: UUID(), month: formatter.date(from: data.0)!, points: data.1, user: user))
             }
 
-            // TODO: Review the adding of mocked bounties
             /*
             modelContext.insert(Bounty(id: UUID(), title: "Clean your room", points: 10, completed: false, user: user))
             modelContext.insert(Bounty(id: UUID(), title: "Mow the lawn", points: 20, completed: false, user: user))

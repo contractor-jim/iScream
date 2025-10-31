@@ -15,8 +15,7 @@ extension User {
              bounties: [],
              name: "Test",
              iceCreamPoints: 1000,
-             negativeIceCreamPoints: 50,
-             type: "child")
+             negativeIceCreamPoints: 50)
 
         let formatter = ISO8601DateFormatter()
 
@@ -28,13 +27,6 @@ extension User {
                                      month: formatter.date(from: "2025-01-01T00:00:00Z")!,
                                      points: 11,
                                      user: user)]
-
-        user.bounties = [Bounty(id: UUID(), title: "Test1", points: 1, completed: true, user: user),
-                         Bounty(id: UUID(), title: "Test2", points: 2, completed: true, user: user),
-                         Bounty(id: UUID(), title: "Test3", points: 3, completed: true, user: user),
-                         Bounty(id: UUID(), title: "Test1", points: 1, completed: false, user: user),
-                         Bounty(id: UUID(), title: "Test2", points: 2, completed: false, user: user),
-                         Bounty(id: UUID(), title: "Test3", points: 3, completed: false, user: user)]
 
         return user
     }()

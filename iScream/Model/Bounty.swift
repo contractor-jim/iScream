@@ -11,26 +11,31 @@ import SwiftData
 @Model
 final class Bounty: Codable {
     @Attribute(.unique) var id: UUID
+    @Relationship(inverse: \Profile.id)
+    var parentId: UUID
     var title: String
     var points: Int
     var completed: Bool
-    // TODO: Need to resolve how to manage this releationship
-    // var user: User
+    @Relationship(inverse: \Profile.bounties)
+    var profile: [Profile]?
 
     init(id: UUID,
+         parentId: UUID,
          title: String,
          points: Int,
-         completed: Bool) {
-         // user: User) {
+         completed: Bool,
+         profile: [Profile]?) {
         self.id = id
+        self.parentId = parentId
         self.title = title
         self.points = points
         self.completed = completed
-        // self.user = user
+        self.profile = profile
     }
 
     enum CodingKeys: String, CodingKey {
-        case id, title, points, completed, children, bounties
+        case id, title, points, completed, children, bounties, profile
+        case parentId = "parent_id"
     }
 
     required init(from decoder: Decoder) throws {
@@ -39,6 +44,8 @@ final class Bounty: Codable {
         title = try container.decode(String.self, forKey: .title)
         points = try container.decode(Int.self, forKey: .points)
         completed = try container.decode(Bool.self, forKey: .completed)
+        profile = try container.decodeIfPresent([Profile].self, forKey: .profile)
+        parentId = try container.decode(UUID.self, forKey: .parentId)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -47,5 +54,7 @@ final class Bounty: Codable {
         try container.encode(title, forKey: .title)
         try container.encode(points, forKey: .points)
         try container.encode(completed, forKey: .completed)
+        try container.encode(profile, forKey: .profile)
+        try container.encode(parentId, forKey: .parentId)
     }
 }

@@ -8,12 +8,6 @@
 import Foundation
 import SwiftData
 
-enum UserType: String, CaseIterable, Codable {
-    case unknown
-    case parent
-    case child
-}
-
 @Model
 final class User {
 
@@ -22,9 +16,6 @@ final class User {
     var name: String
     var iceCreamPoints: Int
     var negativeIceCreamPoints: Int
-    var type: String
-    @Relationship(deleteRule: .cascade) var children: [User]?
-    // @Relationship(deleteRule: .cascade, inverse: \Bounty.user) var bounties: [Bounty]
 
     @Transient lazy var orderedDataPoints: [PointData] = {
         dataPoints.sorted { $0.month < $1.month }
@@ -36,16 +27,12 @@ final class User {
          name: String,
          iceCreamPoints: Int,
          negativeIceCreamPoints: Int,
-         type: String,
-         children: [User] = []) {
+    ) {
         self.id = id
         self.dataPoints = dataPoints
-        // self.bounties = bounties
         self.name = name
         self.iceCreamPoints = iceCreamPoints
         self.negativeIceCreamPoints = negativeIceCreamPoints
-        self.type =  type
-        self.children = children
     }
 }
 
@@ -121,8 +108,6 @@ extension User: Equatable {
         return lhs.name == rhs.name &&
         lhs.dataPoints == rhs.dataPoints  &&
         lhs.iceCreamPoints == rhs.iceCreamPoints &&
-        lhs.negativeIceCreamPoints == rhs.negativeIceCreamPoints &&
-        lhs.type == rhs.type &&
-        lhs.children == rhs.children
+        lhs.negativeIceCreamPoints == rhs.negativeIceCreamPoints
     }
 }
