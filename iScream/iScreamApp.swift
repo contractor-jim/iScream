@@ -16,7 +16,7 @@ struct iScreamApp: App {
 
     init() {
         let schema = Schema([
-            User.self,
+            Profile.self,
             PointData.self,
             Bounty.self
         ])

@@ -44,11 +44,13 @@ class SignUpInteractor: GenericInteractorImp<SignUpEntity>, SignUpInteractorProt
     func signUp(email: String, password: String, nickname: String) async throws {
         let userId = try await userService!.registerUser(email: email, password: password, nickname: nickname)
         try await userService!.insertProfile(profile: Profile(userName: nickname,
-                                                              type: "parent",
+                                                              type: .parent,
                                                               points: 0,
                                                               negativePoints: 0,
                                                               parentId: nil,
                                                               authId: userId,
-                                                              children: nil))
+                                                              children: nil,
+                                                              managedBounties: nil,
+                                                              bounties: nil))
     }
 }

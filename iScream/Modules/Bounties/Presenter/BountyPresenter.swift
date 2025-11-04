@@ -8,21 +8,19 @@
 import SwiftUI
 
 protocol BountyPresenterProtocol: GenericPresenter {
-    var user: User? { get }
     var navPath: Binding<NavigationPath> { get }
-    func fetch() async
+    func fetch() async throws
 }
 
 @Observable
 class BountyPresenter: GenericPresenterImp<BountyInteractor, BountyRouter>,
                        BountyPresenterProtocol, Observable {
-    var user: User?
-
+    var profile: Profile?
     var navPath: Binding<NavigationPath> {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
     }
 
-    func fetch() async {
-        user = await interactor.fetchMyUser()
+    func fetch() async throws {
+        profile = try await interactor.fetchMyUserProfile()
     }
 }

@@ -18,14 +18,16 @@ struct LoginPresenterTests {
 
     init() throws {
         mockUserService = MockUserService()
-        mockUserService.mockProfile = Profile(id: nil,
-                                           userName: "Test",
-                                           type: "parent",
-                                           points: 0,
-                                           negativePoints: 0,
-                                           parentId: UUID(),
+        mockUserService.mockProfile = Profile(id: UUID(),
+                                              userName: "McTest",
+                                              type: .parent,
+                                              points: 1000,
+                                              negativePoints: -100,
+                                              parentId: nil,
                                               authId: UUID(),
-                                              children: [])
+                                              children: [],
+                                              managedBounties: [],
+                                              bounties: [])
 
         router = LoginRouter()
         interactor = LoginInteractor(entity: LoginEntity(), services: [mockUserService, DefaultUserValidationService()])!

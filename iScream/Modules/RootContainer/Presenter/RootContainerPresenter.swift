@@ -24,24 +24,20 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
         do {
             userProfile = try await interactor.fetchMyUserProfile()
         } catch { }
-
     }
-    // TODO: Retest this
-    func getBountyBadgeCount() -> Int {
-        // TODO: Reimplement the badge count when we add database bounties
 
-        /*
+    func getBountyBadgeCount() -> Int {
         guard let userProfile else {
             return 0
         }
 
-        if user.type == UserType.child.rawValue {
-            return user.openBounties.count
-        } else if user.type == UserType.parent.rawValue {
+        if userProfile.type == UserType.child {
+            return userProfile.openBounties.count
+        } else if userProfile.type == UserType.parent {
             // TODO: Need another state called pending complete to tell the parent of bounties the child claims to have completed
             return 0
         }
-        */
+
         return 0
     }
 }

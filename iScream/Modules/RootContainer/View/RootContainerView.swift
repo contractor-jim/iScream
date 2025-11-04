@@ -56,10 +56,10 @@ struct LoggedInTabBarView: View {
     var body: some View {
         TabView {
             Tab("general.title.people", systemImage: "person.fill") {
-                if profile.type == UserType.parent.rawValue {
+                if profile.type == UserType.parent {
                     ViperContainerBuilder.buildParentListChildrenViewBuilder()
                         .accessibilityIdentifier("parent-children-list-view")
-                } else if profile.type == UserType.child.rawValue {
+                } else if profile.type == UserType.child {
                     ViperContainerBuilder.buildChildDashboardView()
                         .accessibilityIdentifier("children-list-view")
                 }
