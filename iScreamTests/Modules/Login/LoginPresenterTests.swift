@@ -57,7 +57,7 @@ struct LoginPresenterTests {
         result: String
     ) async throws {
         presenter.email = email
-        presenter.password = "ABCDabcd1234_@"
+        presenter.password = "ValidPassword1@"
         #expect(presenter.isValidEmail() == result)
         #expect(presenter.validationPassed == (result == "") )
     }
@@ -68,15 +68,21 @@ struct LoginPresenterTests {
              result: "Missing Password"),
 
             (password: "flobbyDobby",
-             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( #?!@$%^&*-_ )"),
+             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( $@$!%*#?& )"),
 
             (password: "12343",
-             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( #?!@$%^&*-_ )"),
+             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( $@$!%*#?& )"),
 
             (password: "*£$£@$£$@£",
-             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( #?!@$%^&*-_ )"),
+             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( $@$!%*#?& )"),
 
-            (password: "*ValidPassword1_",
+            (password: "abc34@",
+             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( $@$!%*#?& )"),
+
+            (password: "abc34@",
+             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( $@$!%*#?& )"),
+
+            (password: "ValidPassword1@",
              result: "")
     ])
     func testPasswordValidation_ReturnsCountOf3(
@@ -100,7 +106,7 @@ struct LoginPresenterTests {
              result: false),
 
             (email: "test@test.test",
-             password: "ABCD1234_",
+             password: "ABCd1234@",
              result: true),
 
             (email: "testtrue@test.test",
@@ -120,7 +126,7 @@ struct LoginPresenterTests {
              result: false),
 
             (email: "test@test.com",
-             password: "ABCDbc12",
+             password: "ABCDbc12@",
              result: true)
     ])
     func testFormValidation(
