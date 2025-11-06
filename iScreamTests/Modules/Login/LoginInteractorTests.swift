@@ -74,7 +74,31 @@ struct LoginInteractorTests {
             (password: "abc34@",
              result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( $@$!%*#?& )"),
 
+            (password: "Abc34@",
+             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( $@$!%*#?& )"),
+
             (password: "ValidPassword1@",
+             result: ""),
+
+            (password: "ValidPassword2$",
+             result: ""),
+
+            (password: "ValidPa4!",
+             result: ""),
+
+            (password: "ValidPassword2%",
+             result: ""),
+
+            (password: "ValidPassword2*",
+             result: ""),
+
+            (password: "ValidPassword2?",
+             result: ""),
+
+            (password: "ValidPassword2&",
+             result: ""),
+
+            (password: "ValidPassword2#",
              result: "")
     ])
     func testEmailValidation_ReturnsCountOf3(
