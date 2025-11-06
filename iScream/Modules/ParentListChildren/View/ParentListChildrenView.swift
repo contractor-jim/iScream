@@ -59,9 +59,9 @@ struct DashboardChildCellView: View {
                 }
             }
         }
-        .navigationDestination(for: User.self) { user in
+        .navigationDestination(for: Profile.self) { profile in
             Text("Child Detail view")
-                .navigationTitle(user.name)
+                .navigationTitle(profile.userName)
                 .navigationBarTitleDisplayMode(.inline)
         }
         .navigationTitle(Text("general.title.people"))

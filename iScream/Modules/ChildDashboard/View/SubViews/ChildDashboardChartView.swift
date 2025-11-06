@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChildDashboardChartView: View {
-    @State var user: User!
+    @State var profile: Profile!
     @State private var interpolationValue: CGFloat = 0.0
 
     var presenter: ChildDashboardPresenter
@@ -28,7 +28,7 @@ struct ChildDashboardChartView: View {
             .padding(0)
             .padding(.top, Style.topPadding)
 
-            AnimatedChartView(user: user)
+            AnimatedChartView(profile: profile)
                 .padding([.bottom], Style.fullPadding)
                 .padding([.leading, .trailing], Style.halfPadding)
                 .accessibilityIdentifier("child-dashboard-chart-view")

@@ -75,17 +75,26 @@ class DefaultSupaBaseService: GenericService, SupaBaseService {
     func function<T: Codable>(functionName: String,
                               params: [String: some Encodable & Sendable],
                               object: T.Type) async throws -> [T] {
-        let response = try await client?.rpc(functionName,
-                                             params: params).execute()
 
-        let decoder = JSONDecoder()
-        let objects = try decoder.decode([T].self, from: response!.data)
+        do {
+            let response = try await client?.rpc(functionName,
+                                                 params: params).execute()
 
-        if objects.count < 0 {
-            // TODO: Test and handle error when no profile is found
-            return []
+            // print(">>> RESPONSE \(String(data: response!.data, encoding: .utf8))")
+
+            let decoder = JSONDecoder()
+            let objects = try decoder.decode([T].self, from: response!.data)
+
+            if objects.count < 0 {
+                // TODO: Test and handle error when no profile is found
+                return []
+            }
+
+            return objects
+        } catch {
+            print(">>> ERROR \(error)")
         }
 
-        return objects
+        return []
     }
 }

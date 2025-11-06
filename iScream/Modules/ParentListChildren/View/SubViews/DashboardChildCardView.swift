@@ -57,21 +57,21 @@ struct DashBoardChildCardTitleView: View {
 }
 
 struct DashBoardChildCardScoreView: View {
-    let user: User!
+    let profile: Profile!
 
     var body: some View {
         VStack(alignment: .center) {
-            Text("\(user.aggregateSinceLastMonth >= 0 ? "+" : "")\(user.aggregateSinceLastMonth)")
+            Text("\(profile.aggregateSinceLastMonth >= 0 ? "+" : "")\(profile.aggregateSinceLastMonth)")
                 .font(CustomFont.subHeaderFont)
                 .lineLimit(1)
                 .minimumScaleFactor(0.01)
-                .foregroundStyle(user.aggregateSinceLastMonth >= 0 ? .green : .red)
+                .foregroundStyle(profile.aggregateSinceLastMonth >= 0 ? .green : .red)
             Text(
                 String(
                     format: NSLocalizedString("dashboard.childpoints.since.label",
                                               bundle: .main,
                                               comment: ""),
-                    user.dataPoints.dropLast().last!.monthString)
+                    profile.dataPoints?.dropLast().last!.monthString ?? "")
             )
             .font(CustomFont.smallFontBody)
             .multilineTextAlignment(.center)

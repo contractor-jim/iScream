@@ -10,7 +10,7 @@ import SwiftData
 
 protocol ParentListChildrenPresenterProtocol: GenericPresenter {
     func fetch() async
-    func navigateChildDetailView(user: User)
+    func navigateChildDetailView(profile: Profile)
 }
 
 @Observable
@@ -30,7 +30,7 @@ class ParentListChildrenPresenter: GenericPresenterImp<ParentListChildrenInterac
         } catch { }
     }
 
-    func navigateChildDetailView(user: User) {
-        router.navigateChildDetailView(user: user)
+    func navigateChildDetailView(profile: Profile) {
+        router.navigateChildDetailView(profile: profile)
     }
 }

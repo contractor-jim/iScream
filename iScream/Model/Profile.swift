@@ -26,6 +26,8 @@ final class Profile: Codable {
     var children: [Profile]?
     var managedBounties: [Bounty]?
     var bounties: [Bounty]?
+    var dataPoints: [PointData]?
+    // @Relationship(deleteRule: .cascade, inverse: \PointData.user) var dataPoints: [PointData]
 
     enum CodingKeys: String, CodingKey {
         case id, type, points, negativePoints, children, bounties
@@ -33,6 +35,7 @@ final class Profile: Codable {
         case parentId = "parent_id"
         case authId = "auth_id"
         case managedBounties = "managed_bounties"
+        case dataPoints = "data_points"
     }
 
     init(id: UUID? = nil,
@@ -44,7 +47,8 @@ final class Profile: Codable {
          authId: UUID,
          children: [Profile]?,
          managedBounties: [Bounty]?,
-         bounties: [Bounty]?) {
+         bounties: [Bounty]?,
+         dataPoints: [PointData]?) {
         self.id = id
         self.userName = userName
         self.type = type
@@ -55,6 +59,7 @@ final class Profile: Codable {
         self.children = children
         self.managedBounties = managedBounties
         self.bounties = bounties
+        self.dataPoints = dataPoints
     }
 
     init(from decoder: Decoder) throws {
@@ -69,6 +74,7 @@ final class Profile: Codable {
         children = try container.decodeIfPresent([Profile].self, forKey: .children)
         managedBounties = try container.decodeIfPresent([Bounty].self, forKey: .managedBounties)
         bounties = try container.decodeIfPresent([Bounty].self, forKey: .managedBounties)
+        dataPoints = try container.decodeIfPresent([PointData].self, forKey: .dataPoints)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -82,8 +88,12 @@ final class Profile: Codable {
         try container.encode(authId, forKey: .authId)
         try container.encode(children, forKey: .children)
         try container.encode(managedBounties, forKey: .managedBounties)
-        try container.encode(bounties, forKey: .bounties)
+        try container.encode(dataPoints, forKey: .dataPoints)
     }
+
+    @Transient lazy var orderedDataPoints: [PointData] = {
+        dataPoints?.sorted { $0.month < $1.month } ?? []
+    }()
 }
 
 extension Profile {
@@ -94,6 +104,63 @@ extension Profile {
 
     var completedBounties: [Bounty] {
         bounties?.filter { $0.completed == true } ?? []
+    }
+
+    var hasImproved: Bool {
+        guard self.orderedDataPoints.count > 1 else {
+            return false
+        }
+
+        return self.orderedDataPoints.first?.points ?? 0 < self.orderedDataPoints.last?.points ?? 0
+    }
+
+    var max: Int {
+        guard self.orderedDataPoints.count > 0 else {
+            return 0
+        }
+
+        guard self.orderedDataPoints.count > 1 else {
+            return orderedDataPoints[0].points
+        }
+
+        return self.orderedDataPoints.max { $0.points > $1.points }?.points ?? 0
+    }
+
+    var chartYMax: Int {
+        guard self.orderedDataPoints.count > 0 else {
+            return 0
+        }
+
+        guard self.orderedDataPoints.count > 1 else {
+            return orderedDataPoints[0].points
+        }
+
+        return self.orderedDataPoints.max { $0.points < $1.points }?.points ?? 0
+    }
+
+    var chartYMin: Int {
+        guard self.orderedDataPoints.count > 0 else {
+            return 0
+        }
+
+        guard self.orderedDataPoints.count > 1 else {
+            return orderedDataPoints[0].points
+        }
+
+        return self.orderedDataPoints.min { $0.points < $1.points }?.points ?? 0
+    }
+
+    var aggregateSinceLastMonth: Int {
+
+        guard orderedDataPoints.count > 0 else {
+            return 0
+        }
+
+        guard orderedDataPoints.count > 1 else {
+            return orderedDataPoints.first!.points
+        }
+
+        return orderedDataPoints.last!.points - orderedDataPoints.dropLast().last!.points
     }
 }
 
@@ -108,5 +175,11 @@ extension Profile: Equatable {
         lhs.authId == rhs.authId &&
         lhs.children == rhs.children &&
         lhs.bounties == rhs.bounties
+    }
+}
+
+extension Profile: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
