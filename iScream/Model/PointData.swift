@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftData
-
+// TODO: Test this
 @Model
 final class PointData: Codable {
     @Attribute(.unique) var id: UUID

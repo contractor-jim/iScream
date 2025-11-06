@@ -47,7 +47,8 @@ struct BountyPresenterTests {
                               children: [],
                               managedBounties: [],
                               bounties: [],
-                              dataPoints: [])
+                              dataPoints: [],
+                              achivements: [])
 
         mockUserService.mockProfile = profile
 

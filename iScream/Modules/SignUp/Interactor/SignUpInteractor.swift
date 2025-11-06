@@ -52,6 +52,7 @@ class SignUpInteractor: GenericInteractorImp<SignUpEntity>, SignUpInteractorProt
                                                               children: nil,
                                                               managedBounties: nil,
                                                               bounties: nil,
-                                                              dataPoints: nil))
+                                                              dataPoints: nil,
+                                                              achivements: nil))
     }
 }

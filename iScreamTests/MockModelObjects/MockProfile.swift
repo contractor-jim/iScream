@@ -19,7 +19,8 @@ extension Profile {
                               children: [],
                               managedBounties: [],
                               bounties: [],
-                              dataPoints: [])
+                              dataPoints: [],
+                              achivements: [])
 
         return profile
     }()
