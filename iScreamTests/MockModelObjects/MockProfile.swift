@@ -20,7 +20,7 @@ extension Profile {
                               managedBounties: [],
                               bounties: [],
                               dataPoints: [],
-                              achivements: [])
+                              achievements: [])
 
         return profile
     }()
