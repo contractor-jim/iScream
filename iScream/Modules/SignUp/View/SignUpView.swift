@@ -23,7 +23,6 @@ struct SignUpView: GenericView, View {
         ZStack {
             VStack(alignment: .leading) {
                 HStack {
-
                     Button {
                       dismiss()
                     } label: {
