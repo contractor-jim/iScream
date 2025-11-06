@@ -48,15 +48,21 @@ struct SignUpPresenterTests {
              result: "Missing Password"),
 
             (password: "flobbyDobby",
-             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( #?!@$%^&*-_ )"),
+             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( $@$!%*#?& )"),
 
             (password: "12343",
-             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( #?!@$%^&*-_ )"),
+             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( $@$!%*#?& )"),
 
             (password: "*£$£@$£$@£",
-             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( #?!@$%^&*-_ )"),
+             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( $@$!%*#?& )"),
 
-            (password: "*ValidPassword1_",
+            (password: "abc34@",
+             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( $@$!%*#?& )"),
+
+            (password: "abc34@",
+             result: "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( $@$!%*#?& )"),
+
+            (password: "ValidPassword1@",
              result: "")
     ])
     func testEmailValidation_ReturnsCountOf3(

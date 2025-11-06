@@ -375,7 +375,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( #?!@$%^&*-_ )"
+            "value" : "Invalid Password password must be 8 characters long, contain one uppercase and one lowercase character. And one special character ( $@$!%*#?& )"
           }
         }
       }
