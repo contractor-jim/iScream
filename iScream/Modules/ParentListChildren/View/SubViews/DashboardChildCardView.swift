@@ -19,14 +19,11 @@ struct DashboardChildCardView: View {
             VStack(alignment: .leading) {
                 DashBoardChildCardTitleView(profile: profile)
                     .accessibilityIdentifier("parent-dashboard-card-title-view-\(profile.userName)")
-                // TODO: Add this again when we have added user chart data
-                /*
                 HStack(alignment: .top, spacing: 0) {
-                    DashBoardChildCardScoreView(user: user)
+                    DashBoardChildCardScoreView(profile: profile)
                     // TODO: This needs to be re added when we have user data
-                    AnimatedChartView(user: user)
+                    AnimatedChartView(profile: profile)
                 }
-                */
             }
             .padding(.all, Style.fullPadding)
             .font(CustomFont.subHeaderFont)
@@ -57,21 +54,22 @@ struct DashBoardChildCardTitleView: View {
 }
 
 struct DashBoardChildCardScoreView: View {
-    let user: User!
+    let profile: Profile!
 
     var body: some View {
         VStack(alignment: .center) {
-            Text("\(user.aggregateSinceLastMonth >= 0 ? "+" : "")\(user.aggregateSinceLastMonth)")
+            Text("\(profile.aggregateSinceLastMonth >= 0 ? "+" : "")\(profile.aggregateSinceLastMonth)")
                 .font(CustomFont.subHeaderFont)
                 .lineLimit(1)
                 .minimumScaleFactor(0.01)
-                .foregroundStyle(user.aggregateSinceLastMonth >= 0 ? .green : .red)
+                .foregroundStyle(profile.aggregateSinceLastMonth >= 0 ? .green : .red)
             Text(
+                // TODO: HERE
                 String(
                     format: NSLocalizedString("dashboard.childpoints.since.label",
                                               bundle: .main,
                                               comment: ""),
-                    user.dataPoints.dropLast().last!.monthString)
+                    profile.lastMonthString)
             )
             .font(CustomFont.smallFontBody)
             .multilineTextAlignment(.center)

@@ -35,12 +35,12 @@ class DefaultUserService: GenericService, UserService {
             }
 
             do {
-                try modelContext.delete(model: User.self)
+                try modelContext.delete(model: Profile.self)
             } catch {
                 fatalError("Failed to clear the cache \(error)")
             }
 
-            createMockUsers(modelContext: modelContext)
+            // createMockUsers(modelContext: modelContext)
 
             DefaultUserService.didLoad = true
         }
@@ -118,9 +118,12 @@ class DefaultUserService: GenericService, UserService {
     }
 }
 
+// TODO: Generate the profile from JSON MOCK
+/*
 extension DefaultUserService {
 
     fileprivate func createMockUsers(modelContext: ModelContext) {
+
         let jacksUUID = UUID()
         let jemsUUID = UUID()
         let chrisUUID = UUID()
@@ -220,3 +223,4 @@ extension DefaultUserService {
         }
     }
 }
+*/

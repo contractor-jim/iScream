@@ -15,7 +15,6 @@ enum TestError: Error, Equatable {
 
 class MockUserService: GenericService, UserService {
 
-    var mockUser: User?
     var shouldFailSignup: Bool = false
     var shouldFailLogin: Bool = false
 
@@ -53,6 +52,6 @@ class MockUserService: GenericService, UserService {
 
 extension MockUserService: Equatable {
     static func == (lhs: MockUserService, rhs: MockUserService) -> Bool {
-        lhs.mockUser == rhs.mockUser
+        lhs.mockProfile == rhs.mockProfile
     }
 }

@@ -45,7 +45,8 @@ struct ChildDashboardInteractorTests {
                               authId: authId,
                               children: [],
                               managedBounties: [],
-                              bounties: [])
+                                  bounties: [],
+                                  dataPoints: [])
 
         mockUserService.mockProfile = mockProfile
 

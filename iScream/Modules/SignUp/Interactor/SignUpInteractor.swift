@@ -51,6 +51,7 @@ class SignUpInteractor: GenericInteractorImp<SignUpEntity>, SignUpInteractorProt
                                                               authId: userId,
                                                               children: nil,
                                                               managedBounties: nil,
-                                                              bounties: nil))
+                                                              bounties: nil,
+                                                              dataPoints: nil))
     }
 }

@@ -18,7 +18,8 @@ extension Profile {
                               authId: UUID(),
                               children: [],
                               managedBounties: [],
-                              bounties: [])
+                              bounties: [],
+                              dataPoints: [])
 
         return profile
     }()

@@ -35,7 +35,8 @@ struct RootContainerPresenterTests {
                               authId: authId,
                               children: [],
                               managedBounties: [],
-                              bounties: [])
+                              bounties: [],
+                              dataPoints: [])
 
         mockUserService.mockProfile = profile
         await presenter.fetch()
@@ -113,7 +114,8 @@ struct RootContainerPresenterTests {
                                             title: "Test3",
                                             points: 3,
                                             completed: false,
-                                            profile: [Profile.mockProfile])])
+                                            profile: [Profile.mockProfile])],
+                                  dataPoints: [])
 
             mockUserService.mockProfile = profile
             await presenter.fetch()
