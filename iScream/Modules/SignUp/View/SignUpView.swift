@@ -23,14 +23,24 @@ struct SignUpView: GenericView, View {
         ZStack {
             VStack(alignment: .leading) {
                 HStack {
+
+                    Button {
+                      dismiss()
+                    } label: {
+                      Image(systemName: "chevron.backward")
+                          .fontWeight(.medium)
+                    }
+                    .buttonBorderShape(.circle)
+                    .buttonStyle(.glass)
+
                     Spacer()
 
                     Text(.signupLabelSignup)
-                        .padding(.top, Style.fullPadding)
                         .font(CustomFont.subHeaderFont)
 
                     Spacer()
                 }
+                .padding(.top, Style.fullPadding)
 
                 Spacer()
 
