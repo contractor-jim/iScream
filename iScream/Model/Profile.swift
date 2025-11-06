@@ -14,6 +14,7 @@ enum UserType: String, CaseIterable, Codable {
     case child
 }
 
+// TODO: Test this
 @Model
 final class Profile: Codable {
     var id: UUID?
@@ -28,9 +29,10 @@ final class Profile: Codable {
     var bounties: [Bounty]?
     var dataPoints: [PointData]?
     // @Relationship(deleteRule: .cascade, inverse: \PointData.user) var dataPoints: [PointData]
+    var achivements: [Achievement]?
 
     enum CodingKeys: String, CodingKey {
-        case id, type, points, negativePoints, children, bounties
+        case id, type, points, negativePoints, children, bounties, achivements
         case userName = "user_name"
         case parentId = "parent_id"
         case authId = "auth_id"
@@ -48,7 +50,8 @@ final class Profile: Codable {
          children: [Profile]?,
          managedBounties: [Bounty]?,
          bounties: [Bounty]?,
-         dataPoints: [PointData]?) {
+         dataPoints: [PointData]?,
+         achivements: [Achievement]?) {
         self.id = id
         self.userName = userName
         self.type = type
@@ -60,6 +63,7 @@ final class Profile: Codable {
         self.managedBounties = managedBounties
         self.bounties = bounties
         self.dataPoints = dataPoints
+        self.achivements = achivements
     }
 
     init(from decoder: Decoder) throws {
@@ -74,6 +78,7 @@ final class Profile: Codable {
         children = try container.decodeIfPresent([Profile].self, forKey: .children)
         managedBounties = try container.decodeIfPresent([Bounty].self, forKey: .managedBounties)
         bounties = try container.decodeIfPresent([Bounty].self, forKey: .managedBounties)
+        achivements = try container.decodeIfPresent([Achievement].self, forKey: .achivements)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -88,6 +93,7 @@ final class Profile: Codable {
         try container.encode(children, forKey: .children)
         try container.encode(managedBounties, forKey: .managedBounties)
         try container.encode(dataPoints, forKey: .dataPoints)
+        try container.encode(achivements, forKey: .achivements)
     }
 
     @Transient lazy var orderedDataPoints: [PointData] = {
@@ -185,7 +191,9 @@ extension Profile: Equatable {
         lhs.parentId == rhs.parentId &&
         lhs.authId == rhs.authId &&
         lhs.children == rhs.children &&
-        lhs.bounties == rhs.bounties
+        lhs.bounties == rhs.bounties &&
+        lhs.dataPoints == rhs.dataPoints &&
+        lhs.achivements == rhs.achivements
     }
 }
 

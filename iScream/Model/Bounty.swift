@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftData
-
+// TODO: Test this
 @Model
 final class Bounty: Codable {
     @Attribute(.unique) var id: UUID
@@ -56,5 +56,15 @@ final class Bounty: Codable {
         try container.encode(completed, forKey: .completed)
         try container.encode(profile, forKey: .profile)
         try container.encode(parentId, forKey: .parentId)
+    }
+}
+
+extension Bounty: Equatable {
+    static func == (lhs: Bounty, rhs: Bounty) -> Bool {
+        rhs.id == rhs.id &&
+        rhs.title == rhs.title &&
+        rhs.points == rhs.points &&
+        rhs.completed == rhs.completed &&
+        rhs.parentId == rhs.parentId
     }
 }

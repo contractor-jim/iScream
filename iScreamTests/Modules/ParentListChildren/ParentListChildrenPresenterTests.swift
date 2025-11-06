@@ -47,7 +47,8 @@ struct ParentListChildrenPresenterTests {
                               children: [],
                               managedBounties: [],
                               bounties: [],
-                              dataPoints: [])
+                              dataPoints: [],
+                              achivements: [])
 
         mockUserService.mockProfile = profile
         await presenter.fetch()

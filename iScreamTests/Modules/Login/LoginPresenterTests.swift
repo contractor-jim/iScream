@@ -28,7 +28,8 @@ struct LoginPresenterTests {
                                               children: [],
                                               managedBounties: [],
                                               bounties: [],
-                                              dataPoints: [])
+                                              dataPoints: [],
+                                              achivements: [])
 
         router = LoginRouter()
         interactor = LoginInteractor(entity: LoginEntity(), services: [mockUserService, DefaultUserValidationService()])!

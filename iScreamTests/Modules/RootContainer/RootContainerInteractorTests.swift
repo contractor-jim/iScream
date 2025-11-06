@@ -53,7 +53,8 @@ struct RootContainerInteractorTests {
                               children: [],
                               managedBounties: [],
                               bounties: [],
-                              dataPoints: [])
+                              dataPoints: [],
+                              achivements: [])
 
         mockUserService.mockProfile = profile
 
