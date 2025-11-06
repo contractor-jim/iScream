@@ -40,8 +40,6 @@ class DefaultUserService: GenericService, UserService {
                 fatalError("Failed to clear the cache \(error)")
             }
 
-            // createMockUsers(modelContext: modelContext)
-
             DefaultUserService.didLoad = true
         }
     }
