@@ -8,7 +8,12 @@
 import SwiftUI
 
 protocol RootContainerPresenterProtocol: GenericPresenter {
-    func fetch() async
+
+    // Error Handeling
+    var errorShown: Bool { get set }
+    var loginError: Error? { get set }
+
+    func fetch() async throws
     func getBountyBadgeCount() -> Int
 }
 
@@ -18,12 +23,18 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
 
     var userProfile: Profile?
     var requiringLogIn: Bool = true
+    var errorShown: Bool = false
+    var loginError: Error?
 
-    func fetch() async {
-        // TODO: Handle the error elegantly
+    // TODO: Test this
+    func fetch() async throws {
         do {
             userProfile = try await interactor.fetchMyUserProfile()
-        } catch { }
+        } catch {
+            requiringLogIn = true
+            errorShown = true
+            loginError = LoginError.failedToLoadProfile
+        }
     }
 
     func getBountyBadgeCount() -> Int {

@@ -40,7 +40,7 @@ struct RootContainerPresenterTests {
                               achivements: [])
 
         mockUserService.mockProfile = profile
-        await presenter.fetch()
+        try await presenter.fetch()
 
         #expect(presenter.userProfile != nil)
         #expect(presenter.userProfile == profile)
@@ -51,8 +51,7 @@ struct RootContainerPresenterTests {
         #expect(presenter.getBountyBadgeCount() == 0)
     }
 
-    @Test("POSITIVE - RootContainerPresenter - getBountyBadgeCount",
-          arguments: [
+    @Test("POSITIVE - RootContainerPresenter - getBountyBadgeCount", arguments: [
             // TODO: Need to fix this
             /*
             (userType: "child",
@@ -120,8 +119,27 @@ struct RootContainerPresenterTests {
                                   achivements: [])
 
             mockUserService.mockProfile = profile
-            await presenter.fetch()
+            try await presenter.fetch()
             try #require(presenter.userProfile != nil)
             #expect(presenter.getBountyBadgeCount() == expectedCount)
+    }
+
+    @Test("NEGATIVE - RootContainerPresenter - fetch user profile fials throw error") func testFetchError() async throws {
+
+        mockUserService.shouldThrowError = LoginError.failedToLoadProfile
+
+        do {
+            try await presenter.fetch()
+        } catch {
+            #expect(presenter.userProfile == nil)
+            #expect(presenter.errorShown == true)
+            guard let loginError = error as? LoginError else {
+                #expect(Bool(false), "Should be the same type of error")
+                return
+            }
+
+            #expect(loginError == LoginError.failedToLoadProfile)
+            #expect(loginError == LoginError.failedToLoadProfile)
+        }
     }
 }

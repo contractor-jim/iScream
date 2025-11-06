@@ -25,18 +25,12 @@ struct RootContainerView: View, GenericView {
         } else {
             VStack {
                 ProgressView()
-                    .onAppear {
-                        Task {
-                            // TODO: Need to check if a user is logged in, token needs refreshing e.t.c.
-                            // await presenter.fetch()
-                        }
-                    }
                     .sheet(isPresented: $presenter.requiringLogIn) {
                         ViperContainerBuilder.buildLoginView()
                         .onDisappear {
                             Task {
                                 // TODO: Need to check if a user is logged in, token needs refreshing e.t.c.
-                                await presenter.fetch()
+                                try await presenter.fetch()
                             }
                         }
                     }
@@ -45,6 +39,18 @@ struct RootContainerView: View, GenericView {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.mainBackground)
+            .alert(.dialogSignupErrorTitle,
+                   isPresented: $presenter.errorShown,
+                   presenting: $presenter.loginError,
+                   actions: { _ in
+                Button(.genericButtonOk) {
+                    presenter.errorShown = false
+                }
+                .keyboardShortcut(.defaultAction)
+
+            }, message: { signupError in
+                Text("\(signupError.wrappedValue!.localizedDescription)")
+            })
         }
     }
 }
