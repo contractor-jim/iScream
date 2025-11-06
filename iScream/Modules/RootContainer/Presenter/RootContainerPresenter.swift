@@ -26,7 +26,6 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
     var errorShown: Bool = false
     var loginError: Error?
 
-    // TODO: Test this
     func fetch() async throws {
         do {
             userProfile = try await interactor.fetchMyUserProfile()
