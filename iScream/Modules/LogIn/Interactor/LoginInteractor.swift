@@ -8,7 +8,7 @@
 import SwiftUI
 
 protocol LoginInteractorProtocol: GenericInteractor {
-    func loginUser(email: String, password: String) async throws -> Profile
+    func loginUser(email: String, password: String) async throws
 }
 
 class LoginInteractor: GenericInteractorImp<LoginEntity>, LoginInteractorProtocol {
@@ -33,11 +33,8 @@ class LoginInteractor: GenericInteractorImp<LoginEntity>, LoginInteractorProtoco
         return userValidationService!.isValidPassword(password: password)
     }
 
-    func loginUser(email: String, password: String) async throws -> Profile {
-        _ = try await userService?.loginUser(email: email, password: password)
+    func loginUser(email: String, password: String) async throws {
         // TODO: This needs to be better handeld error wise
-        let profile = try await userService?.fetchProfile()
-        // TODO: Need to handle error case when a profile doesn't return correctly
-        return profile!
+        _ = try await userService?.loginUser(email: email, password: password)
     }
 }

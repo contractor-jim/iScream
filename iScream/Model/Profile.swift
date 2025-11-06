@@ -75,10 +75,29 @@ final class Profile: Codable {
         negativePoints = try container.decode(Int.self, forKey: .negativePoints)
         parentId = try container.decodeIfPresent(UUID.self, forKey: .parentId)
         authId = try container.decode(UUID.self, forKey: .authId)
-        children = try container.decodeIfPresent([Profile].self, forKey: .children)
-        managedBounties = try container.decodeIfPresent([Bounty].self, forKey: .managedBounties)
-        bounties = try container.decodeIfPresent([Bounty].self, forKey: .managedBounties)
-        achivements = try container.decodeIfPresent([Achievement].self, forKey: .achivements)
+        do {
+            children = try container.decodeIfPresent([Profile].self, forKey: .children)
+        } catch {
+            children = []
+        }
+
+        do {
+            managedBounties = try container.decodeIfPresent([Bounty].self, forKey: .managedBounties)
+        } catch {
+            managedBounties = []
+        }
+
+        do {
+            bounties = try container.decodeIfPresent([Bounty].self, forKey: .managedBounties)
+        } catch {
+            bounties = []
+        }
+
+        do {
+            achivements = try container.decodeIfPresent([Achievement].self, forKey: .achivements)
+        } catch {
+            achivements = []
+        }
     }
 
     func encode(to encoder: Encoder) throws {
