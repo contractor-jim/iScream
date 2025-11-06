@@ -46,7 +46,8 @@ struct ParentListChildrenPresenterTests {
                               authId: authId,
                               children: [],
                               managedBounties: [],
-                              bounties: [])
+                              bounties: [],
+                              dataPoints: [])
 
         mockUserService.mockProfile = profile
         await presenter.fetch()
@@ -80,8 +81,8 @@ struct ParentListChildrenPresenterTests {
 
         // Navigate to user
         // TODO: Need to make this user as part of the mocked model to refactor out duplicate generation
-        let mockedUser = User.mockUser
-        presenter?.navigateChildDetailView(user: mockedUser)
+        let mockedProfile = Profile.mockProfile
+        presenter?.navigateChildDetailView(profile: mockedProfile)
 
         #expect(presenter?.navPath.wrappedValue.isEmpty == false)
         #expect(presenter?.navPath.wrappedValue.count == 1)

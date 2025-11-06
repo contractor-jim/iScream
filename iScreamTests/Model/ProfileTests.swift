@@ -25,7 +25,8 @@ struct ProfileTests {
                                 authId: parentAuthId,
                                 children: [],
                                 managedBounties: [],
-                                bounties: [])
+                                bounties: [],
+                                dataPoints: [])
 
     }
 

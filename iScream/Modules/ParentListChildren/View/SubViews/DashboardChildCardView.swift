@@ -19,14 +19,11 @@ struct DashboardChildCardView: View {
             VStack(alignment: .leading) {
                 DashBoardChildCardTitleView(profile: profile)
                     .accessibilityIdentifier("parent-dashboard-card-title-view-\(profile.userName)")
-                // TODO: Add this again when we have added user chart data
-                /*
                 HStack(alignment: .top, spacing: 0) {
-                    DashBoardChildCardScoreView(user: user)
+                    DashBoardChildCardScoreView(profile: profile)
                     // TODO: This needs to be re added when we have user data
-                    AnimatedChartView(user: user)
+                    AnimatedChartView(profile: profile)
                 }
-                */
             }
             .padding(.all, Style.fullPadding)
             .font(CustomFont.subHeaderFont)
@@ -67,11 +64,12 @@ struct DashBoardChildCardScoreView: View {
                 .minimumScaleFactor(0.01)
                 .foregroundStyle(profile.aggregateSinceLastMonth >= 0 ? .green : .red)
             Text(
+                // TODO: HERE
                 String(
                     format: NSLocalizedString("dashboard.childpoints.since.label",
                                               bundle: .main,
                                               comment: ""),
-                    profile.dataPoints?.dropLast().last!.monthString ?? "")
+                    profile.lastMonthString)
             )
             .font(CustomFont.smallFontBody)
             .multilineTextAlignment(.center)

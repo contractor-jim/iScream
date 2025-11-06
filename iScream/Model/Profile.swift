@@ -74,7 +74,6 @@ final class Profile: Codable {
         children = try container.decodeIfPresent([Profile].self, forKey: .children)
         managedBounties = try container.decodeIfPresent([Bounty].self, forKey: .managedBounties)
         bounties = try container.decodeIfPresent([Bounty].self, forKey: .managedBounties)
-        dataPoints = try container.decodeIfPresent([PointData].self, forKey: .dataPoints)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -161,6 +160,18 @@ extension Profile {
         }
 
         return orderedDataPoints.last!.points - orderedDataPoints.dropLast().last!.points
+    }
+
+    var lastMonthString: String {
+        guard dataPoints?.count ?? 0 > 1 else {
+            return ""
+        }
+
+        if dataPoints?.count ?? 0 == 1 {
+            return dataPoints?.last!.monthString ?? "Error"
+        }
+
+        return dataPoints?.dropLast().last!.monthString ?? "Error"
     }
 }
 

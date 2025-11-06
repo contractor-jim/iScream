@@ -17,7 +17,7 @@ struct ParentListChildrenRouterTests {
     }
 
     @Test("POSITIVE - ParentListChildrenRouter - navigateChildDetails ") func testNavPath() {
-        router.navigateChildDetailView(user: User.mockUser)
+        router.navigateChildDetailView(profile: Profile.mockProfile)
         #expect(router.nav.isEmpty == false)
         #expect(router.nav.count == 1)
     }
