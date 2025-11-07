@@ -44,47 +44,47 @@ class DefaultUserService: GenericService, UserService {
         }
     }
 
-    /*
-     WE ARE CALLING ACTUALL FUNCTIONS FROM HERE
-     */
     func getLoggedInUserId() async throws -> UUID? {
-        return try await supabaseService.client?.auth.user().id
+        do {
+            return try await supabaseService.getLoggedInUserId()
+        } catch {
+            throw UserError.loggedInUserNotFound
+        }
     }
 
     func registerUser(email: String, password: String, nickname: String) async throws -> UUID {
-        let response = try await supabaseService.client?.auth.signUp(
-          email: email,
-          password: password,
-          data: ["display_name": .string(nickname)]
-        )
-
-        // TODO: Test that a UUID exists and the response was succesfull
-        return response!.user.id
+        do {
+            return try await supabaseService.registerUser(email: email, password: password, nickname: nickname)!
+        } catch {
+            throw UserError.registrationFailed
+        }
     }
 
     func loginUser(email: String, password: String) async throws -> UUID {
-        let response = try await supabaseService.client?.auth.signIn(
-            email: email,
-            password: password
-        )
-
-        // TODO: Test that a UUID exists and the response was succesfull
-        return response!.user.id
+        do {
+            return try await supabaseService.loginUser(email: email, password: password)
+        } catch {
+            throw UserError.loginFailed
+        }
     }
 
     func insertProfile(profile: Profile) async throws {
-        try await supabaseService.insert(table: "user_profile", object: profile)
+        do {
+            try await supabaseService.insertProfile(profile: profile)
+        } catch {
+            throw UserError.createProfileFailed
+        }
     }
 
     func fetchProfile() async throws -> Profile? {
-        // TODO: need to throw error if there is no valid user service
         guard let userId = try await getLoggedInUserId() else {
-            // TODO: Add error handeling here
-            return nil
+            throw UserError.loggedInUserNotFound
         }
 
-        return try await supabaseService.function(functionName: "get_profile",
-                                                   params: ["auth_id": userId],
-                                                   object: Profile.self)[0]
+        do {
+            return try await supabaseService.fetchProfile(userId: userId)
+        } catch {
+            throw UserError.fetchUserProfileFailed
+        }
     }
 }

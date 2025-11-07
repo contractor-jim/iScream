@@ -24,12 +24,16 @@ class RootContainerInteractor: GenericInteractorImp<RootContainerEntity>, RootCo
 
     func fetchMyUserProfile() async throws -> Profile? {
 
-        guard let userService = userService,
-              let profile =  try await userService.fetchProfile() else {
-            // TODO: Add error handeling her
-            return nil
+        guard let userService = userService else {
+            // TODO: Test this
+            throw UserError.userServiceNotFound
         }
 
-        return profile
+        do {
+            return try await userService.fetchProfile()
+        } catch {
+            // TODO: Test this
+            throw error
+        }
     }
 }

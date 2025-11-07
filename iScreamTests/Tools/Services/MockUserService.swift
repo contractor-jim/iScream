@@ -54,6 +54,10 @@ class MockUserService: GenericService, UserService {
     func getLoggedInUserId() async throws -> UUID? {
         return UUID()
     }
+
+    func registerUser(email: String, password: String, nickname: String) async throws -> UUID? {
+        return UUID()
+    }
 }
 
 extension MockUserService: Equatable {

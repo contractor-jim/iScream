@@ -127,19 +127,21 @@ struct RootContainerPresenterTests {
     @Test("NEGATIVE - RootContainerPresenter - fetch user profile fials throw error") func testFetchError() async throws {
 
         mockUserService.shouldThrowError = LoginError.failedToLoadProfile
+        var loginError: LoginError?
 
         do {
             try await presenter.fetch()
         } catch {
             #expect(presenter.userProfile == nil)
             #expect(presenter.errorShown == true)
+
             guard let loginError = error as? LoginError else {
                 #expect(Bool(false), "Should be the same type of error")
                 return
             }
-
-            #expect(loginError == LoginError.failedToLoadProfile)
-            #expect(loginError == LoginError.failedToLoadProfile)
         }
+
+        #expect(loginError == LoginError.failedToLoadProfile)
+        #expect(loginError != nil)
     }
 }

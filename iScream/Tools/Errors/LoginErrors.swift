@@ -4,7 +4,7 @@
 //
 //  Created by James Woodbridge on 06/11/2025.
 //
-
+// TODO: Test this
 enum LoginError: Error {
     case loginDetailsIncorrect
     case failedToLoadProfile

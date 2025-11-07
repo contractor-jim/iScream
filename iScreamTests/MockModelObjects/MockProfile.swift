@@ -24,4 +24,20 @@ extension Profile {
 
         return profile
     }()
+
+    static var mockChildProfile: Profile = {
+        let profile = Profile(userName: "test",
+                              type: .child,
+                              points: 100,
+                              negativePoints: 50,
+                              parentId: nil,
+                              authId: UUID(),
+                              children: [],
+                              managedBounties: [],
+                              bounties: [],
+                              dataPoints: [],
+                              achievements: [])
+
+        return profile
+    }()
 }

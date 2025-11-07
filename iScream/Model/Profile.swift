@@ -94,9 +94,9 @@ final class Profile: Codable {
         }
 
         do {
-            achivements = try container.decodeIfPresent([Achievement].self, forKey: .achivements)
+            achievements = try container.decodeIfPresent([Achievement].self, forKey: .achievements)
         } catch {
-            achivements = []
+            achievements = []
         }
     }
 
