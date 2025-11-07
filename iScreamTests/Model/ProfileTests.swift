@@ -28,7 +28,6 @@ struct ProfileTests {
                                 bounties: [],
                                 dataPoints: [],
                                 achievements: [])
-
     }
 
     @Test("POSITIVE - user profile parent init") func testInitParentUserProfile() async throws {

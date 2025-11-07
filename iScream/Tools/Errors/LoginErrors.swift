@@ -6,7 +6,7 @@
 //
 
 import Foundation
-// TODO: Test this
+
 enum LoginError: Error {
     case loginDetailsIncorrect
     case failedToLoadProfile
@@ -16,9 +16,9 @@ extension LoginError: CustomStringConvertible {
     public var description: String {
         switch self {
         case .failedToLoadProfile:
-            return "Failed to load the user profile"
+            return String(localized: .loginErrorFailedToLoadProfileError)
         case .loginDetailsIncorrect:
-            return "Username or password incorrect"
+            return String(localized: .loginErrorLoginDetailsIncorrect)
         }
     }
 }
@@ -27,9 +27,9 @@ extension LoginError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .failedToLoadProfile:
-            return "Failed to load the user profile"
+            return String(localized: .loginErrorFailedToLoadProfileError)
         case .loginDetailsIncorrect:
-            return "Username or password incorrect"
+            return String(localized: .loginErrorLoginDetailsIncorrect)
         }
     }
 }
