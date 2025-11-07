@@ -18,11 +18,11 @@ This also gives me a playground to play about with the more recent language, lib
 ### Swift
 
 ````Swift6```` ````Protocols```` ````Equatable```` ````Generics```` ````Failable Initializers```` ````SwiftData```` ````Computed Properties```` ````Lazy Vars```` ````Hashable````
-````Closures````
+````Closures```` ````do-catch```` ````Error/CustomErrors````
 
 ### SwiftUI
 
-````TabBar```` ````SFSymbols```` ````ScrollView```` ````HStack```` ````ZStack```` ````VStack```` ````ViewModifiers```` ````Custom ViewModifiers```` ````Charts```` ````List```` ````List Sections```` ````Animation```` ````MeshGradient````
+````TabBar```` ````SFSymbols```` ````ScrollView```` ````HStack```` ````ZStack```` ````VStack```` ````ViewModifiers```` ````Custom ViewModifiers```` ````Charts```` ````List```` ````List Sections```` ````Animation```` ````MeshGradient```` ````Sheets````
 
 
 ### xCode 
