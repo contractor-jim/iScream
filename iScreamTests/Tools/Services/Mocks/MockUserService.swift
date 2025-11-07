@@ -22,6 +22,8 @@ class MockUserService: GenericService, UserService {
     var mockProfile: Profile?
     var mockUserID = UUID()
 
+    var shouldFailProfileCreate: Bool = false
+
     func registerUser(email: String, password: String, nickname: String) async throws -> UUID {
         if shouldFailSignup {
             throw TestError.signupError("Errr")
@@ -39,6 +41,9 @@ class MockUserService: GenericService, UserService {
     }
 
     func insertProfile(profile: Profile) async throws {
+        if shouldFailProfileCreate {
+            throw TestError.signupError("Errr")
+        }
         mockProfile = profile
     }
 

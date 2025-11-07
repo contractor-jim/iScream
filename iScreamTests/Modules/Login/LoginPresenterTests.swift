@@ -94,7 +94,7 @@ struct LoginPresenterTests {
         #expect(presenter.isValidPassword() == result)
         #expect(presenter.validationPassed == (result == "") )
     }
-// TODO: The validation on the password is still incorrect fix this in a later bug ticket
+
     @Test("POSITIVE - LoginPresenter - testFormValidation",
           arguments: [
             (email: "",
@@ -153,7 +153,7 @@ struct LoginPresenterTests {
         }
     }
 
-    @Test("POSITIVE - LoginPresenter - Login") func testLoginFails() async throws {
+    @Test("POSITIVE - LoginPresenter - Login Throws") func testLoginFails() async throws {
         presenter.email = "test@test.test"
         presenter.password = "ABCD"
         mockUserService.shouldFailLogin = true

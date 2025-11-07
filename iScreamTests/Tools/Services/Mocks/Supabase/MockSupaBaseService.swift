@@ -7,10 +7,17 @@
 
 @testable import iScream
 import Supabase
+import Foundation
 
 class MockSupaBaseService: SupaBaseService {
 
     var client: Supabase.SupabaseClient?
+    var mockedUUID: UUID?
+    var loggedInUserIdError: Error?
+    var registerUserIdError: Error?
+    var registerProfileError: Error?
+    var mockProfile: Profile?
+    var fetchProfileError: Error?
 
     func fetch<T>(table: String, eq: [String: any PostgrestFilterValue], type: T.Type) async throws -> T? where T: Decodable, T: Encodable {
         return nil

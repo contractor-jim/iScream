@@ -11,14 +11,14 @@ import Testing
 struct RootContainerBuilderTests {
 
     var mockService: MockUserService
-    let router: MockRootContainerRouter
-    let interactor: MockRootContainerInteractor
+    let router: RootContainerRouter
+    let interactor: RootContainerInteractor
     let presenter: RootContainerPresenter
 
     init() throws {
         mockService = MockUserService()
-        router = MockRootContainerRouter()
-        interactor = MockRootContainerInteractor(entity: MockRootContainerEntity(), services: [mockService])!
+        router = RootContainerRouter()
+        interactor = RootContainerInteractor(entity: RootContainerEntity(), services: [mockService])!
         presenter = RootContainerPresenter(interactor: interactor, router: router)!
     }
 

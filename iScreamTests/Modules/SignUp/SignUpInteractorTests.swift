@@ -123,4 +123,18 @@ struct SignUpInteractorTests {
            }
         }
     }
+
+    @Test("NEGATIVE - SignUpInteractor - signup missing user Id should throw") func testSignup_missingUserID_throws() async throws {
+        mockUserService.shouldFailSignup = true
+        await #expect(throws: (TestError.signupError("Errr")).self) {
+            _ = try await interactor.signUp(email: "test@test.test", password: "ABCD1234_", nickname: "Alan")
+        }
+    }
+
+    @Test("NEGATIVE - SignUpInteractor - signup missing profile should throw") func testSignup_missingProfile_throws() async throws {
+        mockUserService.shouldFailProfileCreate = true
+        await #expect(throws: (TestError.signupError("Errr")).self) {
+            _ = try await interactor.signUp(email: "test@test.test", password: "ABCD1234_", nickname: "Alan")
+        }
+    }
 }

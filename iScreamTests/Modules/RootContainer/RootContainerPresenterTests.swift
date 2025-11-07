@@ -12,14 +12,14 @@ import Foundation
 struct RootContainerPresenterTests {
 
     var mockUserService: MockUserService
-    let router: MockRootContainerRouter
-    let interactor: MockRootContainerInteractor
+    let router: RootContainerRouter
+    let interactor: RootContainerInteractor
     let presenter: RootContainerPresenter
 
     init() throws {
         mockUserService = MockUserService()
-        router = MockRootContainerRouter()
-        interactor = MockRootContainerInteractor(entity: MockRootContainerEntity(), services: [mockUserService])!
+        router = RootContainerRouter()
+        interactor = RootContainerInteractor(entity: RootContainerEntity(), services: [mockUserService])!
         presenter = RootContainerPresenter(interactor: interactor, router: router)!
     }
 
@@ -124,22 +124,17 @@ struct RootContainerPresenterTests {
             #expect(presenter.getBountyBadgeCount() == expectedCount)
     }
 
-    @Test("NEGATIVE - RootContainerPresenter - fetch user profile fials throw error") func testFetchError() async throws {
+    @Test("NEGATIVE - RootContainerPresenter - fetch user profile fails and sets error") func testFetchError() async throws {
+        mockUserService.shouldThrowError = TestError.loginError("Test")
+        _ = try await presenter.fetch()
 
-        mockUserService.shouldThrowError = LoginError.failedToLoadProfile
-
-        do {
-            try await presenter.fetch()
-        } catch {
-            #expect(presenter.userProfile == nil)
-            #expect(presenter.errorShown == true)
-            guard let loginError = error as? LoginError else {
-                #expect(Bool(false), "Should be the same type of error")
-                return
-            }
-
-            #expect(loginError == LoginError.failedToLoadProfile)
-            #expect(loginError == LoginError.failedToLoadProfile)
+        #expect(presenter.errorShown == true)
+        #expect(presenter.requiringLogIn == true)
+        guard let error = presenter.loginError as? LoginError else {
+            #expect(Bool(false), "Incorrect error type.")
+            return
         }
+
+        #expect(error == LoginError.failedToLoadProfile)
     }
 }
