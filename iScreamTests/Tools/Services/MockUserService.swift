@@ -17,6 +17,7 @@ class MockUserService: GenericService, UserService {
 
     var shouldFailSignup: Bool = false
     var shouldFailLogin: Bool = false
+    var shouldThrowError: Error?
 
     var mockProfile: Profile?
     var mockUserID = UUID()
@@ -42,6 +43,11 @@ class MockUserService: GenericService, UserService {
     }
 
     func fetchProfile() async throws -> iScream.Profile? {
+
+        if shouldThrowError != nil {
+            throw shouldThrowError!
+        }
+
         return mockProfile
     }
 

@@ -94,7 +94,6 @@ struct LoginView: GenericView, View {
             .presentationDetents([.medium, .medium])
             .presentationDragIndicator(.hidden)
             .environment(\.openURL, OpenURLAction { url in
-                // TODO: Test this
                 if url.absoluteString == "://sign_up" {
                     presenter.showSignUpModule()
                 }

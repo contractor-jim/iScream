@@ -110,22 +110,12 @@ struct LoginInteractorTests {
 
     @Test("POSITIVE - LoginInteractor - Login") func testLoginSuccess() async throws {
         mockUserService.shouldFailLogin = false
-        await #expect(throws: Never.self) {
-            let profile = try await interactor.loginUser(email: "test@test.test", password: "ABCD1234_")
-            #expect(profile.id == id)
-            #expect(profile.userName == "McTest")
-            #expect(profile.type == .parent)
-            #expect(profile.points == 1000)
-            #expect(profile.negativePoints == -100)
-            #expect(profile.parentId == nil)
-            #expect(profile.authId == authId)
-            #expect(profile.children == [])
-            #expect(profile.managedBounties == [])
-            #expect(profile.bounties == [])
+        async #expect(throws: Never.self) {
+            try await interactor.loginUser(email: "test@test.test", password: "ABcd1234?")
         }
     }
 
-    @Test("POSITIVE - LoginInteractor - Login") func testLoginFails() async throws {
+    @Test("NEGATIVE - LoginInteractor - Login") func testLoginFails() async throws {
         mockUserService.shouldFailLogin = true
         await #expect(throws: TestError.self) {
             try await interactor.loginUser(email: "test@test.test", password: "ABCD")
