@@ -18,7 +18,7 @@ struct LoginBuilderTests {
     init() throws {
         mockService = MockUserService()
         router = RootContainerRouter()
-        interactor = RootContainerInteractor(entity: MockRootContainerEntity(), services: [mockService, DefaultUserValidationService()])!
+        interactor = RootContainerInteractor(entity: RootContainerEntity(), services: [mockService, DefaultUserValidationService()])!
         presenter = RootContainerPresenter(interactor: interactor, router: router)!
     }
 

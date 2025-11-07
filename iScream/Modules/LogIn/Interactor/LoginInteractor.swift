@@ -34,7 +34,6 @@ class LoginInteractor: GenericInteractorImp<LoginEntity>, LoginInteractorProtoco
     }
 
     func loginUser(email: String, password: String) async throws {
-        // TODO: This needs to be better handeld error wise
         _ = try await userService?.loginUser(email: email, password: password)
     }
 }

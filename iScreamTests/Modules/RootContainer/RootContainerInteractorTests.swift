@@ -15,12 +15,12 @@ struct RootContainerInteractorTests {
     let router: RootContainerRouter
     let interactor: RootContainerInteractor
     let presenter: RootContainerPresenter
-    let entity: MockRootContainerEntity
+    let entity: RootContainerEntity
 
     init() throws {
         mockUserService = MockUserService()
         router = RootContainerRouter()
-        entity = MockRootContainerEntity()
+        entity = RootContainerEntity()
         interactor = RootContainerInteractor(entity: entity, services: [mockUserService])!
         presenter = RootContainerPresenter(interactor: interactor, router: router)!
 
@@ -31,18 +31,13 @@ struct RootContainerInteractorTests {
         let interactor = RootContainerInteractor(entity: entity,
                                                  services: [mockUserService])
 
-        #expect(interactor?.entity != nil)
-        let mockEntity = try #require(interactor?.entity as? MockRootContainerEntity)
-        #expect(mockEntity == self.entity)
-
         #expect(interactor?.userService != nil)
         let mockUserService = try #require(interactor?.userService as? MockUserService)
         #expect(mockUserService == self.mockUserService)
     }
 
     @Test("NEGATIVE - RootContainerInteractor - missing user service") func testFetch_missingUserService_throws() async throws {
-//        let mockUserService = MockUserService()
-        let entity = MockRootContainerEntity()
+        let entity = RootContainerEntity()
         let interactor = RootContainerInteractor(entity: entity, services: [mockUserService])!
         interactor.userService = nil
         await #expect(throws: (UserError.userServiceNotFound).self) {
@@ -75,7 +70,7 @@ struct RootContainerInteractorTests {
 
     @Test("NEGATIVE - RootContainerInteractor - fetch user throws") func testFetch_throws() async throws {
         let mockUserService = MockUserService()
-        let entity = MockRootContainerEntity()
+        let entity = RootContainerEntity()
         mockUserService.shouldThrowError = TestError.loginError("Test")
         let interactor = RootContainerInteractor(entity: entity, services: [mockUserService])!
         await #expect(throws: (UserError.fetchUserProfileFailed).self) {

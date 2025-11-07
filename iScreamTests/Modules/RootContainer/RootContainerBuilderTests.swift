@@ -18,7 +18,7 @@ struct RootContainerBuilderTests {
     init() throws {
         mockService = MockUserService()
         router = RootContainerRouter()
-        interactor = RootContainerInteractor(entity: MockRootContainerEntity(), services: [mockService])!
+        interactor = RootContainerInteractor(entity: RootContainerEntity(), services: [mockService])!
         presenter = RootContainerPresenter(interactor: interactor, router: router)!
     }
 

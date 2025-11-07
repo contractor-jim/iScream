@@ -42,9 +42,7 @@ class SignUpInteractor: GenericInteractorImp<SignUpEntity>, SignUpInteractorProt
     }
 
     func signUp(email: String, password: String, nickname: String) async throws {
-        // TODO: Test this with thrown error
         let userId = try await userService!.registerUser(email: email, password: password, nickname: nickname)
-        // TODO: Test this with thrown error
         try await userService!.insertProfile(profile: Profile(userName: nickname,
                                                               type: .parent,
                                                               points: 0,
@@ -56,6 +54,5 @@ class SignUpInteractor: GenericInteractorImp<SignUpEntity>, SignUpInteractorProt
                                                               bounties: nil,
                                                               dataPoints: nil,
                                                               achievements: nil))
-
     }
 }
