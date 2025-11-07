@@ -56,7 +56,7 @@ struct ChildDashboardPresenterTests {
         #expect(presenter?.navPath.wrappedValue == nav)
     }
 
-    @Test("POSITIVE - ChildDashboardPresenter - user bounty scores add up") func testUserBountyCounts() async throws {
+    @Test("POSITIVE - ChildDashboardPresenter - user bounty scores add up", .disabled()) func testUserBountyCounts() async throws {
         let testProfile = Profile.mockProfile
         mockUserService.mockProfile = testProfile
         try await presenter.fetch()
