@@ -293,6 +293,17 @@
         }
       }
     },
+    "parent_dashboard.no_children.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To add a child click the + button in the top right of the screen."
+          }
+        }
+      }
+    },
     "signup" : {
       "extractionState" : "manual"
     },
