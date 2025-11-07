@@ -12,25 +12,38 @@ struct DashboardChildCardView: View {
     @State private var interpolationValue: CGFloat = 0.0
 
     var body: some View {
+
         VStack(alignment: .leading) {
+
             Text(profile.userName)
                 .font(CustomFont.subHeaderFont.bold())
 
-            VStack(alignment: .leading) {
-                DashBoardChildCardTitleView(profile: profile)
-                    .accessibilityIdentifier("parent-dashboard-card-title-view-\(profile.userName)")
-                HStack(alignment: .top, spacing: 0) {
-                    DashBoardChildCardScoreView(profile: profile)
-                    // TODO: This needs to be re added when we have user data
-                    AnimatedChartView(profile: profile)
+            ZStack {
+                if (profile.dataPoints ?? []).count == 0 {
+                    Text(.parentDashboardChildCardNoPoints)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .padding([.trailing, .leading, .bottom], Style.fullPadding)
+                        .multilineTextAlignment(.center)
+                        .font(CustomFont.regularFontBody)
+                        .accessibilityIdentifier("parent-dashboard-card-no-points-label")
+                } else {
+                    VStack(alignment: .leading) {
+                        DashBoardChildCardTitleView(profile: profile)
+                            .accessibilityIdentifier("parent-dashboard-card-title-view-\(profile.userName)")
+                        HStack(alignment: .top, spacing: 0) {
+                            DashBoardChildCardScoreView(profile: profile)
+                            // TODO: This needs to be re added when we have user data
+                            AnimatedChartView(profile: profile)
+                        }
+                    }
                 }
             }
-            .padding(.all, Style.fullPadding)
-            .font(CustomFont.subHeaderFont)
-            .background(.cellBackground)
-            .cornerRadius(Style.cornerRadius)
-            .accessibilityIdentifier("parent-dashboard-card-view-\(profile.userName)")
         }
+        .padding(.all, Style.fullPadding)
+        .font(CustomFont.subHeaderFont)
+        .background(.cellBackground)
+        .cornerRadius(Style.cornerRadius)
+        .accessibilityIdentifier("parent-dashboard-card-view-\(profile.userName)")
     }
 }
 

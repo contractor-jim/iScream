@@ -41,6 +41,8 @@ struct DashboardChildCellView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding([.trailing, .leading], Style.fullPadding)
                     .multilineTextAlignment(.center)
+                    .font(CustomFont.regularFontBody)
+                    .accessibilityIdentifier("parent-dashboard-no-children-label")
             } else {
                 ScrollView {
                     // TODO: These should be ordered too

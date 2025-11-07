@@ -293,6 +293,17 @@
         }
       }
     },
+    "parent_dashboard.child_card.no+points" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No points yet"
+          }
+        }
+      }
+    },
     "parent_dashboard.no_children.label" : {
       "extractionState" : "manual",
       "localizations" : {
