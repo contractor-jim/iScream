@@ -127,7 +127,7 @@ struct RootContainerPresenterTests {
     @Test("NEGATIVE - RootContainerPresenter - fetch user profile fials throw error") func testFetchError() async throws {
 
         mockUserService.shouldThrowError = LoginError.failedToLoadProfile
-        var loginError: LoginError?
+        let loginError: LoginError?
 
         do {
             try await presenter.fetch()
