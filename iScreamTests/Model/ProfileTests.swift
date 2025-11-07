@@ -27,7 +27,7 @@ struct ProfileTests {
                                 managedBounties: [],
                                 bounties: [],
                                 dataPoints: [],
-                                achivements: [])
+                                achievements: [])
 
     }
 
