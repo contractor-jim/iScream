@@ -24,7 +24,6 @@ struct ParentListChildrenView: View, GenericView {
             DashboardChildCellView(presenter: presenter)
         }
         .onAppear {
-            // TODO: Review which actor this task is created on
             Task {
                 await presenter.fetch()
             }
@@ -37,17 +36,24 @@ struct DashboardChildCellView: View {
 
     var body: some View {
         ZStack {
-            ScrollView {
-                // TODO: These should be ordered too
-                if let children = presenter.userProfile?.children {
-                    ForEach(Array(children.enumerated()), id: \.offset) { _, childProfile in
-                        DashboardChildCardView(profile: childProfile)
-                        .onTapGesture {
-                            // TODO: Re implement this
-                            // presenter.navigateChildDetailView(user: user)
+            if (presenter.userProfile?.children ?? []).count == 0 {
+                Text( .parentDashboardNoChildrenLabel)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding([.trailing, .leading], Style.fullPadding)
+                    .multilineTextAlignment(.center)
+            } else {
+                ScrollView {
+                    // TODO: These should be ordered too
+                    if let children = presenter.userProfile?.children {
+                        ForEach(Array(children.enumerated()), id: \.offset) { _, childProfile in
+                            DashboardChildCardView(profile: childProfile)
+                                .onTapGesture {
+                                    // TODO: Re implement this
+                                    // presenter.navigateChildDetailView(user: user)
+                                }
+                                .padding(.top, Style.fullPadding)
+                                .padding([.trailing, .leading], Style.fullPadding)
                         }
-                        .padding(.top, Style.fullPadding)
-                        .padding([.trailing, .leading], Style.fullPadding)
                     }
                 }
             }
