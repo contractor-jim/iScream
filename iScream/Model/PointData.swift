@@ -7,13 +7,12 @@
 
 import Foundation
 import SwiftData
-// TODO: Test this
+
 @Model
 final class PointData: Codable {
     @Attribute(.unique) var id: UUID
     var month: Date
     var points: Int
-    // var user: User
 
     @Transient lazy var monthString: String = {
         let formatter = DateFormatter()
@@ -23,12 +22,10 @@ final class PointData: Codable {
 
     init(id: UUID,
          month: Date,
-         points: Int,
-         /* user: User */) {
+         points: Int) {
         self.id = id
         self.month = month
         self.points = points
-        // self.user = user
     }
 
     enum CodingKeys: String, CodingKey {
@@ -42,8 +39,6 @@ final class PointData: Codable {
         let monthString = try container.decode(String.self, forKey: .month)
         month = Date.dateFromSupabaseString(dateString: monthString)
         points = try container.decode(Int.self, forKey: .points)
-        // user = try container.decode(UserType.self, forKey: .user)
-
     }
 
     func encode(to encoder: Encoder) throws {

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-// TODO: Test this
+
 enum UserError: Error {
     case userServiceNotFound
     case loggedInUserNotFound
@@ -15,22 +15,22 @@ enum UserError: Error {
     case createProfileFailed
     case fetchUserProfileFailed
 }
-// TODO: Need to add these strings to the strings file and test
+
 extension UserError: CustomStringConvertible {
     public var description: String {
         switch self {
         case .userServiceNotFound:
-            return "User service not found. Dev Error"
+            return String(localized: .userErrorUserServiceNotFound)
         case .loggedInUserNotFound:
-            return "User not logged in. Please login again."
+            return String(localized: .userErrorLoggedInUserNotFound)
         case .registrationFailed:
-            return "User registration failed. Please try again"
+            return String(localized: .userErrorRegistrationFailed)
         case .loginFailed:
-            return "Login failed. Please try again."
+            return String(localized: .userErrorLoginFailed)
         case .createProfileFailed:
-            return "Failed to create the users profile. Please try again."
+            return String(localized: .userErrorCreateProfileFailed)
         case .fetchUserProfileFailed:
-            return "Failed to fetch user profile. Please try again."
+            return String(localized: .userErrorFetchUserProfileFailed)
         }
     }
 }
@@ -39,17 +39,17 @@ extension UserError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .userServiceNotFound:
-            return "User service not found. Dev Error"
+            return String(localized: .userErrorUserServiceNotFound)
         case .loggedInUserNotFound:
-            return "User not logged in. Please login again."
+            return String(localized: .userErrorLoggedInUserNotFound)
         case .registrationFailed:
-            return "User registration failed. Please try again"
+            return String(localized: .userErrorRegistrationFailed)
         case .loginFailed:
-            return "Login failed. Please try again."
+            return String(localized: .userErrorLoginFailed)
         case .createProfileFailed:
-            return "Failed to create the users profile. Please try again."
+            return String(localized: .userErrorCreateProfileFailed)
         case .fetchUserProfileFailed:
-            return "Failed to fetch user profile. Please try again."
+            return String(localized: .userErrorFetchUserProfileFailed)
         }
     }
 }
