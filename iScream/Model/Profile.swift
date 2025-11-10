@@ -87,7 +87,7 @@ final class Profile: Codable {
         }
 
         do {
-            bounties = try container.decodeIfPresent([Bounty].self, forKey: .managedBounties)
+            bounties = try container.decodeIfPresent([Bounty].self, forKey: .bounties)
         } catch {
             bounties = []
         }
@@ -126,6 +126,22 @@ final class Profile: Codable {
 }
 
 extension Profile {
+
+    var openBountiesCount: Int {
+        // TODO: Test this
+        if type == UserType.child {
+            return openBounties.count
+        } else {
+            var count = 0
+            for child in children ?? [] {
+                for _ in child.bounties?.filter({ $0.pendingComplete == true }) ?? [] {
+                    count += 1
+                }
+            }
+
+            return count
+        }
+    }
 
     var openBounties: [Bounty] {
         bounties?.filter { $0.completed == false } ?? []

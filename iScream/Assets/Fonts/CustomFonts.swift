@@ -11,7 +11,7 @@ struct CustomFont {
     // Font names
     static let headerFontName = "Avenir Black"
     static let regularFontName = "Avenir Medium"
-    // TODO: Make these sizes private as they should be obscured from the implementation
+
     // Sizes
     static let fontHeaderLargeSize: CGFloat = 32
     static let fontSubHeaderLargeSize: CGFloat = 20

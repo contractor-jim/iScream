@@ -44,6 +44,7 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
         if userProfile.type == UserType.child {
             return userProfile.openBounties.count
         } else if userProfile.type == UserType.parent {
+            print(">>> MANAGED BOUNTIES \(userProfile.openBountiesCount)")
             // TODO: Need another state called pending complete to tell the parent of bounties the child claims to have completed
             return 0
         }
