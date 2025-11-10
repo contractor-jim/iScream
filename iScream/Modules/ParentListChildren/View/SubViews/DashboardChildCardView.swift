@@ -14,15 +14,11 @@ struct DashboardChildCardView: View {
     var body: some View {
 
         VStack(alignment: .leading) {
-
-            Text(profile.userName)
-                .font(CustomFont.subHeaderFont.bold())
-
             ZStack {
                 if (profile.dataPoints ?? []).count == 0 {
                     Text(.parentDashboardChildCardNoPoints)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .padding([.trailing, .leading, .bottom], Style.fullPadding)
+                        .padding(.all, Style.fullPadding)
                         .multilineTextAlignment(.center)
                         .font(CustomFont.regularFontBody)
                         .accessibilityIdentifier("parent-dashboard-card-no-points-label")
@@ -30,9 +26,10 @@ struct DashboardChildCardView: View {
                     VStack(alignment: .leading) {
                         DashBoardChildCardTitleView(profile: profile)
                             .accessibilityIdentifier("parent-dashboard-card-title-view-\(profile.userName)")
+
                         HStack(alignment: .top, spacing: 0) {
                             DashBoardChildCardScoreView(profile: profile)
-                            // TODO: This needs to be re added when we have user data
+
                             AnimatedChartView(profile: profile)
                         }
                     }
@@ -52,6 +49,14 @@ struct DashBoardChildCardTitleView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
+            Text(profile.userName)
+                .font(CustomFont.subHeaderFont.bold())
+                .padding(0)
+                .padding([.leading], Style.halfPadding)
+                .accessibilityIdentifier("parent-dashboard-card-title-user-name-\(profile.userName)")
+
+            Spacer()
+
             Text(
                 String(
                     format: NSLocalizedString("dashboard.childpoints.label",
@@ -60,8 +65,8 @@ struct DashBoardChildCardTitleView: View {
                     profile.points)
             )
             .font(CustomFont.regularFontBody)
-
-            Spacer()
+            .padding([.trailing], Style.halfPadding)
+            .accessibilityIdentifier("parent-dashboard-card-title-points-\(profile.points)")
         }
     }
 }
@@ -71,13 +76,15 @@ struct DashBoardChildCardScoreView: View {
 
     var body: some View {
         VStack(alignment: .center) {
+
             Text("\(profile.aggregateSinceLastMonth >= 0 ? "+" : "")\(profile.aggregateSinceLastMonth)")
                 .font(CustomFont.subHeaderFont)
                 .lineLimit(1)
                 .minimumScaleFactor(0.01)
                 .foregroundStyle(profile.aggregateSinceLastMonth >= 0 ? .green : .red)
+                .accessibilityIdentifier("parent-dashboard-card-profile-points-\(profile.aggregateSinceLastMonth >= 0 ? "+" : "")\(profile.aggregateSinceLastMonth)")
+
             Text(
-                // TODO: HERE
                 String(
                     format: NSLocalizedString("dashboard.childpoints.since.label",
                                               bundle: .main,
@@ -88,6 +95,7 @@ struct DashBoardChildCardScoreView: View {
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
             .lineLimit(2)
+            .accessibilityIdentifier("parent-dashboard-card-since-label-\(profile.lastMonthString)")
         }
         .frame(maxWidth: 65)
         .padding([.trailing], Style.halfPadding)

@@ -97,6 +97,12 @@ final class Profile: Codable {
         } catch {
             achievements = []
         }
+
+        do {
+            dataPoints = try container.decodeIfPresent([PointData].self, forKey: .dataPoints)
+        } catch {
+            dataPoints = []
+        }
     }
 
     func encode(to encoder: Encoder) throws {
@@ -110,7 +116,13 @@ final class Profile: Codable {
     }
 
     @Transient lazy var orderedDataPoints: [PointData] = {
-        dataPoints?.sorted { $0.month < $1.month } ?? []
+        // TODO: Test this
+        // Insert a blank date from the start of time if only 1 entry exists. This allows a starting point for the line graph
+        if dataPoints?.count == 1 {
+            dataPoints?.insert(PointData(id: UUID(), month: Date(timeIntervalSince1970: 0), points: 0), at: 0)
+        }
+
+        return dataPoints?.sorted { $0.month < $1.month } ?? []
     }()
 }
 

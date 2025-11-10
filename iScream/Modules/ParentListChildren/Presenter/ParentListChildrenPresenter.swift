@@ -24,7 +24,6 @@ class ParentListChildrenPresenter: GenericPresenterImp<ParentListChildrenInterac
     }
 
     func fetch() async {
-        // TODO: Handle the error elegantly
         do {
             userProfile = try await interactor.fetchMyUserProfile()
         } catch { }

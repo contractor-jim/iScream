@@ -67,4 +67,22 @@ struct ProfileTests {
         #expect(Profile.CodingKeys.managedBounties.rawValue == "managed_bounties")
         #expect(Profile.CodingKeys.bounties.rawValue == "bounties")
     }
+
+    @Test("POSITIVE - user profile should always have 2 ordered data points when only 1 exists")
+    func testProfile_DataPoints_oneEquals2() async throws {
+        let testProfile = Profile(id: id,
+                                  userName: "McTest",
+                                  type: .parent,
+                                  points: 1000,
+                                  negativePoints: -100,
+                                  parentId: parentId,
+                                  authId: parentAuthId,
+                                  children: [],
+                                  managedBounties: [],
+                                  bounties: [],
+                                  dataPoints: [PointData(id: UUID(), month: Date(), points: 1)],
+                                  achievements: [])
+
+        #expect(testProfile.orderedDataPoints.count == 2)
+    }
 }
