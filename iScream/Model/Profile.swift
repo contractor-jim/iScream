@@ -14,7 +14,6 @@ enum UserType: String, CaseIterable, Codable {
     case child
 }
 
-// TODO: Test this
 @Model
 final class Profile: Codable {
     var id: UUID?
