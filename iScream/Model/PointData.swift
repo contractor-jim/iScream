@@ -37,7 +37,7 @@ final class PointData: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(UUID.self, forKey: .id)
         let monthString = try container.decode(String.self, forKey: .month)
-        month = Date.dateFromSupabaseString(dateString: monthString)
+        month = Date.dateFromSupabaseString(dateString: monthString)!
         points = try container.decode(Int.self, forKey: .points)
     }
 
