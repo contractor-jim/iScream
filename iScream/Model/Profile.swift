@@ -116,7 +116,6 @@ final class Profile: Codable {
     }
 
     @Transient lazy var orderedDataPoints: [PointData] = {
-        // TODO: Test this
         // Insert a blank date from the start of time if only 1 entry exists. This allows a starting point for the line graph
         if dataPoints?.count == 1 {
             dataPoints?.insert(PointData(id: UUID(), month: Date(timeIntervalSince1970: 0), points: 0), at: 0)
