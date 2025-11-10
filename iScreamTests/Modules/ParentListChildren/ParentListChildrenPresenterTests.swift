@@ -81,7 +81,6 @@ struct ParentListChildrenPresenterTests {
         let presenter = ParentListChildrenPresenter(interactor: interactor, router: router)
 
         // Navigate to user
-        // TODO: Need to make this user as part of the mocked model to refactor out duplicate generation
         let mockedProfile = Profile.mockProfile
         presenter?.navigateChildDetailView(profile: mockedProfile)
 

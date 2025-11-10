@@ -16,7 +16,6 @@ final class ChildDashboardUITests: XCTestCase {
 
     @MainActor
     func testChildDashboardCanSeeUI() throws {
-        // TODO: Need to add mocks here
         let app = XCUIApplication()
         app.launchArguments.append("USER_CHILD")
         app.activate()
@@ -27,7 +26,6 @@ final class ChildDashboardUITests: XCTestCase {
 
     @MainActor
     func testChildDashboardCanSeeUINaughtyCell() throws {
-        // TODO: Need to add mocks here
         let app = XCUIApplication()
         app.launchArguments.append("USER_CHILD")
         app.activate()
@@ -44,7 +42,6 @@ final class ChildDashboardUITests: XCTestCase {
 
     @MainActor
     func testChildDashboardCanSeeUIBountyCell() throws {
-        // TODO: Need to add mocks here
         let app = XCUIApplication()
         app.launchArguments.append("USER_CHILD")
         app.activate()
@@ -58,7 +55,6 @@ final class ChildDashboardUITests: XCTestCase {
 
     @MainActor
     func testChildDashboardCanSeeUIAchievementCell() throws {
-        // TODO: Need to add mocks here
         let app = XCUIApplication()
         app.launchArguments.append("USER_CHILD")
         app.activate()
