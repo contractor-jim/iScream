@@ -55,6 +55,7 @@ struct BountyPresenterTests {
         try await presenter.fetch()
 
         #expect(presenter.profile != nil)
+        #expect(presenter.isLoading == false)
         #expect(presenter.profile == profile)
     }
 

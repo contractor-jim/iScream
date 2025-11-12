@@ -38,7 +38,6 @@ final class Bounty: Codable {
         self.points = points
         self.completed = completed
         self.pendingComplete = pendingComplete
-        // TODO: Test this
         self.rarity = rarity
     }
 

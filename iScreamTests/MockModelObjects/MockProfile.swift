@@ -23,13 +23,16 @@ extension Profile {
                                                 title: "Test",
                                                 points: 10,
                                                 completed: false,
-                                                profile: nil),
+                                                pendingComplete: true,
+                                                rarity: .bronze),
+
                                          Bounty(id: UUID(),
-                                                           parentId: UUID(),
-                                                           title: "Test",
-                                                           points: 10,
-                                                           completed: true,
-                                                           profile: nil)],
+                                                parentId: UUID(),
+                                                title: "Test",
+                                                points: 10,
+                                                completed: false,
+                                                pendingComplete: true,
+                                                rarity: .bronze)],
                               dataPoints: [],
                               achievements: [])
 

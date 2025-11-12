@@ -21,7 +21,8 @@ struct BountyTests {
                         title: "TEST",
                         points: 100,
                         completed: false,
-                        profile: nil)
+                        pendingComplete: true,
+                        rarity: .bronze)
     }
 
     @Test("POSITIVE - Bounty -  init") func testInitBounty() async throws {
@@ -30,14 +31,16 @@ struct BountyTests {
         #expect(bounty.title == "TEST")
         #expect(bounty.points == 100)
         #expect(bounty.completed == false)
-        #expect(bounty.profile == [])
+        #expect(bounty.pendingComplete == true)
+        #expect(bounty.rarity == .bronze)
 
         #expect(bounty == Bounty(id: id,
                                  parentId: parentId,
                                  title: "TEST",
                                  points: 100,
                                  completed: false,
-                                 profile: nil))
+                                 pendingComplete: true,
+                                 rarity: .bronze))
     }
 
     @Test("POSITIVE - Bounty - CodingKeys ") func testBounty_CodingKeys() async throws {
@@ -46,7 +49,8 @@ struct BountyTests {
         #expect(Bounty.CodingKeys.title.rawValue == "title")
         #expect(Bounty.CodingKeys.points.rawValue == "points")
         #expect(Bounty.CodingKeys.completed.rawValue == "completed")
-        #expect(Bounty.CodingKeys.profile.rawValue == "profile")
+        #expect(Bounty.CodingKeys.pendingComplete.rawValue == "pending_complete")
+        #expect(Bounty.CodingKeys.rarity.rawValue == "rarity")
     }
 
 }

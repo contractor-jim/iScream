@@ -128,14 +128,15 @@ final class Profile: Codable {
 extension Profile {
 
     var openBountiesCount: Int {
-        // TODO: Test this
-        if type == UserType.child {
+        if type == UserType.unknown {
+            return 0
+        } else  if type == UserType.child {
             return openBounties.count
         } else {
             // Note this doesn't yet include work where a child can to multiple parents
             var count = 0
             for child in children ?? [] {
-                count += (child.bounties?.filter({ $0.pendingComplete == true }) ?? []).count
+                count += (child.bounties?.filter({ $0.pendingComplete == true && $0.completed == false }) ?? []).count
             }
 
             return count

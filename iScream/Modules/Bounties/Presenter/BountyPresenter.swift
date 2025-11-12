@@ -24,7 +24,6 @@ class BountyPresenter: GenericPresenterImp<BountyInteractor, BountyRouter>,
     func fetch() async throws {
         // TODO: Handle error here
         profile = try await interactor.fetchMyUserProfile()
-        // TODO: Test this
         if profile != nil {
             isLoading = false
         }

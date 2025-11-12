@@ -52,13 +52,11 @@ struct RootContainerPresenterTests {
     }
 
     @Test("POSITIVE - RootContainerPresenter - getBountyBadgeCount", arguments: [
-            // TODO: Need to fix this
-            /*
             (userType: "child",
-             expectedCount: 3)
-             */
+             expectedCount: 3),
+
             (userType: "parent",
-             expectedCount: 0),
+             expectedCount: 1),
 
             (userType: "unknown",
              expectedCount: 0)
@@ -68,53 +66,104 @@ struct RootContainerPresenterTests {
         expectedCount: Int
         ) async throws {
             let parentId = UUID()
+
+            let childProfile = Profile(id: parentId,
+                                       userName: "McTest",
+                                       type: .child,
+                                       points: 1000,
+                                       negativePoints: -100,
+                                       parentId: nil,
+                                       authId: UUID(),
+                                       children: [],
+                                       managedBounties: [],
+                                       bounties:
+                                         [Bounty(id: UUID(),
+                                                 parentId: UUID(),
+                                                 title: "Test1",
+                                                 points: 1,
+                                                 completed: true,
+                                                 pendingComplete: true,
+                                                 rarity: .bronze),
+                                          Bounty(id: UUID(),
+                                                 parentId: UUID(),
+                                                 title: "Test2",
+                                                 points: 2,
+                                                 completed: false,
+                                                 pendingComplete: true,
+                                                 rarity: .bronze),
+                                          Bounty(id: UUID(),
+                                                 parentId: UUID(),
+                                                 title: "Test3",
+                                                 points: 3,
+                                                 completed: false,
+                                                 pendingComplete: false,
+                                                 rarity: .bronze)],
+                                       dataPoints: [],
+                                       achievements: [])
+
+            var profileType: UserType {
+                if userType == "child" {
+                    return .child
+                }
+
+                if userType == "parent" {
+                    return .parent
+                }
+
+                return .unknown
+            }
             let profile = Profile(id: parentId,
                                   userName: "McTest",
-                                  type: .parent,
+                                  type: profileType,
                                   points: 1000,
                                   negativePoints: -100,
                                   parentId: nil,
                                   authId: UUID(),
-                                  children: [],
+                                  children: [childProfile],
                                   managedBounties: [],
                                   bounties:
                                     [Bounty(id: UUID(),
-                                            parentId: parentId,
+                                            parentId: UUID(),
                                             title: "Test1",
                                             points: 1,
                                             completed: true,
-                                            profile: [Profile.mockProfile]),
+                                            pendingComplete: true,
+                                            rarity: .bronze),
                                      Bounty(id: UUID(),
-                                            parentId: parentId,
+                                            parentId: UUID(),
                                             title: "Test2",
                                             points: 2,
-                                            completed: true,
-                                            profile:
-                                                [Profile.mockProfile]),
+                                            completed: false,
+                                            pendingComplete: true,
+                                            rarity: .bronze),
                                      Bounty(id: UUID(),
-                                            parentId: parentId,
+                                            parentId: UUID(),
                                             title: "Test3",
                                             points: 3,
-                                            completed: true,
-                                            profile: [Profile.mockProfile]),
+                                            completed: false,
+                                            pendingComplete: true,
+                                            rarity: .bronze),
                                      Bounty(id: UUID(),
-                                            parentId: parentId,
+                                            parentId: UUID(),
                                             title: "Test1",
                                             points: 1,
-                                            completed: false,
-                                            profile: [Profile.mockProfile]),
+                                            completed: true,
+                                            pendingComplete: true,
+                                            rarity: .bronze),
                                      Bounty(id: UUID(),
-                                            parentId: parentId,
-                                            title: "Test2",
-                                            points: 2,
-                                            completed: false,
-                                            profile: [Profile.mockProfile]),
-                                     Bounty(id: UUID(),
-                                            parentId: parentId,
+                                            parentId: UUID(),
                                             title: "Test3",
                                             points: 3,
                                             completed: false,
-                                            profile: [Profile.mockProfile])],
+                                            pendingComplete: true,
+                                            rarity: .bronze),
+                                     Bounty(id: UUID(),
+                                            parentId: UUID(),
+                                            title: "Test3",
+                                            points: 3,
+                                            completed: true,
+                                            pendingComplete: true,
+                                            rarity: .bronze)],
                                   dataPoints: [],
                                   achievements: [])
 

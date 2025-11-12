@@ -40,7 +40,11 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
         guard let userProfile else {
             return 0
         }
-        // TODO: Test this
+
+        if userProfile.type == .unknown {
+            return 0
+        }
+
         return userProfile.openBountiesCount
     }
 }
