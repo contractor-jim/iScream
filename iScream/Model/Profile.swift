@@ -132,11 +132,10 @@ extension Profile {
         if type == UserType.child {
             return openBounties.count
         } else {
+            // Note this doesn't yet include work where a child can to multiple parents
             var count = 0
             for child in children ?? [] {
-                for _ in child.bounties?.filter({ $0.pendingComplete == true }) ?? [] {
-                    count += 1
-                }
+                count += (child.bounties?.filter({ $0.pendingComplete == true }) ?? []).count
             }
 
             return count

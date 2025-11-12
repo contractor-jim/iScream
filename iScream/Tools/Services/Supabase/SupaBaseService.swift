@@ -82,7 +82,6 @@ class DefaultSupaBaseService: GenericService, SupaBaseService {
             let response = try await client?.rpc(functionName,
                                                  params: params).execute()
 
-            print(">>> RESPONSE \(String(data: response!.data, encoding: .utf8))")
             let decoder = JSONDecoder()
             let objects = try decoder.decode([T].self, from: response!.data)
 
