@@ -85,4 +85,55 @@ struct ProfileTests {
 
         #expect(testProfile.orderedDataPoints.count == 2)
     }
+
+    @Test("POSITIVE - parent profile should only count bounties which are pending")
+    func testProfile_ParentBounties_badgeCountOnlyIncludesPendingIncomplete() async throws {
+
+        let testChildProfile = Profile(id: id,
+                                    userName: "McTest",
+                                    type: .child,
+                                    points: 1000,
+                                    negativePoints: -100,
+                                    parentId: parentId,
+                                    authId: parentAuthId,
+                                    children: [],
+                                    managedBounties: [],
+                                    bounties: [Bounty(id: UUID(),
+                                                       parentId: UUID(),
+                                                       title: "Test1",
+                                                       points: 100,
+                                                       completed: false,
+                                                       pendingComplete: true,
+                                                       rarity: .bronze),
+                                                Bounty(id: UUID(),
+                                                       parentId: UUID(),
+                                                       title: "Test1",
+                                                       points: 100,
+                                                       completed: false,
+                                                       pendingComplete: false,
+                                                       rarity: .bronze),
+                                                Bounty(id: UUID(),
+                                                       parentId: UUID(),
+                                                       title: "Test1",
+                                                       points: 100,
+                                                       completed: true,
+                                                       pendingComplete: true,
+                                                       rarity: .bronze)],
+                                     dataPoints: [PointData(id: UUID(), month: Date(), points: 1)],
+                                     achievements: [])
+        let testProfile = Profile(id: id,
+                                  userName: "McTest",
+                                  type: .parent,
+                                  points: 1000,
+                                  negativePoints: -100,
+                                  parentId: parentId,
+                                  authId: parentAuthId,
+                                  children: [testChildProfile],
+                                  managedBounties: [],
+                                  bounties: [],
+                                  dataPoints: [PointData(id: UUID(), month: Date(), points: 1)],
+                                  achievements: [])
+
+        #expect(testProfile.openBountiesCount == 1)
+    }
 }

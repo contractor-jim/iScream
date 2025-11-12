@@ -29,6 +29,27 @@ struct BountyStackView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
+            Text("TODO: Reimplement as child list")
+
+            if presenter.isLoading {
+                VStack(alignment: .center) {
+                    Spacer()
+                    ProgressView()
+                        .tint(.white)
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(.black.opacity(0.7))
+                .onAppear {
+                    Task {
+                        try await presenter.fetch()
+                    }
+                }
+            } else {
+                ParentListChildrenBounties(profile: presenter.profile)
+            }
+            // TODO: Reimplement this when we get to the children bounty view re intro
+            /*
             List {
                 Section {
                     ForEach(presenter.profile?.openBounties ?? []) { bounty in
@@ -59,14 +80,10 @@ struct BountyStackView: View {
             .foregroundColor(.white)
             .background(.clear)
             .scrollContentBackground(.hidden)
+            */
         }
         .navigationBarTitleDisplayMode(.inline)
         .background(.mainBackground)
         .navigationTitle("general.title.bounties")
-        .onAppear {
-            Task {
-                try await presenter.fetch()
-            }
-        }
     }
 }

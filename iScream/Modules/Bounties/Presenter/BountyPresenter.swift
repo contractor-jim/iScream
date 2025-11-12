@@ -16,11 +16,16 @@ protocol BountyPresenterProtocol: GenericPresenter {
 class BountyPresenter: GenericPresenterImp<BountyInteractor, BountyRouter>,
                        BountyPresenterProtocol, Observable {
     var profile: Profile?
+    var isLoading: Bool = true
     var navPath: Binding<NavigationPath> {
         Binding(get: { self.router.nav }, set: { self.router.nav = $0 })
     }
 
     func fetch() async throws {
+        // TODO: Handle error here
         profile = try await interactor.fetchMyUserProfile()
+        if profile != nil {
+            isLoading = false
+        }
     }
 }

@@ -41,13 +41,10 @@ class RootContainerPresenter: GenericPresenterImp<RootContainerInteractor, RootC
             return 0
         }
 
-        if userProfile.type == UserType.child {
-            return userProfile.openBounties.count
-        } else if userProfile.type == UserType.parent {
-            // TODO: Need another state called pending complete to tell the parent of bounties the child claims to have completed
+        if userProfile.type == .unknown {
             return 0
         }
 
-        return 0
+        return userProfile.openBountiesCount
     }
 }
